@@ -1,7 +1,7 @@
 # Lecture 03 — PyTorch and Resource Accounting
 
 **Duration:** 25 minutes  
-**Lab:** [03_resource_accounting_flops_memory.ipynb](../../notebooks/03_resource_accounting_flops_memory.ipynb)  
+**Lab:** [resource_accounting_flops_memory.ipynb](../../notebooks/resource_accounting_flops_memory.ipynb)  
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -87,7 +87,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/03_resource_accounting_flops_memory.ipynb
+notebooks/resource_accounting_flops_memory.ipynb
 
 Produce:
 - baseline;
