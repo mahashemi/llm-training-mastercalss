@@ -1,7 +1,7 @@
 # Lecture 05 — Attention Alternatives and MoE
 
 **Duration:** 25 minutes  
-**Lab:** [05_attention_and_moe_lab.ipynb](../../notebooks/05_attention_and_moe_lab.ipynb)  
+**Lab:** [attention_and_moe_lab.ipynb](../../notebooks/attention_and_moe_lab.ipynb)  
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -87,7 +87,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/05_attention_and_moe_lab.ipynb
+notebooks/attention_and_moe_lab.ipynb
 
 Produce:
 - baseline;
