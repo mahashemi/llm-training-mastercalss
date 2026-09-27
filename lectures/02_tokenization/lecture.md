@@ -1,7 +1,7 @@
 # Lecture 02 — Tokenization
 
 **Duration:** 25 minutes  
-**Lab:** [02_tokenizer_design_and_measurement.ipynb](../../notebooks/02_tokenizer_design_and_measurement.ipynb)  
+**Lab:** [tokenizer_design_and_measurement.ipynb](../../notebooks/tokenizer_design_and_measurement.ipynb)  
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -86,7 +86,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/02_tokenizer_design_and_measurement.ipynb
+notebooks/tokenizer_design_and_measurement.ipynb
 
 Produce:
 - baseline;
