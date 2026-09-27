@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this curriculum, its notebooks, experiments, or explanatory material in research or development work, please cite the repository and the specific release or commit used."
+type: manual
+title: "LLM Trainer Masterclass"
+version: "0.1.0"
+date-released: "2026-09-27"
+authors:
+  - family-names: "Hashemi"
+    given-names: "Seyed Mohammad Abuzar"
+repository-code: "https://github.com/mahashemi/llm-training-mastercalss"
+url: "https://github.com/mahashemi/llm-training-mastercalss"
+abstract: "A free-first, research-oriented and implementation-heavy curriculum for understanding, building, training, evaluating, optimizing, deploying, and managing large language models. The project combines textbook chapters, 25-minute lectures, executable laboratories, runbooks, research reproduction guides, resource planning, and organizational and funding frameworks."
+keywords:
+  - large language models
+  - LLM training
+  - language model pretraining
+  - fine-tuning
+  - supervised fine-tuning
+  - LoRA
+  - QLoRA
+  - data curation
+  - evaluation
+  - distributed training
+  - multilingual models
+  - low-resource languages
+  - reproducibility
+  - machine learning education
