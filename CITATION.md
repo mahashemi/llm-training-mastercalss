@@ -1,21 +1,70 @@
 # Citing the LLM Trainer Masterclass
 
-Please cite the specific release or commit used in your research or engineering work.
+Please cite the **specific release or commit** used in your research or engineering work whenever possible.
 
-The repository contains a machine-readable CITATION.cff file. GitHub uses that file to provide citation information and generated APA/BibTeX formats.
+The repository provides three citation formats:
 
-## Recommended repository citation
+- [CITATION.cff](CITATION.cff) — machine-readable citation metadata used by GitHub.
+- [CITATION.bib](CITATION.bib) — ready-to-copy BibTeX.
+- this document — guidance for research and development use.
 
-Seyed Mohammad Abuzar Hashemi. (2026). LLM Trainer Masterclass. GitHub repository. https://github.com/mahashemi/llm-training-mastercalss
+## Recommended BibTeX
 
-For reproducible research, add the exact release tag or commit:
+```bibtex
+@misc{hashemi2026llmtrainer,
+  author       = {Hashemi, Seyed Mohammad Abuzar},
+  title        = {LLM Trainer Masterclass},
+  year         = {2026},
+  howpublished = {GitHub repository},
+  url          = {https://github.com/mahashemi/llm-training-mastercalss},
+  note         = {Free-first, research-oriented curriculum for understanding, building, training, evaluating, optimizing, deploying, and managing large language models}
+}
+```
 
-Seyed Mohammad Abuzar Hashemi. (2026). LLM Trainer Masterclass (release or commit ID). GitHub. https://github.com/mahashemi/llm-training-mastercalss
+## Reproducible citation
 
-## Research papers
+For a paper, report, or experiment, cite the repository version actually used.
 
-When a paper is primarily based on an underlying external work, cite the original paper as well. The repository citation identifies the curriculum, notebook, runbook, or experiment used to support your work; it does not replace citations to the original scientific literature.
+Preferred forms, in descending order:
+
+1. a DOI-backed release once the release has been archived;
+2. a GitHub release/tag;
+3. an exact Git commit.
+
+For example:
+
+```text
+https://github.com/mahashemi/llm-training-mastercalss/tree/<TAG>
+```
+
+or
+
+```text
+https://github.com/mahashemi/llm-training-mastercalss/commit/<COMMIT>
+```
+
+## Cite the underlying research too
+
+This repository is a teaching and engineering layer. It does not replace citations to the original scientific literature.
+
+When your work uses a method, dataset, model, benchmark, or software project documented here, cite the original source **and** this repository when both materially contributed.
+
+Examples include the Transformer paper, LoRA/QLoRA, DPO, OLMo, Dolma, FineWeb, PyTorch, Hugging Face libraries, or vLLM.
+
+## Cite a specific artifact
+
+When relevant, identify the artifact used in the paper or report:
+
+- lecture;
+- textbook chapter;
+- notebook;
+- runbook;
+- experiment card;
+- dataset/model card;
+- project/capstone.
+
+For experimental claims, the repository commit should accompany the artifact path when practical.
 
 ## DOI
 
-A DOI will be added to the citation metadata when a stable release is archived with a DOI service. Release-specific DOI records should be preferred for long-lived academic references.
+A DOI will be added once a stable GitHub release has been archived with a DOI service. For long-lived academic references, use that release DOI after it is available.
