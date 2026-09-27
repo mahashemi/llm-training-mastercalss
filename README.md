@@ -63,3 +63,26 @@ The course treats model training as an experimental science and an engineering d
 - Llama 3 technical report — case study in modern large-scale training.
 - BLOOM — case study in multilingual, collaborative, large-scale training.
 - Dolma / FineWeb / DataComp-LM — case studies in data curation.
+
+
+## Open research and development resource
+
+This repository is intended to be a living, citable knowledge base for LLM engineering. It is designed for teaching, experimentation, research reproduction, technical planning, and real-world model-development programs.
+
+Readers are encouraged to explore the material, reproduce experiments, report failures, propose corrections, add new experiments, translate explanations, and contribute improved teaching material.
+
+The project values scientific traceability: important claims should point to evidence; experimental results should include configurations and limitations; changing recommendations should be dated; and historical releases should remain referenceable.
+
+## How to cite
+
+Use the repository's CITATION.cff metadata and cite a release or commit when possible. For research claims, cite the underlying primary paper as well as the relevant repository material when both contributed to the work.
+
+## Quality bar
+
+The target is not simply a large collection of tutorials. The target is a durable engineering curriculum in which a learner can progress from intuition to implementation, from implementation to controlled experimentation, and from experimentation to resource planning and organizational decision-making.
+
+The project explicitly aims to teach learners how to build evidence for a model proposal: mission, users, data, architecture, training method, compute, people, evaluation, safety, deployment, budget, milestones, risks, and measurable outcomes.
+
+## Project status
+
+The curriculum is under active development. The field changes quickly, so material may be revised as new papers, models, datasets, training techniques, hardware, and evaluation practices become available. Substantive updates should be recorded in the changelog and associated with a release or commit whenever practical.
