@@ -94,3 +94,26 @@ Original educational material is intended to be shared under CC BY 4.0, while so
 ## Repository health
 
 The project includes contribution guidelines, a code of conduct, security guidance, issue templates, code ownership, a reproducibility standard, maintenance policy, and release checklist. These are designed to keep the repository useful as a living research and engineering reference.
+
+## Current build status
+
+The repository currently contains:
+
+- 24 lecture packages;
+- 75 textbook chapters plus chapter template;
+- 25 notebooks including orientation + one lab per numbered lecture;
+- 9 operational runbooks;
+- 4 capstone/project briefs;
+- research, proposal, model-card, dataset-card, and experiment templates;
+- curated lecture/video and paper-reading paths;
+- citation, reproducibility, maintenance, governance, security, and contribution standards.
+
+Use `START_HERE.md` for the learner path, `COURSE_MAP.md` for the curriculum map, `BOOK_TOC.md` for the textbook, and `notebooks/README.md` for the Colab laboratory map.
+
+## Mastery standard
+
+Completing a notebook is not mastery. A learner graduates from each major stage only after producing evidence:
+
+**understand → implement → measure → break → explain → decide → reproduce**.
+
+The final standard is the Model Program Dossier in `projects/04_llm_program_dossier.md`.
