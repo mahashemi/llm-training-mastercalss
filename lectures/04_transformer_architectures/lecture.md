@@ -1,7 +1,7 @@
 # Lecture 04 — Transformer Architectures
 
 **Duration:** 25 minutes  
-**Lab:** [04_build_a_tiny_transformer.ipynb](../../notebooks/04_build_a_tiny_transformer.ipynb)  
+**Lab:** [build_a_tiny_transformer.ipynb](../../notebooks/build_a_tiny_transformer.ipynb)  
 **Primary anchor:** https://arxiv.org/abs/1706.03762
 
 ## Outcome
@@ -88,7 +88,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/04_build_a_tiny_transformer.ipynb
+notebooks/build_a_tiny_transformer.ipynb
 
 Produce:
 - baseline;
