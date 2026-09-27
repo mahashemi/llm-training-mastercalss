@@ -3,7 +3,6 @@ message: "If you use this curriculum, its notebooks, experiments, or explanatory
 type: manual
 title: "LLM Trainer Masterclass"
 version: "0.1.0"
-date-released: "2026-09-27"
 authors:
   - family-names: "Hashemi"
     given-names: "Seyed Mohammad Abuzar"
