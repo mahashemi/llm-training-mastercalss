@@ -1,7 +1,7 @@
 # Lecture 10 — Inference Systems
 
 **Duration:** 25 minutes  
-**Lab:** [10_inference_and_kv_cache.ipynb](../../notebooks/10_inference_and_kv_cache.ipynb)  
+**Lab:** [inference_and_kv_cache.ipynb](../../notebooks/inference_and_kv_cache.ipynb)  
 **Primary anchor:** https://docs.vllm.ai/en/stable/
 
 ## Outcome
@@ -87,7 +87,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/10_inference_and_kv_cache.ipynb
+notebooks/inference_and_kv_cache.ipynb
 
 Produce:
 - baseline;
