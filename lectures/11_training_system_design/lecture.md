@@ -1,7 +1,7 @@
 # Lecture 11 — Training System Design
 
 **Duration:** 25 minutes  
-**Lab:** [11_training_loop_instrumentation.ipynb](../../notebooks/11_training_loop_instrumentation.ipynb)  
+**Lab:** [training_loop_instrumentation.ipynb](../../notebooks/training_loop_instrumentation.ipynb)  
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -88,7 +88,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/11_training_loop_instrumentation.ipynb
+notebooks/training_loop_instrumentation.ipynb
 
 Produce:
 - baseline;
