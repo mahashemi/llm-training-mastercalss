@@ -35,6 +35,54 @@ Practical labs target free Google Colab or CPU fallbacks whenever possible. Cola
 
 For large-scale training, the course uses small reproducible runs to teach the method and then converts the same experiment into a scaling proposal with explicit assumptions.
 
+## Course Materials — Start Here
+
+| Stage | What you learn | Core materials |
+|---|---|---|
+| 0. Orientation | How to use the course, resource thinking, reproducibility | [START HERE](START_HERE.md) · [Course Operating Manual](docs/COURSE_OPERATING_MANUAL.md) |
+| 1. Foundations | Tokens, probabilities, embeddings, attention, Transformers, training | [Lectures 01–08](lectures/LECTURE_INDEX.md) · [Book](BOOK_TOC.md) · [Labs](notebooks/README.md) |
+| 2. Data | Corpus construction, filtering, deduplication, mixing, synthetic data | [Lectures 13–14](lectures/LECTURE_INDEX.md) · [Data Runbook](runbooks/01_dataset_curation_runbook.md) |
+| 3. Pretraining | Scaling laws, resource accounting, checkpoints, distributed training | [Pretraining Runbook](runbooks/02_pretraining_runbook.md) · [Resource Estimation](docs/RESOURCE_ESTIMATION.md) · [Tiny GPT campaign](notebooks/25_tiny_gpt_pretraining_campaign.ipynb) |
+| 4. Post-training | SFT, full fine-tuning, LoRA, QLoRA, DPO, RLHF, RLVR, distillation | [Training Method Matrix](docs/TRAINING_METHOD_MATRIX.md) · [Lectures 15–20](lectures/LECTURE_INDEX.md) |
+| 5. Evaluation | Benchmarks, human/model judges, ablations, safety, robustness | [Evaluation Runbook](runbooks/07_evaluation_runbook.md) · [Assessment](docs/ASSESSMENT_AND_MASTERY.md) |
+| 6. Serving | KV cache, batching, quantization, vLLM, inference economics | [Serving Runbook](runbooks/08_inference_serving_runbook.md) · [Systems Stack](docs/SYSTEMS_STACK.md) |
+| 7. Build vs Buy | API vs RAG vs tools vs fine-tuning vs pretraining | [Decision Trees](docs/ENGINEERING_DECISION_TREES.md) · [Build-vs-Buy Lab](notebooks/build_vs_buy_decision_lab.ipynb) |
+| 8. LLM Programs | Multilingual/national models, compute, teams, governance | [Program chapters](BOOK_TOC.md) · [Program Runbooks](runbooks/09_funding_and_program_proposal_runbook.md) |
+| 9. Research + Funding | Reproduction, paper writing, proposal, budget, milestones | [Paper Pipeline](docs/PAPER_PIPELINE.md) · [Funding Pitch](templates/funding_pitch.md) · [Capstone](projects/04_llm_program_dossier.md) |
+
+### 24-Lecture Table of Contents
+
+| # | Lecture | Lecture | Lab / Primary artifact |
+|---:|---|---|---|
+| 01 | What Is an LLM? | [Lecture](lectures/01_what_is_an_llm/lecture.md) | [Tiny language model](notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb) |
+| 02 | Tokenization | [Lecture](lectures/02_tokenization/lecture.md) | [BPE tokenizer](notebooks/tokenizer_design_and_measurement.ipynb) |
+| 03 | PyTorch and Resource Accounting | [Lecture](lectures/03_pytorch_and_resource_accounting/lecture.md) | [FLOPs + memory](notebooks/resource_accounting_flops_memory.ipynb) |
+| 04 | Transformer Architectures | [Lecture](lectures/04_transformer_architectures/lecture.md) | [Tiny Transformer](notebooks/build_a_tiny_transformer.ipynb) |
+| 05 | Attention Alternatives and MoE | [Lecture](lectures/05_attention_alternatives_and_moe/lecture.md) | [Attention / MoE](notebooks/attention_and_moe_lab.ipynb) |
+| 06 | GPUs and Kernels | [Lecture](lectures/06_gpus_and_kernels/lecture.md) | [GPU benchmark](notebooks/gpu_kernel_benchmark.ipynb) |
+| 07 | Efficient Attention and Triton | [Lecture](lectures/07_efficient_attention_and_triton/lecture.md) | [Attention tiling](notebooks/attention_memory_and_tiling.ipynb) |
+| 08 | Distributed Training | [Lecture](lectures/08_distributed_training/lecture.md) | [DDP / sharding](notebooks/ddp_and_sharding_simulation.ipynb) |
+| 09 | Scaling Laws | [Lecture](lectures/09_scaling_laws/lecture.md) | [Scaling-law fit](notebooks/scaling_law_fit.ipynb) |
+| 10 | Inference Systems | [Lecture](lectures/10_inference_systems/lecture.md) | [KV cache](notebooks/inference_and_kv_cache.ipynb) |
+| 11 | Training System Design | [Lecture](lectures/11_training_system_design/lecture.md) | [Instrumentation](notebooks/training_loop_instrumentation.ipynb) |
+| 12 | Evaluation | [Lecture](lectures/12_evaluation/lecture.md) | [Evaluation harness](notebooks/evaluation_harness.ipynb) |
+| 13 | Data Sources and Dataset Construction | [Lecture](lectures/13_data_sources_and_dataset_construction/lecture.md) | [Curation pipeline](notebooks/dataset_curation_pipeline.ipynb) |
+| 14 | Filtering, Deduplication, Mixing, Synthetic Data | [Lecture](lectures/14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) | [Dedup + mixing](notebooks/dedup_and_data_mixing.ipynb) |
+| 15 | Mid/Post Training: SFT and RLHF | [Lecture](lectures/15_mid_and_post_training_sft_and_rlhf/lecture.md) | [SFT](notebooks/sft_with_a_small_open_model.ipynb) |
+| 16 | Reinforcement Learning with Verifiable Rewards | [Lecture](lectures/16_reinforcement_learning_with_verifiable_rewards/lecture.md) | [RLVR](notebooks/rlvr_toy_experiment.ipynb) |
+| 17 | Multimodality | [Lecture](lectures/17_multimodality/lecture.md) | [Multimodal map](notebooks/multimodal_alignment_map.ipynb) |
+| 18 | LoRA, QLoRA, and PEFT | [Lecture](lectures/18_lora_qlora_and_peft/lecture.md) | [LoRA / QLoRA](notebooks/lora_qlora_comparison.ipynb) |
+| 19 | Full Fine-Tuning and Continued Pretraining | [Lecture](lectures/19_full_fine_tuning_and_continued_pretraining/lecture.md) | [FT vs LoRA](notebooks/full_ft_vs_lora.ipynb) |
+| 20 | Preference Optimization and Distillation | [Lecture](lectures/20_preference_optimization_and_distillation/lecture.md) | [DPO + distillation](notebooks/dpo_and_distillation_concepts.ipynb) |
+| 21 | Safety, Robustness, Failure Analysis | [Lecture](lectures/21_safety_robustness_and_failure_analysis/lecture.md) | [Failure analysis](notebooks/failure_analysis_and_safety_eval.ipynb) |
+| 22 | API vs RAG vs Tools vs Training | [Lecture](lectures/22_api_vs_rag_vs_tools_vs_training/lecture.md) | [Build-vs-buy](notebooks/build_vs_buy_decision_lab.ipynb) |
+| 23 | Build an LLM Program | [Lecture](lectures/23_build_an_llm_program/lecture.md) | [Resource plan](notebooks/national_llm_resource_plan.ipynb) |
+| 24 | From Experiment to Fundable Model | [Lecture](lectures/24_from_experiment_to_fundable_model/lecture.md) | [Capstone](notebooks/capstone_model_program.ipynb) |
+
+### Research / Reproducibility Navigation
+
+[Book TOC](BOOK_TOC.md) · [Paper Reading Path](papers/PAPER_READING_PATH.md) · [Experiment → Paper](docs/PAPER_PIPELINE.md) · [Reproducibility Standard](REPRODUCIBILITY.md) · [Contribution Guide](CONTRIBUTING.md)
+
 ## Repository architecture
 
 - `book/` — textbook chapters and long-form explanations
@@ -73,9 +121,40 @@ Readers are encouraged to explore the material, reproduce experiments, report fa
 
 The project values scientific traceability: important claims should point to evidence; experimental results should include configurations and limitations; changing recommendations should be dated; and historical releases should remain referenceable.
 
-## How to cite
+## How to Cite This Repository
 
-Use the repository's CITATION.cff metadata and cite a release or commit when possible. For research claims, cite the underlying primary paper as well as the relevant repository material when both contributed to the work.
+### For papers, reports, and research derived from this repository
+
+Cite the **specific release or Git commit** you used whenever possible. If the work also relies on an underlying paper, dataset, model, or software project, cite that original source as well. This repository citation identifies the curriculum, notebook, runbook, experiment, or proposal framework that contributed to your work.
+
+For long-lived academic references, prefer a **release DOI** once the corresponding GitHub release has been archived. Until a DOI release exists, cite the repository URL together with the exact commit or tag.
+
+### Recommended BibTeX
+
+The machine-readable citation file is available at [CITATION.cff](CITATION.cff), and a ready-to-copy BibTeX record is available at [CITATION.bib](CITATION.bib).
+
+```bibtex
+@misc{hashemi2026llmtrainer,
+  author       = {Hashemi, Seyed Mohammad Abuzar},
+  title        = {LLM Trainer Masterclass},
+  year         = {2026},
+  howpublished = {GitHub repository},
+  url          = {https://github.com/mahashemi/llm-training-mastercalss},
+  note         = {Free-first, research-oriented curriculum for understanding, building, training, evaluating, optimizing, deploying, and managing large language models}
+}
+```
+
+For reproducibility, add the release or commit used, for example:
+
+```text
+https://github.com/mahashemi/llm-training-mastercalss/tree/<TAG>
+```
+
+or
+
+```text
+https://github.com/mahashemi/llm-training-mastercalss/commit/<COMMIT>
+```
 
 ## Quality bar
 
