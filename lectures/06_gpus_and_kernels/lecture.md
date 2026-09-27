@@ -1,7 +1,7 @@
 # Lecture 06 — GPUs and Kernels
 
 **Duration:** 25 minutes  
-**Lab:** [06_gpu_kernel_benchmark.ipynb](../../notebooks/06_gpu_kernel_benchmark.ipynb)  
+**Lab:** [gpu_kernel_benchmark.ipynb](../../notebooks/gpu_kernel_benchmark.ipynb)  
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -87,7 +87,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/06_gpu_kernel_benchmark.ipynb
+notebooks/gpu_kernel_benchmark.ipynb
 
 Produce:
 - baseline;
