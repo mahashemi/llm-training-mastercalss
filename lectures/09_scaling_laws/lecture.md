@@ -1,7 +1,7 @@
 # Lecture 09 — Scaling Laws
 
 **Duration:** 25 minutes  
-**Lab:** [09_scaling_law_fit.ipynb](../../notebooks/09_scaling_law_fit.ipynb)  
+**Lab:** [scaling_law_fit.ipynb](../../notebooks/scaling_law_fit.ipynb)  
 **Primary anchor:** https://arxiv.org/abs/2203.15556
 
 ## Outcome
@@ -86,7 +86,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/09_scaling_law_fit.ipynb
+notebooks/scaling_law_fit.ipynb
 
 Produce:
 - baseline;
