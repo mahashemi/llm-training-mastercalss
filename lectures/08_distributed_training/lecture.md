@@ -1,7 +1,7 @@
 # Lecture 08 — Distributed Training
 
 **Duration:** 25 minutes  
-**Lab:** [08_ddp_and_sharding_simulation.ipynb](../../notebooks/08_ddp_and_sharding_simulation.ipynb)  
+**Lab:** [ddp_and_sharding_simulation.ipynb](../../notebooks/ddp_and_sharding_simulation.ipynb)  
 **Primary anchor:** https://pytorch.org/docs/main/distributed.fsdp.fully_shard.html
 
 ## Outcome
@@ -87,7 +87,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/08_ddp_and_sharding_simulation.ipynb
+notebooks/ddp_and_sharding_simulation.ipynb
 
 Produce:
 - baseline;
