@@ -1,7 +1,7 @@
 # Lecture 07 — Efficient Attention and Triton
 
 **Duration:** 25 minutes  
-**Lab:** [07_attention_memory_and_tiling.ipynb](../../notebooks/07_attention_memory_and_tiling.ipynb)  
+**Lab:** [attention_memory_and_tiling.ipynb](../../notebooks/attention_memory_and_tiling.ipynb)  
 **Primary anchor:** https://arxiv.org/abs/2205.14135
 
 ## Outcome
@@ -86,7 +86,7 @@ Each visual should have a one-sentence “notice this” caption.
 
 Run:
 
-notebooks/07_attention_memory_and_tiling.ipynb
+notebooks/attention_memory_and_tiling.ipynb
 
 Produce:
 - baseline;
