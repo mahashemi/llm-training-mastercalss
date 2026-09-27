@@ -1,0 +1,29 @@
+{
+  "title": "LLM Trainer Masterclass",
+  "description": "A free-first, research-oriented and implementation-heavy curriculum for understanding, building, training, evaluating, optimizing, deploying, and managing large language models.",
+  "creators": [
+    {
+      "name": "Hashemi, Seyed Mohammad Abuzar"
+    }
+  ],
+  "keywords": [
+    "large language models",
+    "LLM training",
+    "pretraining",
+    "fine-tuning",
+    "LoRA",
+    "QLoRA",
+    "data curation",
+    "evaluation",
+    "distributed training",
+    "multilingual models",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/mahashemi/llm-training-mastercalss",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
