@@ -50,3 +50,9 @@ The core learning path is designed to run on CPU or free Colab whenever practica
 ## Research use
 
 For experiments used in papers or engineering reports, preserve the notebook Git commit, dataset/model versions, environment, hardware, and results. See REPRODUCIBILITY.md and templates/paper_report.md.
+
+## End-to-end project lab
+
+[Pretrain a Tiny GPT](./25_tiny_gpt_pretraining_campaign.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/25_tiny_gpt_pretraining_campaign.ipynb)
+
+This is the main bridge from the conceptual labs to an actual pretraining campaign. It covers corpus acquisition, train/validation split, Transformer implementation, sanity overfit, pretraining, evaluation, checkpointing, generation, and deliberate failure experiments.
