@@ -2,32 +2,108 @@
 
 **Part:** Part IV
 
-## Core concepts
-1. **Adapters** — Add trainable modules while freezing most base weights.
-2. **DoRA** — Separates magnitude and direction components of weight adaptation.
-3. **Initialization** — Adapter initialization affects convergence.
-4. **Composability** — Separate adapters can encode different behaviors.
+## 1. Why adapter variants exist
 
-## Formal view
-LoRA writes ΔW as a low-rank update. DoRA and other variants alter the parameterization or initialization of that update; compare them under identical evaluation.
+LoRA constrains the update to a low-rank subspace:
 
-## Engineering workflow
-Baseline → intervention → evaluation → profiling → failure analysis → decision.
+W' = W + BA
+
+Other adapter methods change the parameterization, initialization, or capacity of that update.
+
+The engineering question is not “which variant is newest?” It is:
+
+**Does the variant deliver a measurable quality/resource benefit on the target workload?**
+
+## 2. Comparison matrix
+
+| Method | Main idea | Extra complexity | What to measure |
+|---|---|---|---|
+| LoRA | low-rank update | low | quality vs rank |
+| DoRA | separates magnitude/direction | higher | quality vs compute |
+| Other adapters | alternative parameterization | varies | task + memory |
+
+Reference for DoRA and related adapter methods should be the exact paper/docs version used in the experiment.
+
+## 3. Rank and capacity
+
+Increasing rank increases trainable parameters:
+
+P_LoRA = r(d_in + d_out)
+
+This raises:
+
+- optimizer memory;
+- checkpoint size;
+- training compute.
+
+It may improve adaptation only until the task no longer benefits from extra capacity.
+
+## 4. Adapter targeting
+
+Compare:
+
+| Experiment | Attention | MLP | Rank |
+|---|---|---|---:|
+| A | yes | no | 16 |
+| B | yes | yes | 16 |
+| C | yes | yes | 32 |
+
+Keep data, epochs, learning rate, and evaluation fixed.
+
+## 5. Composability
+
+Adapters can represent different specializations.
+
+Example:
+
+**base model + language adapter + domain adapter**
+
+This can be operationally attractive, but composition can introduce:
+
+- interference;
+- incompatible assumptions;
+- memory overhead;
+- harder evaluation.
+
+Therefore evaluate the composed system, not just each adapter independently.
+
+## 6. Worked decision
+
+Suppose:
+
+| Configuration | Target score | Peak memory | Training time |
+|---|---:|---:|---:|
+| LoRA r16 | 84 | 18 GB | 2 h |
+| LoRA r32 | 85 | 20 GB | 2.5 h |
+| DoRA r16 | 85 | 21 GB | 3 h |
+
+The differences are small.
+
+Now include:
+
+- run-to-run variance;
+- serving path;
+- adapter size;
+- deployment complexity.
+
+A seemingly better score may not justify the extra system cost.
+
+## 7. Research exercise
+
+Compare LoRA and one adapter variant under identical:
+
+- model;
+- data;
+- training tokens;
+- evaluation;
+- hardware.
+
+Report:
+
+**quality → trainable parameters → peak memory → GPU-hours → adapter size → serving latency**
+
+Then determine whether the observed difference is large enough to warrant a follow-up study.
 
 ## Laboratory
+
 [lora_qlora_comparison.ipynb](../../notebooks/lora_qlora_comparison.ipynb)
-
-## Critical thinking
-**Question:** What could make the method appear to work while the real objective gets worse?
-
-**Answer:** Proxy optimization, data leakage, benchmark contamination, distribution shift, or resource-side regressions can all produce misleading gains.
-
-**Question:** What should the next experiment be?
-
-**Answer:** The cheapest experiment that tests the highest-impact uncertainty.
-
-## Research prompt
-State a falsifiable claim and design a minimum-cost test that could reject it.
-
-## References
-https://huggingface.co/docs/peft/

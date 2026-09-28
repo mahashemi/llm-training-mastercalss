@@ -2,28 +2,102 @@
 
 **Part:** Part III
 
-## Core idea
-1. **Exact dedup** — Remove identical documents or segments.
-2. **Near dedup** — Cluster highly similar content.
-3. **Contamination** — Train/evaluation overlap can inflate benchmark results.
-4. **Memorization** — Repeated exposure changes the learning dynamics.
+## 1. Why duplicate data matters
 
-## Formal view
-Deduplication changes sample frequency. For repeated document frequency f_i, the empirical gradient contribution can be distorted approximately in proportion to f_i.
+If the same document appears repeatedly, the training distribution overweights it.
 
-## Practical method
-Start with a baseline, change one major variable, measure quality and resource impact, inspect failures, and only then scale the experiment.
+That can:
+
+- waste compute;
+- increase memorization;
+- distort source mixture;
+- increase contamination risk;
+- reduce effective diversity.
+
+Deduplication is therefore both a **data-quality operation** and a **compute-allocation decision**.
+
+## 2. Two forms of deduplication
+
+| Method | Detects | Cost | Typical use |
+|---|---|---|---|
+| Exact hash | identical bytes/text | low | obvious duplicates |
+| Normalized hash | equivalent after normalization | low | formatting variants |
+| Near-duplicate fingerprints | similar text | medium | syndicated/reposted content |
+| Semantic similarity | meaning-level similarity | high | paraphrased copies |
+
+Use the least expensive method that detects the relevant duplication mechanism.
+
+## 3. Example
+
+Suppose raw corpus:
+
+10B tokens
+
+After exact dedup:
+
+8.5B
+
+After near dedup:
+
+7.2B
+
+You have removed 2.8B tokens.
+
+But the relevant question is not “did we delete tokens?”
+
+It is:
+
+**Did the remaining 7.2B tokens preserve or improve useful diversity and downstream quality?**
+
+## 4. Deduplication trade-offs
+
+Aggressive near-dedup can remove:
+
+- useful repeated canonical formulations;
+- legitimate parallel-language examples;
+- legal or policy versions where repetition is meaningful;
+- high-quality training examples.
+
+Therefore compare multiple thresholds.
+
+| Threshold | Usable tokens | Validation loss | Target score |
+|---|---:|---:|---:|
+| loose | 8.0B | 2.70 | 78 |
+| medium | 7.2B | 2.68 | 80 |
+| aggressive | 5.8B | 2.75 | 77 |
+
+The middle setting may be worth investigating further, but the conclusion requires actual experiments.
+
+## 5. Contamination connection
+
+Maintain exclusion sets for:
+
+- evaluation benchmarks;
+- protected tests;
+- known copyrighted/restricted sources where applicable;
+- sensitive datasets.
+
+Run overlap checks before training.
+
+## 6. Research exercise
+
+Create three deduplication policies.
+
+Measure:
+
+- duplicate removal;
+- corpus diversity;
+- language balance;
+- validation loss;
+- downstream score;
+- processing cost.
+
+Then estimate quality improvement per billion tokens processed.
 
 ## Laboratory
+
 [dedup_and_data_mixing.ipynb](../../notebooks/dedup_and_data_mixing.ipynb)
 
-## Critical-thinking questions
-**What is the tempting shortcut?** Apply the method before identifying the real bottleneck.  
-**What is the answer?** Diagnose whether the limiting factor is data, objective, capacity, optimization, hardware, inference, or evaluation.  
-**What evidence is required?** Versioned configuration, controlled comparison, target-specific metrics, representative failures, and explicit limitations.
+## Reference
 
-## Research prompt
-Design one controlled experiment that could falsify the central claim of this chapter.
-
-## References
-https://arxiv.org/abs/2402.00159
+https://cs336.stanford.edu/

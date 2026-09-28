@@ -2,30 +2,96 @@
 
 **Part:** Part III
 
-## Core concepts
-1. **Train-test overlap** — Shared examples can inflate evaluation.
-2. **Benchmark leakage** — Public benchmark text can enter training corpora.
-3. **Temporal splits** — Time-based evaluation can test freshness better than random splits.
-4. **Provenance tracing** — Record sources and exclusion rules.
+## 1. What contamination does
 
-## Formal view
-If E_train∩E_eval is non-negligible, measured generalization can be biased upward. The practical remedy is detection, exclusion, and robust evaluation design.
+If evaluation examples or near-duplicates appear in training data, measured performance can be inflated.
 
-## Engineering workflow
-Establish a baseline → define one intervention → measure target metrics → measure resource metrics → inspect failures → decide whether to iterate.
+Let E_train be training examples and E_eval evaluation examples.
+
+If overlap is substantial:
+
+E_train ∩ E_eval ≠ ∅
+
+then the evaluation no longer cleanly estimates generalization.
+
+## 2. Contamination types
+
+| Type | Example | Detection |
+|---|---|---|
+| Exact | same text | hash |
+| Normalized | punctuation/case changes | normalized hash |
+| Near duplicate | copied with edits | fingerprint/similarity |
+| Semantic | paraphrase | embedding/similarity |
+| Temporal | future test data in training | timestamp/source audit |
+| Benchmark leakage | public test included in corpus | source exclusion |
+
+## 3. Why random splits are insufficient
+
+Randomly splitting documents can put nearly identical material in train and test.
+
+Prefer:
+
+- source-based splits;
+- document-family splits;
+- temporal splits;
+- organization/domain holdouts.
+
+The correct split matches the generalization claim.
+
+## 4. Worked example
+
+Suppose benchmark score is:
+
+**before overlap removal: 86%**
+
+After removing overlapping sources:
+
+**82%**
+
+The four-point decrease is not necessarily a model regression. It may reveal that the original measurement was contaminated.
+
+## 5. Contamination checklist
+
+Before a major experiment:
+
+- scan exact overlap;
+- scan near duplicates;
+- inspect public benchmark sources;
+- check temporal metadata;
+- freeze evaluation data;
+- record exclusion rules.
+
+## 6. Leakage beyond training
+
+Leakage can also happen through:
+
+- prompt engineering using test examples;
+- evaluator tuning on the test set;
+- repeated human review of the same benchmark;
+- model selection based on hidden test feedback.
+
+Protect the test process, not only the dataset.
+
+## 7. Research exercise
+
+Take a small corpus and benchmark.
+
+Create:
+
+1. random split;
+2. source-based split;
+3. temporal split.
+
+Measure the score difference.
+
+Then run lexical and similarity overlap checks.
+
+Explain which split supports which generalization claim.
 
 ## Laboratory
+
 [evaluation_harness.ipynb](../../notebooks/evaluation_harness.ipynb)
 
-## Critical thinking
-**Challenge:** What could make an apparent improvement misleading?  
-**Answer:** Leakage, evaluation contamination, changed data mixture, changed decoding, implementation differences, cherry-picked examples, or an unmeasured regression.
+## Reference
 
-**Challenge:** What should be measured next?  
-**Answer:** The smallest experiment that most reduces uncertainty about the engineering decision.
-
-## Research prompt
-Write a falsifiable hypothesis and a minimum experiment that could disprove it.
-
-## References
 https://cs336.stanford.edu/

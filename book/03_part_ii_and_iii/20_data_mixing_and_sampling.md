@@ -2,28 +2,135 @@
 
 **Part:** Part III
 
-## Core idea
-1. **Mixture weights** — Control how often source families appear.
-2. **Temperature sampling** — Flatten or sharpen category probabilities.
-3. **Epochs over a corpus** — Repeatedly sampling a small corpus increases exposure.
-4. **Low-resource languages** — Need explicit measurement so representation is not dominated by high-resource data.
+## 1. Sampling is how the training budget is allocated
 
-## Formal view
-A temperature-style mixture can be written q_i∝p_i^α. α<1 flattens the distribution; α>1 sharpens it.
+The corpus may contain billions of tokens, but the model sees a sampled stream.
 
-## Practical method
-Start with a baseline, change one major variable, measure quality and resource impact, inspect failures, and only then scale the experiment.
+Therefore:
+
+**sampling policy = implicit allocation of training compute**
+
+If Language A receives 50% of tokens and Language B 1%, the model has received very different learning budgets.
+
+## 2. Temperature sampling
+
+If raw source proportions are p_i, a common family is:
+
+q_i = p_i^alpha / Σ_j p_j^alpha
+
+For 0 < alpha < 1, the distribution is flattened.
+
+For alpha > 1, it is sharpened.
+
+## 3. Worked example
+
+Suppose raw proportions are:
+
+| Source | Raw p |
+|---|---:|
+| English | 0.80 |
+| Language A | 0.15 |
+| Language B | 0.05 |
+
+With alpha = 0.5:
+
+sqrt proportions are approximately:
+
+0.894, 0.387, 0.224
+
+Normalize:
+
+| Source | Approx. sampled q |
+|---|---:|
+| English | 59% |
+| Language A | 26% |
+| Language B | 15% |
+
+A small language receives substantially more exposure than its raw corpus share.
+
+The cost is that high-resource data is sampled less often.
+
+## 4. Oversampling is not free
+
+If a source contains 100M unique usable tokens and you sample it for 300M training tokens, you have effectively replayed the source three times.
+
+This can:
+
+- improve exposure;
+- increase memorization;
+- reduce diversity;
+- overfit the source.
+
+Track **unique tokens vs sampled tokens**.
+
+## 5. Mixture design matrix
+
+| Strategy | Benefit | Risk |
+|---|---|---|
+| Raw proportions | faithful corpus distribution | low-resource starvation |
+| Temperature | raises low-resource exposure | less high-resource exposure |
+| Floors | guarantees minimum exposure | hand-tuned |
+| Caps | prevents dominance | may discard useful data |
+| Curriculum | changes exposure over training | more complexity |
+
+## 6. Data quality × sampling
+
+A tiny high-quality source may deserve more sampling than a huge noisy source.
+
+Therefore optimize:
+
+**useful learning signal per sampled token**
+
+not merely corpus size.
+
+## 7. Worked multilingual example
+
+Suppose:
+
+- L1 = 800B raw tokens;
+- L2 = 100B;
+- L3 = 20B.
+
+Training budget = 200B tokens.
+
+Compare:
+
+**Raw:** 174B / 22B / 4B
+
+**Temperature/floored mix:** 130B / 45B / 25B
+
+Now ask:
+
+- Did L3 improve?
+- Did L1 degrade?
+- Did duplicate exposure increase?
+- Did compute per quality gain improve?
+
+## 8. Research exercise
+
+Design three mixtures:
+
+1. raw;
+2. temperature;
+3. floor + cap.
+
+Run a small-model experiment.
+
+Report:
+
+- sampled tokens per source;
+- validation loss;
+- per-language scores;
+- unique-source coverage;
+- compute.
+
+Then choose the next experiment based on the observed bottleneck.
 
 ## Laboratory
+
 [dedup_and_data_mixing.ipynb](../../notebooks/dedup_and_data_mixing.ipynb)
 
-## Critical-thinking questions
-**What is the tempting shortcut?** Apply the method before identifying the real bottleneck.  
-**What is the answer?** Diagnose whether the limiting factor is data, objective, capacity, optimization, hardware, inference, or evaluation.  
-**What evidence is required?** Versioned configuration, controlled comparison, target-specific metrics, representative failures, and explicit limitations.
-
-## Research prompt
-Design one controlled experiment that could falsify the central claim of this chapter.
-
 ## References
-https://arxiv.org/abs/2402.00159
+
+- Stanford CS336: https://cs336.stanford.edu/
+- Chinchilla: https://arxiv.org/abs/2203.15556
