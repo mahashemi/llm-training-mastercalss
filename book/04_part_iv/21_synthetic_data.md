@@ -2,30 +2,110 @@
 
 **Part:** Part III
 
-## Core concepts
-1. **Synthetic generation** — Generate additional training examples using another model or rule system.
-2. **Teacher quality** — Synthetic data inherits biases and errors from its generator.
-3. **Filtering** — Generated examples require validation and quality control.
-4. **Diversity** — Naive generation can collapse variety and amplify artifacts.
+## 1. Synthetic data creates supervision, not guaranteed truth
 
-## Formal view
-Synthetic dataset quality can be modeled as generator quality × selection quality × diversity. No single scalar fully captures it.
+A generator can turn a small source set into many examples.
 
-## Engineering workflow
-Establish a baseline → define one intervention → measure target metrics → measure resource metrics → inspect failures → decide whether to iterate.
+But the generated data may inherit:
+
+- factual errors;
+- stylistic artifacts;
+- repeated patterns;
+- teacher bias;
+- safety failures.
+
+Therefore synthetic data should be treated as a **data-generation pipeline** with quality gates.
+
+## 2. Synthetic-data lifecycle
+
+**seed/source → generation → validation → filtering → deduplication → human audit → training → evaluation**
+
+Do not jump directly from generation to training.
+
+## 3. When synthetic data is useful
+
+| Need | Potential value |
+|---|---|
+| sparse task examples | expand coverage |
+| rare edge cases | generate targeted scenarios |
+| format supervision | create consistent schema examples |
+| multilingual coverage | fill controlled gaps |
+| reasoning traces | provide intermediate supervision where appropriate |
+
+## 4. Main risks
+
+| Risk | Symptom | Test |
+|---|---|---|
+| teacher error | same wrong fact repeats | human/source check |
+| mode collapse | outputs look too similar | diversity metrics |
+| style transfer | student imitates teacher quirks | cross-teacher comparison |
+| contamination | benchmark-like examples appear | overlap scan |
+| synthetic bias | real-user performance falls | human/production slice |
+
+## 5. Mixture decisions
+
+Never ask only:
+
+“Does synthetic data help?”
+
+Ask:
+
+**At what synthetic fraction does it help?**
+
+| Run | Source/human | Synthetic |
+|---|---:|---:|
+| A | 100% | 0% |
+| B | 75% | 25% |
+| C | 50% | 50% |
+| D | 25% | 75% |
+
+Measure target quality and failure diversity.
+
+## 6. Worked example
+
+Suppose target score:
+
+- 0% synthetic = 76;
+- 25% = 80;
+- 50% = 81;
+- 75% = 78.
+
+The result suggests diminishing returns and possible synthetic over-weighting.
+
+Now inspect whether the 75% run contains:
+
+- more repeated language;
+- teacher artifacts;
+- fewer real edge cases.
+
+## 7. Source-grounded generation
+
+For factual tasks, prefer generation grounded in an approved source.
+
+Store:
+
+- source ID;
+- generator model/version;
+- generation prompt;
+- generation timestamp;
+- validation status.
+
+This preserves provenance.
+
+## Research exercise
+
+Generate 10k examples at three synthetic fractions.
+
+Compare:
+
+**quality → diversity → contamination → human error rate → training cost**
+
+Then determine the maximum synthetic fraction that preserves the target data-quality requirements.
 
 ## Laboratory
+
 [dataset_curation_pipeline.ipynb](../../notebooks/dataset_curation_pipeline.ipynb)
 
-## Critical thinking
-**Challenge:** What could make an apparent improvement misleading?  
-**Answer:** Leakage, evaluation contamination, changed data mixture, changed decoding, implementation differences, cherry-picked examples, or an unmeasured regression.
+## Reference
 
-**Challenge:** What should be measured next?  
-**Answer:** The smallest experiment that most reduces uncertainty about the engineering decision.
-
-## Research prompt
-Write a falsifiable hypothesis and a minimum experiment that could disprove it.
-
-## References
-https://arxiv.org/abs/2402.00159
+https://cs336.stanford.edu/

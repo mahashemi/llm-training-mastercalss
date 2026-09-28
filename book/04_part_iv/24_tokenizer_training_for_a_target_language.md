@@ -2,30 +2,122 @@
 
 **Part:** Part III
 
-## Core concepts
-1. **Corpus selection** — Tokenizer quality depends on representative text.
-2. **Unicode normalization** — Normalization changes the tokenization surface.
-3. **Vocabulary allocation** — Decide how capacity is shared across languages.
-4. **Evaluation** — Measure fertility and coverage on held-out text.
+## 1. Tokenizer choice affects the entire model
 
-## Formal view
-Optimize tokenizer statistics against a representative corpus rather than a single language. Track tokens per byte/word and unknown/fallback behavior.
+For multilingual or low-resource models, tokenizer design affects:
 
-## Engineering workflow
-Establish a baseline → define one intervention → measure target metrics → measure resource metrics → inspect failures → decide whether to iterate.
+- sequence length;
+- training compute;
+- KV-cache memory;
+- context utilization;
+- vocabulary allocation;
+- text fidelity.
+
+A poor tokenizer can make a language expensive to represent.
+
+## 2. Measure fertility
+
+A simple measure:
+
+fertility = tokenizer_tokens / words
+
+Also track:
+
+tokens / characters
+
+Compare languages under the same tokenizer.
+
+## 3. Worked example
+
+| Language | Tokenizer A | Tokenizer B |
+|---|---:|---:|
+| English | 1.2 | 1.1 |
+| Language A | 1.8 | 1.4 |
+| Language B | 3.1 | 2.0 |
+| Language C | 4.5 | 2.8 |
+
+Tokenizer B is substantially more compact for the lower-resource languages in this example.
+
+The practical consequence is fewer sequence tokens for the same text.
+
+## 4. Vocabulary-size trade-off
+
+A larger vocabulary can:
+
+- reduce token counts;
+- increase embedding/output parameters;
+- increase model memory;
+- change rare-token behavior.
+
+A smaller vocabulary can:
+
+- improve parameter efficiency;
+- increase sequence length;
+- increase decode steps.
+
+Measure the complete trade-off.
+
+## 5. Tokenizer benchmark
+
+For each candidate:
+
+| Metric | Measure |
+|---|---|
+| fertility | tokens/word |
+| char efficiency | tokens/character |
+| vocabulary coverage | observed vocabulary |
+| sequence expansion | tokens per document |
+| multilingual balance | per-language fertility |
+| training throughput | tokens/sec |
+| model size effect | embedding/output parameters |
+
+## 6. Worked selection
+
+Suppose:
+
+- tokenizer A gives 1.5 average fertility;
+- tokenizer B gives 1.2;
+- B adds 50M embedding parameters.
+
+Now estimate:
+
+**training compute saved by shorter sequences**
+
+vs
+
+**memory/model-size cost of larger vocabulary**
+
+The decision is quantitative.
+
+## 7. Normalization and scripts
+
+Test:
+
+- Unicode normalization;
+- punctuation;
+- whitespace;
+- diacritics;
+- mixed scripts;
+- code switching;
+- spelling variants.
+
+A tokenizer that performs well on clean text may behave poorly on real user input.
+
+## 8. Research exercise
+
+Train or evaluate three tokenizers on a multilingual corpus.
+
+Report:
+
+**vocabulary → fertility → sequence length → embedding size → throughput**
+
+Then estimate which tokenizer gives the best quality/resource trade-off.
 
 ## Laboratory
+
 [tokenizer_design_and_measurement.ipynb](../../notebooks/tokenizer_design_and_measurement.ipynb)
 
-## Critical thinking
-**Challenge:** What could make an apparent improvement misleading?  
-**Answer:** Leakage, evaluation contamination, changed data mixture, changed decoding, implementation differences, cherry-picked examples, or an unmeasured regression.
-
-**Challenge:** What should be measured next?  
-**Answer:** The smallest experiment that most reduces uncertainty about the engineering decision.
-
-## Research prompt
-Write a falsifiable hypothesis and a minimum experiment that could disprove it.
-
 ## References
-https://cs336.stanford.edu/
+
+- SentencePiece: https://arxiv.org/abs/1808.06226
+- Stanford CS336: https://cs336.stanford.edu/
