@@ -2,30 +2,129 @@
 
 **Part:** Part VI
 
-## Core concepts
-1. **Prefill** — Process the existing prompt to build hidden states and KV cache.
-2. **Decode** — Generate one or more new tokens step by step.
-3. **Batching** — Combine compatible requests to improve hardware utilization.
-4. **Prompt length** — Long inputs can dominate time-to-first-token.
+## 1. Generation has two very different phases
 
-## Formal view
-Total latency can be decomposed into prefill and decode components. Their scaling differs with prompt length, output length, and batching.
+### Prefill
 
-## Practice
-Define the operational objective, freeze the baseline, run the smallest informative experiment, record resource use, inspect failures, and decide whether the next intervention is justified.
+The model processes the existing prompt and builds hidden states/KV cache.
+
+### Decode
+
+The model generates new tokens autoregressively, typically one token step at a time.
+
+This distinction matters because prompt length primarily stresses prefill while output length primarily stresses decode.
+
+## 2. Latency decomposition
+
+A useful model is:
+
+L_total =
+network
++ queue
++ prefill
++ decode
++ post-processing
+
+For a streaming service, also track:
+
+**TTFT = time to first token**
+
+**ITL = inter-token latency**
+
+A request can have excellent total throughput but unacceptable TTFT.
+
+## 3. Workload matrix
+
+| Workload | Prompt | Output | Dominant concern |
+|---|---:|---:|---|
+| Short chat | short | short | scheduling/overhead |
+| Long-document QA | long | short | prefill |
+| Coding | medium | long | decode |
+| Summarization | long | medium | both |
+| RAG | long with evidence | medium | prefill + token cost |
+
+Do not use a single synthetic prompt to represent all workloads.
+
+## 4. Batch-size tradeoff
+
+Higher batch/concurrency can improve hardware utilization.
+
+But it may increase:
+
+- queue time;
+- TTFT;
+- memory use;
+- tail latency.
+
+The engineering target is often:
+
+**maximum throughput subject to p95/p99 latency constraints**
+
+## 5. Worked example
+
+Suppose:
+
+| Concurrency | Throughput | TTFT p95 |
+|---:|---:|---:|
+| 1 | 20 tok/s | 150 ms |
+| 4 | 70 tok/s | 190 ms |
+| 16 | 180 tok/s | 420 ms |
+| 32 | 250 tok/s | 900 ms |
+
+If the SLA is TTFT p95 ≤500 ms, concurrency 32 may not qualify despite the higher throughput.
+
+The useful operating point is determined by the SLA.
+
+## 6. Long prompts
+
+For a RAG workload, retrieved context can make prefill the bottleneck.
+
+Therefore optimize:
+
+- retrieval token count;
+- prompt template;
+- context ordering;
+- prefix caching;
+- batching;
+- attention kernels.
+
+Sometimes improving retrieval reduces latency more than changing the model.
+
+## 7. Measurement protocol
+
+For each benchmark record:
+
+- model/checkpoint;
+- precision/quantization;
+- hardware;
+- prompt length distribution;
+- output length distribution;
+- concurrency;
+- streaming/non-streaming;
+- TTFT p50/p95;
+- ITL p50/p95;
+- end-to-end latency;
+- input/output tokens/sec;
+- GPU memory/utilization.
+
+## Research exercise
+
+Benchmark one model at four concurrency levels and two prompt lengths.
+
+Plot:
+
+**throughput vs concurrency**
+
+and:
+
+**TTFT vs concurrency**
+
+Identify the point where more batching stops meeting the latency target.
 
 ## Laboratory
+
 [inference_and_kv_cache.ipynb](../../notebooks/inference_and_kv_cache.ipynb)
 
-## Critical thinking
-**Question:** What can a benchmark or metric hide?  
-**Answer:** Distribution shift, severe but rare failures, cost/latency regressions, and behavior outside the tested task.
+## Reference
 
-**Question:** What makes this research-grade?  
-**Answer:** Clear hypothesis, controlled comparison, versioned inputs, reproducible procedure, quantitative evidence, uncertainty/limitations, and enough detail for another team to repeat it.
-
-## Research prompt
-Propose one ablation and one failure-analysis experiment.
-
-## References
 https://docs.vllm.ai/en/stable/

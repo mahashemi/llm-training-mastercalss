@@ -1,79 +1,155 @@
 # Lecture 24 — From Experiment to Fundable Model
 
-**Duration:** 25 minutes  
-**Primary anchor:** https://github.com/allenai/OLMo
+**Duration:** 25 minutes
 
 ## Outcome
 
-The learner finishes with an engineering artifact, a defensible decision, and a research question.
+Turn an experiment into a fundable, reviewable technical case without hiding uncertainty.
 
-## 25-minute teaching plan
+## 0–4 — The proposal is an evidence chain
 
-### 0–3 — The real-world problem
-Start with a scenario involving an explicit constraint: quality, data, compute, latency, privacy, reliability, or budget. Make students predict the answer before terminology.
+Start with:
 
-### 3–8 — Intuition
-Build the smallest example that exposes the core idea.
+“We should train a 30B model.”
 
-### 8–14 — Formalism
-Derive the key equations or decision criteria. State what is measured and what is estimated.
+Ask students to rewrite it.
 
-### 14–19 — Lab
-Run the associated experiment. Record the baseline before changing anything.
+Better:
 
-### 19–22 — Failure analysis
-Break one assumption. Explain whether the failure is data, statistical, numerical, algorithmic, or infrastructure-related.
+“Baseline A misses target benchmark B by C points. RAG improves factuality but not language quality. A continued-pretraining pilot improves B by D points at E compute. We therefore propose a scale experiment to estimate the quality-vs-compute curve.”
 
-### 22–24 — Proposal thinking
-Turn the result into a decision: what should be built next, by whom, using which resources, and why?
+Every claim should point to evidence or an explicit assumption.
 
-### 24–25 — Exit challenge
-Write a three-sentence recommendation supported by evidence and one uncertainty that remains.
+## 4–8 — Proposal anatomy
 
-## Core concepts
-1. technical proposal
-2. budget
-3. evidence package
-4. pilot
-5. KPIs
-6. risk register
-7. publication plan
-
-## Engineering decision matrix
-
-| Question | Evidence to collect |
+| Section | Core question |
 |---|---|
-| Does this method improve quality? | controlled baseline and target-specific eval |
-| Does it justify additional compute? | marginal gain per unit compute |
-| Can the organization operate it? | people, infrastructure, monitoring, recovery |
-| Is the result reusable? | versioned code/data/model + reproduction instructions |
-| Is it fundable? | measurable outcome, budget, milestones, risk register |
+| Mission | Why does this matter? |
+| Users | Who uses it? |
+| Gap | What cannot current systems do? |
+| Baseline | What was already tested? |
+| Evidence | What experiments support the claim? |
+| Technical plan | What exactly will be trained/built? |
+| Evaluation | How will success be measured? |
+| Resources | What compute/data/people are needed? |
+| Budget | What is one-time vs recurring? |
+| Risk | What can invalidate the plan? |
+| Gates | When is more money released? |
+| Deliverables | What artifacts will exist? |
 
-## Critical thinking
+## 8–13 — The reviewer objection table
 
-**Q1. What is the most dangerous mistake?**
+Teach students to answer:
 
-**A:** Optimizing a proxy—benchmark score, loss, tokens/sec, or user preference—without verifying that it represents the actual program objective.
+| Reviewer asks | Required evidence |
+|---|---|
+| Why not API? | quality + TCO baseline |
+| Why not RAG? | retrieval experiment + residual gap |
+| Why not SFT/PEFT? | adaptation comparison |
+| Why continued PT? | domain/language evidence |
+| Why this architecture? | controlled architecture experiment |
+| Why this model size? | scaling study |
+| Why these GPUs? | measured throughput |
+| Why this budget? | equations + assumptions |
+| What if it fails? | gate + fallback |
+| Can it be reproduced? | artifact plan |
 
-**Q2. What must a serious recommendation contain?**
+This table makes the proposal falsifiable.
 
-**A:** A baseline, the proposed intervention, evidence, resource requirements, expected outcome, risks, and a plan to validate the remaining uncertainty.
+## 13–17 — Budget from the workload
 
-**Q3. What turns an experiment into a program?**
+For training:
 
-**A:** Repeatability, ownership, operational infrastructure, measurable outcomes, budget, milestones, governance, and a path from pilot evidence to scale.
+FLOPs ≈ 6ND
 
-## Visuals
-- method-selection tree;
-- system/data boundary;
-- resource-to-budget flow;
-- milestone roadmap.
+For time:
 
-## Practical deliverable
+time ≈ total FLOPs / measured effective throughput
 
-Produce one artifact that can be shown to an engineering lead:
-**problem → evidence → method → experiment → result → resource estimate → decision → next milestone**.
+For compute cost:
 
-## Research bridge
+cost ≈ accelerator hours × blended rate
 
-Read the primary anchor and cite the relevant method paper as well as this repository when your work derives from both.
+Then add:
+
+- data;
+- storage;
+- evaluation;
+- retries;
+- people;
+- security/governance;
+- serving;
+- contingency.
+
+Never make the GPU line equal the project budget.
+
+## 17–20 — Milestone-funded development
+
+Example:
+
+| Milestone | Release condition |
+|---|---|
+| Discovery | baseline gap reproduced |
+| Data | rights + quality pass |
+| Pilot | target gain demonstrated |
+| Scaling | trend measurable |
+| Product | task/SLO gate |
+| Full program | integrated evidence |
+
+This converts a large request into a sequence of testable claims.
+
+## 20–22 — Make the proposal research-grade
+
+Preserve:
+
+- code;
+- model/config;
+- tokenizer;
+- dataset version;
+- hardware;
+- software versions;
+- evaluation;
+- results;
+- limitations.
+
+The proposal should be capable of becoming a paper, a reproduction package, and a future maintenance record.
+
+## 22–24 — Worked proposal
+
+Claim:
+
+“A target language is underserved.”
+
+Evidence:
+
+- native benchmark gap;
+- tokenizer inefficiency;
+- RAG factuality gain without language gain;
+- SFT format gain without grammar gain;
+- continued-pretraining pilot improves native score.
+
+Next request:
+
+a controlled small-scale scaling experiment.
+
+Not yet:
+
+the final large cluster.
+
+## 24–25 — Exit challenge
+
+Write the first page of a proposal with exactly:
+
+**problem → baseline → evidence → proposed experiment → resources → gate → fallback**
+
+### Critical-thinking question
+
+What makes a proposal more credible: a larger requested budget or a stronger chain of measured evidence?
+
+The proposal should make the evidence chain explicit so the reviewer can inspect the assumptions and challenge them.
+
+### References
+
+OLMo 2: https://allenai.org/olmo2  
+Stanford CS336: https://cs336.stanford.edu/  
+Chinchilla: https://arxiv.org/abs/2203.15556

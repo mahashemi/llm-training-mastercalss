@@ -1,80 +1,155 @@
 # Lecture 23 — Build an LLM Program
 
-**Duration:** 25 minutes  
-**Primary anchor:** https://arxiv.org/abs/2402.00159
+**Duration:** 25 minutes
 
 ## Outcome
 
-The learner finishes with an engineering artifact, a defensible decision, and a research question.
+The learner should be able to turn a model experiment into an operating program with explicit owners, resources, gates, risks, and evidence.
 
-## 25-minute teaching plan
+## 0–4 — Start with the mission, not the model
 
-### 0–3 — The real-world problem
-Start with a scenario involving an explicit constraint: quality, data, compute, latency, privacy, reliability, or budget. Make students predict the answer before terminology.
+Give the class this requirement:
 
-### 3–8 — Intuition
-Build the smallest example that exposes the core idea.
+“Build a useful multilingual assistant in 12 months.”
 
-### 8–14 — Formalism
-Derive the key equations or decision criteria. State what is measured and what is estimated.
+Ask: what would you budget?
 
-### 14–19 — Lab
-Run the associated experiment. Record the baseline before changing anything.
+The correct first response is **not a GPU number**.
 
-### 19–22 — Failure analysis
-Break one assumption. Explain whether the failure is data, statistical, numerical, algorithmic, or infrastructure-related.
+Convert the mission into:
 
-### 22–24 — Proposal thinking
-Turn the result into a decision: what should be built next, by whom, using which resources, and why?
+**users → tasks → target capability → baseline → metric → constraints**
 
-### 24–25 — Exit challenge
-Write a three-sentence recommendation supported by evidence and one uncertainty that remains.
+Example:
 
-## Core concepts
-1. mission
-2. data strategy
-3. model roadmap
-4. people
-5. compute
-6. governance
-7. procurement
-8. national-language strategy
-
-## Engineering decision matrix
-
-| Question | Evidence to collect |
+| Requirement | Example |
 |---|---|
-| Does this method improve quality? | controlled baseline and target-specific eval |
-| Does it justify additional compute? | marginal gain per unit compute |
-| Can the organization operate it? | people, infrastructure, monitoring, recovery |
-| Is the result reusable? | versioned code/data/model + reproduction instructions |
-| Is it fundable? | measurable outcome, budget, milestones, risk register |
+| Users | public-service staff |
+| Languages | 4 |
+| Main task | question answering + summarization |
+| Fresh knowledge | yes |
+| Latency | p95 < 2 s |
+| Deployment | local |
+| Budget | fixed |
+| Governance | controlled data |
 
-## Critical thinking
+## 4–8 — Build the evidence ladder
 
-**Q1. What is the most dangerous mistake?**
+Before requesting a large program:
 
-**A:** Optimizing a proxy—benchmark score, loss, tokens/sec, or user preference—without verifying that it represents the actual program objective.
+**API/model baseline**  
+→ **RAG/tool baseline**  
+→ **SFT/PEFT pilot**  
+→ **continued-pretraining pilot if needed**  
+→ **small-model scaling study**  
+→ **program proposal**
 
-**Q2. What must a serious recommendation contain?**
+Each stage removes one uncertainty.
 
-**A:** A baseline, the proposed intervention, evidence, resource requirements, expected outcome, risks, and a plan to validate the remaining uncertainty.
+## 8–13 — Program workstreams
 
-**Q3. What turns an experiment into a program?**
+Draw seven parallel tracks:
 
-**A:** Repeatability, ownership, operational infrastructure, measurable outcomes, budget, milestones, governance, and a path from pilot evidence to scale.
+1. data;
+2. model research;
+3. training systems;
+4. evaluation;
+5. serving/product;
+6. governance/security;
+7. program/procurement.
 
-## Visuals
-- method-selection tree;
-- system/data boundary;
-- resource-to-budget flow;
-- milestone roadmap.
+Then show the handoffs.
 
-## Practical deliverable
+| Workstream | Key artifact |
+|---|---|
+| Data | versioned corpus + data card |
+| Research | model/config records |
+| Systems | throughput/scaling report |
+| Evaluation | scorecard + failure analysis |
+| Serving | latency/cost report |
+| Governance | rights/risk record |
+| Program | budget + milestone plan |
 
-Produce one artifact that can be shown to an engineering lead:
-**problem → evidence → method → experiment → result → resource estimate → decision → next milestone**.
+## 13–17 — Resource planning
 
-## Research bridge
+Teach the resource chain:
 
-Read the primary anchor and cite the relevant method paper as well as this repository when your work derives from both.
+**target model/data → FLOPs → measured throughput → wall time → accelerator cost → storage → staffing → total TCO**
+
+First-order dense-LM planning:
+
+FLOPs ≈ 6ND
+
+Then use measured effective throughput.
+
+Example:
+
+7B parameters × 100B training tokens
+
+FLOPs ≈ 4.2e21
+
+If a pilot cluster delivers 5e15 effective FLOP/s:
+
+wall time ≈ 9.7 days
+
+The point is not the number. The point is that every budget line has an assumption behind it.
+
+## 17–20 — Stage gates
+
+| Stage | Spend | Required evidence |
+|---|---:|---|
+| Baseline | tiny | measured gap |
+| Data pilot | low | quality + rights |
+| Training pilot | low–medium | stable learning + target gain |
+| Scaling test | medium | scaling curve |
+| Product pilot | medium | user/SLO evidence |
+| Program | high | integrated technical + economic case |
+
+At every gate define:
+
+**metric → threshold → artifact → owner → next budget**
+
+## 20–22 — Team design
+
+Show a small pilot team:
+
+- technical lead;
+- ML/research engineer;
+- data engineer;
+- evaluator/domain expert;
+- platform/infra support;
+- part-time program management.
+
+Then ask what changes at scale.
+
+Answer: the functions do not disappear; they become dedicated roles.
+
+## 22–24 — Risk and governance
+
+Create a live risk table:
+
+| Risk | Indicator | Response |
+|---|---|---|
+| poor data | quality score falls | stop acquisition, improve sources |
+| training instability | validation divergence | fix pipeline before scaling |
+| regression | protected eval drops | reduce specialization |
+| budget growth | forecast exceeds ceiling | reduce scope/pivot |
+| data rights | unresolved source | quarantine/remove |
+| serving cost | cost/task above limit | distill/smaller model |
+
+## 24–25 — Exit challenge
+
+Produce one page:
+
+**mission → baseline → evidence → workstreams → resources → budget → milestones → risks → release plan**
+
+### Critical-thinking question
+
+Why can a technically excellent model still be a failed program?
+
+Because the program can fail at data rights, evaluation, serving economics, staffing, reliability, or schedule even when the model itself works.
+
+### References
+
+Stanford CS336: https://cs336.stanford.edu/  
+OLMo 2: https://allenai.org/olmo2

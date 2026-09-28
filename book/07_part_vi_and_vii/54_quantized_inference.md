@@ -2,30 +2,129 @@
 
 **Part:** Part VI
 
-## Core concepts
-1. **Weight compression** — Reduce memory footprint of stored weights.
-2. **Kernel support** — Quantization helps only if the hardware/software path can exploit it.
-3. **Calibration** — Representative inputs can influence quantization error.
-4. **Quality testing** — Evaluate target tasks after quantization.
+## 1. Quantization changes the serving envelope
 
-## Formal view
-Quantization trades representation precision for storage/bandwidth savings. Measure end-to-end tokens/sec and task quality, not compression ratio alone.
+The main potential benefits are:
 
-## Practice
-Define the operational objective, freeze the baseline, run the smallest informative experiment, record resource use, inspect failures, and decide whether the next intervention is justified.
+- lower weight memory;
+- lower memory bandwidth;
+- ability to fit a larger model on a given GPU;
+- potentially higher throughput when optimized kernels are available.
+
+The main risks are:
+
+- quality degradation;
+- unsupported hardware/kernel path;
+- calibration mismatch;
+- changed latency characteristics.
+
+## 2. Precision comparison
+
+| Format | Ideal weight storage | Typical purpose | Main question |
+|---|---:|---|---|
+| FP32 | 32 bits/parameter | reference | can it fit? |
+| BF16/FP16 | 16 bits/parameter | standard serving | baseline quality/speed |
+| INT8 | 8 bits/parameter | memory/bandwidth reduction | quality + kernel support |
+| 4-bit | 4 bits/parameter | aggressive compression | quality + throughput |
+
+Actual memory includes scales, metadata, runtime buffers, KV cache, and framework overhead.
+
+## 3. Fit calculation
+
+For a 13B model:
+
+BF16 raw weights ≈ 13B × 2 bytes ≈ 26 GB decimal
+
+4-bit raw weights ≈ 13B × 0.5 bytes ≈ 6.5 GB decimal
+
+This does not mean a 4-bit model needs only 6.5 GB total GPU memory.
+
+Add:
+
+**KV cache + activations + runtime + quantization metadata**
+
+## 4. Compression is not speed
+
+A quantized model can use much less memory but gain little throughput if:
+
+- the kernel is poorly optimized;
+- dequantization dominates;
+- the workload is compute-bound elsewhere;
+- batching is limited by another resource.
+
+Therefore measure end to end.
+
+## 5. Calibration
+
+If the method uses calibration, calibration data should represent deployment.
+
+Example mismatch:
+
+calibration = short English prompts
+
+deployment = long multilingual RAG requests
+
+The quantization error profile may differ.
+
+## 6. Evaluation matrix
+
+| Metric | BF16 | 8-bit | 4-bit |
+|---|---:|---:|---:|
+| Target quality | measure | measure | measure |
+| Safety | measure | measure | measure |
+| TTFT p95 | measure | measure | measure |
+| Output tok/s | measure | measure | measure |
+| Peak memory | measure | measure | measure |
+| Cost/task | measure | measure | measure |
+
+## 7. Worked deployment example
+
+Suppose:
+
+- BF16 weights = 30 GB;
+- available GPU memory = 24 GB.
+
+BF16 deployment does not fit.
+
+A 4-bit version may fit after accounting for metadata and runtime.
+
+But the release gate should be:
+
+**fit + quality + latency + throughput + reliability**
+
+not simply “4-bit fits.”
+
+## 8. When quantization is especially useful
+
+Evaluate quantization when:
+
+- model weights dominate memory;
+- hardware is memory-constrained;
+- serving cost is high;
+- quality tolerance allows small degradation;
+- optimized kernels exist.
+
+## Research exercise
+
+Quantize a small open model.
+
+Compare BF16 vs two lower-precision configurations.
+
+Report:
+
+- memory;
+- throughput;
+- TTFT;
+- target score;
+- safety score;
+- cost per successful task.
+
+Calculate the quality loss per unit cost saved.
 
 ## Laboratory
+
 [lora_qlora_comparison.ipynb](../../notebooks/lora_qlora_comparison.ipynb)
 
-## Critical thinking
-**Question:** What can a benchmark or metric hide?  
-**Answer:** Distribution shift, severe but rare failures, cost/latency regressions, and behavior outside the tested task.
+## Reference
 
-**Question:** What makes this research-grade?  
-**Answer:** Clear hypothesis, controlled comparison, versioned inputs, reproducible procedure, quantitative evidence, uncertainty/limitations, and enough detail for another team to repeat it.
-
-## Research prompt
-Propose one ablation and one failure-analysis experiment.
-
-## References
 https://docs.vllm.ai/en/stable/

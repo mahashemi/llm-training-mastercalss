@@ -1,79 +1,165 @@
 # Lecture 22 — API vs RAG vs Tools vs Training
 
 **Duration:** 25 minutes  
-**Primary anchor:** https://docs.vllm.ai/en/stable/
+**Primary goal:** Diagnose the bottleneck before choosing an architecture.
 
-## Outcome
+## Learning outcome
 
-The learner finishes with an engineering artifact, a defensible decision, and a research question.
+The learner should be able to take a requirement such as:
 
-## 25-minute teaching plan
+“Build an assistant that answers from changing documents, follows a strict format, and can perform actions.”
 
-### 0–3 — The real-world problem
-Start with a scenario involving an explicit constraint: quality, data, compute, latency, privacy, reliability, or budget. Make students predict the answer before terminology.
+and decompose it into **knowledge, behavior, and action** problems.
 
-### 3–8 — Intuition
-Build the smallest example that exposes the core idea.
+## 0–3 minutes — The trap
 
-### 8–14 — Formalism
-Derive the key equations or decision criteria. State what is measured and what is estimated.
+Show four responses to:
 
-### 14–19 — Lab
-Run the associated experiment. Record the baseline before changing anything.
+“The assistant gives answers from old policy.”
 
-### 19–22 — Failure analysis
-Break one assumption. Explain whether the failure is data, statistical, numerical, algorithmic, or infrastructure-related.
+A. fine-tune it  
+B. make the prompt longer  
+C. add retrieval  
+D. train a new foundation model
 
-### 22–24 — Proposal thinking
-Turn the result into a decision: what should be built next, by whom, using which resources, and why?
+Ask students which experiment would be most informative.
 
-### 24–25 — Exit challenge
-Write a three-sentence recommendation supported by evidence and one uncertainty that remains.
+Then establish the rule:
 
-## Core concepts
-1. knowledge versus behavior
-2. freshness
-3. privacy
-4. latency
-5. economics
-6. decision trees
-7. total cost of ownership
+**If the source of truth changes externally, first test whether the model needs access to that source rather than new memorized weights.**
 
-## Engineering decision matrix
+## 3–7 minutes — The three-bucket model
 
-| Question | Evidence to collect |
+**KNOWLEDGE:** What information should the model see?  
+Typical method: RAG or live data.
+
+**BEHAVIOR:** How should the model respond?  
+Typical method: prompting → SFT/PEFT.
+
+**ACTION:** What should the system do outside the model?  
+Typical method: tools/APIs.
+
+Then add a fourth bucket:
+
+**REPRESENTATION:** Is the model fundamentally weak on the domain/language?  
+Possible method: continued pretraining.
+
+## 7–12 minutes — Decision matrix
+
+| Dimension | API | API + RAG | API + tools | SFT/PEFT | Continued PT | Scratch |
+|---|---|---|---|---|---|---|
+| Up-front effort | low | low–medium | medium | medium | high | very high |
+| Main asset | provider model | model + corpus | model + APIs | adapted weights | adapted base | full training stack |
+| Freshness | provider-dependent | strong | live state | retrain | retrain | retrain |
+| Stable behavior | prompt | prompt + context | workflow-dependent | strong candidate | indirect | indirect |
+| Live action | no | no | yes | no | no | no |
+| Data ownership | depends on provider/app | corpus + provider path | app + tool data | training data | training corpus | full corpus |
+| Main burden | integration | retrieval | workflow reliability | model lifecycle | training lifecycle | full program |
+
+Stress that the table is a **problem-to-method map**, not a winner table.
+
+## 12–16 minutes — Worked scenario
+
+Hospital assistant requirements:
+
+1. current internal policy;
+2. structured triage object;
+3. live appointment schedule;
+4. fixed latency budget;
+5. minimal infrastructure.
+
+Map the architecture:
+
+**base model/API**  
++ **RAG for policy**  
++ **structured output or small PEFT experiment for stable format**  
++ **tool for appointment availability**
+
+Evaluate each requirement separately.
+
+| Requirement | Measurement |
 |---|---|
-| Does this method improve quality? | controlled baseline and target-specific eval |
-| Does it justify additional compute? | marginal gain per unit compute |
-| Can the organization operate it? | people, infrastructure, monitoring, recovery |
-| Is the result reusable? | versioned code/data/model + reproduction instructions |
-| Is it fundable? | measurable outcome, budget, milestones, risk register |
+| Current policy | retrieval recall + answer correctness |
+| Structured response | schema validity + semantics |
+| Appointment | tool selection + execution success |
+| Latency | p50/p95 |
+| Cost | cost per successful task |
 
-## Critical thinking
+## 16–19 minutes — Cost reasoning
 
-**Q1. What is the most dangerous mistake?**
+API request:
 
-**A:** Optimizing a proxy—benchmark score, loss, tokens/sec, or user preference—without verifying that it represents the actual program objective.
+C_request =
+input tokens × price
++ output tokens × price
++ retrieval/tool costs
 
-**Q2. What must a serious recommendation contain?**
+Training lifecycle:
 
-**A:** A baseline, the proposed intervention, evidence, resource requirements, expected outcome, risks, and a plan to validate the remaining uncertainty.
+C_training =
+compute + data + evaluation + engineering + retries
 
-**Q3. What turns an experiment into a program?**
+Thought experiment:
 
-**A:** Repeatability, ownership, operational infrastructure, measurable outcomes, budget, milestones, governance, and a path from pilot evidence to scale.
+A fine-tune costs 1,000 currency units and saves 0.01 per successful task.
 
-## Visuals
-- method-selection tree;
-- system/data boundary;
-- resource-to-budget flow;
-- milestone roadmap.
+Break-even is about 100,000 successful tasks.
 
-## Practical deliverable
+Then add update cadence. Daily-changing knowledge can make repeated retraining uneconomic even when per-request inference becomes cheaper.
 
-Produce one artifact that can be shown to an engineering lead:
-**problem → evidence → method → experiment → result → resource estimate → decision → next milestone**.
+## 19–22 minutes — Failure analysis
+
+**Correct document never retrieved**  
+→ retrieval failure.
+
+**Correct document retrieved but contradicted**  
+→ evidence-use/generation failure.
+
+**Right action, wrong arguments**  
+→ tool-contract/model-selection failure.
+
+**Correct semantics, invalid JSON**  
+→ structured-output/behavior failure.
+
+**Persistent weak language performance despite correct evidence**  
+→ possible representation problem; test continued pretraining.
+
+Teach students to map **failure → system layer**.
+
+## 22–24 minutes — Escalation ladder
+
+**Strong baseline**  
+↓  
+**Add context**  
+↓  
+**Add actions**  
+↓  
+**Adapt stable behavior**  
+↓  
+**Change domain/language distribution**  
+↓  
+**Foundation-model program only with evidence**
+
+Every escalation must record quality, latency, cost, regression, and operational complexity.
+
+## 24–25 minutes — Exit challenge
+
+Write one sentence for each:
+
+1. What external knowledge is missing?
+2. What stable behavior is missing?
+3. What external action is required?
+4. What is the cheapest experiment that distinguishes the hypotheses?
 
 ## Research bridge
 
-Read the primary anchor and cite the relevant method paper as well as this repository when your work derives from both.
+- RAG: https://arxiv.org/abs/2005.11401
+- Toolformer: https://arxiv.org/abs/2302.04761
+- ReAct: https://arxiv.org/abs/2210.03629
+- Stanford CS336: https://cs336.stanford.edu/
+
+## Required deliverable
+
+Create an architecture decision record:
+
+**requirement → failure class → baseline → intervention → experiment → quality → latency → cost → risk → next decision**
