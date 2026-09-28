@@ -3,76 +3,121 @@
 **Duration:** 25 minutes  
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
-## Outcome
+## Learning outcome
 
-The learner finishes with an engineering artifact, a defensible decision, and a research question.
+The learner can turn vague “safety concerns” into measurable failure categories, test them under realistic conditions, and use the results to drive engineering changes.
 
-## 25-minute teaching plan
+## 0–4 — Start from failures
 
-### 0–3 — The real-world problem
-Start with a scenario involving an explicit constraint: quality, data, compute, latency, privacy, reliability, or budget. Make students predict the answer before terminology.
+Give five outputs:
 
-### 3–8 — Intuition
-Build the smallest example that exposes the core idea.
+1. wrong answer;
+2. unsafe answer;
+3. correct answer with unsupported citation;
+4. correct answer but invalid JSON;
+5. correct answer that becomes wrong after a typo.
 
-### 8–14 — Formalism
-Derive the key equations or decision criteria. State what is measured and what is estimated.
+Ask: “Are these the same failure?”
 
-### 14–19 — Lab
-Run the associated experiment. Record the baseline before changing anything.
+No. They occur at different layers.
 
-### 19–22 — Failure analysis
-Break one assumption. Explain whether the failure is data, statistical, numerical, algorithmic, or infrastructure-related.
+## 4–8 — Failure taxonomy
 
-### 22–24 — Proposal thinking
-Turn the result into a decision: what should be built next, by whom, using which resources, and why?
+| Failure | Example | Likely layer |
+|---|---|---|
+| Capability | cannot solve task | model/data |
+| Grounding | contradicts source | retrieval/generation |
+| Safety | harmful response | policy/model/system |
+| Format | invalid schema | interface/behavior |
+| Robustness | fails after perturbation | data/model |
+| Tool | unsafe/wrong action | agent/system |
 
-### 24–25 — Exit challenge
-Write a three-sentence recommendation supported by evidence and one uncertainty that remains.
+This taxonomy turns evaluation into an intervention map.
 
-## Core concepts
-1. red teaming
-2. jailbreak evaluation
-3. data risks
-4. harmful behavior testing
-5. robustness
-6. model/system boundary
+## 8–13 — Safety evaluation design
 
-## Engineering decision matrix
+A serious safety set should specify:
 
-| Question | Evidence to collect |
+- threat model;
+- user population;
+- attack/edge-case families;
+- expected safe behavior;
+- severity levels;
+- scoring rubric;
+- human audit process.
+
+Example severity:
+
+| Severity | Meaning | Release treatment |
+|---|---|---|
+| S0 | harmless quality issue | monitor |
+| S1 | minor failure | fix |
+| S2 | meaningful harm potential | release gate |
+| S3 | severe/critical | blocker |
+
+The exact definitions are domain-specific.
+
+## 13–17 — Robustness
+
+Build perturbations:
+
+- typos;
+- paraphrases;
+- long context;
+- multilingual variation;
+- conflicting evidence;
+- malformed tool arguments.
+
+Measure degradation:
+
+clean score − perturbed score
+
+Also record latency/cost changes.
+
+## 17–20 — Worked failure analysis
+
+Observed:
+
+“The assistant gives unsafe medical advice.”
+
+Test 1: Was correct policy/evidence retrieved?
+
+Test 2: Was the evidence sufficient?
+
+Test 3: Does the model behave correctly with oracle context?
+
+Test 4: Is the failure isolated to one language/intent?
+
+This converts a scary symptom into a causal debugging tree.
+
+## 20–22 — Red-team vs benchmark
+
+| Benchmark | Red-team |
 |---|---|
-| Does this method improve quality? | controlled baseline and target-specific eval |
-| Does it justify additional compute? | marginal gain per unit compute |
-| Can the organization operate it? | people, infrastructure, monitoring, recovery |
-| Is the result reusable? | versioned code/data/model + reproduction instructions |
-| Is it fundable? | measurable outcome, budget, milestones, risk register |
+| fixed, repeatable | adaptive |
+| known categories | searches for unknown failure modes |
+| easier to regress | can discover novel failures |
+| quantitative | often exploratory + quantitative |
 
-## Critical thinking
+Use both.
 
-**Q1. What is the most dangerous mistake?**
+## 22–24 — Release decision
 
-**A:** Optimizing a proxy—benchmark score, loss, tokens/sec, or user preference—without verifying that it represents the actual program objective.
+A release scorecard should include:
 
-**Q2. What must a serious recommendation contain?**
+**capability + safety + robustness + language + product SLO**
 
-**A:** A baseline, the proposed intervention, evidence, resource requirements, expected outcome, risks, and a plan to validate the remaining uncertainty.
+Do not allow a large aggregate benchmark gain to silently override a critical failure.
 
-**Q3. What turns an experiment into a program?**
+## 24–25 — Exit challenge
 
-**A:** Repeatability, ownership, operational infrastructure, measurable outcomes, budget, milestones, governance, and a path from pilot evidence to scale.
+Give the learner one failure and require:
 
-## Visuals
-- method-selection tree;
-- system/data boundary;
-- resource-to-budget flow;
-- milestone roadmap.
+**failure → taxonomy → confirming experiment → intervention → release gate**
 
-## Practical deliverable
+### Research bridge
 
-Produce one artifact that can be shown to an engineering lead:
-**problem → evidence → method → experiment → result → resource estimate → decision → next milestone**.
+Read the primary post-training/safety literature and compare automated evaluation with human audit.
 
-## Research bridge
-
-Read the primary anchor and cite the relevant method paper as well as this repository when your work derives from both.
+Reference:
+https://arxiv.org/abs/2203.02155

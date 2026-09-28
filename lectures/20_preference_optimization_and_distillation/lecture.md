@@ -1,77 +1,134 @@
 # Lecture 20 — Preference Optimization and Distillation
 
 **Duration:** 25 minutes  
-**Primary anchor:** https://arxiv.org/abs/2305.18290
+**Primary anchors:** https://arxiv.org/abs/2305.18290 · https://arxiv.org/abs/1503.02531
 
-## Outcome
+## Learning outcome
 
-The learner finishes with an engineering artifact, a defensible decision, and a research question.
+The learner can explain two different goals:
 
-## 25-minute teaching plan
+**preference optimization changes what the model prefers**  
+**distillation changes the economics of serving a capability**
 
-### 0–3 — The real-world problem
-Start with a scenario involving an explicit constraint: quality, data, compute, latency, privacy, reliability, or budget. Make students predict the answer before terminology.
+## 0–4 — Start with the product problem
 
-### 3–8 — Intuition
-Build the smallest example that exposes the core idea.
+Suppose a model is accurate but:
 
-### 8–14 — Formalism
-Derive the key equations or decision criteria. State what is measured and what is estimated.
+- too verbose;
+- expensive to serve;
+- inconsistent with user preferences.
 
-### 14–19 — Lab
-Run the associated experiment. Record the baseline before changing anything.
+Ask: is one method the answer?
 
-### 19–22 — Failure analysis
-Break one assumption. Explain whether the failure is data, statistical, numerical, algorithmic, or infrastructure-related.
+Reveal two separate hypotheses:
 
-### 22–24 — Proposal thinking
-Turn the result into a decision: what should be built next, by whom, using which resources, and why?
-
-### 24–25 — Exit challenge
-Write a three-sentence recommendation supported by evidence and one uncertainty that remains.
-
-## Core concepts
-1. DPO
-2. KL intuition
-3. teacher/student methods
-4. response distillation
-5. dataset quality
-
-## Engineering decision matrix
-
-| Question | Evidence to collect |
+| Problem | Candidate |
 |---|---|
-| Does this method improve quality? | controlled baseline and target-specific eval |
-| Does it justify additional compute? | marginal gain per unit compute |
-| Can the organization operate it? | people, infrastructure, monitoring, recovery |
-| Is the result reusable? | versioned code/data/model + reproduction instructions |
-| Is it fundable? | measurable outcome, budget, milestones, risk register |
+| behavior/preference | DPO-style preference optimization |
+| cost/latency/model size | distillation |
 
-## Critical thinking
+They can be combined later.
 
-**Q1. What is the most dangerous mistake?**
+## 4–8 — Preference data
 
-**A:** Optimizing a proxy—benchmark score, loss, tokens/sec, or user preference—without verifying that it represents the actual program objective.
+A preference example contains:
 
-**Q2. What must a serious recommendation contain?**
+**prompt x + chosen y_w + rejected y_l**
 
-**A:** A baseline, the proposed intervention, evidence, resource requirements, expected outcome, risks, and a plan to validate the remaining uncertainty.
+The quality of the pair is critical.
 
-**Q3. What turns an experiment into a program?**
+Bad pair:
 
-**A:** Repeatability, ownership, operational infrastructure, measurable outcomes, budget, milestones, governance, and a path from pilot evidence to scale.
+chosen = 500 words  
+rejected = 100 words
 
-## Visuals
-- method-selection tree;
-- system/data boundary;
-- resource-to-budget flow;
-- milestone roadmap.
+This teaches length if length correlates with the label.
 
-## Practical deliverable
+Better pair:
 
-Produce one artifact that can be shown to an engineering lead:
-**problem → evidence → method → experiment → result → resource estimate → decision → next milestone**.
+chosen = correct + concise + grounded  
+rejected = plausible + unsupported
 
-## Research bridge
+## 8–13 — DPO mechanics
 
-Read the primary anchor and cite the relevant method paper as well as this repository when your work derives from both.
+A common DPO objective compares policy and reference log-probability differences.
+
+The important intuition:
+
+**increase relative preference for the chosen answer while anchoring against the reference policy.**
+
+Parameters such as beta control how strongly preference differences affect optimization.
+
+Do not treat beta as a universal magic number; sweep it.
+
+## 13–17 — Distillation
+
+Teacher → student.
+
+| Signal | Student learns from | Cost |
+|---|---|---|
+| Hard labels | target answer | low |
+| Teacher responses | generated output | medium |
+| Teacher logits | full distribution | higher |
+| Hidden states | representations | higher |
+
+The student must be evaluated against the real task, not only teacher imitation.
+
+## 17–20 — Worked decision
+
+| Model | Quality | p95 latency | Cost/task |
+|---|---:|---:|---:|
+| Teacher | 90 | 500 ms | 1.00 |
+| Student A | 86 | 180 ms | 0.30 |
+| Student B | 88 | 240 ms | 0.45 |
+
+If the release threshold is quality ≥87 and latency ≤300 ms:
+
+Student A does not satisfy the quality constraint.
+
+Student B is a candidate for further testing.
+
+This is constraint satisfaction, not a “best model” ranking.
+
+## 20–22 — Failure analysis
+
+**Preference win rate rises but factuality falls**  
+→ preference proxy mismatch.
+
+**Student matches teacher but product score falls**  
+→ teacher behavior was not aligned with the actual objective.
+
+**Student is cheaper but misses latency target**  
+→ compression did not solve the relevant bottleneck.
+
+## 22–24 — Experiment design
+
+Run:
+
+1. SFT baseline;
+2. DPO on balanced preferences;
+3. DPO on style-heavy preferences;
+4. teacher → student distillation.
+
+Measure:
+
+- target quality;
+- safety;
+- verbosity;
+- refusal;
+- latency;
+- cost;
+- rare-case failures.
+
+## 24–25 — Exit challenge
+
+State one sentence each:
+
+> “Preference optimization is justified because ___.”
+
+> “Distillation is justified because ___.”
+
+### References
+
+DPO: https://arxiv.org/abs/2305.18290  
+Knowledge distillation: https://arxiv.org/abs/1503.02531

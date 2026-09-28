@@ -1,89 +1,155 @@
-# Lecture 15 — Mid and Post Training: SFT and RLHF
+# Lecture 15 — Mid and Post Training: SFT, RLHF, and the Post-Training Stack
 
 **Duration:** 25 minutes  
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Learning outcome
 
-## Teaching sequence
+By the end, the learner can distinguish:
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+**continued pretraining → SFT → preference optimization/RLHF**
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+and decide which stage addresses a measured failure.
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+## 0–4 — Why “train the model more” is ambiguous
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+Start with three failures:
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+1. The model does not know a specialist domain.
+2. The model knows the domain but ignores the required response format.
+3. The model follows the format but prefers unsafe or unhelpful responses.
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+Ask whether one training method should solve all three.
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+Reveal:
 
-## Core concepts
-1. continued pretraining
-2. supervised fine-tuning
-3. instruction data
-4. preference data
-5. reward models
-6. RLHF lifecycle
-
-## Decision table
-
-| Constraint | First thing to investigate |
+| Failure | Likely intervention |
 |---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+| Broad domain/language exposure | continued pretraining |
+| Stable behavior | SFT / PEFT |
+| Preference trade-offs | DPO / RLHF-style methods |
 
-## Critical-thinking questions
+## 4–8 — The post-training stack
 
-**Q1. What is the tempting shortcut?**
+Draw:
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+**base model**  
+↓  
+**continued pretraining (optional)**  
+↓  
+**SFT**  
+↓  
+**preference optimization**  
+↓  
+**evaluation + safety**  
+↓  
+**serving**
 
-**Q2. What should be recorded?**
+Explain that stages are composable, not mandatory.
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+## 8–13 — SFT in concrete terms
 
-**Q3. When should we stop scaling?**
+SFT learns from:
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+**input → desired response**
 
-## Visuals
+Show a bad dataset:
 
-Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
+- repetitive prompts;
+- low-quality answers;
+- only easy cases;
+- no refusal/uncertainty examples.
 
-## Practical work
+Then a good coverage matrix:
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+| Dimension | Examples |
+|---|---|
+| intent | factual / advisory / procedural |
+| difficulty | easy / medium / hard |
+| language | L1 / L2 / L3 |
+| output | prose / JSON / table |
+| safety | ordinary / edge / refusal |
 
-## Research connection
+Explain:
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+**dataset composition = gradient pressure on behavior.**
+
+## 13–17 — Preference optimization vs RLHF
+
+| Property | SFT | DPO-style preference optimization | Classic RLHF |
+|---|---|---|---|
+| Data | targets | chosen/rejected | preferences + rollouts |
+| Reward model | no | no | yes |
+| Online loop | no | usually no | yes |
+| Complexity | low | medium | high |
+| Main risk | imitation errors | preference bias | reward hacking/stability |
+
+Key lesson:
+
+A more complex training loop is justified only when it solves a problem the simpler loop cannot.
+
+## 17–20 — Worked example
+
+Target: “safe, concise, grounded medical responses.”
+
+Baseline:
+
+- correctness = 84%;
+- schema validity = 96%;
+- unnecessary refusal = 12%.
+
+SFT improves:
+
+- correctness = 88%;
+- schema validity = 98%;
+- refusal = 12%.
+
+Preference optimization then tests whether the preference data can reduce verbosity/refusal without harming correctness.
+
+Measure:
+
+| Metric | Before | After |
+|---|---:|---:|
+| Correctness | 84 | measure |
+| Groundedness | 82 | measure |
+| Refusal rate | 12 | measure |
+| Mean output tokens | 240 | measure |
+| Safety failures | measure | measure |
+
+## 20–22 — Break it
+
+Give a preference dataset where chosen responses are always longer.
+
+Predict:
+
+- verbosity increases;
+- serving cost increases;
+- human helpfulness may not improve.
+
+Then inspect the preference data.
+
+## 22–24 — Engineering judgment
+
+The learner must answer:
+
+**When is another training stage justified?**
+
+Require:
+
+- stable failure;
+- measurable target metric;
+- representative data;
+- protected evaluation;
+- known resource cost;
+- acceptable regression.
+
+## 24–25 — Exit challenge
+
+Complete:
+
+> “We should use ___ rather than ___ because the dominant failure is ___, and the cheapest experiment is ___.”
+
+### Research bridge
+
+- InstructGPT: https://arxiv.org/abs/2203.02155
+- DPO: https://arxiv.org/abs/2305.18290

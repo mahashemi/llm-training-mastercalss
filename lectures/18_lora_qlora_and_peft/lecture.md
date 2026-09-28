@@ -1,89 +1,114 @@
 # Lecture 18 — LoRA, QLoRA, and PEFT
 
 **Duration:** 25 minutes  
-**Primary anchor:** https://arxiv.org/abs/2305.14314
+**Primary anchors:** https://arxiv.org/abs/2106.09685 · https://arxiv.org/abs/2305.14314
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Outcome
 
-## Teaching sequence
+Understand why parameter-efficient fine-tuning changes the training resource equation and how to choose rank, target modules, and quantization experimentally.
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+## 0–4 — The resource problem
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+Suppose a 7B model fits for inference but does not fit for full fine-tuning.
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+Ask:
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+**Do we need to update all 7B parameters?**
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+Introduce PEFT:
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+**freeze base → learn small update → preserve base weights**
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+## 4–8 — LoRA mechanics
 
-## Core concepts
-1. parameter-efficient adaptation
-2. rank
-3. target modules
-4. quantization
-5. memory accounting
-6. adapter lifecycle
+For W:
 
-## Decision table
+W' = W + BA
 
-| Constraint | First thing to investigate |
-|---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+where the adapter rank r is much smaller than the original matrix dimensions.
 
-## Critical-thinking questions
+Parameter count:
 
-**Q1. What is the tempting shortcut?**
+r(d_in+d_out)
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+For 4096×4096:
 
-**Q2. What should be recorded?**
+full = 16.8M parameters
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+rank 16 LoRA:
 
-**Q3. When should we stop scaling?**
+16×8192 = 131k
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+That is roughly 128× fewer trainable parameters for that matrix.
 
-## Visuals
+## 8–12 — Rank is a capacity/resource knob
 
-Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
+| Rank | Adapter capacity | Memory | Experiment |
+|---:|---|---|---|
+| 4 | low | low | underfit test |
+| 8 | modest | low | small pilot |
+| 16 | medium | low | baseline |
+| 32 | higher | higher | capacity test |
+| 64 | high | higher | saturation test |
 
-## Practical work
+Do not assume a higher rank improves quality enough to pay for itself.
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+## 12–16 — What should be adapted?
 
-## Research connection
+Compare:
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+| Run | Attention | MLP | Rank |
+|---|---|---|---:|
+| A | yes | no | 16 |
+| B | yes | yes | 16 |
+| C | yes | yes | 32 |
+
+Hold data, training tokens, and evaluation constant.
+
+## 16–19 — QLoRA
+
+QLoRA combines adapter training with a quantized frozen base.
+
+Potential benefit:
+
+**lower training memory**
+
+But measure:
+
+- quality;
+- memory;
+- throughput;
+- stability.
+
+Do not assume quantization is free.
+
+## 19–22 — Worked decision
+
+| Method | Target score | Peak memory | GPU-hours | Adapter/checkpoint |
+|---|---:|---:|---:|---|
+| Full FT | 86 | 70 GB | 12 | large |
+| LoRA | 84 | 20 GB | 3 | small |
+| QLoRA | 83 | 14 GB | 3.5 | small |
+
+If the hardware budget is 24 GB, full FT is infeasible in this example.
+
+The next question is whether 84/83 quality is enough. If not, increase adapter capacity or reconsider the task.
+
+## 22–24 — Failure analysis
+
+**Target task underfits:** rank/data coverage may be insufficient.
+
+**General capability regresses:** adaptation too strong or dataset too narrow.
+
+**QLoRA slower than expected:** kernels or quantization path may dominate.
+
+## 24–25 — Exit challenge
+
+State:
+
+**task → resource constraint → LoRA/QLoRA hypothesis → measured evidence → next experiment**
+
+### References
+
+LoRA: https://arxiv.org/abs/2106.09685  
+QLoRA: https://arxiv.org/abs/2305.14314

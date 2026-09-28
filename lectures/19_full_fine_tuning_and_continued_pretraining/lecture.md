@@ -1,77 +1,112 @@
 # Lecture 19 — Full Fine-Tuning and Continued Pretraining
 
 **Duration:** 25 minutes  
-**Primary anchor:** https://huggingface.co/docs/transformers/main/trainer
+**Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
 
-The learner finishes with an engineering artifact, a defensible decision, and a research question.
+Learn to distinguish a narrow behavior update from a broad domain/language distribution shift, then choose between PEFT, full fine-tuning, and continued pretraining using evidence.
 
-## 25-minute teaching plan
+## 0–4 — Three different requests
 
-### 0–3 — The real-world problem
-Start with a scenario involving an explicit constraint: quality, data, compute, latency, privacy, reliability, or budget. Make students predict the answer before terminology.
+1. “Always return this JSON format.”  
+2. “Understand our specialist terminology better.”  
+3. “Become substantially better at a low-resource language.”
 
-### 3–8 — Intuition
-Build the smallest example that exposes the core idea.
+Ask whether all three require the same training method.
 
-### 8–14 — Formalism
-Derive the key equations or decision criteria. State what is measured and what is estimated.
+No.
 
-### 14–19 — Lab
-Run the associated experiment. Record the baseline before changing anything.
-
-### 19–22 — Failure analysis
-Break one assumption. Explain whether the failure is data, statistical, numerical, algorithmic, or infrastructure-related.
-
-### 22–24 — Proposal thinking
-Turn the result into a decision: what should be built next, by whom, using which resources, and why?
-
-### 24–25 — Exit challenge
-Write a three-sentence recommendation supported by evidence and one uncertainty that remains.
-
-## Core concepts
-1. when all weights should move
-2. domain adaptation
-3. catastrophic forgetting
-4. optimizer state
-5. checkpoints
-
-## Engineering decision matrix
-
-| Question | Evidence to collect |
+| Requirement | Candidate |
 |---|---|
-| Does this method improve quality? | controlled baseline and target-specific eval |
-| Does it justify additional compute? | marginal gain per unit compute |
-| Can the organization operate it? | people, infrastructure, monitoring, recovery |
-| Is the result reusable? | versioned code/data/model + reproduction instructions |
-| Is it fundable? | measurable outcome, budget, milestones, risk register |
+| stable narrow behavior | SFT/PEFT |
+| broad adaptation | full FT may be tested |
+| language/domain exposure | continued pretraining |
 
-## Critical thinking
+## 4–8 — Full fine-tuning
 
-**Q1. What is the most dangerous mistake?**
+Full FT updates most/all parameters.
 
-**A:** Optimizing a proxy—benchmark score, loss, tokens/sec, or user preference—without verifying that it represents the actual program objective.
+Training memory includes:
 
-**Q2. What must a serious recommendation contain?**
+**weights + gradients + optimizer state + activations + runtime**
 
-**A:** A baseline, the proposed intervention, evidence, resource requirements, expected outcome, risks, and a plan to validate the remaining uncertainty.
+This can be many times larger than inference-only memory.
 
-**Q3. What turns an experiment into a program?**
+## 8–12 — Continued pretraining
 
-**A:** Repeatability, ownership, operational infrastructure, measurable outcomes, budget, milestones, governance, and a path from pilot evidence to scale.
+Continued pretraining feeds additional unlabeled tokens.
 
-## Visuals
-- method-selection tree;
-- system/data boundary;
-- resource-to-budget flow;
-- milestone roadmap.
+The hypothesis is:
 
-## Practical deliverable
+**the model needs more exposure to the target distribution**
 
-Produce one artifact that can be shown to an engineering lead:
-**problem → evidence → method → experiment → result → resource estimate → decision → next milestone**.
+not:
 
-## Research bridge
+**the model needs a different output format.**
 
-Read the primary anchor and cite the relevant method paper as well as this repository when your work derives from both.
+For a dense model, a first-order compute heuristic is:
+
+FLOPs ≈ 6ND
+
+Use measured throughput to translate this into wall time.
+
+## 12–16 — Decision matrix
+
+| Question | SFT/PEFT | Full FT | Continued PT |
+|---|---|---|---|
+| Stable format | strong candidate | possible but heavy | indirect |
+| Broad domain behavior | candidate | candidate | strong hypothesis |
+| Low-resource language exposure | limited | possible | strong hypothesis |
+| Fresh changing knowledge | poor fit | poor fit | poor fit |
+| Data type | labeled examples | labeled/domain data | large unlabeled corpus |
+| Training memory | low–medium | high | high |
+| Main risk | under/overfitting | high cost/forgetting | forgetting + compute |
+
+## 16–19 — Worked example
+
+Suppose:
+
+- base target score = 70;
+- SFT = 76;
+- continued PT = 81;
+- continued PT also lowers general score from 88 to 84.
+
+Now the program has an explicit trade-off.
+
+Test:
+
+**mixed target + general replay**
+
+and evaluate whether target quality can be retained without unacceptable regression.
+
+## 19–22 — Why the order matters
+
+Recommended evidence ladder:
+
+**prompt/RAG/tools → SFT/PEFT → continued PT → full FT/scratch when justified**
+
+This avoids spending expensive compute before identifying the actual bottleneck.
+
+## 22–24 — Break it
+
+Give a small 1B-token specialist corpus.
+
+Ask:
+
+“Should we immediately continued-pretrain a 70B model?”
+
+Answer:
+
+No. First test whether the corpus is large/novel enough and whether a small pilot changes the target metric.
+
+## 24–25 — Exit challenge
+
+Complete:
+
+> “The evidence suggests ___ is a behavior problem / representation problem because ___. Therefore the next experiment is ___.”
+
+### References
+
+Stanford CS336: https://cs336.stanford.edu/  
+Chinchilla: https://arxiv.org/abs/2203.15556
