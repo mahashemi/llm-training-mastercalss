@@ -181,7 +181,7 @@ The repository currently contains:
 - 24 lecture packages;
 - 75 textbook chapters plus chapter template;
 - 26 notebooks including orientation, one lab per numbered lecture, and the end-to-end tiny-GPT pretraining campaign;
-+ 11 operational runbooks;
+- 13 operational runbooks;
 - 4 capstone/project briefs;
 - research, proposal, model-card, dataset-card, and experiment templates;
 - curated lecture/video and paper-reading paths;
