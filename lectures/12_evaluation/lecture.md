@@ -1,89 +1,119 @@
 # Lecture 12 — Evaluation
 
-**Duration:** 25 minutes  
-**Primary anchor:** https://cs336.stanford.edu/
+**Duration:** 25 minutes
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Outcome
 
-## Teaching sequence
+Design an evaluation system that measures the real task, separates retrieval/model/system failures, quantifies uncertainty, and can block a bad release.
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+## 0–4 — Start with a dangerous claim
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+“Model B scores 3 points higher than Model A.”
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+Ask:
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+**Higher on what?**
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+Then expose five possible hidden changes:
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+- benchmark;
+- prompt;
+- decoding;
+- evaluator;
+- data distribution.
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+A score is meaningful only with a defined protocol.
 
-## Core concepts
-1. pretraining validation
-2. benchmark design
-3. contamination
-4. human evaluation
-5. task-specific evaluation
-6. statistical interpretation
+## 4–8 — Evaluation stack
 
-## Decision table
+Draw:
 
-| Constraint | First thing to investigate |
+**benchmark design → automatic metrics → human evaluation → failure taxonomy → statistical analysis → release gates**
+
+Each answers a different question.
+
+## 8–13 — Build a benchmark from the requirement
+
+Example requirement:
+
+“Answer internal policy questions correctly, cite evidence, and abstain when evidence is insufficient.”
+
+| Requirement | Metric |
 |---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+| correctness | task accuracy |
+| evidence | citation support / groundedness |
+| abstention | unsupported-answer rate |
+| language | per-language score |
+| latency | p95 |
+| cost | cost per successful task |
 
-## Critical-thinking questions
+Then create slices:
 
-**Q1. What is the tempting shortcut?**
+**language × difficulty × task type × safety/failure class**
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+## 13–17 — Human and model judges
 
-**Q2. What should be recorded?**
+| Approach | Strength | Risk |
+|---|---|---|
+| automatic | cheap/fast | metric mismatch |
+| model-as-judge | scalable | judge bias |
+| human | richer | expensive |
+| hybrid | scalable + audited | operational complexity |
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+Calibrate judges on a human-labeled subset.
 
-**Q3. When should we stop scaling?**
+## 17–20 — Statistical reasoning
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+When two models use the same test items, compare paired outcomes.
 
-## Visuals
+For proportion p over n approximately independent examples:
 
-Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
+SE ≈ sqrt[p(1-p)/n]
 
-## Practical work
+For paired open-ended evaluation, bootstrap per-example differences.
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+Then separate:
 
-## Research connection
+**statistical significance** from **engineering significance**.
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+A 0.3-point gain may be detectable but not worth extra cost.
+
+## 20–22 — Failure analysis
+
+Example:
+
+Wrong answer in RAG.
+
+Ask:
+
+1. Was correct evidence retrieved?
+2. Was evidence sufficient?
+3. Did model use it?
+4. Was citation correct?
+
+This maps evaluation to the next engineering action.
+
+## 22–24 — Release gate
+
+Example:
+
+| Metric | Gate |
+|---|---:|
+| target quality | ≥90 |
+| critical safety failures | 0 |
+| L3 language | ≥75 |
+| p95 latency | ≤2s |
+| cost/task | ≤0.20 |
+
+A candidate can improve overall score and still fail release.
+
+## 24–25 — Exit challenge
+
+Write:
+
+**metric → sampling → uncertainty → failure taxonomy → release gate**
+
+### Research bridge
+
+Use the evaluation chapters and harness in the repository to build a reproducible scorecard.
+

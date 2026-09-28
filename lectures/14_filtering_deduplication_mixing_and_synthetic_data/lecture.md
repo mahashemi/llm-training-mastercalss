@@ -1,88 +1,130 @@
 # Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data
 
-**Duration:** 25 minutes  
-**Primary anchor:** https://arxiv.org/abs/2402.00159
+**Duration:** 25 minutes
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Outcome
 
-## Teaching sequence
+Learn how corpus transformations allocate the effective training budget and how to measure whether “cleaner” or “more balanced” data actually improves the target model.
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+## 0–4 — The raw corpus is not the training corpus
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+Start with:
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+**100B raw tokens → 60B after quality filtering → 45B after dedup → 45B sampled with a new mixture**
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+Ask:
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+“How did the data change the model's learning budget?”
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+Every transformation changes what the model sees.
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+## 4–8 — Four operations
 
-## Core concepts
-1. quality filtering
-2. exact and near deduplication
-3. memorization
-4. mixture sampling
-5. synthetic data risks
+### Filtering
+Remove low-quality or unsuitable content.
 
-## Decision table
+### Deduplication
+Reduce repeated content.
 
-| Constraint | First thing to investigate |
-|---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+### Mixing
+Choose how often source families are sampled.
 
-## Critical-thinking questions
+### Synthetic data
+Create additional examples from a model or rule system.
 
-**Q1. What is the tempting shortcut?**
+These have different failure modes and should be evaluated separately.
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+## 8–12 — Filtering trade-off
 
-**Q2. What should be recorded?**
+| Filter setting | Usable tokens | Noise | Target score | Risk |
+|---|---:|---|---:|---|
+| loose | high | high | measure | noisy learning |
+| medium | medium | lower | measure | possible balance |
+| aggressive | low | lowest | measure | useful data removed |
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+The best threshold is empirical.
 
-**Q3. When should we stop scaling?**
+## 12–16 — Deduplication
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+Compare:
 
-## Visuals
+**exact → normalized → near-duplicate**
 
-Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
+The benefit is not “fewer tokens.” It is potentially:
 
-## Practical work
+- more unique information;
+- less memorization;
+- less contamination;
+- better effective diversity.
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+But aggressive dedup can remove legitimate repeated content.
 
-## Research connection
+## 16–19 — Data mixing
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+For source proportions p_i, temperature sampling can use:
+
+q_i = p_i^alpha / Σ p_j^alpha
+
+Example:
+
+raw = 80% / 15% / 5%
+
+alpha = 0.5
+
+approximately becomes:
+
+59% / 26% / 15%
+
+A low-resource source receives more exposure, but high-resource sources receive less.
+
+## 19–21 — Synthetic data
+
+Synthetic data can fill sparse regions but may also introduce correlated teacher errors.
+
+Compare:
+
+| Run | Human/source | Synthetic |
+|---|---:|---:|
+| A | 100% | 0% |
+| B | 75% | 25% |
+| C | 50% | 50% |
+
+Measure quality **and failure diversity**.
+
+## 21–23 — Worked experiment
+
+Hold model/training constant.
+
+Run:
+
+A. loose filter + raw mix  
+B. medium filter + raw mix  
+C. medium filter + temperature mix  
+D. medium filter + temperature mix + 25% synthetic
+
+Measure:
+
+- validation loss;
+- target score;
+- per-language score;
+- contamination;
+- duplicate rate;
+- compute;
+- tokens processed.
+
+Now the learner can attribute gains to specific data interventions.
+
+## 23–25 — Exit challenge
+
+Complete:
+
+> “The data intervention changed ___, which we expect to affect ___, so we will measure ___ while holding ___ fixed.”
+
+### Laboratory
+
+[dedup_and_data_mixing.ipynb](../../notebooks/dedup_and_data_mixing.ipynb)
+
+### Research bridge
+
+The key research habit is to report the actual transformed corpus, not only the raw source size.
+

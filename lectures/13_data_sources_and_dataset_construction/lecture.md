@@ -1,90 +1,115 @@
 # Lecture 13 — Data Sources and Dataset Construction
 
-**Duration:** 25 minutes  
-**Primary anchor:** https://arxiv.org/abs/2402.00159
+**Duration:** 25 minutes
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Outcome
 
-## Teaching sequence
+Turn raw sources into a versioned training corpus with measurable quality, provenance, licensing, and coverage.
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+## 0–4 — The data paradox
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+Give two corpora:
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+**Corpus A:** 100B noisy web tokens  
+**Corpus B:** 10B high-quality domain tokens
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+Ask which is “larger.”
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+Then ask which provides more useful evidence for a target task.
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+The lesson:
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+**token count is not the same as useful training signal.**
 
-## Core concepts
-1. Common Crawl
-2. books
-3. papers
-4. code
-5. provenance
-6. licensing
-7. corpus composition
+## 4–8 — Data lifecycle
 
-## Decision table
+**discover → acquire → rights → parse → normalize → filter → deduplicate → classify → mix → tokenize → shard → evaluate**
 
-| Constraint | First thing to investigate |
-|---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+Every stage can change the distribution.
 
-## Critical-thinking questions
+## 8–13 — Source quality matrix
 
-**Q1. What is the tempting shortcut?**
+| Source | Scale | Authority | Noise | Rights risk | Processing |
+|---|---|---|---|---|---|
+| curated books | medium | high | low | high | OCR/licensing |
+| government docs | medium | high | low | varies | parsing |
+| web | huge | mixed | high | varies | heavy filtering |
+| community | small/medium | mixed | mixed | contributor terms | review |
+| synthetic | huge | teacher-dependent | correlated | model terms | filtering |
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+Students should score sources explicitly rather than calling the corpus “high quality.”
 
-**Q2. What should be recorded?**
+## 13–17 — Dataset accounting
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+For each source track:
 
-**Q3. When should we stop scaling?**
+- raw tokens;
+- post-filter tokens;
+- post-dedup tokens;
+- language;
+- domain;
+- time;
+- license;
+- synthetic fraction.
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+Worked example:
 
-## Visuals
+Raw = 20B  
+filter survival = 60% → 12B  
+dedup survival = 75% → 9B
+
+Only **9B usable tokens** enter the final mix.
+
+## 17–20 — Governance and contamination
 
 Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
 
-## Practical work
+**source ID → rights status → dataset version → training run**
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+Exclude protected evaluation data.
 
-## Research connection
+Test exact and near-duplicate overlap before training.
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+## 20–22 — Data as an experiment
+
+Change one data variable:
+
+- filter threshold;
+- source mixture;
+- synthetic fraction;
+- dedup threshold.
+
+Keep model/training/evaluation fixed.
+
+Measure:
+
+**validation loss + target score + language slices + cost**
+
+## 22–24 — Failure analysis
+
+If quality improves:
+
+Ask:
+
+- Did useful sources increase?
+- Did the model simply see more tokens?
+- Did benchmark leakage increase?
+- Did one language dominate?
+
+If quality falls:
+
+- inspect rejected sources;
+- inspect language distribution;
+- inspect duplicate rates;
+- compare source-by-source contributions.
+
+## 24–25 — Exit challenge
+
+Build a mini data card containing:
+
+**sources → rights → raw tokens → usable tokens → quality → mixture → evaluation → limitations**
+
+### Research bridge
+
+Use Stanford CS336 data-processing material as the implementation reference:
+https://cs336.stanford.edu/
