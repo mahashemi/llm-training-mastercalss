@@ -2,47 +2,143 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. Tokenization is the interface between text and the model
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+A language model does not directly receive characters or words. It receives token IDs.
 
-## Concepts
+text → tokenizer → token IDs → embeddings → Transformer
 
-1. **Discrete interface** — Text must be converted to IDs before the neural network can process it.
-2. **BPE** — Merge frequent byte/character sequences to create reusable subword units.
-3. **Vocabulary tradeoff** — Larger vocabularies can shorten sequences but increase embedding/output parameters.
-4. **Fertility** — Tokens per word or semantic unit gives a practical multilingual efficiency measure.
+Therefore tokenization changes:
 
-## Formal view
+- sequence length;
+- vocabulary size;
+- embedding/output parameters;
+- training and serving compute;
+- multilingual efficiency;
+- the model's ability to represent rare forms.
 
-Let V be vocabulary size and D the embedding dimension. The embedding table contains V×D parameters, so vocabulary design changes both model size and sequence length.
+## 2. Tokenizer trade-off
 
-## Practical method
+| Choice | Vocabulary | Sequence length | Main cost |
+|---|---:|---:|---|
+| character-level | tiny | huge | long sequences |
+| word-level | huge | short | unknown/rare words |
+| subword | medium | medium | tokenizer complexity |
+| byte-level | broad coverage | variable | possible expansion |
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+Modern LLMs commonly use subword or byte-derived schemes because they balance vocabulary size and sequence efficiency.
+
+## 3. Vocabulary-size economics
+
+Increasing vocabulary can reduce token count.
+
+But it also increases:
+
+- embedding parameters;
+- output projection size when untied;
+- memory;
+- optimizer state during training.
+
+For vocabulary V and model width d:
+
+embedding parameters ≈ Vd
+
+Example with d=4096:
+
+| Vocab | Embedding parameters |
+|---:|---:|
+| 32k | ~131M |
+| 64k | ~262M |
+| 128k | ~524M |
+
+Vocabulary choice is therefore a model-size decision.
+
+## 4. Fertility
+
+Define:
+
+fertility = token_count / word_count
+
+Example:
+
+| Language | Tokens/word |
+|---|---:|
+| English | 1.2 |
+| Language A | 1.7 |
+| Language B | 3.4 |
+
+If the same semantic content is represented with 3× more tokens, the language consumes more context and compute.
+
+## 5. Tokenizer benchmark
+
+Measure:
+
+- fertility;
+- tokens/character;
+- sequence length distribution;
+- vocabulary utilization;
+- handling of rare words;
+- script coverage;
+- code-switching;
+- malformed Unicode.
+
+Do not test only clean English text.
+
+## 6. Worked example
+
+Suppose a corpus contains 1B words.
+
+Tokenizer A:
+
+1.5 tokens/word → 1.5B tokens
+
+Tokenizer B:
+
+1.2 tokens/word → 1.2B tokens
+
+B reduces the sequence-token budget by:
+
+300M tokens
+
+That can reduce training work substantially.
+
+But if B requires a much larger vocabulary, include that parameter/memory cost in the comparison.
+
+## 7. Tokenizer failure modes
+
+### Over-fragmentation
+Rare language forms become many tokens.
+
+### Under-segmentation
+Very large vocabulary consumes excessive parameters.
+
+### Normalization errors
+Distinct characters/forms collapse unexpectedly.
+
+### Mixed-script failure
+Real user input produces inefficient tokenization.
+
+## 8. Research exercise
+
+Benchmark three candidate tokenizers on:
+
+- English;
+- Persian;
+- Hindi;
+- Arabic;
+- one technical domain.
+
+Report:
+
+**vocab size → fertility → sequence expansion → parameter cost → throughput**
+
+Then identify which language drives the tokenizer decision.
 
 ## Laboratory
 
 [tokenizer_design_and_measurement.ipynb](../../notebooks/tokenizer_design_and_measurement.ipynb)
 
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
-
 ## References
 
-https://cs336.stanford.edu/
+- SentencePiece: https://arxiv.org/abs/1808.06226
+- Stanford CS336: https://cs336.stanford.edu/

@@ -2,48 +2,103 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. Hyperparameters interact
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+Do not treat training settings as isolated knobs.
 
-## Concepts
+Important coupled variables include:
 
-1. **Depth/width** — Change representational capacity and optimization behavior.
-2. **Head count** — Changes attention subspace partitioning while preserving total hidden size in common designs.
-3. **Sequence length** — Changes activation and attention cost.
-4. **Batch size** — Changes optimization noise and hardware utilization.
-5. **Learning rate** — Controls update magnitude and interacts with batch size and optimizer.
+- learning rate;
+- effective batch size;
+- sequence length;
+- optimizer;
+- warmup;
+- weight decay;
+- training duration;
+- model size.
 
-## Formal view
+Changing one can change the appropriate value of another.
 
-Parameter count and training compute are functions of architecture dimensions, but memory and throughput also depend on sequence length, batch shape, precision, and kernels.
+## 2. Resource variables
 
-## Practical method
+| Variable | Quality effect | Resource effect |
+|---|---|---|
+| batch size | optimization dynamics | memory |
+| sequence length | context capability | quadratic attention pressure |
+| model width | capacity | compute/memory |
+| learning rate | convergence | instability risk |
+| accumulation | effective batch | memory/throughput |
+| precision | numerical behavior | memory/speed |
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+## 3. Why random sweeps are inefficient
+
+Suppose you vary:
+
+- 5 learning rates;
+- 4 batch sizes;
+- 3 sequence lengths;
+- 3 weight-decay values.
+
+That is:
+
+5×4×3×3 = 180 combinations
+
+Most may be unnecessary.
+
+Start with a small hypothesis-driven design.
+
+## 4. Example sweep
+
+| Run | LR | Batch | Sequence | Question |
+|---|---:|---:|---:|---|
+| A | low | base | base | under-update |
+| B | medium | base | base | baseline |
+| C | high | base | base | stability |
+| D | medium | 2× | base | batch effect |
+| E | medium | base | 2× | context cost |
+
+Change one dimension at a time first.
+
+## 5. Resource accounting
+
+For a fixed model:
+
+doubling sequence length can increase attention interaction count by about 4×.
+
+Doubling effective batch does not necessarily double activation memory if accumulation is used instead of a larger micro-batch.
+
+This distinction matters for hardware planning.
+
+## 6. Worked decision
+
+Suppose quality is similar for:
+
+- Run B: 20k tokens/sec;
+- Run D: 30k tokens/sec.
+
+D may be preferable operationally, but only after checking:
+
+- convergence;
+- validation loss;
+- GPU utilization;
+- stability.
+
+Throughput is not the objective if quality changes.
+
+## 7. Research exercise
+
+Design a five-run hyperparameter experiment.
+
+For each run record:
+
+**configuration → GPU memory → tokens/sec → loss → validation → instability**
+
+Then identify which variable produced the largest useful improvement per unit resource.
 
 ## Laboratory
 
-[resource_accounting_flops_memory.ipynb](../../notebooks/resource_accounting_flops_memory.ipynb)
+[training_loop_instrumentation.ipynb](../../notebooks/training_loop_instrumentation.ipynb)
 
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
-
-## References
+## Reference
 
 https://cs336.stanford.edu/

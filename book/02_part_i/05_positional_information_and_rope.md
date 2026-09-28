@@ -2,47 +2,102 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. Why position is necessary
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+Self-attention by itself does not inherently distinguish the order of tokens.
 
-## Concepts
+The model therefore needs a mechanism that makes:
 
-1. **Position** — Self-attention alone is permutation-equivariant without position information.
-2. **Absolute position** — Adds an explicit positional representation.
-3. **Rotary position embeddings** — Rotate query/key coordinates as a function of position, affecting attention scores.
-4. **Context extension** — Changing context length requires careful validation; position encoding behavior matters.
+“dog bites man”
 
-## Formal view
+different from:
 
-Attention uses q·k. RoPE applies position-dependent rotations R_t to q and k, so relative positional structure enters their dot product.
+“man bites dog”
 
-## Practical method
+## 2. Two broad strategies
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+### Absolute position
+Add a position-dependent vector to token representations.
+
+### Relative/rotary position
+Modify attention-related representations so that relative position information affects token interactions.
+
+RoPE is widely used in modern decoder-only architectures.
+
+## 3. RoPE intuition
+
+RoPE rotates query and key components by an angle that depends on position.
+
+Schematically:
+
+Q' = R(position)Q  
+K' = R(position)K
+
+The resulting dot product carries relative positional information.
+
+## 4. Why relative position matters
+
+For positions m and n:
+
+Q'_m · K'_n
+
+depends on the relative displacement m-n through the rotations.
+
+This makes attention naturally sensitive to relative token distance.
+
+## 5. Context-length economics
+
+Longer context affects:
+
+- attention computation;
+- KV-cache memory;
+- prefill latency;
+- serving throughput.
+
+Positional encoding is therefore connected to practical context limits.
+
+## 6. Worked intuition
+
+If a model has a 4k context and a user sends 8k tokens, the system must:
+
+- truncate;
+- use a long-context model;
+- summarize/retrieve;
+- or otherwise change the architecture.
+
+Positional encoding alone does not make every long-context deployment reliable.
+
+## 7. Evaluation
+
+Test positional behavior with:
+
+- sequence-order tasks;
+- relative-position retrieval;
+- long-context tasks;
+- extrapolation beyond training length where relevant.
+
+Measure both quality and resource cost.
+
+## 8. Failure modes
+
+- poor long-range attention;
+- extrapolation degradation;
+- implementation mistakes in rotation/scaling;
+- context length increases that overwhelm memory.
+
+## Research exercise
+
+Implement a minimal RoPE function.
+
+Visualize rotations at several positions.
+
+Then compare short vs long-context attention on a toy retrieval task.
 
 ## Laboratory
 
 [build_a_tiny_transformer.ipynb](../../notebooks/build_a_tiny_transformer.ipynb)
 
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
-
 ## References
 
-https://arxiv.org/abs/2104.09864
+- RoFormer: https://arxiv.org/abs/2104.09864
+- Transformer: https://arxiv.org/abs/1706.03762

@@ -2,47 +2,109 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. The residual stream is the model's communication highway
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+Transformer blocks repeatedly update a shared representation:
 
-## Concepts
+x_{l+1} = x_l + F_l(x_l)
 
-1. **Residual connection** — Adds a transformed branch back to a running representation.
-2. **Layer normalization** — Normalizes feature statistics to stabilize optimization.
-3. **RMSNorm** — Normalizes by root-mean-square without mean subtraction.
-4. **Pre-norm** — Places normalization before major sublayers in many modern decoder architectures.
+The residual connection lets information flow through many layers while each sublayer contributes an update rather than replacing the entire state.
 
-## Formal view
+## 2. Why normalization matters
 
-A residual block can be viewed as x' = x + F(Norm(x)). This creates a direct gradient path and modular computation path.
+Normalization controls representation scale.
 
-## Practical method
+It can stabilize:
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+- activations;
+- gradients;
+- optimization;
+- deep-network training.
+
+Modern Transformer implementations commonly use LayerNorm or RMSNorm variants.
+
+## 3. Pre-norm vs post-norm
+
+Conceptually:
+
+### Pre-norm
+x + F(norm(x))
+
+### Post-norm
+norm(x + F(x))
+
+The choice changes optimization behavior and implementation details.
+
+Do not memorize one pattern as a law; understand what changes in the computation graph.
+
+## 4. What to measure
+
+| Signal | Why |
+|---|---|
+| activation norm by layer | detect scale drift |
+| gradient norm by layer | detect unstable backprop |
+| update/parameter ratio | detect aggressive optimization |
+| loss | learning |
+| validation loss | generalization |
+| NaN/Inf | numerical failure |
+
+## 5. Worked example
+
+Suppose activation norms by layer are:
+
+1.2 → 1.3 → 1.4 → 2.1 → 5.8 → 19.0
+
+A rapidly growing scale may indicate instability.
+
+Now inspect:
+
+- normalization placement;
+- residual scaling;
+- learning rate;
+- input data;
+- numerical precision.
+
+A single symptom is not enough to identify the root cause.
+
+## 6. RMSNorm intuition
+
+RMSNorm normalizes based on root-mean-square magnitude rather than subtracting the mean.
+
+The intent is to control scale while keeping the transformation simple.
+
+Implementation details must match the architecture configuration.
+
+## 7. Systems implications
+
+Normalization is not only mathematics.
+
+It affects:
+
+- kernel fusion;
+- memory reads/writes;
+- numerical precision;
+- inference throughput.
+
+Optimization work should therefore profile actual kernels.
+
+## Research exercise
+
+Implement a tiny residual block with pre-norm and post-norm.
+
+Compare:
+
+- activation norms;
+- gradient norms;
+- training stability;
+- validation loss.
+
+Then explain what changed in the computation graph.
 
 ## Laboratory
 
 [build_a_tiny_transformer.ipynb](../../notebooks/build_a_tiny_transformer.ipynb)
 
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
-
 ## References
 
-https://arxiv.org/abs/1910.07467
+- Transformer: https://arxiv.org/abs/1706.03762
+- RMSNorm: https://arxiv.org/abs/1910.07467

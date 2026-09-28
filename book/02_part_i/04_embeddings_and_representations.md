@@ -2,46 +2,104 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. From token ID to vector
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+A token ID is an integer. The Transformer needs a continuous representation.
 
-## Concepts
+An embedding table:
 
-1. **Embedding table** — Maps discrete token IDs to dense vectors.
-2. **Representation geometry** — Similarity in vector space can reflect learned relationships.
-3. **Weight tying** — The input embedding matrix and output projection can share parameters in some architectures.
+E ∈ R^(V×d)
 
-## Formal view
+maps token IDs to vectors in R^d.
 
-For token ID i, e_i=E[i]. If E∈R^{V×d}, each token receives a d-dimensional learned representation.
+For vocabulary V and width d:
 
-## Practical method
+embedding_parameters = V × d
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+## 2. Why embeddings are learned
+
+Early in training, vectors are not guaranteed to have semantic structure.
+
+Gradient descent updates them so that token representations become useful for predicting context.
+
+Similar contexts can therefore produce useful relationships in representation space.
+
+## 3. Vocabulary-size trade-off
+
+| Vocab | Width | Embedding parameters |
+|---:|---:|---:|
+| 32k | 4096 | ~131M |
+| 64k | 4096 | ~262M |
+| 128k | 4096 | ~524M |
+
+A larger vocabulary can shorten sequences but consumes more parameters.
+
+## 4. Input/output tying
+
+Some language models reuse the input embedding matrix for the output projection.
+
+Benefits:
+
+- fewer parameters;
+- consistent input/output representation;
+- lower memory.
+
+If tied:
+
+output logits can use E^T h
+
+instead of a separate matrix.
+
+## 5. Representation geometry
+
+Useful diagnostics include:
+
+- nearest neighbors;
+- cosine similarity;
+- cluster structure;
+- language/domain separation;
+- token frequency effects.
+
+But geometric similarity does not prove semantic equivalence.
+
+## 6. Worked example
+
+Suppose:
+
+V=50k, d=2048
+
+Embedding parameters:
+
+50,000 × 2,048 = 102.4M
+
+At BF16, raw storage is about 205 MB decimal.
+
+A 128k vocabulary at the same width would exceed 524M parameters and about 1.05 GB raw BF16 storage.
+
+Vocabulary therefore affects architecture economics.
+
+## 7. Failure modes
+
+- poorly represented rare tokens;
+- excessive vocabulary size;
+- tokenizer/embedding mismatch;
+- accidental untied output matrix increasing parameters;
+- embedding drift during domain adaptation.
+
+## Research exercise
+
+Compute embedding parameter/memory costs for:
+
+V = 32k, 64k, 128k
+
+at d = 1024, 2048, 4096.
+
+Then connect the result to tokenizer fertility and total model size.
 
 ## Laboratory
 
 [build_a_tiny_transformer.ipynb](../../notebooks/build_a_tiny_transformer.ipynb)
 
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
-
-## References
+## Reference
 
 https://arxiv.org/abs/1706.03762

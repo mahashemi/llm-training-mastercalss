@@ -2,47 +2,109 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. The mechanism
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+Given Q, K, V:
 
-## Concepts
+S = QK^T / sqrt(d_head)
 
-1. **Q/K/V** — Queries seek relevant information, keys describe what is available, values carry content.
-2. **Causal mask** — Prevents a position from attending to future tokens.
-3. **Heads** — Multiple attention subspaces process different interaction patterns.
-4. **Quadratic sequence term** — The naive score matrix scales with T².
+Apply a causal mask so position t cannot attend to positions > t.
 
-## Formal view
+Then:
 
-Attention(Q,K,V)=softmax(QKᵀ/√d_k)V. A causal mask sets forbidden logits to negative infinity before softmax.
+A = softmax(S + mask)
 
-## Practical method
+Output:
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+O = AV
+
+## 2. Why causal masking is necessary
+
+For next-token prediction, token t must not see its future target.
+
+Without masking, the model could directly inspect information it is supposed to predict.
+
+That would invalidate the autoregressive training objective.
+
+## 3. Shape accounting
+
+For B batch, T sequence length, H heads, D head dimension:
+
+Q,K,V ∈ R^(B×H×T×D)
+
+Scores:
+
+S ∈ R^(B×H×T×T)
+
+This T² structure drives attention memory.
+
+## 4. Worked memory example
+
+Suppose:
+
+B=8  
+H=32  
+T=2048  
+BF16=2 bytes
+
+Raw score elements:
+
+8×32×2048² ≈ 1.07 billion elements
+
+At 2 bytes:
+
+≈2.15 GB
+
+This is why storing full attention matrices can be expensive.
+
+Efficient attention kernels avoid materializing the full matrix in the same way.
+
+## 5. Computational complexity
+
+A rough score-computation cost:
+
+O(BHT²D)
+
+A second term exists for multiplying attention weights by V.
+
+Both grow strongly with T.
+
+## 6. Causal mask implementation
+
+A common implementation uses a triangular mask.
+
+Test that:
+
+- position 0 sees only position 0;
+- position 1 sees positions 0–1;
+- position T−1 can see the full prefix.
+
+A one-line masking bug can silently corrupt training.
+
+## 7. Failure analysis
+
+### Future-token leakage
+Training loss becomes suspiciously good.
+
+### Wrong mask shape
+Broadcasting bugs produce incorrect attention.
+
+### Numerical instability
+Large logits can create NaNs without stable softmax.
+
+## Research exercise
+
+Implement causal attention from matrix operations.
+
+Add tests that assert future positions have zero attention probability.
+
+Then benchmark T = 256, 512, 1024, 2048 and measure memory/time.
 
 ## Laboratory
 
-[build_a_tiny_transformer.ipynb](../../notebooks/build_a_tiny_transformer.ipynb)
-
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
+[attention_and_moe_lab.ipynb](../../notebooks/attention_and_moe_lab.ipynb)
 
 ## References
 
-https://arxiv.org/abs/1706.03762
+- Transformer: https://arxiv.org/abs/1706.03762
+- FlashAttention: https://arxiv.org/abs/2205.14135

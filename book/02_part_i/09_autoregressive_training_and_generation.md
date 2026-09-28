@@ -2,47 +2,117 @@
 
 **Part:** Part I
 
-## Core idea
+## 1. Training and generation use the same probability model differently
 
-This chapter turns the topic into an engineering concept: what problem it solves, what assumptions it makes, what changes in the model or system, and what evidence is needed before trusting it.
+Training has the full target sequence available.
 
-## Concepts
+For each position:
 
-1. **Teacher forcing** — Training conditions each prediction on known preceding tokens.
-2. **Parallel training** — All sequence positions can be evaluated together under a causal mask.
-3. **Autoregressive generation** — At inference, each new token depends on the tokens already generated.
-4. **Sampling** — Temperature/top-k/top-p alter the effective decoding distribution.
+p(x_t | x_<t)
 
-## Formal view
+can be computed in parallel for all positions using a causal mask.
 
-Training computes p(x_t|x_<t) at many positions simultaneously; generation repeatedly samples or selects x_t and appends it to the context.
+Generation cannot know future tokens.
 
-## Practical method
+It therefore proceeds:
 
-1. Establish a baseline.
-2. Change one major variable.
-3. Measure the target metric and relevant resource metrics.
-4. Inspect representative failures.
-5. Repeat only when the result justifies the additional cost.
+x_1 → x_2 → x_3 → …
+
+## 2. Teacher forcing
+
+During training, the model receives the ground-truth prefix.
+
+Example:
+
+Input: “The capital of France is”
+
+Target: “Paris”
+
+The model does not need to generate earlier tokens before learning the next one.
+
+This makes training highly parallelizable.
+
+## 3. Why inference is sequential
+
+At generation time:
+
+step 1 produces token 1  
+step 2 uses token 1 to produce token 2  
+step 3 uses tokens 1–2 to produce token 3
+
+This makes decode latency fundamentally different from training.
+
+## 4. Training vs inference
+
+| Dimension | Training | Generation |
+|---|---|---|
+| Future targets available | yes | no |
+| Parallel sequence positions | yes | no |
+| Main bottleneck | compute/memory/communication | sequential decode |
+| KV cache | not central in same way | central |
+| Objective | minimize token loss | sample/choose tokens |
+| Typical metric | loss/tokens/sec | TTFT/ITL/tokens/sec |
+
+## 5. Decoding choices
+
+Common controls:
+
+- greedy;
+- temperature;
+- top-k;
+- top-p;
+- constrained decoding.
+
+These affect output behavior without changing model weights.
+
+## 6. Worked example
+
+Suppose a model generates 100 tokens.
+
+If decode speed is 20 tokens/sec:
+
+approximate generation time = 5 sec
+
+If it reaches 50 tokens/sec:
+
+≈2 sec
+
+The same model weights can therefore produce very different user experience depending on serving optimization.
+
+## 7. Failure modes
+
+### Exposure bias
+Training conditions differ from generated histories.
+
+### Repetition
+Decoding or model behavior creates loops.
+
+### Sampling instability
+High temperature can increase variability.
+
+### Context overflow
+Conversation exceeds context budget.
+
+## Research exercise
+
+Generate the same prompt under:
+
+- greedy;
+- temperature 0.7;
+- temperature 1.0;
+- top-p 0.9.
+
+Compare:
+
+**diversity → factuality → repetition → length**
+
+Then explain which behavior is caused by decoding rather than training.
 
 ## Laboratory
 
-[10_inference_and_kv_cache.ipynb](../../notebooks/10_inference_and_kv_cache.ipynb)
-
-## Critical thinking
-
-**Question:** What is the tempting but wrong shortcut here?
-
-**Answer:** Applying the technique without identifying the bottleneck it is meant to address. A method can improve a proxy while making the actual application worse.
-
-**Question:** What evidence should be recorded?
-
-**Answer:** Configuration, data/model versions, hardware, evaluation protocol, metrics, runtime/resource observations, and limitations.
-
-## Research question
-
-What controlled experiment would distinguish the mechanism described here from a simpler explanation?
+[01_next_token_prediction_and_a_tiny_language_model.ipynb](../../notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb)
 
 ## References
 
-https://huggingface.co/docs/transformers/main/tasks/language_modeling
+- Transformer: https://arxiv.org/abs/1706.03762
+- GPT-3: https://arxiv.org/abs/2005.14165
