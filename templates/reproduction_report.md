@@ -4,21 +4,39 @@
 
 ## Claim being reproduced
 
-## Environment
+## Exact artifact
 
-## Configuration
+- source release/commit:
+- model/revision:
+- dataset/version:
+- code/config:
+- environment:
 
-## Data
+## Experimental protocol
 
-## Procedure
+Describe all deviations from the original.
 
-## Result
+## Resource profile
 
-## Difference from original
+- hardware:
+- wall time:
+- peak memory:
+- throughput:
+- cost estimate:
+
+## Original result
+
+## Reproduced result
+
+## Difference
 
 ## Failure analysis
 
-## Conclusion
+## Explanation of discrepancies
+
+## Reproducibility verdict
+
+State only what the evidence supports.
 
 ## Limitations
 
