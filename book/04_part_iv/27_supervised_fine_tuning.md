@@ -138,3 +138,50 @@ Compare:
 ## Reference
 
 https://huggingface.co/docs/trl/sft_trainer
+
+
+## Deepening: SFT is a data-distribution experiment
+
+The central quantity is not “number of examples.” It is the distribution of training signal.
+
+### Coverage matrix
+
+Construct a matrix over:
+
+- task/intent;
+- difficulty;
+- language;
+- answer length;
+- format;
+- ambiguity;
+- safety;
+- refusal/uncertainty;
+- domain.
+
+Then measure the proportion of examples in every cell.
+
+### Controlled data experiment
+
+Keep training steps approximately fixed and compare:
+
+| Run | Data | Question |
+|---|---|---|
+| A | narrow/repeated | what does repetition teach? |
+| B | broad/representative | what does coverage teach? |
+| C | broad + hard cases | do rare cases improve? |
+
+Evaluate target performance **and retained capability**.
+
+### Critical distinction
+
+A lower training loss is not proof that the model became more useful.
+
+A successful SFT experiment must demonstrate:
+
+**baseline → training → target gain → regression check → failure analysis**
+
+### Colab lab
+
+Use Qwen3-0.6B and an inspectable dataset. Require students to print several training examples before training and compare generations before/after training.
+
+The lesson is intentionally small enough to run in a free-first environment while preserving the same methodology used on H100.
