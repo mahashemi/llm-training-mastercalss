@@ -1,6 +1,7 @@
 # Lecture 18 — LoRA, QLoRA, and PEFT
 
 **Duration:** 25 minutes  
+**Lab:** [lora_qlora_comparison.ipynb](../../notebooks/lora_qlora_comparison.ipynb)
 **Primary anchors:** https://arxiv.org/abs/2106.09685 · https://arxiv.org/abs/2305.14314
 
 ## Outcome
@@ -112,3 +113,8 @@ State:
 
 LoRA: https://arxiv.org/abs/2106.09685  
 QLoRA: https://arxiv.org/abs/2305.14314
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
