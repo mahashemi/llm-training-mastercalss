@@ -115,3 +115,41 @@ Plot the frontier and identify the region where additional target gain begins to
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: regression must be measured explicitly
+
+Catastrophic forgetting is not “the model got worse” in the abstract.
+
+Define a protected evaluation suite representing capabilities that must remain acceptable.
+
+### Experiment
+
+Evaluate:
+
+- base;
+- adapted model;
+- optionally a weaker/stronger adaptation.
+
+Report target gain and protected-task regression together.
+
+### Useful metric
+
+For a protected metric M:
+
+**regression = M_adapted − M_base**
+
+with the sign interpreted according to the metric.
+
+### Failure mode
+
+The target score improves because the evaluation set is narrow while a protected capability quietly collapses.
+
+### Engineering decision
+
+Define a regression threshold before training. If exceeded, test:
+
+- lower learning rate;
+- fewer steps;
+- broader data;
+- replay/mixed data;
+- weaker adapter capacity.
