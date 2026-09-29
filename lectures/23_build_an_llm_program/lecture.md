@@ -1,6 +1,7 @@
 # Lecture 23 — Build an LLM Program
 
 **Duration:** 25 minutes
+**Lab:** [national_llm_resource_plan.ipynb](../../notebooks/national_llm_resource_plan.ipynb)
 
 ## Outcome
 
@@ -153,3 +154,8 @@ Because the program can fail at data rights, evaluation, serving economics, staf
 
 Stanford CS336: https://cs336.stanford.edu/  
 OLMo 2: https://allenai.org/olmo2
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
