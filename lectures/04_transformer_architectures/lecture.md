@@ -1,114 +1,88 @@
 # Lecture 04 — Transformer Architectures
 
 **Duration:** 25 minutes  
-**Lab:** [build_a_tiny_transformer.ipynb](../../notebooks/build_a_tiny_transformer.ipynb)  
-**Primary anchor:** https://arxiv.org/abs/1706.03762
+**Lab:** [Build a Tiny Transformer](../../notebooks/build_a_tiny_transformer.ipynb)  
+**Primary anchor:** *Attention Is All You Need* — https://arxiv.org/abs/1706.03762
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students can trace a decoder-only Transformer from token IDs to logits and explain why residual paths, normalization, positional information, attention, and the MLP exist.
 
-## Learning objectives
+## 0–4 — Assemble before naming
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
+Start with:
 
-## Core concepts
+**token IDs → embeddings → blocks → logits**
 
-1. **decoder-only transformers**
-2. **embeddings**
-3. **RoPE**
-4. **RMSNorm**
-5. **MLP/SwiGLU**
-6. **residual streams**
-7. **hyperparameters**
+Ask what each stage must provide for the next stage.
 
-## 25-minute script
+## 4–9 — One Transformer block
 
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
+Draw:
 
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
+**x → norm → attention → residual → norm → MLP → residual**
 
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
+Then explain that the residual stream carries information forward while sublayers transform it.
 
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
+## 9–14 — Attention and MLP are different jobs
 
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
+Attention allows positions to exchange information.
 
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
+The MLP transforms each position's representation after contextualization.
 
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
+Students should be able to state:
 
-## Decision table
+> Attention mixes across positions; the MLP transforms features within a position.
 
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
+Then introduce RoPE and normalization as components that affect the representation flow rather than optional decoration.
 
-## Critical thinking
+## 14–19 — Tensor walkthrough
 
-**Q1. What is the seductive but wrong shortcut?**
+Use concrete shapes:
 
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
+**B × L × d_model**
 
-**Q2. What evidence would justify spending more compute?**
+and one small configuration.
 
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
+Track:
 
-**Q3. What can invalidate the conclusion?**
+- Q/K/V;
+- attention scores;
+- attention output;
+- MLP expansion;
+- final logits.
 
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
+Students calculate parameter counts for one attention block.
 
-## Visuals to build
+## 19–22 — Laboratory
 
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
+Run the tiny Transformer notebook.
 
-Each visual should have a one-sentence “notice this” caption.
+Required experiment:
 
-## Lab requirements
+- baseline depth;
+- change depth;
+- compare validation loss and parameter count.
 
-Run:
+Then break causal masking and observe leakage.
 
-notebooks/build_a_tiny_transformer.ipynb
+## 22–24 — Engineering decision
 
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
+Architecture is a coupled system:
+
+**depth × width × context × attention structure × MLP × normalization × positional method**
+
+Changing one term can alter memory and optimization behavior elsewhere.
+
+## 24–25 — Exit challenge
+
+Without naming a Transformer component, explain why the model needs:
+
+1. a way to represent tokens;
+2. a way to mix information across positions;
+3. a way to transform each position;
+4. a path that preserves earlier information.
 
 ## Research bridge
 
-Read the cited primary/official material after completing the lab.
-
-Ask:
-
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
-
-## Deliverable
-
-One-page experiment report:
-
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
-
+Connect the implementation to the original Transformer paper, then identify which modern decoder-only choices are inherited, modified, or newly introduced.
