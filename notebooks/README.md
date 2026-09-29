@@ -60,6 +60,12 @@ Completing all cells is not the learning objective.
 
 ## Open-weight training labs
 
+| Lab | Purpose |
+|---|---|
+| [Open-Weight Model Audit](./open_weight_model_audit.ipynb) | download, inspect, resource-estimate, baseline inference |
+| [Qwen3-0.6B SFT](./sft_with_a_small_open_model.ipynb) | real open-weight SFT |
+| [LoRA / QLoRA](./lora_qlora_comparison.ipynb) | parameter-efficient training and resource trade-offs |
+
 ### Real checkpoint path
 
 [Qwen3-0.6B SFT](./sft_with_a_small_open_model.ipynb) is the first real checkpoint-training lab.
