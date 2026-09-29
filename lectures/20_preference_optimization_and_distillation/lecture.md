@@ -138,3 +138,37 @@ Knowledge distillation: https://arxiv.org/abs/1503.02531
 ## Lab contract
 
 Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — preference labels are an optimization target
+
+Construct two preference datasets.
+
+**Dataset A:** chosen responses are longer.
+
+**Dataset B:** chosen responses are more correct and grounded.
+
+Ask what proxy each dataset creates.
+
+### DPO worksheet
+
+For a preference pair, identify:
+
+- policy log-probability of chosen;
+- policy log-probability of rejected;
+- reference log-probabilities;
+- relative margin;
+- beta.
+
+Students should understand how the objective turns labels into gradient pressure.
+
+### Distillation frontier
+
+Compare:
+
+| Teacher | Student | Quality | Latency | Cost |
+|---|---|---:|---:|---:|
+| large | small | measure | measure | measure |
+| large | medium | measure | measure | measure |
+
+The question is not whether the student copies the teacher. It is whether the student satisfies the real workload at a better resource point.
+
