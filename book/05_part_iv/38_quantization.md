@@ -131,3 +131,39 @@ Then determine the quality loss per unit cost saved.
 ## Reference
 
 https://huggingface.co/docs/peft/developer_guides/quantization
+
+## Deepening: quantization has multiple error surfaces
+
+Quantization can affect:
+
+- weights;
+- activations;
+- KV cache;
+- optimizer state during training;
+- communication payloads.
+
+These are different interventions.
+
+### Controlled comparison
+
+Separate:
+
+**weight storage precision**
+
+from
+
+**activation/compute precision**
+
+and, for training,
+
+**optimizer/base-state precision**.
+
+Measure quality and resource usage separately.
+
+### Failure mode
+
+A label such as “4-bit model” can hide different storage, compute, kernel, and runtime paths.
+
+### Decision
+
+Always record the exact quantization method, storage format, compute dtype, kernel/runtime, and model revision.
