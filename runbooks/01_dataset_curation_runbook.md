@@ -103,3 +103,36 @@ Produce:
 **dataset card + manifest + transformation statistics + rights record + quality audit + contamination report + version ID**
 
 Do not begin expensive training without these artifacts.
+
+
+
+## Real source acquisition set
+
+Use [data/REAL_DATASET_REGISTRY.md](../data/REAL_DATASET_REGISTRY.md) as the starting registry.
+
+The classroom acquisition benchmark should cover:
+
+1. FineWeb sample-10BT — general web;
+2. FineWeb-Edu sample-10BT — educational web;
+3. Wikimedia Wikipedia 20231101.en — reference text;
+4. OpenWebMath — mathematics/technical web;
+5. Aya Dataset — multilingual instruction;
+6. one Kaggle source — Tashkeela or RUFND for cross-platform acquisition.
+
+Stream or sample the large datasets. Store no bulk third-party corpus in Git.
+
+### Acquisition worksheet
+
+For each source save:
+
+**host | dataset ID | config | split | revision/version | acquisition date | license/access basis | local sample checksum | preprocessing commit**
+
+### Required source comparison
+
+Do not assume source schemas are equivalent. Record which source fields become:
+
+**source_id, record_id, language, text, prompt, target, metadata_json**.
+
+### Downstream test
+
+Feed the resulting mixture into the appropriate tiny-model experiment and evaluate whether changing source composition changes the measured target objective.

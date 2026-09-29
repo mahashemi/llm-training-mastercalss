@@ -214,7 +214,7 @@ The repository currently contains:
 
 - 24 lecture packages;
 - 76 textbook chapters plus chapter template;
-- 27 notebooks including orientation, one lab per numbered lecture, and the end-to-end tiny-GPT pretraining campaign;\n- a dedicated open-weight model-loading and hardware-progression track;
+- 27 notebooks including orientation, lecture laboratories, the standalone open-weight model audit, real-data corpus bench, open-weight SFT/PEFT labs, and the end-to-end tiny-GPT pretraining campaign.;\n- a dedicated open-weight model-loading and hardware-progression track;
 - 13 operational runbooks;
 - 4 capstone/project briefs;
 - research, proposal, model-card, dataset-card, and experiment templates;
@@ -230,3 +230,13 @@ Completing a notebook is not mastery. A learner graduates from each major stage 
 **understand → implement → measure → break → explain → decide → reproduce**.
 
 The final standard is the Model Program Dossier in `projects/04_llm_program_dossier.md`.
+
+
+
+### Real dataset track
+
+The course now includes a concrete multi-source dataset bench instead of toy-only corpus examples:
+
+[Real Dataset Registry](data/REAL_DATASET_REGISTRY.md) · [Dataset Bench](notebooks/real_dataset_corpus_bench.ipynb) · [Dataset Curation Runbook](runbooks/01_dataset_curation_runbook.md)
+
+Students work with real Hugging Face sources such as FineWeb, FineWeb-Edu, Wikipedia, OpenWebMath, Aya, and OpenR1-Math-220k, plus real Kaggle sources such as Tashkeela and RUFND. Large sources are streamed/sampled; no bulk third-party corpus is committed to the repository.

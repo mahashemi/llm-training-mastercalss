@@ -168,3 +168,17 @@ A large source can dominate the mixture even when it is not the highest-value so
 ### Decision
 
 Report both raw corpus size and the **effective training mixture actually sampled**.
+
+
+
+## Real Dataset Track
+
+Do not complete this chapter using only fabricated examples. Use the [Real Dataset Bench](../../notebooks/real_dataset_corpus_bench.ipynb) and the [Real Dataset Registry](../../data/REAL_DATASET_REGISTRY.md).
+
+The first experiment should inspect at least **FineWeb, FineWeb-Edu, Wikipedia, OpenWebMath, and Aya**. Then compare at least one Kaggle source such as **Tashkeela** or **RUFND**.
+
+For each source, record:
+
+**dataset ID → config/subset → split → sample size → schema → language → source/domain → license/access basis → preprocessing → filtering → dedup → final mixture share**
+
+The goal is to make the corpus itself an auditable experimental object.

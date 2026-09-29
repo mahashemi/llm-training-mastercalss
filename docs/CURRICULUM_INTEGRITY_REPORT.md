@@ -8,7 +8,7 @@ Audit date: 2026-09-29
 |---|---:|
 | textbook chapters | 76 |
 | numbered lectures | 24 |
-| notebooks | 27 |
+| notebooks | 28 |
 | runbooks | 14 |
 | projects | 4 |
 | templates | 10 |
