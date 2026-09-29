@@ -230,3 +230,13 @@ Completing a notebook is not mastery. A learner graduates from each major stage 
 **understand → implement → measure → break → explain → decide → reproduce**.
 
 The final standard is the Model Program Dossier in `projects/04_llm_program_dossier.md`.
+
+
+
+### Real dataset track
+
+The course now includes a concrete multi-source dataset bench instead of toy-only corpus examples:
+
+[Real Dataset Registry](data/REAL_DATASET_REGISTRY.md) · [Dataset Bench](notebooks/real_dataset_corpus_bench.ipynb) · [Dataset Curation Runbook](runbooks/01_dataset_curation_runbook.md)
+
+Students work with real Hugging Face sources such as FineWeb, FineWeb-Edu, Wikipedia, OpenWebMath, Aya, and OpenR1-Math-220k, plus real Kaggle sources such as Tashkeela and RUFND. Large sources are streamed/sampled; no bulk third-party corpus is committed to the repository.
