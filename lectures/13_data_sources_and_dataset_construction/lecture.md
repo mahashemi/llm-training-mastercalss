@@ -72,3 +72,27 @@ What is the smallest metadata set you need to reproduce the exact corpus?
 ## Research bridge
 
 Use current data-processing documentation from the referenced implementation ecosystem and compare it with the simplified classroom pipeline.
+
+
+
+## Required real-data laboratory
+
+Do not substitute the four-row toy dataset for the real exercise. Run the [Real Dataset Corpus Bench](../../notebooks/real_dataset_corpus_bench.ipynb).
+
+Students must inspect multiple source schemas, normalize them into a common schema, measure distributions, run filtering, check cross-source exact duplicates, and construct two competing mixtures.
+
+Minimum sources:
+
+- FineWeb
+- FineWeb-Edu
+- Wikipedia
+- OpenWebMath
+- Aya
+
+Then inspect one Kaggle source such as Tashkeela or RUFND.
+
+### Evidence
+
+Produce:
+
+**source registry + schema map + source statistics + filter survival + dedup report + mixture A/B + downstream hypothesis**.
