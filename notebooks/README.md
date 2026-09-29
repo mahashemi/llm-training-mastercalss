@@ -89,3 +89,11 @@ Use [Open-Weight Training Ladder](../docs/OPEN_WEIGHT_TRAINING_LADDER.md) to rep
 Use [EXPERIMENT_CARD.md](../templates/EXPERIMENT_CARD.md).
 
 Do not report a model result without its model/data revision, evaluation protocol, and resource measurements.
+
+
+
+## Real dataset bench
+
+[Real Dataset Corpus Bench](./real_dataset_corpus_bench.ipynb) is the canonical hands-on dataset lesson. It pulls real slices from multiple Hugging Face datasets and can optionally acquire Kaggle datasets using kagglehub.
+
+Students should run this before calling the curation pipeline “real.” The lab makes the following sources concrete: FineWeb, FineWeb-Edu, Wikipedia, OpenWebMath, Aya, OpenR1-Math-220k, plus Kaggle Tashkeela/RUFND/Gita.
