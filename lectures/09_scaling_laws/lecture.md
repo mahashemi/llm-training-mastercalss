@@ -1,112 +1,82 @@
-# Lecture 09 — Scaling Laws
+# Lecture 09 — Scaling Laws: Spend Compute Where It Buys Information
 
 **Duration:** 25 minutes  
-**Lab:** [scaling_law_fit.ipynb](../../notebooks/scaling_law_fit.ipynb)  
-**Primary anchor:** https://arxiv.org/abs/2203.15556
+**Lab:** [Scaling-law Fit](../../notebooks/scaling_law_fit.ipynb)  
+**Primary anchor:** Chinchilla — https://arxiv.org/abs/2203.15556
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students learn to treat model size and training-token budget as coupled variables and to distrust extrapolation outside the measured regime.
 
-## Learning objectives
+## 0–4 — The allocation problem
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
+Suppose you have a fixed compute budget.
 
-## Core concepts
+Would you train:
 
-1. **compute-optimal training**
-2. **parameter/token allocation**
-3. **FLOPs**
-4. **power laws**
-5. **extrapolation limits**
+- a small model for many tokens;
+- a large model for fewer tokens?
 
-## 25-minute script
+There is no answer from parameter count alone.
 
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
+## 4–9 — Scaling-law intuition
 
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
+Introduce empirical power-law behavior:
 
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
+**loss ≈ A·N^-α + B·D^-β + C**
 
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
+where N and D represent model/data scale in a simplified teaching formulation.
 
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
+Explain that scaling laws are empirical approximations over a regime, not laws of nature.
 
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
+## 9–14 — Compute coupling
 
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
+For dense-model planning:
 
-## Decision table
+**FLOPs ≈ 6ND**
 
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
+If compute is approximately fixed:
 
-## Critical thinking
+**N × D ≈ constant**
 
-**Q1. What is the seductive but wrong shortcut?**
+Increasing N therefore reduces D unless compute grows.
 
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
+Connect this to undertraining large models and overtraining small models.
 
-**Q2. What evidence would justify spending more compute?**
+## 14–19 — Laboratory
 
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
+Fit a simple scaling curve from measured or simulated runs.
 
-**Q3. What can invalidate the conclusion?**
+Then produce:
 
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
+- loss vs parameters;
+- loss vs tokens;
+- loss vs compute.
 
-## Visuals to build
+Students must identify whether their extrapolation is inside or outside the observed regime.
 
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
+## 19–22 — Break it
 
-Each visual should have a one-sentence “notice this” caption.
-
-## Lab requirements
-
-Run:
-
-notebooks/scaling_law_fit.ipynb
-
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
-
-## Research bridge
-
-Read the cited primary/official material after completing the lab.
+Remove one data regime or add noisy measurements.
 
 Ask:
 
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
+> How stable is the extrapolated optimum?
 
-## Deliverable
+This teaches uncertainty in scaling studies.
 
-One-page experiment report:
+## 22–24 — Engineering decision
 
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
+A useful scaling report contains:
 
+**data range → model range → compute range → fitted relationship → uncertainty → proposed next point**
+
+Do not report a single “optimal” model size without the assumptions behind the fit.
+
+## 24–25 — Exit challenge
+
+If you double model size, what must you ask about the token budget?
+
+## Research bridge
+
+Compare your fitted trend with Chinchilla-style compute-optimal reasoning and identify which parts of your result are empirical measurements versus extrapolation.
