@@ -1,112 +1,111 @@
-# Lecture 02 — Tokenization
+# Lecture 02 — Tokenization: The First Hidden Model Decision
 
 **Duration:** 25 minutes  
-**Lab:** [tokenizer_design_and_measurement.ipynb](../../notebooks/tokenizer_design_and_measurement.ipynb)  
-**Primary anchor:** https://cs336.stanford.edu/
+**Lab:** [Tokenizer Design and Measurement](../../notebooks/tokenizer_design_and_measurement.ipynb)  
+**Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+By the end, students can build a simple BPE intuition, measure tokenizer behavior on real text, and explain why tokenization changes model compute, context utilization, and multilingual performance.
 
-## Learning objectives
+## 0–4 — Start with the surprising question
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
+Show:
 
-## Core concepts
-
-1. **characters vs words vs subwords**
-2. **BPE**
-3. **vocabulary design**
-4. **multilingual tokenization**
-5. **fertility**
-
-## 25-minute script
-
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
-
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
-
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
-
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
-
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
-
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
-
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
-
-## Decision table
-
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
-
-## Critical thinking
-
-**Q1. What is the seductive but wrong shortcut?**
-
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
-
-**Q2. What evidence would justify spending more compute?**
-
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
-
-**Q3. What can invalidate the conclusion?**
-
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
-
-## Visuals to build
-
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
-
-Each visual should have a one-sentence “notice this” caption.
-
-## Lab requirements
-
-Run:
-
-notebooks/tokenizer_design_and_measurement.ipynb
-
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
-
-## Research bridge
-
-Read the cited primary/official material after completing the lab.
+- "internationalization"
+- "internationalization" split into subwords
+- the same concept in a morphologically richer language.
 
 Ask:
 
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
+> If two sentences contain the same amount of meaning, why might one require twice as many tokens?
 
-## Deliverable
+The answer is not “because that language is worse.” Tokenization is an encoding choice learned from a corpus.
 
-One-page experiment report:
+## 4–9 — From characters to subwords
 
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
+Walk through:
 
+**characters → candidate pairs → frequent merges → vocabulary**
+
+Explain BPE using a tiny corpus. Students should manually perform two merges.
+
+Then distinguish:
+
+| Unit | Strength | Failure |
+|---|---|---|
+| character | robust, small vocabulary | long sequences |
+| word | short sequences | huge/OOV vocabulary |
+| subword | compromise | uneven fertility |
+
+Define **fertility** as average tokenizer-produced token count for a chosen unit of text.
+
+## 9–14 — Formal resource consequence
+
+For a corpus with C characters and fertility f:
+
+**tokens ≈ C × f**
+
+If tokenizer A gives 1.0M tokens and B gives 1.4M for the same corpus, B creates roughly 40% more token positions.
+
+That can affect:
+
+- context length;
+- attention work;
+- activation memory;
+- training-token budget;
+- inference latency;
+- KV-cache growth.
+
+Students should not leave this lecture thinking vocabulary design is cosmetic.
+
+## 14–19 — Laboratory
+
+Open the tokenizer notebook.
+
+Before running it, predict:
+
+1. which language will have highest fertility;
+2. which tokenizer will produce longer sequences;
+3. whether vocabulary size alone predicts fertility.
+
+Measure:
+
+| Metric | Result |
+|---|---|
+| tokens | measure |
+| tokens/character | measure |
+| mean sequence length | measure |
+| p95 sequence length | measure |
+| vocabulary utilization | measure |
+| per-language fertility | measure |
+
+## 19–22 — Break it
+
+Use a corpus distribution that is mostly English while evaluating a low-resource target language.
+
+Ask:
+
+> Can a tokenizer optimized for average corpus compression be bad for a target language?
+
+Then test it.
+
+Failure category: **distribution mismatch**.
+
+## 22–24 — Engineering decision
+
+Tokenizer choice should be evaluated against:
+
+**language coverage × sequence expansion × vocabulary budget × training/inference compute**
+
+For multilingual projects, report fertility by language rather than one global average.
+
+## 24–25 — Exit challenge
+
+Complete:
+
+> “Tokenizer A creates ___% more/fewer positions than B on our target corpus, which changes ___; therefore our next experiment is ___.”
+
+## Research bridge
+
+Compare your measured result with a published tokenizer claim and identify what is measured, what is a benchmark-specific result, and what is an engineering inference.
