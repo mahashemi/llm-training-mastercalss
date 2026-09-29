@@ -1,37 +1,7 @@
 # Experiment Card
 
-## Question
+This lowercase file is retained as a compatibility alias. Use [EXPERIMENT_CARD.md](EXPERIMENT_CARD.md) as the canonical template.
 
-## Hypothesis
+Minimum record:
 
-## Baseline
-
-## Independent variable
-
-## Controlled variables
-
-## Dataset/version
-
-## Model/version
-
-## Configuration
-
-## Hardware
-
-## Expected result
-
-## Actual result
-
-## Quality metrics
-
-## Resource metrics
-
-## Failure analysis
-
-## Interpretation
-
-## Limitations
-
-## Decision
-
-## Next experiment
+**Question → Hypothesis → Baseline → Independent variable → Controls → Model/data versions → Configuration → Hardware → Expected result → Actual result → Metrics → Resource measurements → Failure → Interpretation → Decision → Next experiment**
