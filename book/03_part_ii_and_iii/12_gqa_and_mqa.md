@@ -114,3 +114,35 @@ Then discuss how much additional concurrency each design might permit under a fi
 
 - Multi-query attention: https://arxiv.org/abs/1911.02150
 - GQA: https://arxiv.org/abs/2305.13245
+
+## Deepening: GQA is a cache-design decision
+
+During decoding, each generated token needs access to past keys and values.
+
+Let H_q be query heads and H_kv be KV heads.
+
+Approximate cache size scales with:
+
+**2 × layers × H_kv × head_dim × sequence_length × bytes**
+
+### Worked comparison
+
+Hold layers, head dimension, context, and dtype fixed.
+
+Compare:
+
+- MHA: H_kv = H_q;
+- GQA: H_kv = H_q/4;
+- MQA: H_kv = 1.
+
+Compute relative KV storage.
+
+### Experiment
+
+Measure generation memory as context grows.
+
+### Failure mode
+
+A benchmark that explicitly repeats K/V tensors can hide the expected cache advantage.
+
+The implementation must match the architectural hypothesis.
