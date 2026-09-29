@@ -1,113 +1,101 @@
 # Lecture 03 — PyTorch and Resource Accounting
 
 **Duration:** 25 minutes  
-**Lab:** [resource_accounting_flops_memory.ipynb](../../notebooks/resource_accounting_flops_memory.ipynb)  
-**Primary anchor:** https://cs336.stanford.edu/
+**Lab:** [Resource Accounting — FLOPs and Memory](../../notebooks/resource_accounting_flops_memory.ipynb)  
+**Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students learn to look at a model as a collection of tensors and resource terms rather than a parameter-count headline.
 
-## Learning objectives
+## 0–4 — The trap
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
+Write:
 
-## Core concepts
+> “This is a 7B model and it fits in 16 GB.”
 
-1. **tensor shapes**
-2. **parameter counts**
-3. **FLOPs**
-4. **memory**
-5. **arithmetic intensity**
-6. **batch and sequence tradeoffs**
+Ask whether that statement is enough to launch training.
 
-## 25-minute script
+No.
 
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
+## 4–8 — Tensor dimensions first
 
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
+Take one linear layer:
 
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
+**X ∈ R^(B×L×d_in)**  
+**W ∈ R^(d_in×d_out)**  
+**Y = XW**
 
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
+Count the parameters:
 
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
+**d_in × d_out**
 
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
+Then ask what happens when B or L doubles.
 
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
+Students connect shape to compute before seeing FLOPs formulas.
 
-## Decision table
+## 8–14 — Memory decomposition
 
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
+For training:
 
-## Critical thinking
+**M ≈ weights + gradients + optimizer + activations + temporary/runtime**
 
-**Q1. What is the seductive but wrong shortcut?**
+For inference:
 
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
+**M ≈ weights + KV cache + runtime**
 
-**Q2. What evidence would justify spending more compute?**
+Example:
 
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
+7B BF16 raw weights ≈ 14 GB decimal.
 
-**Q3. What can invalidate the conclusion?**
+That is not a 14-GB training requirement.
 
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
+## 14–19 — FLOPs and arithmetic intensity
 
-## Visuals to build
+Introduce a first-order dense-model training heuristic:
 
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
+**FLOPs ≈ 6ND**
 
-Each visual should have a one-sentence “notice this” caption.
+where N = parameters and D = training tokens.
 
-## Lab requirements
+Then distinguish:
 
-Run:
+- theoretical peak;
+- achieved FLOPs/sec;
+- tokens/sec;
+- memory bandwidth;
+- communication.
 
-notebooks/resource_accounting_flops_memory.ipynb
+Students should understand why a benchmark number from a GPU vendor is not the throughput of their training job.
 
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
+## 19–22 — Laboratory
+
+Run two controlled experiments:
+
+1. fixed model, sequence length 512 vs 2048;
+2. fixed sequence, batch 1 vs batch 4.
+
+Record:
+
+| Condition | Peak memory | tokens/sec | step time |
+|---|---:|---:|---:|
+| baseline | measure | measure | measure |
+| changed | measure | measure | measure |
+
+## 22–24 — Break it
+
+Create a configuration that fits inference but fails training.
+
+Diagnose which memory term caused failure.
+
+## 24–25 — Exit challenge
+
+Students must answer:
+
+> “Before renting another GPU, which quantity would you measure first, and why?”
+
+The expected reasoning is **resource decomposition → measurement → intervention**, not GPU shopping.
 
 ## Research bridge
 
-Read the cited primary/official material after completing the lab.
-
-Ask:
-
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
-
-## Deliverable
-
-One-page experiment report:
-
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
-
+Read the relevant CS336 resource-accounting material and compare the assumptions behind its calculations with your measured run.
