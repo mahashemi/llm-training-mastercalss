@@ -1,113 +1,104 @@
-# Lecture 05 — Attention Alternatives and MoE
+# Lecture 05 — Attention Alternatives and Mixture-of-Experts
 
 **Duration:** 25 minutes  
-**Lab:** [attention_and_moe_lab.ipynb](../../notebooks/attention_and_moe_lab.ipynb)  
-**Primary anchor:** https://cs336.stanford.edu/
+**Lab:** [Attention and MoE Lab](../../notebooks/attention_and_moe_lab.ipynb)  
+**Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students can compare MHA, MQA, GQA, local attention, and MoE by the tensors they replicate, the memory they consume, and the communication/routing they introduce.
 
-## Learning objectives
-
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
-
-## Core concepts
-
-1. **MHA**
-2. **MQA**
-3. **GQA**
-4. **local attention**
-5. **sparse ideas**
-6. **mixture-of-experts routing and load balance**
-
-## 25-minute script
-
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
-
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
-
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
-
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
-
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
-
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
-
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
-
-## Decision table
-
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
-
-## Critical thinking
-
-**Q1. What is the seductive but wrong shortcut?**
-
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
-
-**Q2. What evidence would justify spending more compute?**
-
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
-
-**Q3. What can invalidate the conclusion?**
-
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
-
-## Visuals to build
-
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
-
-Each visual should have a one-sentence “notice this” caption.
-
-## Lab requirements
-
-Run:
-
-notebooks/attention_and_moe_lab.ipynb
-
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
-
-## Research bridge
-
-Read the cited primary/official material after completing the lab.
+## 0–4 — Start from KV-cache pressure
 
 Ask:
 
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
+> During autoregressive generation, why store K and V for every prior token?
 
-## Deliverable
+Then ask:
 
-One-page experiment report:
+> What if many query heads shared fewer KV heads?
 
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
+This motivates MQA/GQA.
 
+## 4–9 — Head geometry
+
+Let:
+
+- H_q = query heads;
+- H_kv = KV heads.
+
+MHA: H_q = H_kv.
+
+MQA: H_kv = 1.
+
+GQA: 1 < H_kv < H_q.
+
+Explain the memory implication for cached keys/values.
+
+## 9–14 — MoE
+
+Contrast dense and MoE:
+
+**Dense:** every token visits the same FFN parameters.
+
+**MoE:** a router selects a subset of experts.
+
+Introduce:
+
+- top-k routing;
+- expert capacity;
+- load balance;
+- auxiliary/router losses;
+- communication.
+
+The crucial lesson:
+
+> “Total parameters” and “active parameters per token” are different quantities.
+
+## 14–19 — Laboratory
+
+Students vary:
+
+- number of KV heads;
+- sequence length;
+- number of experts;
+- top-k.
+
+Measure:
+
+| Configuration | KV memory | attention time | routing load | throughput |
+|---|---:|---:|---:|---:|
+| MHA | measure | measure | — | measure |
+| GQA | measure | measure | — | measure |
+| MQA | measure | measure | — | measure |
+
+For MoE, deliberately create imbalanced routing and inspect expert utilization.
+
+## 19–22 — Break it
+
+Force one expert to receive most tokens.
+
+Ask:
+
+- Does quality necessarily fail?
+- What fails first: load balance, throughput, or memory?
+
+Separate algorithmic and systems failures.
+
+## 22–24 — Engineering decision
+
+Use a method when its resource benefit addresses the bottleneck:
+
+**KV-cache bottleneck → GQA/MQA hypothesis**
+
+**capacity-per-active-FLOP hypothesis → MoE**
+
+Do not treat architectural novelty as a reason by itself.
+
+## 24–25 — Exit challenge
+
+Explain one benefit and one cost of MoE without saying “it is cheaper.”
+
+## Research bridge
+
+Read original GQA/MQA/MoE papers and compare active computation with total parameter count.
