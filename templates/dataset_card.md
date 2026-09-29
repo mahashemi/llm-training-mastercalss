@@ -1,37 +1,59 @@
 # Dataset Card
 
-## Dataset identity
+## 1. Identity
 
-## Purpose
+- name:
+- version:
+- release/commit:
+- size:
+- token count:
+- languages:
+- domains:
 
-## Source and provenance
+## 2. Purpose
 
-## Access / licensing basis
+## 3. Source and provenance
 
-## Languages
+For every source record acquisition date, source identifier, provenance, access/license basis, checksum where appropriate, and processing version.
 
-## Domains
+## 4. Rights and governance
 
-## Size
+## 5. Processing pipeline
 
-## Collection date
+**acquire → parse → normalize → language ID → filter → deduplicate → contamination-check → mix → tokenize → shard**
 
-## Processing pipeline
+## 6. Accounting
 
-## Filtering
+| Stage | Documents | Tokens | Rejection/survival |
+|---|---:|---:|---:|
+| raw | | | |
+| parsed | | | |
+| filtered | | | |
+| deduped | | | |
+| final | | | |
 
-## Deduplication
+## 7. Language/domain balance
 
-## Synthetic data
+## 8. Quality audit
 
-## Known contamination risks
+Describe human and automated checks.
 
-## Sensitive or personal information considerations
+## 9. Deduplication
 
-## Intended uses
+Method, threshold, and impact.
 
-## Limitations
+## 10. Synthetic data
 
-## Version history
+Fraction, generator/version, filtering, and known correlated errors.
 
-## Citation
+## 11. Contamination risks
+
+## 12. Sensitive/personal information considerations
+
+## 13. Intended and prohibited uses
+
+## 14. Limitations
+
+## 15. Version history
+
+## 16. Citation
