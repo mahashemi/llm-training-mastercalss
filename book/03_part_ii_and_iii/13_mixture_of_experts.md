@@ -143,3 +143,40 @@ The important question is the quality/resource frontier.
 ## Reference
 
 https://arxiv.org/abs/2101.03961
+
+## Deepening: MoE separates total capacity from active computation
+
+Suppose:
+
+- E experts;
+- top-k routing;
+- each expert has comparable parameters.
+
+Total parameter count grows with E.
+
+Active expert computation per token grows approximately with k rather than E.
+
+### Why systems become harder
+
+Tokens must be routed to experts and potentially moved across devices.
+
+Therefore:
+
+**model capacity ↔ active FLOPs ↔ communication ↔ load balance**
+
+### Experiment
+
+Simulate routing for E=4, 8, 16 with top-k=1 or 2.
+
+Measure:
+
+- tokens/expert;
+- imbalance;
+- dropped/overflowed tokens if capacity is constrained;
+- communication volume.
+
+### Failure mode
+
+One expert receives most tokens.
+
+A model can have impressive nominal capacity while the effective system is bottlenecked by routing imbalance.
