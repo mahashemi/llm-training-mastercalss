@@ -101,3 +101,43 @@ Then estimate quality improvement per billion tokens processed.
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: deduplication changes information density
+
+Exact deduplication removes byte-identical or normalized duplicates.
+
+Near-dedup attempts to identify highly similar documents.
+
+### Why it matters
+
+Duplicates can:
+
+- waste token budget;
+- bias sampling;
+- increase memorization pressure;
+- contaminate evaluation;
+- reduce effective diversity.
+
+But aggressive dedup can remove legitimate repeated text.
+
+### Controlled experiment
+
+Create three corpora:
+
+| Corpus | Transformation |
+|---|---|
+| A | no dedup |
+| B | exact dedup |
+| C | exact + near dedup |
+
+Keep model, training tokens, and evaluation fixed.
+
+Measure:
+
+**validation loss + memorization/contamination indicators + target slices**
+
+### Failure mode
+
+A near-dedup threshold that is too aggressive merges semantically distinct documents.
+
+The threshold must be measured, not assumed.

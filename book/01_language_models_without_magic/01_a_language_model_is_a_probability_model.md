@@ -187,16 +187,37 @@ It reminds us that changing the model can mean changing more than the network we
 
 **Answer:** No. This is one of the most important questions in the course. Retrieval, tools, or other external knowledge mechanisms may be more appropriate for information that changes frequently.
 
-## Exercise
+## Laboratory
 
-Before opening the notebook, write down what you expect to happen if:
+### Notebook 01 — Next-token prediction and a tiny language model
+
+[Open the notebook](../../notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb)
+
+This notebook is the executable companion for this chapter. It starts with a bigram model so that the probability objective, logits, loss, parameter updates, and generation can be inspected without Transformer abstractions.
+
+### Prediction exercise
+
+**Before opening the notebook**, write down what you expect to happen if:
 
 1. the model has 10 possible next tokens but the correct token gets probability 0.9;
 2. the correct token gets probability 0.1;
 3. the same token appears many times in the training set;
 4. the validation set contains examples that are near-duplicates of the training set.
 
-Then run the experiment and compare your predictions.
+Then run the corresponding experiment in the notebook and compare your predictions with the observed result.
+
+### Required evidence
+
+| Evidence | What to save |
+|---|---|
+| probability/loss relationship | calculation or observation |
+| baseline | initial loss/output |
+| intervention | what changed |
+| result | measured loss/output |
+| failure | one deliberately broken assumption |
+| interpretation | why the result occurred |
+
+This laboratory is the bridge between the probability model in the chapter and an actual parameter update.
 
 ## Primary references
 

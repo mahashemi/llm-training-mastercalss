@@ -128,3 +128,36 @@ Calculate the quality loss per unit cost saved.
 ## Reference
 
 https://docs.vllm.ai/en/stable/
+
+## Deepening: quantization is a quality/resource trade-off
+
+Quantization changes numerical representation of the stored/computed weights.
+
+Potential benefits:
+
+- lower weight memory;
+- larger model on a fixed GPU;
+- potentially higher throughput.
+
+Potential costs:
+
+- quantization error;
+- kernel constraints;
+- dequantization overhead;
+- changed latency.
+
+### Experiment
+
+Compare BF16 and a supported quantized path on the same model and workload.
+
+Measure:
+
+**memory + throughput + latency + target quality**
+
+### Failure mode
+
+A smaller weight footprint can still have poor end-to-end performance if the kernel path is inefficient.
+
+### Decision
+
+Quantization must be evaluated at the system level, not only by bits/parameter.

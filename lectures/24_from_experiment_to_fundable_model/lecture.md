@@ -1,6 +1,7 @@
 # Lecture 24 — From Experiment to Fundable Model
 
 **Duration:** 25 minutes
+**Lab:** [capstone_model_program.ipynb](../../notebooks/capstone_model_program.ipynb)
 
 ## Outcome
 
@@ -153,3 +154,39 @@ The proposal should make the evidence chain explicit so the reviewer can inspect
 OLMo 2: https://allenai.org/olmo2  
 Stanford CS336: https://cs336.stanford.edu/  
 Chinchilla: https://arxiv.org/abs/2203.15556
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — write the proposal from the experiment backwards
+
+Take one measured experiment and turn it into a proposal.
+
+### Evidence chain
+
+**problem → baseline → intervention → measurement → failure → remaining gap → next experiment → resources**
+
+Every proposal paragraph should map to one element of this chain or be clearly labeled as an assumption.
+
+### Reviewer challenge matrix
+
+Students must answer:
+
+| Question | Evidence |
+|---|---|
+| Why not API? | workload baseline + TCO |
+| Why not RAG? | retrieval experiment + residual gap |
+| Why not PEFT? | adaptation comparison |
+| Why this model size? | scaling/resource evidence |
+| Why these GPUs? | measured throughput |
+| What if it fails? | kill criterion + fallback |
+| How reproducible? | artifact/version plan |
+
+### Final practical exercise
+
+Using the course's Qwen3-0.6B → H100 ladder, write a one-page scale proposal that names:
+
+**current evidence → proposed model → hardware → training method → evaluation → budget assumptions → gate → fallback**.
+

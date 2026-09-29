@@ -116,3 +116,35 @@ Then explain which behavior is caused by decoding rather than training.
 
 - Transformer: https://arxiv.org/abs/1706.03762
 - GPT-3: https://arxiv.org/abs/2005.14165
+
+## Deepening: teacher forcing versus generation cost
+
+During training, the target sequence is known, so many positions can be processed in parallel under a causal mask.
+
+During generation, token t must be produced before token t+1.
+
+### Resource consequence
+
+Training emphasizes:
+
+**throughput + batch tokens + accelerator utilization**
+
+Generation emphasizes:
+
+**TTFT + inter-token latency + KV cache + concurrency**
+
+### Experiment
+
+Compare a fixed prompt under:
+
+- greedy decoding;
+- sampling;
+- different max_new_tokens.
+
+Measure output tokens/sec and latency.
+
+Then vary prompt length separately from generated length.
+
+### Failure mode
+
+A model can have excellent training throughput and poor interactive latency. These are different optimization problems.

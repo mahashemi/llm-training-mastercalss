@@ -1,6 +1,7 @@
 # Lecture 18 — LoRA, QLoRA, and PEFT
 
 **Duration:** 25 minutes  
+**Lab:** [lora_qlora_comparison.ipynb](../../notebooks/lora_qlora_comparison.ipynb)
 **Primary anchors:** https://arxiv.org/abs/2106.09685 · https://arxiv.org/abs/2305.14314
 
 ## Outcome
@@ -112,3 +113,44 @@ State:
 
 LoRA: https://arxiv.org/abs/2106.09685  
 QLoRA: https://arxiv.org/abs/2305.14314
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — make the PEFT decision quantitative
+
+For a matrix with dimensions d_in × d_out:
+
+**full parameters = d_in × d_out**
+
+**LoRA parameters = r(d_in + d_out)**
+
+Have students calculate both for several layers and sum across the architecture.
+
+### Controlled matrix
+
+| Run | Base | Precision | Rank | Target modules | Measure |
+|---|---|---|---:|---|---|
+| A | 0.6B | BF16 | 8 | attention | quality/memory |
+| B | 0.6B | BF16 | 16 | attention | quality/memory |
+| C | 0.6B | BF16 | 32 | attention+MLP | quality/memory |
+| D | 0.6B | 4-bit | 16 | attention+MLP | quality/memory |
+
+The objective is to produce a **quality/resource frontier**.
+
+### H100 transfer
+
+Repeat one arm on a 7B/8B model.
+
+Compare what scales with model size:
+
+- base weights;
+- adapter weights;
+- optimizer state;
+- activations;
+- throughput.
+
+Students should explain why adapter parameter savings do not imply zero activation or runtime cost.
+

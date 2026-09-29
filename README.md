@@ -109,6 +109,10 @@ For large-scale training, the course uses small reproducible runs to teach the m
 | 23 | Build an LLM Program | [Lecture](lectures/23_build_an_llm_program/lecture.md) | [Resource plan](notebooks/national_llm_resource_plan.ipynb) |
 | 24 | From Experiment to Fundable Model | [Lecture](lectures/24_from_experiment_to_fundable_model/lecture.md) | [Capstone](notebooks/capstone_model_program.ipynb) |
 
+### Open-weight / H100 Navigation
+
+[Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md) · [Qwen3.8-27B + H100 Case Study](docs/OPEN_WEIGHT_QWEN_H100_CASE_STUDY.md) · [Open-Weight Model Audit](notebooks/open_weight_model_audit.ipynb) · [Open-Weight Runbook](runbooks/12_open_weight_model_runbook.md) · [Book ↔ Lecture ↔ Laboratory Map](BOOK_LAB_MAP.md) · [Curriculum Integrity Report](docs/CURRICULUM_INTEGRITY_REPORT.md)
+
 ### Research / Reproducibility Navigation
 
 [Book TOC](BOOK_TOC.md) · [Paper Reading Path](papers/PAPER_READING_PATH.md) · [Experiment → Paper](docs/PAPER_PIPELINE.md) · [Reproducibility Standard](REPRODUCIBILITY.md) · [Contribution Guide](CONTRIBUTING.md)
@@ -209,7 +213,7 @@ The project includes contribution guidelines, a code of conduct, security guidan
 The repository currently contains:
 
 - 24 lecture packages;
-- 75 textbook chapters plus chapter template;
+- 76 textbook chapters plus chapter template;
 - 27 notebooks including orientation, one lab per numbered lecture, and the end-to-end tiny-GPT pretraining campaign;\n- a dedicated open-weight model-loading and hardware-progression track;
 - 13 operational runbooks;
 - 4 capstone/project briefs;
@@ -217,7 +221,7 @@ The repository currently contains:
 - curated lecture/video and paper-reading paths;
 - citation, reproducibility, maintenance, governance, security, and contribution standards.
 
-Use `START_HERE.md` for the learner path, `COURSE_MAP.md` for the curriculum map, `BOOK_TOC.md` for the textbook, and `notebooks/README.md` for the Colab laboratory map.
+Use `START_HERE.md` for the learner path, `COURSE_MAP.md` for the curriculum map, `BOOK_TOC.md` for the textbook, `BOOK_LAB_MAP.md` for chapter/lab connections, and `notebooks/README.md` for the Colab laboratory map.
 
 ## Mastery standard
 

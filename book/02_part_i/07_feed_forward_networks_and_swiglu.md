@@ -105,3 +105,44 @@ Then compare quality per parameter and quality per compute.
 
 - LLaMA: https://arxiv.org/abs/2302.13971
 - GLU Variants Improve Transformer: https://arxiv.org/abs/2002.05202
+
+## Deepening: the MLP is often a major parameter and compute budget
+
+A Transformer block spends substantial parameters in its feed-forward sublayer.
+
+For a conventional two-projection MLP, parameter count scales approximately with:
+
+**O(d_model × d_ff)**
+
+SwiGLU introduces a gating path and changes both capacity and parameter accounting.
+
+### Worked comparison
+
+Have students calculate approximate parameter counts for:
+
+- two-projection MLP;
+- gated/SwiGLU-style MLP.
+
+Then compare:
+
+- parameters;
+- matrix multiplications;
+- activation size.
+
+### Experiment
+
+Change the MLP expansion ratio while keeping attention fixed.
+
+Measure:
+
+**validation loss + parameter count + tokens/sec + peak memory**
+
+### Failure mode
+
+Make the MLP extremely narrow.
+
+The model still trains, but capacity can become the bottleneck even when attention is healthy.
+
+### Engineering lesson
+
+Do not think of attention as “the Transformer” and the MLP as a side component. The feed-forward path is a major part of modern decoder-only model capacity.

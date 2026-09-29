@@ -4,6 +4,10 @@
 
 - [START_HERE.md](START_HERE.md)
 - [Course Map](COURSE_MAP.md)
+- [Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md)
+- [Qwen3.8-27B + H100 Case Study](docs/OPEN_WEIGHT_QWEN_H100_CASE_STUDY.md)
+- [Curriculum Integrity Report](docs/CURRICULUM_INTEGRITY_REPORT.md)
+- [Book ↔ Lecture ↔ Laboratory Map](BOOK_LAB_MAP.md)
 - [Book Table of Contents](BOOK_TOC.md)
 - [Lecture Index](lectures/LECTURE_INDEX.md)
 - [Notebook Laboratory](notebooks/README.md)
@@ -23,6 +27,9 @@
 - [Funding Runbook](runbooks/09_funding_and_program_proposal_runbook.md)
 - [Failure Triage](runbooks/10_training_failure_triage.md)
 - [Model Release](runbooks/11_model_release_runbook.md)
+- [Open-Weight Model Runbook](runbooks/12_open_weight_model_runbook.md)
+- [Model Selection](runbooks/MODEL_SELECTION_RUNBOOK.md)
+- [Pretraining Decision](runbooks/PRETRAINING_DECISION_RUNBOOK.md)
 
 ## Decide
 
@@ -32,6 +39,7 @@
 - [Systems Stack](docs/SYSTEMS_STACK.md)
 - [Experiment → Program](docs/EXPERIMENT_TO_PROGRAM.md)
 - [Course Operating Manual](docs/COURSE_OPERATING_MANUAL.md)
+- [Assessment and Mastery](docs/ASSESSMENT_AND_MASTERY.md)
 
 ## Research
 
@@ -40,8 +48,6 @@
 - [Paper Pipeline](docs/PAPER_PIPELINE.md)
 - [Contribution Guide](CONTRIBUTING.md)
 - [Citation Guide](CITATION.md)
-- [Governance](GOVERNANCE.md)
-- [Maintenance](MAINTENANCE.md)
 
 ## Projects
 
@@ -52,4 +58,8 @@
 
 ## Graduate artifact
 
-The final deliverable is not just a model checkpoint. It is a defensible **Model Program Dossier** containing mission, baseline, data, method, architecture, compute, evaluation, safety, deployment, staffing, budget, milestones, risks, and a publication/open-science plan.
+The final deliverable is not just a model checkpoint.
+
+It is a defensible **Model Program Dossier** plus a reproducible model-development record:
+
+**model → data → training → evaluation → resources → failures → decision → scale plan**

@@ -96,3 +96,50 @@ For every material failure record:
 - result;
 - root cause;
 - prevention.
+
+
+## Triage decision tree
+
+### 1. Did the job start?
+
+If no:
+
+**environment → dependency → CUDA/device → checkpoint/tokenizer**
+
+### 2. Is the loss finite?
+
+If no:
+
+**precision → LR → data → optimizer → initialization**
+
+### 3. Does training loss decrease?
+
+If no:
+
+**label/template → data → gradient flow → objective → learning rate**
+
+### 4. Does validation improve?
+
+If training improves but validation does not:
+
+**overfitting → contamination → distribution mismatch → evaluation error**
+
+### 5. Is throughput lower than expected?
+
+Check:
+
+**data loader → kernel utilization → memory bandwidth → communication → checkpoint/evaluation overhead**
+
+### 6. Is memory unexpectedly high?
+
+Check:
+
+**sequence length → batch → activations → optimizer → KV cache → temporary buffers → fragmentation**
+
+### Incident record
+
+Record:
+
+**symptom → first observation → hypothesis → test → result → root cause → fix → regression test**
+
+Never repair an expensive run without preserving the evidence that explains the failure.

@@ -58,3 +58,44 @@ Example:
 > What would cause us to stop spending?
 
 A serious proposal answers this explicitly.
+
+
+## Evidence-first proposal protocol
+
+### Section 1 — Mission
+
+Write the user/task/capability gap without choosing a model first.
+
+### Section 2 — Baseline
+
+Document the strongest tested existing approach, including RAG/tools where relevant.
+
+### Section 3 — Evidence ladder
+
+Show the progression:
+
+**baseline → small intervention → measured gain → remaining gap → next experiment**
+
+### Section 4 — Resources
+
+Derive:
+
+**tokens/model → FLOPs → measured throughput → wall time → accelerator-hours → infrastructure → staffing → TCO**
+
+### Section 5 — Gates
+
+For every funding milestone define:
+
+**success metric + threshold + artifact + owner + next release condition**
+
+### Section 6 — Failure plan
+
+State:
+
+- kill criteria;
+- fallback;
+- data/rights risks;
+- budget ceiling;
+- recovery plan.
+
+A fundable proposal is a sequence of testable claims, not a large hardware request.

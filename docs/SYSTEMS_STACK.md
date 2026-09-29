@@ -1,50 +1,62 @@
 # Open LLM Engineering Stack
 
-This is the current practical stack studied by the masterclass. Tool versions and APIs change; use the linked official docs for current syntax.
+This is a learning stack, not a claim that one framework is mandatory. APIs and versions change; pin the versions used by each experiment and consult the current official documentation.
 
 | Layer | Representative tools | What students learn |
 |---|---|---|
-| Core tensor framework | PyTorch | tensors, autograd, distributed primitives |
-| Data | Hugging Face Datasets + custom streaming | dataset transformation, sharding, provenance |
-| Tokenizers | Hugging Face Tokenizers / custom tokenizer code | vocabulary construction, BPE, multilingual measurement |
-| Model implementations | Transformers / custom PyTorch | model configs, loading, generation |
+| Tensor/autograd | PyTorch | tensors, autograd, memory, distributed primitives |
+| Data | Hugging Face Datasets + custom pipelines | streaming, transforms, provenance |
+| Tokenizers | Hugging Face Tokenizers / custom code | vocabulary, BPE, fertility |
+| Models | Transformers / custom PyTorch | configs, checkpoint loading, generation |
 | PEFT | Hugging Face PEFT | LoRA, QLoRA, adapters |
-| Post-training | Hugging Face TRL | SFT, DPO, RL-style training workflows |
-| Distributed training | PyTorch FSDP2 / TorchTitan | sharding, multi-dimensional parallelism |
-| Large-scale training | Megatron Core | tensor/pipeline/data/expert/context parallelism |
-| Kernel optimization | PyTorch compile, Triton, FlashAttention | profiling and memory-aware kernels |
-| Inference | vLLM | PagedAttention, batching, KV cache, speculative decoding |
-| Experiment tracking | simple versioned artifacts first; optional external tracker later | reproducibility before dashboards |
-| Packaging | Git + GitHub + release/DOI | research traceability |
+| Post-training | Hugging Face TRL | SFT, DPO, GRPO/RL workflows |
+| Distributed | PyTorch FSDP2 / TorchTitan | sharding and parallel training |
+| Large-scale | Megatron Core | tensor/pipeline/data/expert/context parallelism |
+| Kernels | PyTorch compile, Triton, FlashAttention | profiling and IO-aware kernels |
+| Inference | vLLM | batching, KV cache, serving |
+| Tracking | Git + structured experiment cards | reproducibility before dashboards |
+| Packaging | Git/GitHub + releases/DOI | traceable research artifacts |
 
 ## Teaching order
 
-Do not begin with a high-level framework.
+Do not begin with the highest-level framework.
 
-The learner should first understand:
-**PyTorch → tiny model → training loop → profiling → distributed concepts → framework abstraction**.
+**PyTorch → tiny model → real open-weight checkpoint → training loop → profiling → PEFT → distributed abstractions → large-scale frameworks**
 
-Only then introduce framework-specific convenience layers.
+This order prevents students from learning APIs without understanding the computation underneath.
+
+## Open-weight workflow
+
+The practical stack should support:
+
+**Hugging Face model repo → exact revision → tokenizer → Transformers load → baseline inference → TRL/PEFT training → evaluation → model/adapter card → release**
+
+## Hardware ladder
+
+CPU and free Colab are the default teaching environments. H100 is introduced after resource accounting, not before.
+
+## Version policy
+
+Every runnable experiment should record:
+
+- Python;
+- PyTorch;
+- Transformers;
+- PEFT;
+- TRL;
+- CUDA/runtime;
+- GPU;
+- model revision;
+- dataset revision.
+
+Never rely on an unpinned “latest” environment for a reproducibility claim.
 
 ## Official references
 
-PyTorch:
-https://pytorch.org/
-
-TorchTitan:
-https://github.com/pytorch/torchtitan
-
-Megatron Core:
-https://docs.nvidia.com/megatron-core/developer-guide/latest/
-
-Transformers:
-https://huggingface.co/docs/transformers/
-
-PEFT:
-https://huggingface.co/docs/peft/
-
-TRL:
-https://huggingface.co/docs/trl/
-
-vLLM:
-https://docs.vllm.ai/en/stable/
+PyTorch: https://pytorch.org/  
+Transformers: https://huggingface.co/docs/transformers/  
+PEFT: https://huggingface.co/docs/peft/  
+TRL: https://huggingface.co/docs/trl/  
+TorchTitan: https://github.com/pytorch/torchtitan  
+Megatron Core: https://docs.nvidia.com/megatron-core/developer-guide/latest/  
+vLLM: https://docs.vllm.ai/en/stable/

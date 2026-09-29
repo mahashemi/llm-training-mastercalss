@@ -1,6 +1,7 @@
 # Lecture 21 — Safety, Robustness, and Failure Analysis
 
 **Duration:** 25 minutes  
+**Lab:** [failure_analysis_and_safety_eval.ipynb](../../notebooks/failure_analysis_and_safety_eval.ipynb)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -121,3 +122,39 @@ Read the primary post-training/safety literature and compare automated evaluatio
 
 Reference:
 https://arxiv.org/abs/2203.02155
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — turn safety into a test matrix
+
+Create a matrix:
+
+**failure family × severity × language × context × system layer**
+
+For every severe failure define:
+
+1. confirming experiment;
+2. immediate mitigation;
+3. regression test;
+4. release gate.
+
+### Robustness experiment
+
+Start with a clean evaluation set. Generate controlled perturbations:
+
+- typo;
+- paraphrase;
+- long context;
+- conflicting evidence;
+- tool argument corruption;
+- language switch.
+
+Report both score and degradation relative to clean inputs.
+
+### H100/production transfer
+
+Safety evaluation is not cheaper simply because inference is cheap. At production scale the suite becomes an operational workload with queueing, evaluator cost, and release cadence.
+

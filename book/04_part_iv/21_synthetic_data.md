@@ -109,3 +109,37 @@ Then determine the maximum synthetic fraction that preserves the target data-qua
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: synthetic data creates a teacher-defined distribution
+
+Synthetic examples inherit properties from:
+
+**teacher model + prompt/rubric + sampling + filtering**
+
+The resulting data can be diverse in surface form while still repeating the teacher's biases and errors.
+
+### Controlled experiment
+
+Compare:
+
+| Run | Source data | Synthetic fraction |
+|---|---|---:|
+| A | human/source | 0% |
+| B | human/source + synthetic | 25% |
+| C | human/source + synthetic | 50% |
+
+Hold training-token budget constant.
+
+Measure:
+
+- target quality;
+- failure diversity;
+- teacher-overlap;
+- robustness;
+- multilingual slices.
+
+### Failure mode
+
+Quality rises on teacher-like evaluations while independent evaluation does not improve.
+
+Interpret this as evidence that synthetic data may have narrowed the effective distribution.

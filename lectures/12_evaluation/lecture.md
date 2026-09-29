@@ -1,119 +1,77 @@
-# Lecture 12 — Evaluation
+# Lecture 12 — Evaluation That Can Block a Bad Model
 
-**Duration:** 25 minutes
+**Duration:** 25 minutes  
+**Lab:** [Evaluation Harness](../../notebooks/evaluation_harness.ipynb)
 
 ## Outcome
 
-Design an evaluation system that measures the real task, separates retrieval/model/system failures, quantifies uncertainty, and can block a bad release.
+Students design evaluation before training, partition failures by layer, and distinguish statistical evidence from release significance.
 
-## 0–4 — Start with a dangerous claim
+## 0–4 — The benchmark trap
 
-“Model B scores 3 points higher than Model A.”
+“Model B improved by 3 points.”
 
 Ask:
 
-**Higher on what?**
+- same examples?
+- same prompt?
+- same decoding?
+- same evaluator?
+- same contamination status?
 
-Then expose five possible hidden changes:
+## 4–9 — Requirement to metric
 
-- benchmark;
-- prompt;
-- decoding;
-- evaluator;
-- data distribution.
+Requirement:
 
-A score is meaningful only with a defined protocol.
+**correct + grounded + safe + fast**
 
-## 4–8 — Evaluation stack
-
-Draw:
-
-**benchmark design → automatic metrics → human evaluation → failure taxonomy → statistical analysis → release gates**
-
-Each answers a different question.
-
-## 8–13 — Build a benchmark from the requirement
-
-Example requirement:
-
-“Answer internal policy questions correctly, cite evidence, and abstain when evidence is insufficient.”
-
-| Requirement | Metric |
-|---|---|
-| correctness | task accuracy |
-| evidence | citation support / groundedness |
-| abstention | unsupported-answer rate |
-| language | per-language score |
-| latency | p95 |
-| cost | cost per successful task |
+Map each to measurable outputs.
 
 Then create slices:
 
-**language × difficulty × task type × safety/failure class**
+**language × difficulty × task × failure type**
 
-## 13–17 — Human and model judges
+## 9–14 — Automatic versus human evaluation
 
-| Approach | Strength | Risk |
+Compare:
+
+| Method | Main value | Limitation |
 |---|---|---|
-| automatic | cheap/fast | metric mismatch |
-| model-as-judge | scalable | judge bias |
-| human | richer | expensive |
-| hybrid | scalable + audited | operational complexity |
+| exact/automatic | cheap repeatability | narrow |
+| model judge | broad semantic evaluation | bias/calibration |
+| human | richer validity | expensive |
+| hybrid | scale + audit | more infrastructure |
 
-Calibrate judges on a human-labeled subset.
+## 14–19 — Laboratory
 
-## 17–20 — Statistical reasoning
+Build a small scorecard.
 
-When two models use the same test items, compare paired outcomes.
+The notebook should compute at least:
 
-For proportion p over n approximately independent examples:
+- aggregate score;
+- per-slice score;
+- failure count;
+- confidence interval or bootstrap interval where appropriate.
 
-SE ≈ sqrt[p(1-p)/n]
+## 19–22 — Break it
 
-For paired open-ended evaluation, bootstrap per-example differences.
+Create a benchmark with one easy slice dominating 80% of samples.
 
-Then separate:
+Observe how aggregate score hides rare failures.
 
-**statistical significance** from **engineering significance**.
+## 22–24 — Release gates
 
-A 0.3-point gain may be detectable but not worth extra cost.
+Define both:
 
-## 20–22 — Failure analysis
+- quality gates;
+- critical-failure blockers.
 
-Example:
-
-Wrong answer in RAG.
-
-Ask:
-
-1. Was correct evidence retrieved?
-2. Was evidence sufficient?
-3. Did model use it?
-4. Was citation correct?
-
-This maps evaluation to the next engineering action.
-
-## 22–24 — Release gate
-
-Example:
-
-| Metric | Gate |
-|---|---:|
-| target quality | ≥90 |
-| critical safety failures | 0 |
-| L3 language | ≥75 |
-| p95 latency | ≤2s |
-| cost/task | ≤0.20 |
-
-A candidate can improve overall score and still fail release.
+A model can improve aggregate quality and still fail release.
 
 ## 24–25 — Exit challenge
 
-Write:
+Write the minimum information needed for someone else to reproduce your reported score.
 
-**metric → sampling → uncertainty → failure taxonomy → release gate**
+## Research bridge
 
-### Research bridge
-
-Use the evaluation chapters and harness in the repository to build a reproducible scorecard.
-
+Connect your benchmark protocol to the evaluation chapters and preserve the exact evaluation code/configuration alongside results.

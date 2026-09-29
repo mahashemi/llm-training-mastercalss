@@ -107,3 +107,35 @@ Then determine whether the observed difference is large enough to warrant a foll
 ## Laboratory
 
 [lora_qlora_comparison.ipynb](../../notebooks/lora_qlora_comparison.ipynb)
+
+## Deepening: adapter variants change the update parameterization
+
+Different adapter methods impose different constraints on how the update is represented.
+
+The correct comparison is not:
+
+> “Which adapter is newest?”
+
+It is:
+
+**same task + same base + same data + comparable budget → which parameterization changes the measured frontier?**
+
+### Experiment
+
+Compare:
+
+- LoRA;
+- a second adapter parameterization;
+- optionally DoRA.
+
+Measure:
+
+**trainable parameters + peak memory + throughput + quality + checkpoint size**
+
+### Failure mode
+
+An adapter variant can improve a benchmark while adding implementation or serving complexity that the workload does not need.
+
+### Decision
+
+Keep the simplest update parameterization that closes the measured gap under the actual resource constraint.

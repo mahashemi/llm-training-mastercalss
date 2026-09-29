@@ -1,113 +1,84 @@
-# Lecture 10 — Inference Systems
+# Lecture 10 — Inference Systems: Prefill, Decode, KV Cache, and Serving
 
 **Duration:** 25 minutes  
-**Lab:** [inference_and_kv_cache.ipynb](../../notebooks/inference_and_kv_cache.ipynb)  
-**Primary anchor:** https://docs.vllm.ai/en/stable/
+**Lab:** [Inference and KV Cache](../../notebooks/inference_and_kv_cache.ipynb)  
+**Primary anchor:** vLLM — https://docs.vllm.ai/en/stable/
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students can separate prefill from decode, calculate why KV cache grows, and benchmark latency versus throughput.
 
-## Learning objectives
+## 0–4 — Why inference is not training
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
+Training sees the target sequence and can parallelize positions.
 
-## Core concepts
-
-1. **prefill/decode**
-2. **KV cache**
-3. **batching**
-4. **latency vs throughput**
-5. **quantization**
-6. **speculative decoding**
-
-## 25-minute script
-
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
-
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
-
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
-
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
-
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
-
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
-
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
-
-## Decision table
-
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
-
-## Critical thinking
-
-**Q1. What is the seductive but wrong shortcut?**
-
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
-
-**Q2. What evidence would justify spending more compute?**
-
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
-
-**Q3. What can invalidate the conclusion?**
-
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
-
-## Visuals to build
-
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
-
-Each visual should have a one-sentence “notice this” caption.
-
-## Lab requirements
-
-Run:
-
-notebooks/inference_and_kv_cache.ipynb
-
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
-
-## Research bridge
-
-Read the cited primary/official material after completing the lab.
+Generation creates one new token at a time.
 
 Ask:
 
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
+> What repeated computation can be avoided between generated tokens?
 
-## Deliverable
+KV cache.
 
-One-page experiment report:
+## 4–9 — Prefill versus decode
 
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
+**Prefill:** process the prompt and construct cache.
 
+**Decode:** generate one or a few new tokens repeatedly using cached K/V.
+
+Students identify:
+
+- compute-heavy prefill;
+- memory/latency-sensitive decode.
+
+## 9–14 — KV memory
+
+A simplified per-token cache estimate is proportional to:
+
+**2 × layers × KV heads × head dimension × bytes**
+
+Then multiply by:
+
+**sequence length × batch/concurrency**
+
+The exact implementation adds runtime effects, but the scaling relationship is the key.
+
+## 14–19 — Laboratory
+
+Vary:
+
+- prompt length;
+- batch/concurrency;
+- output length.
+
+Measure:
+
+| Condition | TTFT | ITL | peak memory | output tok/s |
+|---|---:|---:|---:|---:|
+| short | measure | measure | measure | measure |
+| medium | measure | measure | measure | measure |
+| long | measure | measure | measure | measure |
+
+## 19–22 — Break it
+
+Increase concurrency until memory or latency becomes unacceptable.
+
+Identify whether the failure is:
+
+**capacity → queueing → KV memory → scheduler**
+
+## 22–24 — Engineering decision
+
+An inference profile must state:
+
+**model + precision + context distribution + output distribution + concurrency + SLO**
+
+A single tokens/sec number is not a capacity plan.
+
+## 24–25 — Exit challenge
+
+Why can throughput rise while user-perceived latency gets worse?
+
+## Research bridge
+
+Compare a small-model local benchmark with a serving runtime such as vLLM and explain which system optimizations target memory, scheduling, or batching.

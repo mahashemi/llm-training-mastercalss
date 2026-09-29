@@ -133,3 +133,30 @@ Then identify the workload characteristics that explain the observed speedup.
 ## Reference
 
 https://docs.vllm.ai/en/stable/
+
+## Deepening: speculative decoding depends on acceptance
+
+Speculative decoding uses a faster draft model to propose tokens and a larger model to verify them.
+
+The useful intuition is:
+
+**draft speed × acceptance rate → potential decode acceleration**
+
+### Experiment
+
+Vary draft-model quality or proposal length.
+
+Measure:
+
+- acceptance rate;
+- end-to-end tokens/sec;
+- latency;
+- verifier work.
+
+### Failure mode
+
+A weak draft model proposes many tokens that are rejected, adding overhead without useful acceleration.
+
+### Decision
+
+Benchmark speculative decoding with the actual target workload; do not infer speedup from draft-model latency alone.

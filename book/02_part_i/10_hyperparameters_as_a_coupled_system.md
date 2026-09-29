@@ -102,3 +102,34 @@ Then identify which variable produced the largest useful improvement per unit re
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: hyperparameters form a resource-constrained system
+
+Learning rate, batch size, sequence length, optimizer, and training duration interact.
+
+### Effective batch tokens
+
+A useful accounting identity is:
+
+**global batch tokens ≈ micro-batch × gradient accumulation × sequence length × data-parallel world size**
+
+Changing sequence length therefore changes both memory and the number of tokens processed per optimizer update.
+
+### Experiment
+
+Hold total training tokens approximately constant and compare:
+
+| Run | micro-batch | accumulation | sequence | peak memory | tokens/sec |
+|---|---:|---:|---:|---:|---:|
+| A | 1 | 16 | 512 | measure | measure |
+| B | 1 | 4 | 2048 | measure | measure |
+
+Then ask whether equal token counts imply equal optimization behavior.
+
+### Failure mode
+
+Change learning rate while also changing batch size. You can no longer attribute the result to one variable.
+
+### Engineering lesson
+
+The correct unit of tuning is often a **configuration**, not a single hyperparameter.

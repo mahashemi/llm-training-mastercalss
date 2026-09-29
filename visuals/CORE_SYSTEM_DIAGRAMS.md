@@ -125,3 +125,44 @@ flowchart LR
     H --> I[Funding proposal]
     I --> J[Scale]
 ```
+
+## 9. Open-weight training ladder
+
+```mermaid
+flowchart LR
+    A[Tiny GPT<br/>CPU] --> B[Qwen3-0.6B<br/>Free Colab]
+    B --> C[1.7B / 4B<br/>Single GPU]
+    C --> D[7B / 8B<br/>1× H100]
+    D --> E[Qwen3.8-27B<br/>H100 / Multi-GPU]
+    E --> F[Distributed<br/>H100]
+    F --> G[Foundation Model<br/>Cluster]
+```
+
+**Notice this:** the workflow stays the same while model size, context, memory, throughput, and distributed complexity increase.
+
+## 10. Inference versus training memory
+
+```mermaid
+flowchart TD
+    A[Model weights] --> B{Workload}
+    B -->|Inference| C[Weights + KV cache + runtime]
+    B -->|Training| D[Weights + gradients + optimizer + activations + runtime]
+```
+
+**Notice this:** weight memory is not training memory.
+
+## 11. The experiment ladder
+
+```mermaid
+flowchart LR
+    A[Question] --> B[Prediction]
+    B --> C[Baseline]
+    C --> D[One intervention]
+    D --> E[Measure]
+    E --> F[Break]
+    F --> G[Diagnose]
+    G --> H[Decision]
+    H --> I[Next experiment]
+```
+
+**Notice this:** every expensive experiment should be the result of a cheaper uncertainty-reduction step.

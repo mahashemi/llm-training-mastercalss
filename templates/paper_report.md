@@ -1,4 +1,4 @@
-# Paper/Experiment Report
+# Paper / Experiment Report
 
 ## Title
 
@@ -8,17 +8,19 @@
 
 ## Prior work
 
-## Hypothesis
+## Research question
+
+## Falsifiable hypothesis
 
 ## Method
 
-## Data
+## Data and provenance
 
 ## Experimental setup
 
 ## Baselines
 
-## Metrics
+## Metrics and statistical protocol
 
 ## Results
 
@@ -26,12 +28,16 @@
 
 ## Failure analysis
 
+## Resource / compute accounting
+
 ## Limitations
 
 ## Reproducibility
 
-## Ethical / governance considerations
+## Governance / ethical considerations
 
 ## Discussion
+
+Separate measured findings from interpretation.
 
 ## References

@@ -106,3 +106,36 @@ Then improve the bottleneck and quantify end-to-end throughput gain.
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: the data pipeline has its own throughput budget
+
+Training can be viewed as:
+
+**storage → read → decode → transform → tokenize → batch → host memory → GPU**
+
+If the pipeline produces fewer tokens/sec than the training loop can consume, the accelerator waits.
+
+### Experiment
+
+Introduce an artificial data-loader delay.
+
+Measure:
+
+- GPU utilization;
+- data wait;
+- step time;
+- tokens/sec.
+
+Then remove the delay and compare.
+
+### Failure modes
+
+- corrupted shard;
+- slow storage;
+- tokenizer CPU bottleneck;
+- uneven worker distribution;
+- checkpoint contention.
+
+### Engineering lesson
+
+Profiling the model kernels without profiling the input pipeline is incomplete.

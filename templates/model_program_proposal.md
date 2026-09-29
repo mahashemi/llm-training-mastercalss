@@ -2,34 +2,37 @@
 
 ## 1. Executive summary
 
-## 2. Problem and users
+## 2. Mission, users, and capability gap
 
-## 3. Strategic rationale
+## 3. Strongest baseline
 
-## 4. Baseline
+Include existing models, prompting, RAG, and tools where relevant.
 
-### Existing systems
-### Measured gaps
+## 4. Evidence ladder
 
-## 5. Target capabilities
+Show:
 
-Define measurable success criteria.
+**baseline → cheap intervention → controlled training → scaling evidence → remaining gap**
+
+## 5. Target capabilities and release gates
+
+Each gate must have a measurable metric and threshold.
 
 ## 6. Data strategy
 
 ### Sources
-### Rights/provenance
-### Languages
-### Domains
-### Quality
+### Provenance/rights
+### Languages/domains
+### Quality/filtering/dedup
+### Tokenizer
 ### Versioning
 
 ## 7. Technical architecture
 
-### Tokenizer
 ### Base model / architecture
 ### Context
 ### Training objective
+### Update strategy
 ### Post-training
 ### Safety
 ### Serving
@@ -39,43 +42,39 @@ Define measurable success criteria.
 ### Pilot
 ### Ablations
 ### Evaluation
+### Failure analysis
 ### Kill criteria
 
 ## 9. Compute plan
 
-### Model size
-### Token budget
-### FLOPs
-### GPU hours
-### Cluster design
-### Storage
-### Networking
-### Utilization assumptions
+Derive:
+
+**model/data → FLOPs → measured throughput → wall time → GPU-hours → storage → networking → utilization**
 
 ## 10. People
 
-### Research
-### Data
-### Systems
-### Language/domain
-### Evaluation
-### Program management
+Research, data, systems, language/domain, evaluation, product/serving, security/governance, program management.
 
 ## 11. Timeline
 
-## 12. Budget
+## 12. TCO / budget
 
-Separate compute, infrastructure, data, personnel, evaluation, security/governance, and contingency.
+Separate:
 
-## 13. Risks
+- compute;
+- infrastructure;
+- data;
+- personnel;
+- evaluation;
+- security/governance;
+- operations;
+- contingency.
+
+## 13. Risks and fallback
 
 ## 14. Outputs
 
-### Model/checkpoints
-### Dataset artifacts
-### Benchmarks
-### Papers
-### Open-source artifacts
+Models/checkpoints, datasets, benchmarks, papers, code, documentation.
 
 ## 15. Funding request
 

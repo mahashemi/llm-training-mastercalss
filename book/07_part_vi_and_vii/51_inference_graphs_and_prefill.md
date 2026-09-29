@@ -128,3 +128,38 @@ Identify the point where more batching stops meeting the latency target.
 ## Reference
 
 https://docs.vllm.ai/en/stable/
+
+## Deepening: prefill and decode create different bottlenecks
+
+Prefill processes the prompt and creates the KV cache.
+
+Decode repeatedly generates new tokens using the cached state.
+
+### Workload decomposition
+
+For each request record:
+
+**prompt tokens + generated tokens + concurrency**
+
+Then measure:
+
+- TTFT;
+- inter-token latency;
+- output throughput;
+- peak memory.
+
+### Experiment
+
+Hold generated tokens constant and increase prompt length.
+
+Then hold prompt length constant and increase generated tokens.
+
+Explain why the two experiments stress the system differently.
+
+### Failure mode
+
+A serving system optimized for short prompts can degrade sharply for long-context workloads.
+
+### Decision
+
+Capacity planning should use a workload distribution, not one average prompt.

@@ -57,3 +57,46 @@ Compare:
 base vs tuned on target AND retained capabilities.
 
 Do not report only the best examples.
+
+
+## Step-by-step execution
+
+### Gate A — Dataset
+
+Verify chat-template compatibility and label semantics. Print representative examples after formatting, not only before formatting.
+
+### Gate B — Baseline
+
+Run the untuned base model on the held-out evaluation set. Save outputs.
+
+### Gate C — Smoke test
+
+Use a tiny subset and a few steps. Verify:
+
+- loss moves;
+- gradients are finite;
+- generation changes;
+- save/load works.
+
+### Gate D — Controlled run
+
+Freeze:
+
+- model revision;
+- tokenizer;
+- dataset split;
+- evaluation prompts.
+
+Sweep only the selected variable.
+
+### Data-quality experiment
+
+Compare a narrow repeated dataset with a broad representative dataset at similar training-token budgets. Evaluate both target and retained capability.
+
+### Acceptance report
+
+Include:
+
+**baseline → trained result → confidence/uncertainty → regressions → peak memory → throughput → checkpoint → failure analysis**
+
+A few attractive generations are not evidence of a successful SFT run.

@@ -103,3 +103,42 @@ Then connect the result to tokenizer fertility and total model size.
 ## Reference
 
 https://arxiv.org/abs/1706.03762
+
+## Deepening: embeddings determine the interface to the Transformer
+
+A token ID is an integer. The embedding table maps:
+
+**token ID → vector in R^d**
+
+For vocabulary V and model width d:
+
+**embedding parameters = V × d**
+
+This can be a major fraction of parameters in smaller models.
+
+### Worked calculation
+
+For V=32,000 and d=4,096:
+
+**32,000 × 4,096 ≈ 131M parameters**
+
+At BF16, that is roughly 262 MB of raw weights.
+
+### Experiment
+
+Compare two hypothetical vocabulary sizes while holding d fixed.
+
+Measure:
+
+- embedding parameters;
+- checkpoint size;
+- logits size;
+- tokens/sec.
+
+Then ask why larger vocabulary affects both input embeddings and the final output projection when weights are not tied.
+
+### Failure mode
+
+Randomly permute the embedding table.
+
+The model can still execute every tensor operation, but token semantics are destroyed. This demonstrates why numerical correctness of the graph is not equivalent to semantic correctness of the model.

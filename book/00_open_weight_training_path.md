@@ -206,3 +206,10 @@ A student has mastered the practical core when they can take an unfamiliar open-
 **model card → resource estimate → baseline → smoke test → training run → evaluation → checkpoint → failure analysis → next experiment**
 
 Later chapters add distributed systems, scaling laws, inference, economics, research, and program design.
+
+
+## Laboratory
+
+Use the [Open-Weight Model Audit](../notebooks/open_weight_model_audit.ipynb) before the SFT lab. The audit establishes the exact checkpoint, tokenizer, resource estimate, memory footprint, and baseline generation needed for a reproducible training experiment.
+
+Operational procedure: [Open-Weight Model Runbook](../runbooks/12_open_weight_model_runbook.md).

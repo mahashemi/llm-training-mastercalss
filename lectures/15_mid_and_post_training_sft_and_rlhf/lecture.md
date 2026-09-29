@@ -1,6 +1,7 @@
 # Lecture 15 — Mid and Post Training: SFT, RLHF, and the Post-Training Stack
 
 **Duration:** 25 minutes  
+**Lab:** [sft_with_a_small_open_model.ipynb](../../notebooks/sft_with_a_small_open_model.ipynb)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -153,3 +154,8 @@ Complete:
 
 - InstructGPT: https://arxiv.org/abs/2203.02155
 - DPO: https://arxiv.org/abs/2305.18290
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).

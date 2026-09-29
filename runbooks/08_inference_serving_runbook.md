@@ -46,3 +46,45 @@ Specify:
 - [ ] model/version pinning
 - [ ] monitoring
 - [ ] rollback path
+
+
+## Serving benchmark protocol
+
+### Workload definition
+
+Record distributions for:
+
+- prompt tokens;
+- output tokens;
+- concurrency;
+- streaming;
+- request arrival rate.
+
+### Benchmark matrix
+
+Run at least:
+
+**concurrency 1 / 4 / 16 / 32**
+
+and several prompt/output length combinations.
+
+### Metrics
+
+Measure:
+
+- TTFT p50/p95/p99;
+- inter-token latency p50/p95;
+- output tokens/sec;
+- peak memory;
+- GPU utilization;
+- queue time;
+- errors/timeouts;
+- cost per successful request.
+
+### Capacity
+
+A server is capacity-safe only at a configuration that meets the stated SLO. Higher throughput at unacceptable tail latency does not count as usable capacity.
+
+### Failure tests
+
+Run long-context, burst, restart, memory-pressure, and rolling-update tests before release.

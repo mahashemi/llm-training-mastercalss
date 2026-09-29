@@ -134,3 +134,38 @@ Then compare a cheap and a reliable policy.
 ## Reference
 
 Stanford CS336: https://cs336.stanford.edu/
+
+## Deepening: checkpointing is a reliability budget
+
+A checkpoint is not just a saved model.
+
+For a training job, recovery may require:
+
+**model + optimizer + scheduler + RNG + step + data-position metadata**
+
+### Recovery objective
+
+Define the maximum acceptable lost work:
+
+**RPO = training work that may be lost after a failure**
+
+Then select checkpoint frequency based on:
+
+- failure rate;
+- checkpoint duration;
+- storage bandwidth;
+- acceptable restart cost.
+
+### Experiment
+
+Interrupt a short training job.
+
+Verify:
+
+1. resume from the latest checkpoint;
+2. training state is restored;
+3. the next metrics are sensible.
+
+### Failure mode
+
+Saving only model weights can produce a checkpoint that loads but cannot faithfully resume optimization.

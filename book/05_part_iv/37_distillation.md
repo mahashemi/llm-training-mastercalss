@@ -131,3 +131,23 @@ Then identify where the student stops being economically attractive.
 
 Hinton et al., Distilling the Knowledge in a Neural Network:
 https://arxiv.org/abs/1503.02531
+
+## Deepening: distillation is an economic frontier
+
+A large teacher may be capable but expensive. A smaller student can trade quality for lower latency and memory.
+
+The objective is:
+
+**quality ↔ latency ↔ memory ↔ cost**
+
+### Experiment
+
+Compare at least two student capacities.
+
+Measure task quality, latency, peak memory, cost/request, and rare-case failures.
+
+### Failure mode
+
+Teacher agreement remains high while the student loses rare capabilities because the distillation data underrepresents them.
+
+Evaluate against the real workload, not only teacher imitation.

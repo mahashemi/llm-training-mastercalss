@@ -108,3 +108,38 @@ Then explain what changed in the computation graph.
 
 - Transformer: https://arxiv.org/abs/1706.03762
 - RMSNorm: https://arxiv.org/abs/1910.07467
+
+## Deepening: residual paths create a stable computation highway
+
+A residual update can be viewed as:
+
+**x_{l+1} = x_l + f(x_l)**
+
+The sublayer proposes a modification; the stream preserves the previous representation.
+
+Normalization controls the scale/distribution entering the sublayer.
+
+### Why scale matters
+
+If the hidden-state magnitude grows unpredictably across layers, optimization can become unstable.
+
+Students should inspect:
+
+- activation norms;
+- gradient norms;
+- loss.
+
+### Experiment
+
+Compare a normalized and deliberately mis-scaled tiny Transformer.
+
+Record:
+
+| Run | activation norm | gradient norm | loss stability |
+|---|---:|---:|---|
+| baseline | measure | measure | measure |
+| altered | measure | measure | measure |
+
+### Engineering lesson
+
+Normalization is not merely a convergence trick. It changes the numerical operating regime of the entire network.

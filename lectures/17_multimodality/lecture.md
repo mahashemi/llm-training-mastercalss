@@ -1,88 +1,88 @@
-# Lecture 17 — Multimodality
+# Lecture 17 — Multimodality: Turning Images Into Model Inputs
 
 **Duration:** 25 minutes  
-**Primary anchor:** https://cs336.stanford.edu/
+**Lab:** [Multimodal Alignment Map](../../notebooks/multimodal_alignment_map.ipynb)  
+**Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Outcome
 
-## Teaching sequence
+Students can explain how a non-text modality becomes usable by a language model and calculate the resulting token/resource budget.
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+## 0–4 — The representation problem
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+A language model receives token embeddings.
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+An image is not a token sequence.
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+Ask:
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+> What representation must exist before a language model can reason over an image?
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+Introduce the modality encoder/projector path.
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+## 4–9 — Typical architecture
 
-## Core concepts
-1. vision-language interfaces
-2. modality encoders
-3. token budgets
-4. alignment
-5. multimodal evaluation
+Draw:
 
-## Decision table
+**image → vision encoder → visual representations → projector/resampler → language-model token space → decoder**
 
-| Constraint | First thing to investigate |
-|---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+Then compare against:
 
-## Critical-thinking questions
+**text → tokenizer → token embeddings**
 
-**Q1. What is the tempting shortcut?**
+The alignment problem is connecting the two representation spaces.
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+## 9–14 — Token budget is a systems budget
 
-**Q2. What should be recorded?**
+Suppose an image becomes V visual tokens.
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+For B examples and context length L:
 
-**Q3. When should we stop scaling?**
+total positions ≈ text tokens + V
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+Increasing visual tokens can affect:
 
-## Visuals
+- attention memory;
+- context occupancy;
+- throughput;
+- training cost.
 
-Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
+The “resolution setting” is therefore not purely a quality parameter.
 
-## Practical work
+## 14–19 — Laboratory
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+Build a small model-flow map and vary visual token count.
 
-## Research connection
+Record:
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+| Visual tokens | total context | estimated attention memory | observed runtime |
+|---:|---:|---:|---:|
+| low | measure | measure | measure |
+| medium | measure | measure | measure |
+| high | measure | measure | measure |
+
+## 19–22 — Break it
+
+Use an input whose image encoding consumes most of the context window.
+
+Observe what happens to available textual context.
+
+Then ask whether the failure is:
+
+**representation → context → memory → quality**
+
+## 22–24 — Engineering decision
+
+A multimodal model is a complete system:
+
+**modality encoder + alignment + language model + data + objective + evaluation**
+
+Do not compare multimodal systems on language-model parameter count alone.
+
+## 24–25 — Exit challenge
+
+Explain why “more image tokens” can simultaneously help quality and hurt latency.
+
+## Research bridge
+
+Read one modern vision-language model architecture and identify the encoder, alignment mechanism, language backbone, and training stages.

@@ -1,88 +1,94 @@
 # Lecture 16 — Reinforcement Learning with Verifiable Rewards
 
 **Duration:** 25 minutes  
-**Primary anchor:** https://cs336.stanford.edu/
+**Lab:** [RLVR Toy Experiment](../../notebooks/rlvr_toy_experiment.ipynb)  
+**Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
-## Learning objectives
-- Explain the central mechanism in plain language.
-- Derive the key quantities and track dimensions.
-- Implement or inspect the mechanism in the practical lab.
-- Predict memory, compute, quality, or failure behavior.
-- Decide when the method is justified.
-- Propose a research experiment.
+## Outcome
 
-## Teaching sequence
+Students can explain why verifiable rewards change the reinforcement-learning problem, build a simple verifier, and diagnose reward hacking.
 
-### 0–3 — Problem first
-State a realistic problem. Ask students for a prediction before introducing terminology.
+## 0–4 — Start with an objective we can check
 
-### 3–8 — Intuition
-Use a small visual example. Show what information moves where and what the method changes.
+Consider a math problem with a known answer.
 
-### 8–14 — Mathematics
-Write the governing equations. Define all symbols and assumptions. Highlight approximations that will matter at scale.
+Instead of asking a human to score every response, create a verifier:
 
-### 14–19 — Implementation
-Run the associated notebook. Inspect shapes, intermediate values, timing, and metrics. Students predict results before execution.
+**response → parser/verifier → reward**
 
-### 19–22 — Break it
-Change exactly one assumption. Classify the resulting failure as statistical, numerical, algorithmic, or systems-level.
+Ask:
 
-### 22–24 — Engineering judgment
-Compare choices under quality, memory, throughput/latency, reliability, privacy, and cost.
+> What can go wrong if the verifier is imperfect?
 
-### 24–25 — Exit challenge
-Explain the concept without the main jargon word. State what evidence would justify a more expensive next step.
+This frames RLVR as an objective-design problem.
 
-## Core concepts
-1. RLVR
-2. reward functions
-3. math/code verification
-4. process versus outcome signals
-5. reward hacking
+## 4–9 — Outcome versus process rewards
 
-## Decision table
+An outcome reward scores the final answer.
 
-| Constraint | First thing to investigate |
-|---|---|
-| quality gap | data quality, objective, capacity, evaluation validity |
-| memory gap | precision, activations, optimizer state, sharding, PEFT |
-| speed gap | profiling first: compute-bound, memory-bound, or communication-bound |
-| data gap | provenance, filtering, deduplication, sampling, domain coverage |
-| evidence gap | improve the evaluation set and baseline before scaling |
+A process reward scores intermediate reasoning/actions.
 
-## Critical-thinking questions
+Discuss the trade-off:
 
-**Q1. What is the tempting shortcut?**
+| Signal | Advantage | Risk |
+|---|---|---|
+| outcome | simple, objective when verifiable | sparse |
+| process | denser feedback | evaluator errors / reward gaming |
 
-**Answer:** Changing many variables simultaneously and then attributing the observed result to one technique.
+## 9–14 — Policy update intuition
 
-**Q2. What should be recorded?**
+The policy generates candidate outputs.
 
-**Answer:** Code version, data/model versions, configuration, environment, hardware, evaluation protocol, results, and limitations.
+The training system uses rewards to change the probability of future outputs.
 
-**Q3. When should we stop scaling?**
+Students should distinguish:
 
-**Answer:** When the marginal experiment no longer reduces an important uncertainty or improves the target objective enough to justify its resource cost.
+**policy model → sampled responses → verifier → reward → optimization**
 
-## Visuals
+from ordinary supervised labels.
 
-Create:
-1. mechanism/data-flow diagram;
-2. tensor/system diagram;
-3. resource diagram;
-4. decision tree.
+## 14–19 — Laboratory
 
-## Practical work
+Run a toy task with a deterministic verifier.
 
-Use the linked course notebook for the hands-on experiment. Produce:
-- a baseline;
-- an intervention;
-- a quantitative comparison;
-- one failure case;
-- a short interpretation;
-- a next experiment.
+Measure:
 
-## Research connection
+- reward;
+- accuracy;
+- invalid outputs;
+- verifier rejection rate.
 
-Read the primary anchor and classify statements into **measured evidence, method choice, heuristic, and inference**.
+Then compare two reward functions:
+
+1. exact correctness;
+2. a flawed heuristic that rewards formatting.
+
+## 19–22 — Break it: reward hacking
+
+Construct a response that satisfies the heuristic but not the real objective.
+
+Ask:
+
+> Did optimization fail, or did our reward function fail?
+
+The answer is often the latter.
+
+## 22–24 — Engineering decision
+
+RLVR is attractive when:
+
+- a reliable verifier exists;
+- the target behavior is hard to supervise directly;
+- the cost of online/rollout training is justified.
+
+Without a trustworthy verifier, a sophisticated RL loop can optimize the wrong thing very efficiently.
+
+## 24–25 — Exit challenge
+
+Write:
+
+**task → verifier → reward → failure mode → protected metric**
+
+## Research bridge
+
+Compare the toy verifier with a real mathematical/code verifier and identify which assumptions become fragile at scale.

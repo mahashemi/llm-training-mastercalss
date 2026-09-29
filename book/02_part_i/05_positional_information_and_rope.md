@@ -101,3 +101,39 @@ Then compare short vs long-context attention on a toy retrieval task.
 
 - RoFormer: https://arxiv.org/abs/2104.09864
 - Transformer: https://arxiv.org/abs/1706.03762
+
+## Deepening: position changes the geometry, not just the input
+
+Without positional information, a self-attention layer sees a set of token representations with no inherent order.
+
+RoPE encodes position by rotating query/key coordinates. The key engineering consequence is that relative positional relationships affect attention scores.
+
+### Thought experiment
+
+Take the same tokens:
+
+**A B C**
+
+and:
+
+**C B A**
+
+Without positional information, permutation can be much harder to distinguish.
+
+With positional information, the model can condition attention on order.
+
+### Resource experiment
+
+Hold model size fixed and increase context length.
+
+Measure:
+
+- attention memory;
+- latency;
+- KV-cache growth.
+
+The positional mechanism itself does not remove the context-length resource cost.
+
+### Failure mode
+
+Use a context length outside the model's intended positional regime. Distinguish a representation/extrapolation failure from an OOM or kernel failure.

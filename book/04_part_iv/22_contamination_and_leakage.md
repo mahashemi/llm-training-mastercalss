@@ -95,3 +95,27 @@ Explain which split supports which generalization claim.
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: contamination is an evaluation-validity problem
+
+A benchmark item appearing in training, or through a near-duplicate, can inflate the apparent evaluation result.
+
+### Contamination matrix
+
+Check:
+
+- exact overlap;
+- normalized overlap;
+- near-duplicate overlap;
+- temporal overlap;
+- generated/synthetic leakage.
+
+### Experiment
+
+Create clean and contaminated evaluation splits. Run the same model on both and measure the score difference.
+
+Interpret the difference as an evaluation-validity effect, not a capability gain.
+
+### Engineering rule
+
+Protect evaluation data before model comparison whenever practical. A high score on contaminated data is not evidence of generalization.

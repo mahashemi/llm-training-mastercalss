@@ -131,3 +131,40 @@ Then identify the three sources that deserve the most acquisition/processing eff
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: corpus composition is a model hyperparameter
+
+A pretraining corpus should be specified by:
+
+**source family × language × domain × time × quality × rights**
+
+### Example composition
+
+Suppose a corpus contains:
+
+- 70% general web;
+- 20% books/curated text;
+- 10% target domain.
+
+That composition is not merely descriptive. It determines the probability that a training token comes from each distribution.
+
+### Experiment
+
+Construct two equal-token mixtures with different source proportions.
+
+Hold model, optimizer, and total tokens constant.
+
+Measure:
+
+- validation loss;
+- domain slices;
+- language slices;
+- memorization/contamination indicators.
+
+### Failure mode
+
+A large source can dominate the mixture even when it is not the highest-value source.
+
+### Decision
+
+Report both raw corpus size and the **effective training mixture actually sampled**.

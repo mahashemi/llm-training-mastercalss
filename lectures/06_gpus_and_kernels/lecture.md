@@ -1,113 +1,88 @@
 # Lecture 06 — GPUs and Kernels
 
 **Duration:** 25 minutes  
-**Lab:** [gpu_kernel_benchmark.ipynb](../../notebooks/gpu_kernel_benchmark.ipynb)  
-**Primary anchor:** https://cs336.stanford.edu/
+**Lab:** [GPU Kernel Benchmark](../../notebooks/gpu_kernel_benchmark.ipynb)  
+**Primary anchor:** NVIDIA/H100 documentation + Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students can explain why two mathematically equivalent implementations can have very different runtime.
 
-## Learning objectives
+## 0–4 — The benchmark surprise
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
-
-## Core concepts
-
-1. **GPU memory hierarchy**
-2. **matrix multiplication**
-3. **Tensor Cores**
-4. **BF16/FP8**
-5. **kernel launch overhead**
-6. **throughput**
-
-## 25-minute script
-
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
-
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
-
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
-
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
-
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
-
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
-
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
-
-## Decision table
-
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
-
-## Critical thinking
-
-**Q1. What is the seductive but wrong shortcut?**
-
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
-
-**Q2. What evidence would justify spending more compute?**
-
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
-
-**Q3. What can invalidate the conclusion?**
-
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
-
-## Visuals to build
-
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
-
-Each visual should have a one-sentence “notice this” caption.
-
-## Lab requirements
-
-Run:
-
-notebooks/gpu_kernel_benchmark.ipynb
-
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
-
-## Research bridge
-
-Read the cited primary/official material after completing the lab.
+Run one matrix multiply two ways.
 
 Ask:
 
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
+> If the math is identical, why isn't the runtime identical?
 
-## Deliverable
+This opens the hardware discussion.
 
-One-page experiment report:
+## 4–9 — Memory hierarchy
 
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
+Walk through:
 
+**HBM → cache/shared memory/registers**
+
+Explain that kernels spend time moving data as well as performing arithmetic.
+
+Introduce:
+
+- memory bandwidth;
+- compute throughput;
+- kernel launch overhead;
+- occupancy.
+
+## 9–14 — Tensor Cores and precision
+
+Compare:
+
+**FP32 vs BF16 vs FP16 vs FP8**
+
+without presenting precision as “more bits = better.”
+
+Discuss:
+
+- representational range;
+- numerical stability;
+- hardware acceleration;
+- accumulation precision.
+
+## 14–19 — Profiling before optimization
+
+Students run a benchmark and collect:
+
+- wall-clock time;
+- achieved throughput;
+- memory utilization if available;
+- repeated-run variance.
+
+Then ask whether they are compute-bound or memory-bound.
+
+## 19–22 — Laboratory break
+
+Make matrix dimensions unfriendly to hardware alignment.
+
+Compare with dimensions that map cleanly to common accelerator tile sizes.
+
+Then discuss why kernels may change behavior abruptly.
+
+## 22–24 — H100 bridge
+
+The H100 is not just “a faster GPU.”
+
+The relevant question is:
+
+> How does this workload use its compute units, memory system, precision modes, and interconnect?
+
+This is why the course measures the workload rather than quoting peak specifications.
+
+## 24–25 — Exit challenge
+
+Write:
+
+**kernel → bottleneck → measurement → optimization → regression test**
+
+## Research bridge
+
+Students should inspect one profiler trace and identify the top two contributors to step time.

@@ -1,6 +1,7 @@
 # Lecture 22 — API vs RAG vs Tools vs Training
 
 **Duration:** 25 minutes  
+**Lab:** [build_vs_buy_decision_lab.ipynb](../../notebooks/build_vs_buy_decision_lab.ipynb)
 **Primary goal:** Diagnose the bottleneck before choosing an architecture.
 
 ## Learning outcome
@@ -163,3 +164,36 @@ Write one sentence for each:
 Create an architecture decision record:
 
 **requirement → failure class → baseline → intervention → experiment → quality → latency → cost → risk → next decision**
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — solve the smallest layer first
+
+Take this requirement:
+
+**“Answer current policy questions, return valid JSON, and book appointments.”**
+
+Decompose:
+
+| Requirement | Layer | Experiment |
+|---|---|---|
+| current policy | knowledge | RAG retrieval/oracle-context test |
+| valid JSON | behavior/interface | structured output + SFT pilot |
+| book appointment | action | tool-selection/execution test |
+| poor language representation | representation | continued-pretraining pilot |
+
+### Cost comparison exercise
+
+For each architecture estimate:
+
+**quality → latency → successful tasks → recurring cost → one-time cost → engineering burden**
+
+Students must identify the assumption with the greatest sensitivity.
+
+### Training escalation
+
+Only escalate to weight updates when the simpler system layer cannot explain or solve the measured failure.
+

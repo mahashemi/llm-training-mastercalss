@@ -68,3 +68,38 @@ Freeze:
 ## Acceptance criteria
 
 A dataset is not “ready” because it is large. It is ready when its provenance, composition, quality controls, version, and evaluation implications are understood.
+
+
+## Operational worksheet
+
+Before processing, create a manifest with one row per source:
+
+`source_id, uri/location, acquisition_date, language, domain, rights_basis, raw_checksum, parser_version`
+
+After each transformation, write a new versioned artifact rather than silently overwriting the previous stage.
+
+### Required measurements
+
+| Stage | Documents | Tokens | Languages | Duplicate rate | Rejection rate |
+|---|---:|---:|---|---:|---:|
+| raw | measure | measure | measure | — | — |
+| parsed | measure | measure | measure | measure | measure |
+| filtered | measure | measure | measure | measure | measure |
+| deduped | measure | measure | measure | measure | measure |
+| final sampled | measure | measure | measure | measure | measure |
+
+### Sampling audit
+
+Plot source proportions before and after temperature/mixture sampling. Report whether low-resource sources gained exposure and whether high-resource sources lost too much coverage.
+
+### Quality audit
+
+Keep a fixed audit set across versions. Review both retained and rejected samples. A filter is not validated merely because it removes more content.
+
+### Exit artifact
+
+Produce:
+
+**dataset card + manifest + transformation statistics + rights record + quality audit + contamination report + version ID**
+
+Do not begin expensive training without these artifacts.

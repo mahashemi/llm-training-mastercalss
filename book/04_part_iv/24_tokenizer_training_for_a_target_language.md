@@ -121,3 +121,32 @@ Then estimate which tokenizer gives the best quality/resource trade-off.
 
 - SentencePiece: https://arxiv.org/abs/1808.06226
 - Stanford CS336: https://cs336.stanford.edu/
+
+## Deepening: tokenizer design must be evaluated per language
+
+For a multilingual target, measure:
+
+**fertility = produced tokens / chosen text unit**
+
+Then connect it to sequence expansion and compute.
+
+### Controlled study
+
+Compare a general-purpose tokenizer with a target-enriched tokenizer.
+
+| Metric | General | Target-enriched |
+|---|---:|---:|
+| tokens/character | measure | measure |
+| p95 sequence length | measure | measure |
+| vocabulary utilization | measure | measure |
+| corpus token count | measure | measure |
+
+### Failure mode
+
+A tokenizer can improve the target language while harming high-resource languages.
+
+Report the trade-off.
+
+### Decision
+
+Tokenizer choice should come from representative target corpora and downstream resource implications.

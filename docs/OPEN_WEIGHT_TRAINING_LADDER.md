@@ -372,3 +372,8 @@ and produce:
 10. next-scale plan.
 
 That is the practical meaning of LLM training.
+
+
+## Canonical executable resources
+
+Start with [Open-Weight Model Audit](../notebooks/open_weight_model_audit.ipynb), then use [Qwen3-0.6B SFT](../notebooks/sft_with_a_small_open_model.ipynb) and [LoRA / QLoRA](../notebooks/lora_qlora_comparison.ipynb). The operational procedure is [Open-Weight Model Runbook](../runbooks/12_open_weight_model_runbook.md).
