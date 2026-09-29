@@ -1,0 +1,152 @@
+{
+  "generated_on": "2026-09-29",
+  "policy": "Do not vendor third-party corpora into this repository. Stream/sample from the source host and record revision/version, split, acquisition date, license/access basis and preprocessing commit.",
+  "datasets": [
+    {
+      "id": "HuggingFaceFW/fineweb",
+      "host": "huggingface",
+      "config": "sample-10BT",
+      "split": "train",
+      "languages": [
+        "en"
+      ],
+      "approx_scale": ">18.5T tokens (full); sample-10BT ~10B GPT-2 tokens",
+      "license": "ODC-BY 1.0",
+      "role": "general_web",
+      "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb"
+    },
+    {
+      "id": "HuggingFaceFW/fineweb-edu",
+      "host": "huggingface",
+      "config": "sample-10BT",
+      "split": "train",
+      "languages": [
+        "en"
+      ],
+      "approx_scale": "1.3T tokens (FineWeb-Edu v1)",
+      "license": "ODC-BY 1.0",
+      "role": "educational_web",
+      "url": "https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu"
+    },
+    {
+      "id": "allenai/dolma",
+      "host": "huggingface",
+      "config": "v1_6-sample",
+      "split": "train",
+      "languages": [
+        "en"
+      ],
+      "approx_scale": "Dolma v1.7: 4.5 TB gzip; v1.6-sample: ~10B tokens",
+      "license": "ODC-BY",
+      "role": "open_model_corpus",
+      "url": "https://huggingface.co/datasets/allenai/dolma"
+    },
+    {
+      "id": "uonlp/CulturaX",
+      "host": "huggingface",
+      "config": "en",
+      "split": "train",
+      "languages": [
+        "167-language family"
+      ],
+      "approx_scale": "6.3T tokens across 167 languages",
+      "license": "Gated; inspect current access conditions",
+      "role": "multilingual_web",
+      "url": "https://huggingface.co/datasets/uonlp/CulturaX"
+    },
+    {
+      "id": "wikimedia/wikipedia",
+      "host": "huggingface",
+      "config": "20231101.en",
+      "split": "train",
+      "languages": [
+        "en (config can be changed)"
+      ],
+      "approx_scale": "Millions of article records across language configurations",
+      "license": "CC BY-SA 3.0 / GFDL",
+      "role": "reference_corpus",
+      "url": "https://huggingface.co/datasets/wikimedia/wikipedia"
+    },
+    {
+      "id": "open-web-math/open-web-math",
+      "host": "huggingface",
+      "config": null,
+      "split": "train",
+      "languages": [
+        "en"
+      ],
+      "approx_scale": "6.315M rows / 14.7B tokens",
+      "license": "ODC-BY 1.0 + Common Crawl terms",
+      "role": "math_domain",
+      "url": "https://huggingface.co/datasets/open-web-math/open-web-math"
+    },
+    {
+      "id": "CohereLabs/aya_dataset",
+      "host": "huggingface",
+      "config": null,
+      "split": "train",
+      "languages": [
+        "65 languages / 71 including dialects & scripts"
+      ],
+      "approx_scale": "204k human-annotated prompt-completion pairs",
+      "license": "Apache-2.0",
+      "role": "multilingual_instruction",
+      "url": "https://huggingface.co/datasets/CohereLabs/aya_dataset"
+    },
+    {
+      "id": "open-r1/OpenR1-Math-220k",
+      "host": "huggingface",
+      "config": "default",
+      "split": "train",
+      "languages": [
+        "en"
+      ],
+      "approx_scale": "default ~94k; extended ~131k; multiple reasoning traces",
+      "license": "Apache-2.0",
+      "role": "reasoning_sft",
+      "url": "https://huggingface.co/datasets/open-r1/OpenR1-Math-220k"
+    },
+    {
+      "id": "ahmedmohsen2002/tashkeela-clean-arabic-diacritized-corpus",
+      "host": "kaggle",
+      "config": null,
+      "split": null,
+      "languages": [
+        "Arabic MSA",
+        "Classical Arabic"
+      ],
+      "approx_scale": "~2.6M sentences; 90/5/5 train/validation/test",
+      "license": "GPL-2",
+      "role": "arabic_text",
+      "url": "https://www.kaggle.com/datasets/ahmedmohsen2002/tashkeela-clean-arabic-diacritized-corpus"
+    },
+    {
+      "id": "zainabnoor02/rufnd-cleaned-testtrain-data-files",
+      "host": "kaggle",
+      "config": null,
+      "split": null,
+      "languages": [
+        "Roman Urdu"
+      ],
+      "approx_scale": "3,500 items; 2,450 train / 1,050 test",
+      "license": "CC BY 4.0",
+      "role": "roman_urdu_domain",
+      "url": "https://www.kaggle.com/datasets/zainabnoor02/rufnd-cleaned-testtrain-data-files"
+    },
+    {
+      "id": "ashishk1331/gita-verses",
+      "host": "kaggle",
+      "config": null,
+      "split": null,
+      "languages": [
+        "Sanskrit",
+        "Hindi",
+        "English"
+      ],
+      "approx_scale": "3 text files; ~580 KB dataset page listing",
+      "license": "Community Data License Agreement — Sharing 1.0",
+      "role": "multilingual_alignment",
+      "url": "https://www.kaggle.com/datasets/ashishk1331/gita-verses"
+    }
+  ]
+}
