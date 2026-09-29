@@ -69,3 +69,73 @@ Stop or investigate when:
 ## Post-run
 
 Archive configuration, logs, metrics, checkpoints, data version, code commit, environment, and failure analysis.
+
+
+## Detailed launch protocol
+
+### Phase 0 — Environment
+
+Capture:
+
+- repository commit;
+- model/config revision;
+- tokenizer revision;
+- framework versions;
+- CUDA/runtime version;
+- GPU type/count;
+- interconnect if distributed.
+
+### Phase 1 — Correctness
+
+Run:
+
+1. one tokenizer batch;
+2. one forward pass;
+3. one backward pass;
+4. one optimizer update;
+5. one checkpoint save;
+6. one checkpoint restore.
+
+Then overfit a tiny dataset.
+
+### Phase 2 — Throughput
+
+Run a short representative benchmark. Measure:
+
+**tokens/sec, step time, peak memory, input-pipeline time, checkpoint time**
+
+Record both warm and steady-state performance.
+
+### Phase 3 — Stability
+
+Run long enough to inspect:
+
+- loss curve;
+- gradient norm;
+- LR;
+- validation loss;
+- NaN/Inf events;
+- restart behavior.
+
+### Phase 4 — Scale
+
+Only after Phase 3:
+
+- increase batch;
+- increase GPUs;
+- increase sequence length;
+- increase model size.
+
+Change one major variable at a time.
+
+### Checkpoint rule
+
+Define a recovery objective before launch:
+
+**RPO = maximum acceptable lost training work**
+
+Checkpoint interval must be derived from RPO, checkpoint duration, and failure frequency.
+
+### Post-run
+
+Archive the exact configuration and a machine-readable experiment summary. A checkpoint without its training metadata is an incomplete research artifact.
