@@ -51,3 +51,17 @@
 ## Maintenance rule
 
 Model releases, library APIs, hardware specifications, and prices change quickly. Date time-sensitive claims, pin model/software revisions for experiments, and verify current official documentation before using a reference operationally.
+
+## Real datasets used by the course
+
+- FineWeb: https://huggingface.co/datasets/HuggingFaceFW/fineweb
+- FineWeb-Edu: https://huggingface.co/datasets/HuggingFaceFW/fineweb-edu
+- Dolma: https://huggingface.co/datasets/allenai/dolma
+- CulturaX: https://huggingface.co/datasets/uonlp/CulturaX
+- Wikimedia Wikipedia: https://huggingface.co/datasets/wikimedia/wikipedia
+- OpenWebMath: https://huggingface.co/datasets/open-web-math/open-web-math
+- Aya Dataset: https://huggingface.co/datasets/CohereLabs/aya_dataset
+- OpenR1-Math-220k: https://huggingface.co/datasets/open-r1/OpenR1-Math-220k
+- Tashkeela Clean Arabic Diacritized Corpus: https://www.kaggle.com/datasets/ahmedmohsen2002/tashkeela-clean-arabic-diacritized-corpus
+- RUFND Cleaned test/train: https://www.kaggle.com/datasets/zainabnoor02/rufnd-cleaned-testtrain-data-files
+- Gita Verses: https://www.kaggle.com/datasets/ashishk1331/gita-verses
