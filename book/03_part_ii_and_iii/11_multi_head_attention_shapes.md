@@ -145,3 +145,46 @@ Then vary T from 128 to 1024 and measure memory/time.
 ## Reference
 
 https://arxiv.org/abs/1706.03762
+
+## Deepening: shape algebra should become automatic
+
+For hidden size d_model and H heads:
+
+**head_dim = d_model / H**
+
+Then:
+
+**Q, K, V ≈ B × H × L × head_dim**
+
+and attention scores:
+
+**B × H × L × L**
+
+### Worked configuration
+
+For:
+
+- B=2;
+- L=512;
+- d_model=1024;
+- H=16;
+
+head_dim = 64.
+
+Students should calculate the number of score elements before running code.
+
+### Experiment
+
+Vary H while holding d_model fixed.
+
+Measure:
+
+- head dimension;
+- attention tensor sizes;
+- runtime.
+
+The model may keep a similar parameter budget while changing attention geometry.
+
+### Failure mode
+
+Choose H that does not divide d_model. Explain why the architecture specification becomes invalid even though the requested numbers look reasonable.
