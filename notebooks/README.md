@@ -1,6 +1,6 @@
 # Notebook Laboratory Map
 
-**27 notebooks in the current course build.**
+**28 notebooks in the current course build.**
 
 Every numbered lecture has a companion laboratory. Some textbook chapters reuse a lab because one executable experiment can teach several tightly related concepts.
 
