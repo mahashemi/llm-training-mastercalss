@@ -53,3 +53,50 @@ If scaling is poor:
 5. inspect kernel efficiency;
 6. inspect topology;
 7. only then add hardware.
+
+
+## Distributed launch checklist
+
+### Topology
+
+Record:
+
+- GPU count/type;
+- nodes;
+- network/interconnect;
+- rank topology;
+- storage path.
+
+### Correctness before scale
+
+Verify single-GPU equivalence first.
+
+Then validate distributed loss/gradient behavior on a tiny fixed batch.
+
+### Scaling benchmark
+
+Run:
+
+1 GPU → 2 → 4 → 8
+
+Measure:
+
+**tokens/sec, scaling efficiency, communication time, peak memory, input wait**
+
+### Sharding decision
+
+Use sharding when memory is the limiting resource. Use data parallelism when the model and state fit and throughput is the primary objective.
+
+### Failure/recovery test
+
+Kill one worker during a short controlled run. Verify the job can recover from the latest valid checkpoint.
+
+### Acceptance
+
+The distributed system is ready only when:
+
+- scaling is measured;
+- communication is understood;
+- checkpoint recovery is proven;
+- evaluation is unchanged;
+- the resource gain justifies the complexity.
