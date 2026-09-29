@@ -1,6 +1,7 @@
 # Lecture 21 — Safety, Robustness, and Failure Analysis
 
 **Duration:** 25 minutes  
+**Lab:** [failure_analysis_and_safety_eval.ipynb](../../notebooks/failure_analysis_and_safety_eval.ipynb)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -121,3 +122,8 @@ Read the primary post-training/safety literature and compare automated evaluatio
 
 Reference:
 https://arxiv.org/abs/2203.02155
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
