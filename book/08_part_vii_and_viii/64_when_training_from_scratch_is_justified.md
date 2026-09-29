@@ -187,3 +187,37 @@ Do not use “we want independence” as the only argument.
 - Stanford CS336: https://cs336.stanford.edu/
 - OLMo 2: https://allenai.org/olmo2
 - Chinchilla: https://arxiv.org/abs/2203.15556
+
+## Deepening: evidence before scale
+
+Use an explicit escalation gate:
+
+| Gate | Required evidence |
+|---|---|
+| 1 | best existing-model baseline |
+| 2 | RAG/tool baseline where applicable |
+| 3 | SFT/PEFT experiment |
+| 4 | continued-pretraining pilot when representation is suspected |
+| 5 | tokenizer/data study |
+| 6 | scaling/resource study |
+| 7 | distributed throughput and recovery test |
+| 8 | full program proposal |
+
+A proposal should identify what evidence would cause the team to stop.
+
+### Student exercise
+
+Given a proposed 30B foundation model, identify:
+
+- capability gap;
+- existing-model baseline;
+- smallest experiment isolating the gap;
+- resource estimate;
+- success criterion;
+- kill criterion.
+
+The lesson is not “never train from scratch.”
+
+It is:
+
+> **Training from scratch should be the conclusion of an evidence chain, not the starting assumption.**
