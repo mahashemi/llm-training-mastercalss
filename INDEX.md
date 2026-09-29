@@ -5,6 +5,8 @@
 - [START_HERE.md](START_HERE.md)
 - [Course Map](COURSE_MAP.md)
 - [Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md)
+- [Qwen3.8-27B + H100 Case Study](docs/OPEN_WEIGHT_QWEN_H100_CASE_STUDY.md)
+- [Curriculum Integrity Report](docs/CURRICULUM_INTEGRITY_REPORT.md)
 - [Book ↔ Lecture ↔ Laboratory Map](BOOK_LAB_MAP.md)
 - [Book Table of Contents](BOOK_TOC.md)
 - [Lecture Index](lectures/LECTURE_INDEX.md)
@@ -25,6 +27,7 @@
 - [Funding Runbook](runbooks/09_funding_and_program_proposal_runbook.md)
 - [Failure Triage](runbooks/10_training_failure_triage.md)
 - [Model Release](runbooks/11_model_release_runbook.md)
+- [Open-Weight Model Runbook](runbooks/12_open_weight_model_runbook.md)
 - [Model Selection](runbooks/MODEL_SELECTION_RUNBOOK.md)
 - [Pretraining Decision](runbooks/PRETRAINING_DECISION_RUNBOOK.md)
 
