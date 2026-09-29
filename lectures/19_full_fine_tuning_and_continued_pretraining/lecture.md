@@ -1,6 +1,7 @@
 # Lecture 19 — Full Fine-Tuning and Continued Pretraining
 
 **Duration:** 25 minutes  
+**Lab:** [full_ft_vs_lora.ipynb](../../notebooks/full_ft_vs_lora.ipynb)
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -110,3 +111,8 @@ Complete:
 
 Stanford CS336: https://cs336.stanford.edu/  
 Chinchilla: https://arxiv.org/abs/2203.15556
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
