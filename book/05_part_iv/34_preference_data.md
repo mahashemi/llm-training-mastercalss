@@ -115,3 +115,46 @@ Measure which behavioral dimensions move.
 ## Reference
 
 https://arxiv.org/abs/2305.18290
+
+## Deepening: preference datasets are measurement instruments
+
+A preference label is a claim:
+
+**chosen response is preferable under a rubric**
+
+Therefore dataset construction must define the rubric.
+
+### Pair taxonomy
+
+Annotate why one response wins:
+
+- correctness;
+- groundedness;
+- safety;
+- concision;
+- formatting;
+- reasoning quality;
+- style.
+
+A pair can encode multiple correlated attributes.
+
+### Experiment
+
+Create two preference sets:
+
+1. balanced multi-attribute rubric;
+2. style-heavy rubric.
+
+Train under similar budgets.
+
+Measure:
+
+- target quality;
+- verbosity;
+- factuality;
+- safety;
+- refusal behavior.
+
+### Failure mode
+
+The model learns the easiest observable proxy, such as length or politeness, rather than the intended quality criterion.
