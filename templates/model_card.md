@@ -1,36 +1,86 @@
 # Model Card
 
-## Model identity
+## 1. Model identity
 
 - Name:
-- Version:
-- Base model:
+- Version/release:
+- Repository:
 - Revision/commit:
-- Tokenizer:
+- Base model:
+- Architecture:
 - Parameter count:
+- Active parameters if MoE:
+- Context length:
+- Tokenizer/revision:
+- Modalities:
+- License:
 
-## Intended use
+## 2. Intended use
 
-## Out-of-scope use
+## 3. Out-of-scope use
 
-## Training data
+## 4. Training data
 
-## Training procedure
+- sources:
+- languages:
+- domains:
+- approximate tokens:
+- provenance/rights:
+- filtering:
+- deduplication:
+- contamination controls:
 
-## Post-training
+## 5. Training procedure
 
-## Evaluation
+- objective:
+- update strategy:
+- model configuration:
+- sequence length:
+- training token budget:
+- optimizer:
+- schedule:
+- precision:
+- hardware:
+- checkpoint/recovery:
 
-## Safety and failure modes
+## 6. Post-training
 
-## Known limitations
+SFT / LoRA / QLoRA / preference optimization / RL / distillation / other.
 
-## Hardware and compute
+## 7. Evaluation
 
-## Quantization / serving
+Include:
 
-## License and usage constraints
+- target metrics;
+- protected regression suite;
+- multilingual slices;
+- safety;
+- robustness;
+- serving performance.
 
-## Citation
+## 8. Resource profile
 
-## Contact / maintenance
+- inference weight memory:
+- training memory:
+- peak GPU memory:
+- throughput:
+- context-length behavior:
+- serving configuration:
+
+## 9. Quantization / adapters
+
+Describe quantization type, adapter configuration, merge state, and required base revision.
+
+## 10. Known failure modes
+
+## 11. Limitations
+
+## 12. Reproducibility
+
+Link code, data description, configuration, environment, and reproduction procedure.
+
+## 13. Safety and governance
+
+## 14. Citation
+
+## 15. Contact / maintenance
