@@ -111,7 +111,7 @@ For large-scale training, the course uses small reproducible runs to teach the m
 
 ### Open-weight / H100 Navigation
 
-[Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md) · [Qwen3.8-27B + H100 Case Study](docs/OPEN_WEIGHT_QWEN_H100_CASE_STUDY.md) · [Book ↔ Lecture ↔ Laboratory Map](BOOK_LAB_MAP.md)
+[Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md) · [Qwen3.8-27B + H100 Case Study](docs/OPEN_WEIGHT_QWEN_H100_CASE_STUDY.md) · [Open-Weight Model Audit](notebooks/open_weight_model_audit.ipynb) · [Open-Weight Runbook](runbooks/12_open_weight_model_runbook.md) · [Book ↔ Lecture ↔ Laboratory Map](BOOK_LAB_MAP.md) · [Curriculum Integrity Report](docs/CURRICULUM_INTEGRITY_REPORT.md)
 
 ### Research / Reproducibility Navigation
 
