@@ -1,112 +1,79 @@
-# Lecture 07 — Efficient Attention and Triton
+# Lecture 07 — Efficient Attention, FlashAttention, and Triton
 
 **Duration:** 25 minutes  
-**Lab:** [attention_memory_and_tiling.ipynb](../../notebooks/attention_memory_and_tiling.ipynb)  
-**Primary anchor:** https://arxiv.org/abs/2205.14135
+**Lab:** [Attention Memory and Tiling](../../notebooks/attention_memory_and_tiling.ipynb)  
+**Primary anchor:** FlashAttention — https://arxiv.org/abs/2205.14135
 
 ## Outcome
 
-This lecture moves from conceptual understanding toward independent model-building judgment. The student should finish able to explain the mechanism, implement the central idea, predict resource behavior, identify failure modes, and decide when the method is appropriate.
+Students understand that attention optimization can come from reducing memory traffic and avoiding materialization, not only from reducing mathematical FLOPs.
 
-## Learning objectives
+## 0–4 — Same equation, different system cost
 
-- Explain the topic in plain language.
-- State the governing equations or invariants.
-- Trace the relevant tensor/data/system flow.
-- Run and interpret the associated lab.
-- Diagnose at least two failure modes.
-- Make a resource-aware engineering decision.
-- Form one testable research question.
-
-## Core concepts
-
-1. **attention memory traffic**
-2. **FlashAttention intuition**
-3. **tiling**
-4. **online softmax**
-5. **Triton kernel concepts**
-
-## 25-minute script
-
-### 0–3 — Problem first
-Start from a real engineering problem. Ask the student to predict what should happen before giving the terminology.
-
-### 3–8 — Intuition
-Build a small example with as few moving parts as possible. Introduce the terminology only after the phenomenon is visible.
-
-### 8–14 — Formal model
-Derive the core quantities. Annotate every symbol and keep track of dimensions, assumptions, and approximations.
-
-### 14–19 — Implementation
-Open the linked notebook. Inspect the smallest implementation. Predict the result, execute it, then explain the observation.
-
-### 19–22 — Break it
-Deliberately violate one assumption. Compare the result with the baseline and explain the failure.
-
-### 22–24 — Engineer it
-Discuss how the choice changes with memory, data volume, latency, throughput, reliability, cost, or research novelty.
-
-### 24–25 — Exit challenge
-The student must explain the idea without using the lecture's main jargon term and propose the next experiment.
-
-## Decision table
-
-| Situation | First question |
-|---|---|
-| quality is poor | Is the issue data, model capacity, objective, or inference? |
-| memory is insufficient | Can we reduce activation/optimizer memory or shard state? |
-| throughput is poor | Are we compute-bound, memory-bound, or communication-bound? |
-| results are surprising | Is the baseline valid and is evaluation contaminated? |
-| budget is tight | What is the smallest experiment that reduces the most uncertainty? |
-
-## Critical thinking
-
-**Q1. What is the seductive but wrong shortcut?**
-
-**Answer:** Treating this topic as a library feature instead of a system property that emerges from interacting data, mathematics, implementation, hardware, and evaluation.
-
-**Q2. What evidence would justify spending more compute?**
-
-**Answer:** A controlled baseline, a measured improvement tied to the target objective, stable evaluation, and evidence that the next experiment is likely to answer an important unresolved question.
-
-**Q3. What can invalidate the conclusion?**
-
-**Answer:** A change in dataset composition, model family, hyperparameters, sequence length, hardware/software path, evaluation set, or another hidden variable.
-
-## Visuals to build
-
-1. Mechanism diagram.
-2. Tensor or data-flow diagram.
-3. Resource-flow diagram.
-4. Engineering decision tree.
-
-Each visual should have a one-sentence “notice this” caption.
-
-## Lab requirements
-
-Run:
-
-notebooks/attention_memory_and_tiling.ipynb
-
-Produce:
-- baseline;
-- changed-condition run;
-- plot/table;
-- interpretation;
-- failure note;
-- next-experiment proposal.
-
-## Research bridge
-
-Read the cited primary/official material after completing the lab.
+Compare naive attention and a memory-efficient implementation.
 
 Ask:
 
-> Which claim is experimentally demonstrated, which is an implementation choice, and which is an inference made by us?
+> If both compute the same attention result, where did the speedup come from?
 
-## Deliverable
+## 4–10 — Why materialization matters
 
-One-page experiment report:
+Explain that naïve attention can materialize large score/probability tensors.
 
-**Hypothesis → Setup → Baseline → Intervention → Result → Failure → Interpretation → Next step**
+For sequence length L, the attention matrix has O(L²) entries per head.
 
+The optimization goal is to keep useful tiles in fast memory and avoid unnecessary HBM traffic.
+
+## 10–15 — Tiling and online softmax
+
+Introduce the conceptual loop:
+
+**load tile → update running statistics → accumulate output → discard tile**
+
+Students do not need to implement production FlashAttention yet; they need to understand the data movement.
+
+## 15–19 — Triton mental model
+
+Explain:
+
+- program instances;
+- blocks;
+- masks;
+- memory loads/stores;
+- launch grid.
+
+Tie each abstraction back to the tensor being computed.
+
+## 19–22 — Laboratory
+
+Run sequence lengths:
+
+128, 512, 2048, 4096.
+
+Measure:
+
+- peak memory;
+- latency;
+- throughput.
+
+Compare against a naïve/materializing implementation where feasible.
+
+## 22–24 — Break it
+
+Use a shape that causes excessive padding/masking or a context length that exceeds practical memory.
+
+Ask what failed:
+
+**algorithm → kernel → memory → configuration**
+
+## 24–25 — Exit challenge
+
+Complete:
+
+> “The optimized implementation wins because it changes ___, not because it changes ___.”
+
+Expected reasoning: memory movement/materialization rather than merely reducing the mathematical definition of attention.
+
+## Research bridge
+
+Compare your measurements with FlashAttention's stated IO/memory motivation and identify where your small experiment does and does not represent the production algorithm.
