@@ -1,32 +1,65 @@
 # Experiment → Program
 
-A serious LLM initiative should grow in stages.
+A serious LLM initiative grows through progressively more expensive evidence.
 
 ## Stage 0 — Hypothesis
-Define the capability and metric.
+
+Define:
+
+**capability → population → metric → constraint**
 
 ## Stage 1 — Baseline
-Measure the strongest practical existing approach.
+
+Measure the strongest existing practical approach.
+
+Record model, prompt, retrieval/tools where applicable, evaluation, latency, and cost.
 
 ## Stage 2 — Cheap intervention
-Try prompting, structured outputs, retrieval, tools, or small adaptation.
 
-## Stage 3 — Controlled training experiment
-Test one training intervention with a reproducible dataset and evaluation.
+Try:
 
-## Stage 4 — Scaling experiment
-Run several resource points and estimate whether quality continues to improve.
+**prompting / structured output / RAG / tools**
 
-## Stage 5 — Pilot system
-Integrate data, model, serving, evaluation, monitoring, and user feedback.
+This isolates whether the gap is contextual or behavioral.
 
-## Stage 6 — Program
-Only now propose large infrastructure, staffing, procurement, and multi-year funding.
+## Stage 3 — Small open-weight training
 
-## Decision gate
+Use a real small checkpoint on free Colab or a small GPU.
+
+Run:
+
+**baseline → SFT/PEFT → regression evaluation**
+
+## Stage 4 — Representation/data study
+
+When evidence suggests domain/language exposure is the bottleneck, test continued pretraining and tokenizer/data hypotheses on a small controlled model.
+
+## Stage 5 — Scaling experiment
+
+Move the same workload to larger checkpoints/H100s.
+
+Measure:
+
+**tokens/sec + memory + scaling efficiency + quality + cost**
+
+## Stage 6 — Pilot system
+
+Integrate:
+
+**data + model + evaluation + serving + monitoring + governance**
+
+## Stage 7 — Program
+
+Only after earlier evidence exists should the proposal include:
+
+**large infrastructure + staffing + multi-year budget + from-scratch pretraining**
+
+## Gate principle
 
 At each stage ask:
 
 > What evidence must exist before we release more resources?
 
-This converts an LLM project from a hardware acquisition exercise into an evidence-generating program.
+Also define what evidence would stop the program.
+
+This converts a hardware acquisition exercise into an evidence-generating engineering program.
