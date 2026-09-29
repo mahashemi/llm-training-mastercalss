@@ -226,21 +226,3 @@ https://arxiv.org/abs/1706.03762
 
 Karpathy, *Let's build GPT from scratch*:
 https://www.youtube.com/watch?v=kCc8FmEb1nY
-
-
-## Laboratory contract
-
-The notebook is not an optional coding appendix. It is the empirical companion for this chapter.
-
-Record:
-
-| Measurement | Required result |
-|---|---|
-| baseline loss | record |
-| training loss after intervention | record |
-| one generated sample | save |
-| changed condition | document |
-| failure case | document |
-| interpretation | explain |
-
-The goal is to connect the probability model in this chapter to an actual parameter update.
