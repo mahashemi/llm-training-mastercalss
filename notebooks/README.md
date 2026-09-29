@@ -56,3 +56,24 @@ For experiments used in papers or engineering reports, preserve the notebook Git
 [Pretrain a Tiny GPT](./25_tiny_gpt_pretraining_campaign.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/25_tiny_gpt_pretraining_campaign.ipynb)
 
 This is the main bridge from the conceptual labs to an actual pretraining campaign. It covers corpus acquisition, train/validation split, Transformer implementation, sanity overfit, pretraining, evaluation, checkpointing, generation, and deliberate failure experiments.
+
+
+## Open-weight model labs
+
+These are the labs that turn the conceptual course into an actual model-training workflow.
+
+| Lab | Model | Target environment | Main outcome |
+|---|---|---|---|
+| [SFT with a Small Open Model](./sft_with_a_small_open_model.ipynb) | Qwen3-0.6B | free Colab | baseline → smoke test → SFT → evaluation |
+| [LoRA / QLoRA Comparison](./lora_qlora_comparison.ipynb) | Qwen3-0.6B, configurable | free Colab → H100 | rank/quantization/resource experiment |
+| [Open-Weight Training Ladder](../docs/OPEN_WEIGHT_TRAINING_LADDER.md) | 0.6B → 27B+ | Colab → H100 → multi-GPU | hardware progression and experiment design |
+
+### The same experiment at larger scale
+
+Students should eventually replace the small model ID with a larger open-weight checkpoint and repeat the workflow. The code is not the lesson; the resource and evaluation measurements are.
+
+Before moving to a large checkpoint, calculate:
+
+**weight memory + activation memory + optimizer/gradient memory + runtime overhead + KV cache where relevant**.
+
+Never infer training feasibility from weight size alone.
