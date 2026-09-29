@@ -139,3 +139,24 @@ Simulate a candidate that improves overall score but fails two slice gates.
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: evaluation is a release system
+
+Evaluation becomes operational when it can:
+
+**run automatically → compare to baseline → classify failures → enforce gates → block release**
+
+### Release pipeline
+
+1. freeze model revision;
+2. run target suite;
+3. run protected regression suite;
+4. run safety/robustness suite;
+5. compare to thresholds;
+6. generate release artifact.
+
+### Failure mode
+
+Overall benchmark improves while a critical category worsens.
+
+The gate must therefore support explicit blockers, not only aggregate scores.
