@@ -132,3 +132,25 @@ Then identify whether one intervention helps one perturbation while harming anot
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: robustness is a family of distributions
+
+A model can succeed on IID evaluation and fail under language, domain, prompt, context-length, temporal, or tool/schema shifts.
+
+### Experiment
+
+Construct a clean set plus one controlled perturbation family.
+
+Measure:
+
+**clean score → shifted score → degradation**
+
+Then repeat for a second shift.
+
+### Failure mode
+
+An average robustness score can hide catastrophic failure in a rare important slice.
+
+### Decision
+
+Treat the shift distribution as part of the workload specification.
