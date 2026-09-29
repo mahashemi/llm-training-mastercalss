@@ -1,15 +1,12 @@
 # Book ↔ Lecture ↔ Laboratory Map
 
-The textbook and lecture layers are intentionally many-to-one with laboratories.
-
-A **book chapter may reuse a laboratory** when the same executable experiment supports several related concepts. The map below makes that reuse explicit so a reader never has to guess which notebook “the chapter” refers to.
+The textbook and lecture layers are intentionally many-to-one with laboratories. A chapter may reuse a laboratory when one executable experiment can teach several related concepts.
 
 ## Primary laboratory families
 
-| Open-Weight Model Audit | checkpoint identification, config/tokenizer, memory, baseline inference | Open-Weight chapter; H100 case study; training runbook |
-
 | Laboratory | Primary concepts | Used by chapters / lectures |
 |---|---|---|
+| Open-Weight Model Audit | checkpoint identification, config/tokenizer, memory, baseline inference | Open-Weight chapter; H100 case study; open-weight runbook |
 | Notebook 01 — next-token prediction | probability model, logits, loss, autoregressive training | Ch. 1, 3, 9; Lecture 1 |
 | Tokenizer measurement | BPE, fertility, multilingual tokenization | Ch. 2, 24; Lecture 2 |
 | Resource accounting | parameter memory, FLOPs, hardware sizing | Ch. 11, 40, 68; Lecture 3 |
@@ -37,7 +34,7 @@ A **book chapter may reuse a laboratory** when the same executable experiment su
 
 ## How to read the map
 
-A chapter can have a **primary lab** and still ask additional exercises that are analytical rather than executable.
+A chapter can have a primary lab and still ask analytical exercises.
 
 When a chapter says:
 
@@ -51,6 +48,6 @@ Every primary lab should contain:
 
 **predict → run → measure → break → explain → save artifact → propose next experiment**
 
-The notebook README contains the current executable path. The chapter tells the student *why* the experiment matters. The lecture provides the instructor-led framing. The runbook provides the operational procedure.
+The notebook README contains the executable path. The chapter explains why the experiment matters. The lecture provides instructor framing. The runbook provides operational procedure.
 
 This separation prevents duplicate prose while keeping the learning path connected.
