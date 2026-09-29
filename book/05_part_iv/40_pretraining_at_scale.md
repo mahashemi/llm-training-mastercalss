@@ -127,3 +127,60 @@ Fit a simple throughput curve and identify the economic scaling limit.
 
 - Stanford CS336: https://cs336.stanford.edu/
 - Chinchilla: https://arxiv.org/abs/2203.15556
+
+
+## Deepening: derive the cluster from measured throughput
+
+Do not begin with “we need 64 H100s.”
+
+Begin with:
+
+1. target tokens;
+2. target wall time;
+3. measured tokens/sec on one GPU;
+4. measured scaling efficiency;
+5. checkpoint/data pipeline limits.
+
+### Worked derivation
+
+If a one-GPU pilot delivers T tokens/sec and a k-GPU run achieves efficiency e:
+
+cluster throughput ≈ k × T × e
+
+Required time:
+
+time ≈ total_training_tokens / cluster_throughput
+
+This gives a defensible GPU-count estimate.
+
+### Scaling experiment
+
+Measure 1, 2, 4 and 8 GPUs for a representative workload.
+
+Record:
+
+| GPUs | tokens/sec | scaling efficiency | communication fraction | peak memory |
+|---:|---:|---:|---:|---:|
+| 1 | measure | 100% | measure | measure |
+| 2 | measure | measure | measure | measure |
+| 4 | measure | measure | measure | measure |
+| 8 | measure | measure | measure | measure |
+
+Then fit a simple throughput curve.
+
+### Hidden bottlenecks
+
+A large cluster can be limited by:
+
+- input pipeline;
+- checkpoint writes;
+- network;
+- synchronization;
+- evaluation;
+- failed workers.
+
+The fastest GPU is useless when it is waiting.
+
+### H100 bridge
+
+The H100 is introduced first as a measurement instrument. Students learn its performance only after measuring their workload, rather than treating the accelerator specification as the experiment.
