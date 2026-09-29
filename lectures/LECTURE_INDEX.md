@@ -1,5 +1,8 @@
 # Lecture Index
 
+The lecture numbers are **stable IDs**, not a mandatory reading order. The README defines the pedagogical order; this file is the canonical lecture-by-lecture reference.
+
+
 Every lecture has a linked executable laboratory and a required evidence artifact.
 
 | # | Lecture | Primary lab | Evidence |
