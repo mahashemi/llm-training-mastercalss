@@ -35,3 +35,35 @@ Use SFT and preference methods as appropriate; do not use post-training to compe
 ## Gate 8 — Release decision
 
 Require evaluation, safety review, licensing/provenance review, deployment validation, and a maintenance plan.
+
+
+## Pretraining decision gate
+
+Before requesting from-scratch compute, document:
+
+1. capability gap;
+2. strongest existing-model baseline;
+3. RAG/tool baseline where applicable;
+4. SFT/PEFT result;
+5. continued-pretraining result if representation is suspected;
+6. tokenizer and data evidence;
+7. scaling-law/resource evidence;
+8. distributed throughput/recovery evidence;
+9. data rights/governance;
+10. staffing and operational ownership.
+
+### Kill criteria
+
+Define measurable conditions such as:
+
+- insufficient target-language/domain gain;
+- unacceptable retained-capability regression;
+- throughput below economic requirement;
+- unresolved data rights;
+- inability to evaluate reliably.
+
+### Decision artifact
+
+Produce:
+
+**evidence → remaining uncertainty → proposed run → resources → success gate → fallback → kill criterion**
