@@ -127,3 +127,63 @@ Write a complete pretraining run card:
 ## Reference
 
 https://cs336.stanford.edu/
+
+
+## Deepening: design the run before launching it
+
+A pretraining run should begin as a written experiment specification.
+
+### Run specification
+
+Record:
+
+| Item | Example |
+|---|---|
+| model | exact config/revision |
+| tokenizer | exact revision |
+| training tokens | target + tolerance |
+| sequence length | 2k/4k/8k |
+| global batch tokens | calculated |
+| optimizer | exact implementation |
+| learning rate | value + schedule |
+| precision | BF16/FP8/etc. |
+| checkpoint interval | tokens or time |
+| evaluation interval | tokens |
+| data mixture | versioned |
+| failure recovery | checkpoint policy |
+| stopping rule | validation/compute budget |
+
+### Batch-token accounting
+
+Global batch tokens are approximately:
+
+micro_batch × gradient_accumulation × sequence_length × data_parallel_world_size
+
+This is a critical quantity because two runs can have the same micro-batch but radically different effective training throughput.
+
+### Smoke test
+
+Before the real run:
+
+1. initialize model;
+2. consume a tiny number of batches;
+3. run forward/backward;
+4. verify loss;
+5. save checkpoint;
+6. kill the process;
+7. resume from checkpoint;
+8. verify the training state continues.
+
+A run that cannot recover is not ready for expensive compute.
+
+### H100 bridge
+
+The first H100 experiment should be deliberately short. Its purpose is to measure:
+
+- tokens/sec;
+- peak memory;
+- communication if distributed;
+- checkpoint bandwidth;
+- evaluation overhead.
+
+Only then should wall-clock projections be made.
