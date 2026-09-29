@@ -1,34 +1,53 @@
 # Project 4 — End-to-End LLM Program Dossier
 
-## Goal
+## Mission
 
-Design an LLM program for an organization, region, language community, or country.
+Design a staged LLM program that could survive technical, financial, evaluation, governance, and operations review.
+
+## Required evidence chain
+
+**problem → baseline → cheapest useful intervention → controlled result → remaining gap → scale evidence → program**
 
 ## Required sections
 
-1. mission;
-2. users;
-3. baseline;
-4. target metrics;
-5. data strategy;
-6. model strategy;
-7. training decision;
-8. infrastructure;
-9. people;
-10. evaluation;
-11. safety/governance;
-12. budget;
-13. milestones;
-14. risks/kill criteria;
-15. publication/open-source strategy.
+1. mission and users;
+2. measurable capability gap;
+3. strongest existing baseline;
+4. RAG/tool baseline where relevant;
+5. data and rights;
+6. tokenizer strategy;
+7. model/architecture strategy;
+8. training objective;
+9. update strategy;
+10. evaluation and regression;
+11. safety;
+12. serving;
+13. compute/resource model;
+14. team;
+15. TCO;
+16. milestones;
+17. risks and kill criteria;
+18. publication/open-science plan.
 
-## Final presentation
+## Required resource model
 
-Defend the proposal against skeptical questions:
-- Why not use an API?
-- Why not use RAG?
-- Why not fine-tune?
-- Why train from scratch?
-- What is the smallest experiment that can falsify the plan?
-- What happens if the main training run fails?
-- What will exist after the first funding tranche?
+Derive rather than guess:
+
+**model/data → FLOPs → measured throughput → wall time → accelerator hours → storage → networking → staffing → contingency**
+
+## Required gates
+
+For every major spend:
+
+**metric → threshold → artifact → owner → next release condition**
+
+## Final defense
+
+Defend:
+
+- why the baseline is insufficient;
+- why the chosen intervention is the next test;
+- why the proposed model size is justified;
+- what would make you stop;
+- what happens if the main run fails;
+- how another team could reproduce the evidence.
