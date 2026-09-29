@@ -1,6 +1,7 @@
 # Lecture 24 — From Experiment to Fundable Model
 
 **Duration:** 25 minutes
+**Lab:** [capstone_model_program.ipynb](../../notebooks/capstone_model_program.ipynb)
 
 ## Outcome
 
@@ -153,3 +154,8 @@ The proposal should make the evidence chain explicit so the reviewer can inspect
 OLMo 2: https://allenai.org/olmo2  
 Stanford CS336: https://cs336.stanford.edu/  
 Chinchilla: https://arxiv.org/abs/2203.15556
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
