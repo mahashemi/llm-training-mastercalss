@@ -129,3 +129,37 @@ Then intentionally shift labels by one position and observe how the loss changes
 ## Reference
 
 https://cs231n.github.io/neural-networks-case-study/
+
+## Deepening: loss is an information signal
+
+### Numerical example
+
+If the correct token has probability:
+
+- 0.9 → loss = −log(0.9) ≈ 0.105
+- 0.1 → loss = −log(0.1) ≈ 2.303
+- 0.01 → loss = −log(0.01) ≈ 4.605
+
+The loss therefore changes nonlinearly as probability assigned to the target changes.
+
+### Tensor shapes
+
+For batch B, sequence length L, and vocabulary V:
+
+**logits: B × L × V**
+
+The target labels have shape:
+
+**B × L**
+
+The loss reduces these predictions against the observed target tokens.
+
+### Failure experiment
+
+Shift labels by one position.
+
+If the model is correctly predicting token t from context through t−1, a misaligned target changes the learning signal even though every tensor still has a valid shape.
+
+### Engineering consequence
+
+A training run can be numerically healthy while learning the wrong task because of a labeling/template error. Always test one hand-verified batch before scaling.
