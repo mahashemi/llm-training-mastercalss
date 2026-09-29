@@ -108,3 +108,50 @@ Then benchmark T = 256, 512, 1024, 2048 and measure memory/time.
 
 - Transformer: https://arxiv.org/abs/1706.03762
 - FlashAttention: https://arxiv.org/abs/2205.14135
+
+
+## Deepening: attention is a memory problem
+
+For sequence length L and head dimension d, the naive attention score matrix has O(L²) elements per head.
+
+The important classroom question is not only “why is attention quadratic?”
+
+It is:
+
+> **Which tensor becomes large, and what happens to GPU memory when L doubles?**
+
+Run a controlled experiment with:
+
+- L = 128;
+- L = 512;
+- L = 2048;
+- L = 4096.
+
+Measure:
+
+| L | score-memory estimate | measured peak memory | attention time |
+|---:|---:|---:|---:|
+| 128 | calculate | measure | measure |
+| 512 | calculate | measure | measure |
+| 2048 | calculate | measure | measure |
+| 4096 | calculate | measure | measure |
+
+Then compare naive attention with a memory-efficient implementation.
+
+### Engineering consequence
+
+A model may fit at sequence length 2k and fail at 8k even though the parameter count is unchanged.
+
+This is why “model size” is not a sufficient hardware specification.
+
+### Research bridge
+
+Ask whether the bottleneck is:
+
+- score materialization;
+- activation storage;
+- kernel efficiency;
+- KV cache;
+- bandwidth.
+
+Students should learn to identify the tensor or kernel responsible rather than memorizing “quadratic.”

@@ -148,3 +148,41 @@ Then estimate the largest concurrency that fits within a 40 GB KV budget.
 ## Reference
 
 https://docs.vllm.ai/en/stable/
+
+
+## Deepening: inference memory is not training memory
+
+For autoregressive generation, the KV cache grows with:
+
+- number of layers;
+- KV heads;
+- head dimension;
+- sequence length;
+- batch/concurrency;
+- dtype.
+
+A simplified per-token cache estimate is proportional to:
+
+2 × layers × KV_heads × head_dim × bytes_per_element
+
+for keys and values.
+
+### Experiment
+
+Fix the model and vary:
+
+- context length;
+- batch/concurrency;
+- generated length.
+
+Measure peak GPU memory.
+
+Then explain why a model can have fixed weight memory while serving memory grows with traffic and context.
+
+### Systems consequence
+
+Serving capacity must be specified as a workload:
+
+**model + context distribution + concurrency + output length + SLO**
+
+“Model uses 20 GB” is not a complete serving specification.

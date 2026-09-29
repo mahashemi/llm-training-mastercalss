@@ -260,3 +260,49 @@ Change one major assumption at a time and identify which assumption changes the 
 ## Reference
 
 Stanford CS336: https://cs336.stanford.edu/
+
+## Deepening: compare architectures at equal useful work
+
+Do not compare “one API call” with “one GPU hour.” Compare systems at a common workload.
+
+Define:
+
+**successful tasks/month**
+
+Then calculate:
+
+- total infrastructure cost;
+- total model inference cost;
+- retrieval/tool cost;
+- training amortization;
+- evaluation;
+- engineering/operations;
+- failure/retry cost.
+
+### Worked break-even table
+
+| Variable | Low | Base | High |
+|---|---:|---:|---:|
+| requests/month | 0.25× | 1× | 4× |
+| input tokens | 0.5× | 1× | 2× |
+| output tokens | 0.5× | 1× | 2× |
+| GPU utilization | 25% | 50% | 75% |
+| retraining cadence | monthly | quarterly | yearly |
+
+Students should calculate the range rather than report a single number.
+
+### Training-specific lesson
+
+For an open-weight model, include:
+
+**download/storage → adaptation → evaluation → deployment → monitoring → retraining**
+
+The “fine-tune cost” is not the total lifecycle cost.
+
+### Decision artifact
+
+The final table should report:
+
+**quality → latency → successful tasks → recurring cost → one-time cost → sensitivity → operational burden**
+
+This makes the economics comparable across API, self-hosted, RAG, and adapted-model architectures.

@@ -150,3 +150,45 @@ Plot quality vs adapter cost.
 ## Reference
 
 https://arxiv.org/abs/2106.09685
+
+
+## Deepening: LoRA is a constrained hypothesis about the update
+
+LoRA assumes that the useful weight update can be represented approximately in a low-rank subspace.
+
+That is a modeling hypothesis, not merely a memory trick.
+
+### Rank experiment
+
+Run ranks:
+
+4, 8, 16, 32, 64
+
+while holding constant:
+
+- base checkpoint;
+- dataset;
+- train steps;
+- sequence length;
+- learning rate;
+- evaluation.
+
+Report:
+
+| Rank | Trainable params | Peak memory | Tokens/sec | Target score | Regression |
+|---:|---:|---:|---:|---:|---:|
+| 4 | measure | measure | measure | measure | measure |
+| 8 | measure | measure | measure | measure | measure |
+| 16 | measure | measure | measure | measure | measure |
+| 32 | measure | measure | measure | measure | measure |
+| 64 | measure | measure | measure | measure | measure |
+
+The desired output is a **quality/resource frontier**, not a favorite rank.
+
+### Target-module experiment
+
+Compare attention-only against attention + MLP targets. This tests whether the required behavior is representable through the selected modules.
+
+### H100 bridge
+
+Repeat the same rank sweep on a larger model. Students should discover that the mathematical rule stays the same while the resource consequences change.

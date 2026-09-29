@@ -133,3 +133,49 @@ Plot quality against training memory.
 
 - QLoRA: https://arxiv.org/abs/2305.14314
 - LoRA: https://arxiv.org/abs/2106.09685
+
+
+## Deepening: QLoRA changes the memory equation, not the learning problem
+
+QLoRA combines a quantized frozen base with trainable adapters. The Hugging Face PEFT documentation describes 4-bit NF4 loading, optional nested quantization, and BF16 computation as a common configuration.
+
+### Three-way controlled experiment
+
+Compare:
+
+1. BF16 + LoRA;
+2. 4-bit + LoRA rank 16;
+3. 4-bit + LoRA rank 32.
+
+Keep data and evaluation fixed.
+
+Measure:
+
+- peak memory;
+- training time;
+- tokens/sec;
+- target quality;
+- retained capability;
+- checkpoint size.
+
+### Important failure mode
+
+If QLoRA is slower than expected, do not immediately increase hardware. Profile:
+
+- dequantization;
+- data loading;
+- sequence length;
+- gradient checkpointing;
+- kernel utilization.
+
+### Colab versus H100
+
+On free Colab, the lesson is:
+
+> “Can I fit and train this real model?”
+
+On H100, the lesson becomes:
+
+> “What resource do I save, and what quality or throughput do I give up?”
+
+The same experiment therefore teaches both accessibility and systems engineering.

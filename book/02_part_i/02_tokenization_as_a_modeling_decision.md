@@ -142,3 +142,53 @@ Then identify which language drives the tokenizer decision.
 
 - SentencePiece: https://arxiv.org/abs/1808.06226
 - Stanford CS336: https://cs336.stanford.edu/
+
+
+## Deepening: tokenization as a compute decision
+
+Tokenization is not only a vocabulary question. It changes the number of training and inference positions the model must process.
+
+For a corpus with C characters and average fertility f tokens/character:
+
+tokens ≈ C × f
+
+If tokenizer A produces 1.0M tokens for a sample and tokenizer B produces 1.4M, B has created roughly 40% more token positions for the same text. That affects:
+
+- training-token budget;
+- sequence length;
+- attention work;
+- activation memory;
+- KV-cache size;
+- inference latency;
+- effective exposure per parameter.
+
+### Worked experiment
+
+Take the same multilingual corpus and compare two tokenizers.
+
+| Measurement | Tokenizer A | Tokenizer B |
+|---|---:|---:|
+| characters | fixed | fixed |
+| tokens | measure | measure |
+| tokens/character | measure | measure |
+| unique tokens | measure | measure |
+| max sequence length | measure | measure |
+| mean sequence length | measure | measure |
+| storage after tokenization | measure | measure |
+
+Do not declare a tokenizer better from vocabulary size alone.
+
+### Failure mode
+
+A tokenizer can look efficient on English and be inefficient on the target language. Always report per-language fertility.
+
+### Scale bridge
+
+At small Colab scale, tokenizer differences may look cosmetic. At hundreds of billions or trillions of training tokens, a persistent sequence expansion becomes a systems and economics issue.
+
+### Student decision
+
+Write:
+
+**corpus → tokenizer → measured token expansion → compute consequence → decision**
+

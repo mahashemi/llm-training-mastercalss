@@ -125,3 +125,37 @@ Then select an operating point based on explicit SLOs.
 ## Reference
 
 https://docs.vllm.ai/en/stable/
+
+
+## Deepening: benchmark the operating envelope
+
+A serving benchmark should produce a frontier rather than one throughput number.
+
+### Required matrix
+
+| Variable | Values |
+|---|---|
+| prompt tokens | 128 / 1k / 4k / 8k |
+| output tokens | 32 / 128 / 512 |
+| concurrency | 1 / 4 / 16 / 32 |
+| precision | BF16 / quantized |
+| streaming | on / off |
+
+Measure:
+
+- TTFT p50/p95;
+- inter-token latency p50/p95;
+- output tokens/sec;
+- peak memory;
+- GPU utilization;
+- rejected/queued requests.
+
+### Decision rule
+
+A configuration is valid only if it satisfies the stated SLO.
+
+Higher throughput with unacceptable tail latency is not a successful serving configuration.
+
+### H100 bridge
+
+Use the same benchmark on a small Colab model and on a larger H100 model. Students should learn that serving performance is a property of the **workload and system**, not merely the model name.

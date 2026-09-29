@@ -119,3 +119,45 @@ Then explain the choice using evidence rather than folklore.
 ## Reference
 
 https://cs231n.github.io/neural-networks-3/
+
+
+## Deepening: optimizer state is part of model size
+
+Students often calculate only parameter memory. For training, optimizer state can become a dominant memory term.
+
+For N parameters, an Adam-like optimizer maintains additional state associated with the parameters. Exact memory depends on optimizer implementation and precision, so use the runtime profiler for final sizing.
+
+### Worked memory exercise
+
+For a hypothetical 7B model, make a spreadsheet with:
+
+| State | Formula | Bytes/parameter | Total |
+|---|---|---:|---:|
+| weights | N | assumption | calculate |
+| gradients | N | assumption | calculate |
+| first moment | N | assumption | calculate |
+| second moment | N | assumption | calculate |
+| activations | architecture-dependent | — | measure |
+| temporary/runtime | implementation-dependent | — | measure |
+
+Then ask:
+
+1. Does it fit on one GPU?
+2. If not, which term dominates?
+3. Would LoRA change optimizer memory?
+4. Would QLoRA change base-weight memory?
+5. Would activation checkpointing change optimizer memory?
+
+This separates **parameter count** from **training-state memory**.
+
+### Controlled experiment
+
+Keep the model and data fixed. Compare:
+
+- AdamW;
+- an 8-bit optimizer;
+- adapter training.
+
+Measure peak memory and tokens/sec.
+
+The result is a systems experiment, not merely an optimizer comparison.

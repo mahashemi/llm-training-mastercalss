@@ -21,6 +21,36 @@ A graduate of this curriculum should be able to:
 - design a multilingual/national-language data and model program;
 - produce a technical + organizational + funding proposal for an LLM initiative.
 
+
+
+## Practical Open-Weight Training Track
+
+The course now has an explicit hardware-to-training ladder. Start with a real open-weight model on free Colab, then move the same experiment to larger single-GPU and H100 environments.
+
+**Practical progression:**
+
+CPU tiny GPT → Qwen3-0.6B on free Colab → Qwen3-1.7B/4B experiments → 7B/8B on H100 → Qwen3.8-27B adaptation → multi-GPU training → foundation-model planning.
+
+See **[Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md)** and **[Open-Weight Training Path](book/00_open_weight_training_path.md)**.
+
+The current classroom anchor is Qwen3-0.6B because the official checkpoint is small enough to make a real open-weight workflow practical in a free-first course. The larger-model path is deliberately the same workflow with different resource constraints.
+
+The course distinguishes four different activities that are often incorrectly called “training”: **inference, supervised fine-tuning, continued pretraining, and pretraining from scratch**. It also treats **full FT, LoRA, and QLoRA as parameter-update strategies**, not as alternatives to the training objective itself.
+
+### Open-weight model ladder
+
+| Stage | Model class | Student outcome | Hardware target |
+|---|---|---|---|
+| Foundation mechanics | tiny GPT | understand every tensor and gradient | CPU / Colab |
+| First real checkpoint | Qwen3-0.6B | download, inspect, infer, SFT | free Colab |
+| Resource scaling | Qwen3-1.7B/4B | precision, sequence, adapter experiments | Colab / single GPU |
+| Professional adaptation | 7B–8B | LoRA, QLoRA, profiling, evaluation | 1× H100 |
+| Large-model adaptation | Qwen3.8-27B | memory accounting and parameter-efficient training | 1× H100 for selected workflows; multi-GPU for broader training |
+| Distributed training | 7B–30B+ | sharding, communication, checkpointing | multi-GPU H100 |
+| Foundation model | project-specific | data + architecture + pretraining program | H100 cluster |
+
+This is intentionally **not** a claim that every model at a given size fits every operation on that hardware. Each notebook must calculate the resource requirement before launching a run.
+
 ## Learning engine
 
 Every lesson follows:
@@ -180,7 +210,7 @@ The repository currently contains:
 
 - 24 lecture packages;
 - 75 textbook chapters plus chapter template;
-- 26 notebooks including orientation, one lab per numbered lecture, and the end-to-end tiny-GPT pretraining campaign;
+- 27 notebooks including orientation, one lab per numbered lecture, and the end-to-end tiny-GPT pretraining campaign;\n- a dedicated open-weight model-loading and hardware-progression track;
 - 13 operational runbooks;
 - 4 capstone/project briefs;
 - research, proposal, model-card, dataset-card, and experiment templates;
