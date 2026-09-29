@@ -134,3 +134,27 @@ Estimate the interaction and explain whether the larger model changes the value 
 ## Reference
 
 https://cs336.stanford.edu/
+
+## Deepening: an ablation isolates causality
+
+An ablation should remove or change one proposed mechanism while preserving the rest of the setup.
+
+### Good design
+
+**full system → remove mechanism X → compare**
+
+### Bad design
+
+Change dataset, model, optimizer, learning rate, and evaluation together, then attribute the result to X.
+
+### Experiment
+
+| Run | Mechanism | Controls |
+|---|---|---|
+| A | full | fixed |
+| B | without X | fixed |
+| C | control/placebo | fixed |
+
+Report effect size, uncertainty, resource change, and failure cases.
+
+Ablation is useful because it strengthens causal interpretation, not because it creates more rows.
