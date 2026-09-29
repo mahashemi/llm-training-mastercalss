@@ -50,3 +50,35 @@ At least one result must be investigated where the intervention behaved differen
 ## Publication path
 
 Convert the result into a 4–8 page research report with explicit distinction between measured evidence and interpretation.
+
+
+
+## Real datasets are mandatory
+
+The study must use at least **three real source families**, not synthetic Python lists.
+
+Recommended combination:
+
+**FineWeb + FineWeb-Edu + Wikipedia/OpenWebMath**, with one multilingual or domain source such as **Aya, Tashkeela, or RUFND**.
+
+### Minimum research design
+
+Run a source-mixture experiment in which total training-token budget is fixed while the source composition changes.
+
+Then run a second experiment changing only one filtering or deduplication variable.
+
+### Required evidence
+
+Include:
+
+- exact dataset IDs and versions;
+- acquisition date;
+- source licenses/access conditions;
+- schema reconciliation;
+- raw/sample/usable token accounting;
+- per-language statistics;
+- cross-source overlap;
+- mixture definitions;
+- model/evaluation result;
+- failure analysis;
+- reproduction instructions.
