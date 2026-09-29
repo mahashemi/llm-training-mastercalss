@@ -116,3 +116,43 @@ Chinchilla: https://arxiv.org/abs/2203.15556
 ## Lab contract
 
 Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — separate adaptation breadth from parameter-update breadth
+
+Students often mix up:
+
+**what the model is learning**
+
+and
+
+**which parameters are allowed to move**.
+
+Build a 2×2:
+
+| Objective | Full FT | PEFT |
+|---|---|---|
+| SFT | behavior, broad parameter update | behavior, constrained update |
+| continued PT | distribution exposure | possible but capacity-constrained |
+
+### Fair comparison
+
+Fix:
+
+- base checkpoint;
+- tokenizer;
+- dataset;
+- training-token budget;
+- evaluation.
+
+Measure:
+
+**target quality + retained capability + memory + throughput + checkpoint size + cost**.
+
+### H100 feasibility drill
+
+Given a 7B model and one H100, students must write the memory budget before choosing full FT.
+
+Then ask:
+
+> Which additional measurement would determine whether sharding is required?
+
