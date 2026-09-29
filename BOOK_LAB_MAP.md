@@ -6,6 +6,8 @@ A **book chapter may reuse a laboratory** when the same executable experiment su
 
 ## Primary laboratory families
 
+| Open-Weight Model Audit | checkpoint identification, config/tokenizer, memory, baseline inference | Open-Weight chapter; H100 case study; training runbook |
+
 | Laboratory | Primary concepts | Used by chapters / lectures |
 |---|---|---|
 | Notebook 01 — next-token prediction | probability model, logits, loss, autoregressive training | Ch. 1, 3, 9; Lecture 1 |
