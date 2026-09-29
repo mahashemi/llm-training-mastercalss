@@ -159,3 +159,40 @@ OLMo 2: https://allenai.org/olmo2
 ## Lab contract
 
 Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+
+## Deepening — the model program is a dependency graph
+
+Draw dependencies:
+
+**data rights → data pipeline → training → evaluation → serving**
+
+and parallel tracks:
+
+**governance + security + procurement + staffing**.
+
+A blocked dependency can stop a technically successful model.
+
+### Resource derivation exercise
+
+Start with:
+
+- parameter count;
+- training tokens;
+- measured tokens/sec/GPU;
+- expected scaling efficiency;
+- desired wall time.
+
+Derive:
+
+**GPU count → accelerator hours → checkpoint storage → staffing load → TCO**
+
+Students must state assumptions next to every number.
+
+### Gate design
+
+For each milestone define:
+
+**metric + threshold + artifact + owner + budget released**
+
+This converts a one-time funding request into a sequence of evidence gates.
+
