@@ -26,7 +26,7 @@ flowchart TD
     H --> I["8 · Serve & decide<br/>inference → RAG/tools → build vs buy"]
     I --> J["9 · Program & research<br/>national strategy → resources → funding"]
     F -. evaluate again .-> D
-
+```
 
 | Stage | Natural teaching order | Textbook coverage | Primary hands-on work |
 |---|---|---|---|
@@ -49,30 +49,30 @@ The table is the **canonical lecture ID list**. Follow the **Natural teaching or
 
 | # | Lecture | Primary laboratory |
 |---:|---|---|
-| 01 | [What Is an LLM](01_what_is_an_llm/lecture.md) | [Tiny LM](../notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb) |
-| 02 | [Tokenization](02_tokenization/lecture.md) | [Tokenizer](../notebooks/tokenizer_design_and_measurement.ipynb) |
-| 03 | [PyTorch + Resource Accounting](03_pytorch_and_resource_accounting/lecture.md) | [Resources](../notebooks/resource_accounting_flops_memory.ipynb) |
-| 04 | [Transformer Architectures](04_transformer_architectures/lecture.md) | [Tiny Transformer](../notebooks/build_a_tiny_transformer.ipynb) |
-| 05 | [Attention Alternatives + MoE](05_attention_alternatives_and_moe/lecture.md) | [Attention/MoE](../notebooks/attention_and_moe_lab.ipynb) |
-| 06 | [GPUs and Kernels](06_gpus_and_kernels/lecture.md) | [GPU benchmark](../notebooks/gpu_kernel_benchmark.ipynb) |
-| 07 | [Efficient Attention + Triton](07_efficient_attention_and_triton/lecture.md) | [Attention tiling](../notebooks/attention_memory_and_tiling.ipynb) |
-| 08 | [Distributed Training](08_distributed_training/lecture.md) | [DDP/sharding](../notebooks/ddp_and_sharding_simulation.ipynb) |
-| 09 | [Scaling Laws](09_scaling_laws/lecture.md) | [Scaling fit](../notebooks/scaling_law_fit.ipynb) |
-| 10 | [Inference Systems](10_inference_systems/lecture.md) | [KV cache](../notebooks/inference_and_kv_cache.ipynb) |
-| 11 | [Training System Design](11_training_system_design/lecture.md) | [Instrumentation](../notebooks/training_loop_instrumentation.ipynb) |
-| 12 | [Evaluation](12_evaluation/lecture.md) | [Evaluation harness](../notebooks/evaluation_harness.ipynb) |
-| 13 | [Data Sources + Construction](13_data_sources_and_dataset_construction/lecture.md) | [Curation](../notebooks/dataset_curation_pipeline.ipynb) |
-| 14 | [Filtering + Dedup + Mixing](14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) | [Data interventions](../notebooks/dedup_and_data_mixing.ipynb) |
-| 15 | [SFT + RLHF](15_mid_and_post_training_sft_and_rlhf/lecture.md) | [Qwen3-0.6B SFT](../notebooks/sft_with_a_small_open_model.ipynb) |
-| 16 | [RLVR](16_reinforcement_learning_with_verifiable_rewards/lecture.md) | [RLVR toy](../notebooks/rlvr_toy_experiment.ipynb) |
-| 17 | [Multimodality](17_multimodality/lecture.md) | [Alignment map](../notebooks/multimodal_alignment_map.ipynb) |
-| 18 | [LoRA + QLoRA](18_lora_qlora_and_peft/lecture.md) | [PEFT comparison](../notebooks/lora_qlora_comparison.ipynb) |
-| 19 | [Full FT + Continued PT](19_full_fine_tuning_and_continued_pretraining/lecture.md) | [FT vs LoRA](../notebooks/full_ft_vs_lora.ipynb) |
-| 20 | [Preference + Distillation](20_preference_optimization_and_distillation/lecture.md) | [DPO/distillation](../notebooks/dpo_and_distillation_concepts.ipynb) |
-| 21 | [Safety + Failure Analysis](21_safety_robustness_and_failure_analysis/lecture.md) | [Failure analysis](../notebooks/failure_analysis_and_safety_eval.ipynb) |
-| 22 | [API/RAG/Tools/Training](22_api_vs_rag_vs_tools_vs_training/lecture.md) | [Build vs buy](../notebooks/build_vs_buy_decision_lab.ipynb) |
-| 23 | [Build an LLM Program](23_build_an_llm_program/lecture.md) | [Resource plan](../notebooks/national_llm_resource_plan.ipynb) |
-| 24 | [Fundable Model](24_from_experiment_to_fundable_model/lecture.md) | [Capstone](../notebooks/capstone_model_program.ipynb) |
+| 01 | [What Is an LLM](lectures/01_what_is_an_llm/lecture.md) | [Tiny LM](notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb) |
+| 02 | [Tokenization](lectures/02_tokenization/lecture.md) | [Tokenizer](notebooks/tokenizer_design_and_measurement.ipynb) |
+| 03 | [PyTorch + Resource Accounting](lectures/03_pytorch_and_resource_accounting/lecture.md) | [Resources](notebooks/resource_accounting_flops_memory.ipynb) |
+| 04 | [Transformer Architectures](lectures/04_transformer_architectures/lecture.md) | [Tiny Transformer](notebooks/build_a_tiny_transformer.ipynb) |
+| 05 | [Attention Alternatives + MoE](lectures/05_attention_alternatives_and_moe/lecture.md) | [Attention/MoE](notebooks/attention_and_moe_lab.ipynb) |
+| 06 | [GPUs and Kernels](lectures/06_gpus_and_kernels/lecture.md) | [GPU benchmark](notebooks/gpu_kernel_benchmark.ipynb) |
+| 07 | [Efficient Attention + Triton](lectures/07_efficient_attention_and_triton/lecture.md) | [Attention tiling](notebooks/attention_memory_and_tiling.ipynb) |
+| 08 | [Distributed Training](lectures/08_distributed_training/lecture.md) | [DDP/sharding](notebooks/ddp_and_sharding_simulation.ipynb) |
+| 09 | [Scaling Laws](lectures/09_scaling_laws/lecture.md) | [Scaling fit](notebooks/scaling_law_fit.ipynb) |
+| 10 | [Inference Systems](lectures/10_inference_systems/lecture.md) | [KV cache](notebooks/inference_and_kv_cache.ipynb) |
+| 11 | [Training System Design](lectures/11_training_system_design/lecture.md) | [Instrumentation](notebooks/training_loop_instrumentation.ipynb) |
+| 12 | [Evaluation](lectures/12_evaluation/lecture.md) | [Evaluation harness](notebooks/evaluation_harness.ipynb) |
+| 13 | [Data Sources + Construction](lectures/13_data_sources_and_dataset_construction/lecture.md) | [Curation](notebooks/dataset_curation_pipeline.ipynb) |
+| 14 | [Filtering + Dedup + Mixing](lectures/14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) | [Data interventions](notebooks/dedup_and_data_mixing.ipynb) |
+| 15 | [SFT + RLHF](lectures/15_mid_and_post_training_sft_and_rlhf/lecture.md) | [Qwen3-0.6B SFT](notebooks/sft_with_a_small_open_model.ipynb) |
+| 16 | [RLVR](lectures/16_reinforcement_learning_with_verifiable_rewards/lecture.md) | [RLVR toy](notebooks/rlvr_toy_experiment.ipynb) |
+| 17 | [Multimodality](lectures/17_multimodality/lecture.md) | [Alignment map](notebooks/multimodal_alignment_map.ipynb) |
+| 18 | [LoRA + QLoRA](lectures/18_lora_qlora_and_peft/lecture.md) | [PEFT comparison](notebooks/lora_qlora_comparison.ipynb) |
+| 19 | [Full FT + Continued PT](lectures/19_full_fine_tuning_and_continued_pretraining/lecture.md) | [FT vs LoRA](notebooks/full_ft_vs_lora.ipynb) |
+| 20 | [Preference + Distillation](lectures/20_preference_optimization_and_distillation/lecture.md) | [DPO/distillation](notebooks/dpo_and_distillation_concepts.ipynb) |
+| 21 | [Safety + Failure Analysis](lectures/21_safety_robustness_and_failure_analysis/lecture.md) | [Failure analysis](notebooks/failure_analysis_and_safety_eval.ipynb) |
+| 22 | [API/RAG/Tools/Training](lectures/22_api_vs_rag_vs_tools_vs_training/lecture.md) | [Build vs buy](notebooks/build_vs_buy_decision_lab.ipynb) |
+| 23 | [Build an LLM Program](lectures/23_build_an_llm_program/lecture.md) | [Resource plan](notebooks/national_llm_resource_plan.ipynb) |
+| 24 | [Fundable Model](lectures/24_from_experiment_to_fundable_model/lecture.md) | [Capstone](notebooks/capstone_model_program.ipynb) |
 
 ### Textbook TOC — at a glance
 
