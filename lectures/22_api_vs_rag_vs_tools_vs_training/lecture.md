@@ -1,6 +1,7 @@
 # Lecture 22 — API vs RAG vs Tools vs Training
 
 **Duration:** 25 minutes  
+**Lab:** [build_vs_buy_decision_lab.ipynb](../../notebooks/build_vs_buy_decision_lab.ipynb)
 **Primary goal:** Diagnose the bottleneck before choosing an architecture.
 
 ## Learning outcome
@@ -163,3 +164,8 @@ Write one sentence for each:
 Create an architecture decision record:
 
 **requirement → failure class → baseline → intervention → experiment → quality → latency → cost → risk → next decision**
+
+
+## Lab contract
+
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
