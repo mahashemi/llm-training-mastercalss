@@ -1,79 +1,83 @@
 # Notebook Laboratory Map
 
-Every numbered lecture has a corresponding lab. The repository also contains an orientation notebook (`00`) that can be used before Lecture 01.
+Every numbered lecture has a companion laboratory. Some textbook chapters reuse a lab because one executable experiment can teach several tightly related concepts.
+
+## The practical spine
+
+**inspect checkpoint → estimate resources → load → baseline → smoke test → train → evaluate → break → report → scale**
+
+The classroom anchor for real open-weight training is **Qwen3-0.6B**, while later labs move the same workflow to larger models and H100 environments.
 
 ## Free-first rule
 
-The core learning path is designed to run on CPU or free Colab whenever practical. GPU-recommended labs retain an analytical or reduced-size path so concepts remain accessible without paid compute.
+Core labs are designed for CPU or free Colab when practical. A free runtime may vary in GPU type, memory, session lifetime, or availability, so notebooks should detect the environment instead of assuming one accelerator.
+
+## Lab quality standard
+
+Every substantive lab should contain:
+
+1. a prediction before execution;
+2. a baseline;
+3. one controlled intervention;
+4. a quantitative result;
+5. a deliberate failure or edge case;
+6. a resource measurement;
+7. an interpretation;
+8. a next experiment.
+
+Completing all cells is not the learning objective.
 
 ## Canonical notebooks
 
 | # | Notebook | Resource | Role |
 |---|---|---|---|
-| 00 | [Orientation / Resource Accounting](./00_orientation_resource_accounting.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/00_orientation_resource_accounting.ipynb) | CPU / optional GPU | Orientation |
-| 01 | [Next-token Prediction and Tiny Language Model](./01_next_token_prediction_and_a_tiny_language_model.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb) | CPU / free Colab | First required lab |
-| 02 | [Tokenizer Design and Measurement](./tokenizer_design_and_measurement.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/tokenizer_design_and_measurement.ipynb) | CPU | Required |
-| 03 | [Resource Accounting — FLOPs and Memory](./resource_accounting_flops_memory.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/resource_accounting_flops_memory.ipynb) | CPU | Required |
-| 04 | [Build a Tiny Transformer](./build_a_tiny_transformer.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/build_a_tiny_transformer.ipynb) | CPU / free Colab | Required |
-| 05 | [Attention Variants and MoE](./attention_and_moe_lab.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/attention_and_moe_lab.ipynb) | CPU | Required |
-| 06 | [GPU Kernel Benchmark](./gpu_kernel_benchmark.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/gpu_kernel_benchmark.ipynb) | GPU optional | Required |
-| 07 | [Attention Memory and Tiling](./attention_memory_and_tiling.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/attention_memory_and_tiling.ipynb) | CPU / GPU optional | Required |
-| 08 | [DDP and Sharding Simulation](./ddp_and_sharding_simulation.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/ddp_and_sharding_simulation.ipynb) | CPU | Required |
-| 09 | [Scaling-law Fit](./scaling_law_fit.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/scaling_law_fit.ipynb) | CPU | Required |
-| 10 | [Inference and KV Cache](./inference_and_kv_cache.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/inference_and_kv_cache.ipynb) | CPU | Required |
-| 11 | [Training Loop Instrumentation](./training_loop_instrumentation.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/training_loop_instrumentation.ipynb) | CPU / GPU optional | Required |
-| 12 | [Evaluation Harness](./evaluation_harness.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/evaluation_harness.ipynb) | CPU | Required |
-| 13 | [Dataset Curation Pipeline](./dataset_curation_pipeline.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/dataset_curation_pipeline.ipynb) | CPU | Required |
-| 14 | [Deduplication and Data Mixing](./dedup_and_data_mixing.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/dedup_and_data_mixing.ipynb) | CPU | Required |
-| 15 | [SFT with a Small Open Model](./sft_with_a_small_open_model.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/sft_with_a_small_open_model.ipynb) | GPU recommended | Primary post-training lab |
-| 16 | [RLVR Toy Experiment](./rlvr_toy_experiment.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/rlvr_toy_experiment.ipynb) | CPU | Required |
-| 17 | [Multimodal Alignment Map](./multimodal_alignment_map.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/multimodal_alignment_map.ipynb) | CPU | Required |
-| 18 | [LoRA / QLoRA Comparison](./lora_qlora_comparison.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/lora_qlora_comparison.ipynb) | GPU recommended | Primary PEFT lab |
-| 19 | [Full Fine-tuning vs LoRA](./full_ft_vs_lora.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/full_ft_vs_lora.ipynb) | CPU accounting / GPU optional | Required |
-| 20 | [DPO and Distillation Concepts](./dpo_and_distillation_concepts.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/dpo_and_distillation_concepts.ipynb) | CPU | Required |
-| 21 | [Failure Analysis and Safety Evaluation](./failure_analysis_and_safety_eval.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/failure_analysis_and_safety_eval.ipynb) | CPU | Required |
-| 22 | [Build-vs-Buy Decision Lab](./build_vs_buy_decision_lab.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/build_vs_buy_decision_lab.ipynb) | CPU | Required |
-| 23 | [National LLM Resource Plan](./national_llm_resource_plan.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/national_llm_resource_plan.ipynb) | CPU | Required |
-| 24 | [Capstone Model Program](./capstone_model_program.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/capstone_model_program.ipynb) | CPU | Required |
+| 00 | Orientation / Resource Accounting | CPU / optional GPU | hardware and memory mental model |
+| 01 | Next-token Prediction and Tiny LM | CPU / free Colab | objective + training loop |
+| 02 | Tokenizer Design and Measurement | CPU | tokenization + fertility |
+| 03 | Resource Accounting — FLOPs and Memory | CPU | model/training resource math |
+| 04 | Build a Tiny Transformer | CPU / free Colab | architecture implementation |
+| 05 | Attention Variants and MoE | CPU | MHA/GQA/MQA/MoE |
+| 06 | GPU Kernel Benchmark | GPU optional | hardware behavior |
+| 07 | Attention Memory and Tiling | CPU / GPU optional | IO/memory-aware attention |
+| 08 | DDP and Sharding Simulation | CPU | distributed resource reasoning |
+| 09 | Scaling-law Fit | CPU | model/data/compute allocation |
+| 10 | Inference and KV Cache | CPU / GPU optional | serving memory/latency |
+| 11 | Training Loop Instrumentation | CPU / GPU optional | observability/recovery |
+| 12 | Evaluation Harness | CPU | metrics and release gates |
+| 13 | Dataset Curation Pipeline | CPU | data transformation |
+| 14 | Deduplication and Data Mixing | CPU | corpus intervention |
+| 15 | SFT with a Small Open Model | GPU recommended | real open-weight training |
+| 16 | RLVR Toy Experiment | CPU | verifier/reward design |
+| 17 | Multimodal Alignment Map | CPU | visual-token/resource reasoning |
+| 18 | LoRA / QLoRA Comparison | GPU recommended | parameter-efficient training |
+| 19 | Full Fine-tuning vs LoRA | CPU accounting / GPU optional | adaptation resource trade-offs |
+| 20 | DPO and Distillation Concepts | CPU | preference/teacher-student |
+| 21 | Failure Analysis and Safety Evaluation | CPU | failure taxonomy |
+| 22 | Build-vs-Buy Decision Lab | CPU | architecture decisions |
+| 23 | National LLM Resource Plan | CPU | compute derivation |
+| 24 | Capstone Model Program | CPU | evidence-to-program |
+| 25 | Tiny GPT Pretraining Campaign | CPU / free Colab | end-to-end pretraining bridge |
 
-## Lab protocol
+## Open-weight training labs
 
-1. Read the lecture prediction questions.
-2. State your prediction before running code.
-3. Execute the smallest experiment.
-4. Record baseline measurements.
-5. Change one major variable.
-6. Inspect the result and at least one failure case.
-7. Complete an experiment card.
-8. State the next experiment that would reduce uncertainty.
+### Real checkpoint path
 
-## Research use
+[Qwen3-0.6B SFT](./sft_with_a_small_open_model.ipynb) is the first real checkpoint-training lab.
 
-For experiments used in papers or engineering reports, preserve the notebook Git commit, dataset/model versions, environment, hardware, and results. See REPRODUCIBILITY.md and templates/paper_report.md.
+Students must:
 
-## End-to-end project lab
+**download → inspect → estimate → infer → baseline → smoke test → SFT → evaluate → reload**
 
-[Pretrain a Tiny GPT](./25_tiny_gpt_pretraining_campaign.ipynb) / [Open in Colab](https://colab.research.google.com/github/mahashemi/llm-training-mastercalss/blob/main/notebooks/25_tiny_gpt_pretraining_campaign.ipynb)
+### PEFT path
 
-This is the main bridge from the conceptual labs to an actual pretraining campaign. It covers corpus acquisition, train/validation split, Transformer implementation, sanity overfit, pretraining, evaluation, checkpointing, generation, and deliberate failure experiments.
+[LoRA / QLoRA](./lora_qlora_comparison.ipynb) turns adapter theory into a measured rank/precision/resource experiment.
 
+### Scale path
 
-## Open-weight model labs
+Use [Open-Weight Training Ladder](../docs/OPEN_WEIGHT_TRAINING_LADDER.md) to repeat the same methodology on larger checkpoints and H100s.
 
-These are the labs that turn the conceptual course into an actual model-training workflow.
+## Reporting
 
-| Lab | Model | Target environment | Main outcome |
-|---|---|---|---|
-| [SFT with a Small Open Model](./sft_with_a_small_open_model.ipynb) | Qwen3-0.6B | free Colab | baseline → smoke test → SFT → evaluation |
-| [LoRA / QLoRA Comparison](./lora_qlora_comparison.ipynb) | Qwen3-0.6B, configurable | free Colab → H100 | rank/quantization/resource experiment |
-| [Open-Weight Training Ladder](../docs/OPEN_WEIGHT_TRAINING_LADDER.md) | 0.6B → 27B+ | Colab → H100 → multi-GPU | hardware progression and experiment design |
+Use [EXPERIMENT_CARD.md](../templates/EXPERIMENT_CARD.md).
 
-### The same experiment at larger scale
-
-Students should eventually replace the small model ID with a larger open-weight checkpoint and repeat the workflow. The code is not the lesson; the resource and evaluation measurements are.
-
-Before moving to a large checkpoint, calculate:
-
-**weight memory + activation memory + optimizer/gradient memory + runtime overhead + KV cache where relevant**.
-
-Never infer training feasibility from weight size alone.
+Do not report a model result without its model/data revision, evaluation protocol, and resource measurements.
