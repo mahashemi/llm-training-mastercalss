@@ -61,3 +61,44 @@ Paid compute enters only after the learner demonstrates that the experiment is w
 ## Operating rule
 
 Never scale an experiment merely because more hardware is available. Scale when the expected information or capability gain justifies the additional resource.
+
+## Practical model-training spine
+
+The 24 lectures are now interpreted through one recurring executable workflow:
+
+**inspect checkpoint → estimate resources → load → baseline → smoke test → train → evaluate → diagnose → scale**
+
+### Hardware progression
+
+| Phase | Model | Environment | Required capability |
+|---|---|---|---|
+| A | tiny GPT | CPU / Colab | implement pretraining loop |
+| B | Qwen3-0.6B | free Colab | real open-weight download + inference + SFT |
+| C | Qwen3-0.6B/1.7B | Colab/single GPU | LoRA/QLoRA + controlled evaluation |
+| D | 7B–8B | 1× H100 | serious profiling and adapter training |
+| E | Qwen3.8-27B | H100 / multi-GPU | large-model resource accounting and selected adaptation |
+| F | 7B–30B+ | multi-GPU H100 | distributed training |
+| G | project-specific | H100 cluster | pretraining program design |
+
+The model may change as the open-weight ecosystem changes. The experimental method is the durable asset.
+
+## Required mastery artifacts
+
+A student should leave each major stage with an artifact, not just notes:
+
+1. **Model card:** exact model/revision, architecture, license, tokenizer, context.
+2. **Resource sheet:** weight memory, training-memory hypothesis, sequence/batch assumptions.
+3. **Baseline report:** prompts, decoding, quality, latency, memory.
+4. **Smoke-test report:** tiny-data overfit and checkpoint reload.
+5. **Training report:** configuration, throughput, wall time, peak memory.
+6. **Evaluation report:** target quality plus retained-capability regression.
+7. **Failure report:** at least one broken assumption and diagnosis.
+8. **Scale decision:** why the next experiment should or should not use more model/data/compute.
+
+## The course's anti-shallow rule
+
+A chapter or lecture is not considered complete merely because it defines a technique. A production-grade lesson must connect:
+
+**definition → mechanism → tensor/resource consequence → worked numerical example → implementation → controlled experiment → failure mode → evaluation → engineering decision → scale-up path**.
+
+This rule applies especially to API vs RAG vs tools vs training, SFT vs LoRA/QLoRA/full FT, inference vs training memory, data quality, scaling laws, distributed training, and compute economics.
