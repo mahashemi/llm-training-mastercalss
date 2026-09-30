@@ -1,7 +1,7 @@
 # Lecture 13 — Data Sources and Dataset Construction
 
 **Duration:** 25 minutes  
-**Lab:** [Dataset Curation Pipeline](../../notebooks/dataset_curation_pipeline.ipynb)
+**Lab:** [Dataset Curation Pipeline](`./lab.ipynb`)
 
 ## Outcome
 
@@ -77,7 +77,7 @@ Use current data-processing documentation from the referenced implementation eco
 
 ## Required real-data laboratory
 
-Do not substitute the four-row toy dataset for the real exercise. Run the [Real Dataset Corpus Bench](../../notebooks/real_dataset_corpus_bench.ipynb).
+Do not substitute the four-row toy dataset for the real exercise. Run the [Real Dataset Corpus Bench](`./lab.ipynb`).
 
 Students must inspect multiple source schemas, normalize them into a common schema, measure distributions, run filtering, check cross-source exact duplicates, and construct two competing mixtures.
 
@@ -96,3 +96,10 @@ Then inspect one Kaggle source such as Tashkeela or RUFND.
 Produce:
 
 **source registry + schema map + source statistics + filter survival + dedup report + mixture A/B + downstream hypothesis**.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
