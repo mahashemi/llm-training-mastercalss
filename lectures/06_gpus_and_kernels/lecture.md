@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can explain why two mathematically equivalent implementations can have very different runtime.
+You can explain why two mathematically equivalent implementations can have very different runtime.
 
 ## The benchmark surprise
 
@@ -49,7 +49,7 @@ Discuss:
 
 ## Profiling before optimization
 
-Students run a benchmark and collect:
+Run a benchmark and collect:
 
 - wall-clock time;
 - achieved throughput;
