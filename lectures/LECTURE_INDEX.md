@@ -32,6 +32,23 @@ Every lecture has a linked executable laboratory and a required evidence artifac
 | 23 | [Build an LLM Program](23_build_an_llm_program/lecture.md) | [Resource plan](../notebooks/national_llm_resource_plan.ipynb) | evidence-to-resource chain |
 | 24 | [Fundable Model](24_from_experiment_to_fundable_model/lecture.md) | [Capstone](../notebooks/capstone_model_program.ipynb) | staged model program |
 
+## Persian longitudinal connections
+
+Persian is intentionally revisited across the lecture series rather than isolated into one lecture.
+
+| Lecture | Persian connection |
+|---|---|
+| 02 — Tokenization | Persian fertility, ZWNJ, Arabic/Persian Unicode normalization, target-language tokenizer decisions |
+| 12 — Evaluation | ParsiNLU, PersianMedQA, held-out Persian slices, multilingual regression |
+| 13 — Data Sources + Construction | Naab, CulturaX-fa, FineWeb2-HQ-fa, merged corpora, provenance |
+| 14 — Filtering + Dedup + Mixing | Persian web quality, deduplication, real-vs-synthetic mixtures |
+| 15 — SFT + RLHF | Persian instruction adaptation and evaluation |
+| 18 — LoRA + QLoRA | parameter-efficient Persian adaptation |
+| 19 — Full FT + Continued PT | Persian representation/domain adaptation and forgetting |
+| 23 — Build an LLM Program | Persian-first data/model program and compute/resource planning |
+
+See the [Persian Dataset Track](../data/PERSIAN_DATASET_TRACK.md) and [Learning Graph](../docs/LEARNING_GRAPH.md).
+
 ## Teaching invariant
 
 The lecture is not complete until students have:
