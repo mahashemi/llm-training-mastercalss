@@ -1,13 +1,12 @@
 # Lecture 12 — Evaluation That Can Block a Bad Model
 
-**Duration:** 25 minutes  
 **Lab:** [Evaluation Harness](`./lab.ipynb`)
 
 ## Outcome
 
 Students design evaluation before training, partition failures by layer, and distinguish statistical evidence from release significance.
 
-## 0–4 — The benchmark trap
+## The benchmark trap
 
 “Model B improved by 3 points.”
 
@@ -19,7 +18,7 @@ Ask:
 - same evaluator?
 - same contamination status?
 
-## 4–9 — Requirement to metric
+## Requirement to metric
 
 Requirement:
 
@@ -31,7 +30,7 @@ Then create slices:
 
 **language × difficulty × task × failure type**
 
-## 9–14 — Automatic versus human evaluation
+## Automatic versus human evaluation
 
 Compare:
 
@@ -42,7 +41,7 @@ Compare:
 | human | richer validity | expensive |
 | hybrid | scale + audit | more infrastructure |
 
-## 14–19 — Laboratory
+## Laboratory
 
 Build a small scorecard.
 
@@ -53,13 +52,13 @@ The notebook should compute at least:
 - failure count;
 - confidence interval or bootstrap interval where appropriate.
 
-## 19–22 — Break it
+## Break it
 
 Create a benchmark with one easy slice dominating 80% of samples.
 
 Observe how aggregate score hides rare failures.
 
-## 22–24 — Release gates
+## Release gates
 
 Define both:
 
@@ -68,7 +67,7 @@ Define both:
 
 A model can improve aggregate quality and still fail release.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Write the minimum information needed for someone else to reproduce your reported score.
 
