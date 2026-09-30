@@ -1,7 +1,7 @@
 # Lecture 10 — Inference Systems: Prefill, Decode, KV Cache, and Serving
 
 **Duration:** 25 minutes  
-**Lab:** [Inference and KV Cache](../../notebooks/inference_and_kv_cache.ipynb)  
+**Lab:** [Inference and KV Cache](`./lab.ipynb`)  
 **Primary anchor:** vLLM — https://docs.vllm.ai/en/stable/
 
 ## Outcome
@@ -82,3 +82,10 @@ Why can throughput rise while user-perceived latency gets worse?
 ## Research bridge
 
 Compare a small-model local benchmark with a serving runtime such as vLLM and explain which system optimizations target memory, scheduling, or batching.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
