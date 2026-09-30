@@ -62,8 +62,6 @@ For the full lecture list, use [Lecture Index](lectures/LECTURE_INDEX.md). For a
 
 ## North-star outcome
 
-## North-star outcome
-
 A graduate of this curriculum should be able to:
 
 - explain a language model from tokens to distributed training;
