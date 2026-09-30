@@ -1,6 +1,6 @@
 # Lecture 15 — Mid and Post Training: SFT, RLHF, and the Post-Training Stack
 
-**Lab:** [sft_with_a_small_open_model.ipynb](`./lab.ipynb`)
+**Lab:** [sft_with_a_small_open_model.ipynb](./lab.ipynb)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -19,7 +19,7 @@ Start with three failures:
 2. The model knows the domain but ignores the required response format.
 3. The model follows the format but prefers unsafe or unhelpful responses.
 
-Ask whether one training method should solve all three.
+Consider: whether one training method should solve all three.
 
 Reveal:
 
@@ -164,3 +164,11 @@ Complete the linked laboratory before treating the lecture as mastered. Record a
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Next lecture: Lecture 16 — Reinforcement Learning with Verifiable Rewards →](../16_reinforcement_learning_with_verifiable_rewards/lecture.md)
+
+</div>
