@@ -1,7 +1,7 @@
 # Lecture 09 — Scaling Laws: Spend Compute Where It Buys Information
 
 **Duration:** 25 minutes  
-**Lab:** [Scaling-law Fit](../../notebooks/scaling_law_fit.ipynb)  
+**Lab:** [Scaling-law Fit](`./lab.ipynb`)  
 **Primary anchor:** Chinchilla — https://arxiv.org/abs/2203.15556
 
 ## Outcome
@@ -80,3 +80,10 @@ If you double model size, what must you ask about the token budget?
 ## Research bridge
 
 Compare your fitted trend with Chinchilla-style compute-optimal reasoning and identify which parts of your result are empirical measurements versus extrapolation.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
