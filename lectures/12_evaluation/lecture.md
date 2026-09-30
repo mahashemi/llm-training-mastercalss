@@ -1,7 +1,7 @@
 # Lecture 12 — Evaluation That Can Block a Bad Model
 
 **Duration:** 25 minutes  
-**Lab:** [Evaluation Harness](../../notebooks/evaluation_harness.ipynb)
+**Lab:** [Evaluation Harness](`./lab.ipynb`)
 
 ## Outcome
 
@@ -75,3 +75,10 @@ Write the minimum information needed for someone else to reproduce your reported
 ## Research bridge
 
 Connect your benchmark protocol to the evaluation chapters and preserve the exact evaluation code/configuration alongside results.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
