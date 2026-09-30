@@ -1,7 +1,7 @@
 # Lecture 02 — Tokenization: The First Hidden Model Decision
 
 **Duration:** 25 minutes  
-**Lab:** [Tokenizer Design and Measurement](../../notebooks/tokenizer_design_and_measurement.ipynb)  
+**Lab:** [Tokenizer Design and Measurement](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -109,3 +109,10 @@ Complete:
 ## Research bridge
 
 Compare your measured result with a published tokenizer claim and identify what is measured, what is a benchmark-specific result, and what is an engineering inference.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
