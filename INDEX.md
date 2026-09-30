@@ -4,6 +4,9 @@
 
 - [START_HERE.md](START_HERE.md)
 - [Course Map](COURSE_MAP.md)
+- [Learning Graph](docs/LEARNING_GRAPH.md)
+- [Real Dataset Registry](data/REAL_DATASET_REGISTRY.md)
+- [Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)
 - [Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md)
 - [Qwen3.8-27B + H100 Case Study](docs/OPEN_WEIGHT_QWEN_H100_CASE_STUDY.md)
 - [Curriculum Integrity Report](docs/CURRICULUM_INTEGRITY_REPORT.md)
