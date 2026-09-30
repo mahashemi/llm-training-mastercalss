@@ -1,6 +1,8 @@
 # Learning Graph — LLM Trainer Masterclass
 
-This is the single dependency graph for the curriculum. It resolves the relationship between lectures, textbook chapters, real datasets, notebooks, runbooks, and projects without turning each artifact type into a separate course.
+This is the dependency graph for the curriculum. It explains the progression; the **README Master Course Matrix** contains the detailed lecture → chapter → lab → dataset → runbook → evidence connections.
+
+**[Open the single Master Course Matrix](../README.md#master-course-matrix--the-single-curriculum-control-plane)**
 
 ## 1. The learner's path
 
@@ -54,50 +56,38 @@ corpora        corpora           + Persian-first    reasoning
              economics → program → capstone
 ```
 
-## 2. The stage contract
+## 2. Stage contract
 
-Every stage uses the same learning loop:
+Every stage uses:
 
 **intuition → reading → lecture → real artifact → experiment → measurement → failure → decision → reproducibility**
 
-| Stage | Learn | Touch real data/model | Produce evidence | Exit question |
-|---|---|---|---|---|
-| 0. Orient | workflow, checkpoints, reproducibility | open-weight checkpoint | audit card | Can I inspect a model before touching training? |
-| 1. Foundations | LM objective, tokenizer, Transformer, attention, MoE | tiny corpus + checkpoint tokenizer | tensor/loss/tokenization measurements | Can I explain every major tensor? |
-| 2. Training systems | optimization, GPU memory, kernels, distributed training, scaling | real model/resource profiles | resource worksheet | Can I predict whether a run fits? |
-| 3. Evaluation | benchmarks, human/judge eval, statistics | real evaluation sets | evaluation contract | What would falsify my claim? |
-| 4. Real data | acquisition, schema, quality, dedup, mixing | multiple HF/Kaggle sources | dataset manifest | Can I defend every training example's provenance? |
-| 5. Train/adapt | SFT, FT, LoRA, QLoRA, continued PT | open-weight model + real data | experiment card | What problem does each intervention actually solve? |
-| 6. Align | preferences, RLHF, DPO, RLVR, distillation | preference/reasoning data | alignment experiment | What signal is the model optimizing? |
-| 7. Extend/release | multimodality, safety, robustness | multimodal + adversarial/eval data | release gate | Did capability improve without hiding regressions? |
-| 8. Serve/decide | inference, RAG, tools, API economics | live/retrieval/tool scenarios | architecture decision record | Is training actually necessary? |
-| 9. Program/research | scale, governance, teams, compute, funding | evidence from prior experiments | Model Program Dossier | Can I defend the entire program? |
+The README matrix is the authoritative answer to “which material do I open next?”
 
-## 3. The master material matrix
+The stages are:
 
-A learner should never have to guess which artifact belongs to a topic.
+- **0 · Orient** — open-weight workflow, reproducibility, model audit.
+- **1 · Foundations** — probability, tokenization, Transformer mechanics, attention, MoE.
+- **2 · Training systems** — resource accounting, GPUs, kernels, efficient attention, distributed training, scaling, instrumentation.
+- **3 · Evaluation contract** — metrics, slices, statistical discipline, and release gates before expensive training.
+- **4 · Real data** — acquisition, schema, quality, deduplication, mixing, provenance.
+- **5 · Train + adapt** — SFT, full fine-tuning, continued pretraining, LoRA, QLoRA.
+- **6 · Align** — RLVR, preference optimization, DPO, and distillation.
+- **7 · Extend + release** — multimodality, robustness, safety, failure analysis, release gates.
+- **8 · Serve + decide** — inference, KV cache, RAG, tools, API economics, training-method choice.
+- **9 · Program + research** — resource planning, research, governance, funding, capstone.
 
-| Module | Lecture | Book | Mind map / visual | Real dataset | Primary lab | Runbook / decision aid | Project |
-|---|---|---|---|---|---|---|---|
-| Foundations | ✓ | ✓ | ✓ | small corpus | Tiny LM / Transformer | — | Tiny GPT |
-| Tokenization | ✓ | ✓ | ✓ | Persian + multilingual slices | Tokenizer measurement | — | Tiny GPT |
-| Training systems | ✓ | ✓ | ✓ | model/resource metadata | Resource/GPU/distributed labs | resource runbooks | Tiny GPT |
-| Evaluation | ✓ | ✓ | ✓ | ParsiNLU / PersianMedQA / general benchmarks | Evaluation harness | Evaluation runbook | Data-quality paper |
-| Data construction | ✓ | ✓ | ✓ | FineWeb / Dolma / CulturaX / Persian corpora | Real Dataset Bench | Dataset curation | Data-quality paper |
-| Data quality | ✓ | ✓ | ✓ | web + Persian + synthetic | Dedup/mixing | Dataset curation | Data-quality paper |
-| SFT | ✓ | ✓ | ✓ | Aya / task datasets / Persian instruction sets | Qwen SFT | SFT runbook | Domain SFT + PEFT |
-| LoRA / QLoRA | ✓ | ✓ | ✓ | same controlled task data | PEFT comparison | PEFT runbook | Domain SFT + PEFT |
-| Continued PT | ✓ | ✓ | ✓ | Persian web / Naab / FineWeb2-HQ / synthetic Persian | FT vs LoRA + resource experiments | Pretraining decision | Data-quality paper |
-| Preference / DPO | ✓ | ✓ | ✓ | preference pairs | DPO concepts | SFT/PEFT + evaluation | Domain SFT + PEFT |
-| RLVR | ✓ | ✓ | ✓ | verifiable reasoning | RLVR toy | training triage | Data-quality paper |
-| Multimodality | ✓ | ✓ | ✓ | image-text / audio / video sources | alignment map | — | Capstone |
-| RAG / tools | ✓ | ✓ | ✓ | documents / live records | Build-vs-buy | decision trees | Capstone |
-| Serving | ✓ | ✓ | ✓ | model profiles | KV-cache / serving | inference runbook | Capstone |
-| Program design | ✓ | ✓ | ✓ | all prior evidence | resource plan | funding/program runbooks | Model Program Dossier |
+## 3. Material relationship
 
-## 4. The Persian longitudinal case
+There is deliberately one curriculum map:
 
-Persian is not a one-off dataset example. It is a thread through the entire course:
+**Lecture → Book → Lab → Dataset → Evaluation → Runbook/Decision → Project**
+
+A laboratory may serve several lectures or chapters. Reuse is intentional; a new notebook is justified only when an existing experiment cannot demonstrate the required mechanism.
+
+## 4. Persian longitudinal case
+
+Persian is not a one-off dataset example. It is a thread through the course:
 
 ```text
 Persian text → tokenizer fertility → corpus provenance / filtering
@@ -106,19 +96,17 @@ Persian text → tokenizer fertility → corpus provenance / filtering
 → serving / deployment economics → language-model program design
 ```
 
-This lets students ask the same engineering question repeatedly:
-
-> What changes when the target language has less high-quality digital data, different orthography/tokenization behavior, and different evaluation coverage?
+See the [Persian Dataset Track](../data/PERSIAN_DATASET_TRACK.md).
 
 ## 5. Evidence artifacts
 
 A stage is complete only when the learner can save the relevant artifact:
 
 - **model audit:** checkpoint/config/tokenizer/resource record
-- **tokenization:** fertility table and examples
+- **tokenization:** fertility analysis and examples
 - **data:** immutable source manifest + schema map + quality/dedup report
 - **training:** loss/resource/checkpoint record
-- **adaptation:** baseline vs intervention table
+- **adaptation:** baseline vs intervention results
 - **evaluation:** benchmark protocol + slice results + error taxonomy
 - **serving:** latency/memory/TCO record
 - **decision:** alternatives + evidence + gate
@@ -126,19 +114,19 @@ A stage is complete only when the learner can save the relevant artifact:
 
 ## 6. Rules that prevent curriculum sprawl
 
-1. A new dataset must attach to an existing stage and lab before it becomes a course artifact.
-2. A new notebook must replace a missing executable experiment; it should not duplicate an existing lab.
+1. A new dataset must attach to an existing stage and lab.
+2. A new notebook must replace a missing executable experiment; it must not duplicate an existing lab.
 3. A runbook is a procedure, not another reading track.
 4. A lecture must point to its primary laboratory and evidence artifact.
-5. A book chapter must explain the mechanism and decision; it must not duplicate the lecture verbatim.
+5. A book chapter explains mechanism and decision; it does not duplicate the lecture verbatim.
 6. Every real-data experiment records source, revision, split, license/access basis, and preprocessing.
-7. Every model comparison holds the relevant budget and evaluation protocol constant.
-8. Every major claim must have a measurement path.
+7. Comparisons hold the relevant budget and evaluation protocol constant.
+8. Every major claim has a measurement path.
 
 ## 7. Definition of curriculum completeness
 
-The curriculum is structurally complete when every major stage has:
+The curriculum is complete when every major stage has:
 
 **concept → lecture → book → real artifact → executable experiment → evaluation → failure mode → engineering decision → reproducible evidence**
 
-Content can continue to evolve; the graph should remain stable.
+Content can evolve; the graph and the single curriculum matrix should remain stable.
