@@ -1,7 +1,7 @@
 # Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data
 
 **Duration:** 25 minutes  
-**Lab:** [Deduplication and Data Mixing](../../notebooks/dedup_and_data_mixing.ipynb)
+**Lab:** [Deduplication and Data Mixing](`./lab.ipynb`)
 
 ## Outcome
 
@@ -71,3 +71,10 @@ Name one reason aggressive deduplication can hurt rather than help.
 ## Research bridge
 
 Compare your classroom experiment with a published dataset-construction pipeline and identify the missing production stages.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
