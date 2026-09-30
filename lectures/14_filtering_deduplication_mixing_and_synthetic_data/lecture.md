@@ -1,6 +1,6 @@
 # Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data
 
-**Lab:** [Deduplication and Data Mixing](`./lab.ipynb`)
+**Lab:** [Deduplication and Data Mixing](./lab.ipynb)
 
 ## Outcome
 
@@ -8,11 +8,11 @@ You can isolate data interventions and quantify whether a cleaner corpus is actu
 
 ## The transformed budget
 
-Show:
+Inspect:
 
 **100B raw → 60B filtered → 45B deduped → 45B sampled**
 
-Ask what changed besides token count.
+Consider: what changed besides token count.
 
 ## Filtering
 
@@ -55,7 +55,7 @@ Measure:
 
 Increase synthetic data until teacher-correlated failures become visible.
 
-Ask whether a larger dataset produced more useful diversity.
+Consider: whether a larger dataset produced more useful diversity.
 
 ## Engineering decision
 
@@ -77,3 +77,11 @@ Compare your classroom experiment with a published dataset-construction pipeline
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 13 — Data Sources and Dataset Construction](../13_data_sources_and_dataset_construction/lecture.md) · [Next lecture: Lecture 15 — Mid and Post Training: SFT and RLHF →](../15_mid_and_post_training_sft_and_rlhf/lecture.md)
+
+</div>
