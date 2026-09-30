@@ -1,6 +1,6 @@
 # Lecture 17 — Multimodality: Turning Images Into Model Inputs
 
-**Lab:** [Multimodal Alignment Map](`./lab.ipynb`)  
+**Lab:** [Multimodal Alignment Map](./lab.ipynb)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -92,3 +92,11 @@ Read one modern vision-language model architecture and identify the encoder, ali
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 16 — Reinforcement Learning with Verifiable Rewards](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Next lecture: Lecture 18 — LoRA, QLoRA, and PEFT →](../18_lora_qlora_and_peft/lecture.md)
+
+</div>
