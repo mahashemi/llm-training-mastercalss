@@ -1,7 +1,7 @@
 # Lecture 11 — Training System Design and Instrumentation
 
 **Duration:** 25 minutes  
-**Lab:** [Training Loop Instrumentation](../../notebooks/training_loop_instrumentation.ipynb)
+**Lab:** [Training Loop Instrumentation](`./lab.ipynb`)
 
 ## Outcome
 
@@ -77,3 +77,10 @@ Name the three measurements you would require before approving a 100× longer ru
 ## Research bridge
 
 Compare your checkpoint state with the state required by the chosen training framework and document any assumptions.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
