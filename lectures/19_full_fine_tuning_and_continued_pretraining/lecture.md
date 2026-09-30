@@ -1,6 +1,5 @@
 # Lecture 19 — Full Fine-Tuning and Continued Pretraining
 
-**Duration:** 25 minutes  
 **Lab:** [full_ft_vs_lora.ipynb](`./lab.ipynb`)
 **Primary anchor:** https://cs336.stanford.edu/
 
@@ -8,7 +7,7 @@
 
 Learn to distinguish a narrow behavior update from a broad domain/language distribution shift, then choose between PEFT, full fine-tuning, and continued pretraining using evidence.
 
-## 0–4 — Three different requests
+## Three different requests
 
 1. “Always return this JSON format.”  
 2. “Understand our specialist terminology better.”  
@@ -24,7 +23,7 @@ No.
 | broad adaptation | full FT may be tested |
 | language/domain exposure | continued pretraining |
 
-## 4–8 — Full fine-tuning
+## Full fine-tuning
 
 Full FT updates most/all parameters.
 
@@ -34,7 +33,7 @@ Training memory includes:
 
 This can be many times larger than inference-only memory.
 
-## 8–12 — Continued pretraining
+## Continued pretraining
 
 Continued pretraining feeds additional unlabeled tokens.
 
@@ -52,7 +51,7 @@ FLOPs ≈ 6ND
 
 Use measured throughput to translate this into wall time.
 
-## 12–16 — Decision matrix
+## Decision matrix
 
 | Question | SFT/PEFT | Full FT | Continued PT |
 |---|---|---|---|
@@ -64,7 +63,7 @@ Use measured throughput to translate this into wall time.
 | Training memory | low–medium | high | high |
 | Main risk | under/overfitting | high cost/forgetting | forgetting + compute |
 
-## 16–19 — Worked example
+## Worked example
 
 Suppose:
 
@@ -81,7 +80,7 @@ Test:
 
 and evaluate whether target quality can be retained without unacceptable regression.
 
-## 19–22 — Why the order matters
+## Why the order matters
 
 Recommended evidence ladder:
 
@@ -89,7 +88,7 @@ Recommended evidence ladder:
 
 This avoids spending expensive compute before identifying the actual bottleneck.
 
-## 22–24 — Break it
+## Break it
 
 Give a small 1B-token specialist corpus.
 
@@ -101,7 +100,7 @@ Answer:
 
 No. First test whether the corpus is large/novel enough and whether a small pilot changes the target metric.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Complete:
 
@@ -150,7 +149,7 @@ Measure:
 
 ### H100 feasibility drill
 
-Given a 7B model and one H100, students must write the memory budget before choosing full FT.
+Given a 7B model and one H100, you must write the memory budget before choosing full FT.
 
 Then ask:
 
