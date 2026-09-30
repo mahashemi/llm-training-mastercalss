@@ -1,7 +1,7 @@
 # Lecture 15 — Mid and Post Training: SFT, RLHF, and the Post-Training Stack
 
 **Duration:** 25 minutes  
-**Lab:** [sft_with_a_small_open_model.ipynb](../../notebooks/sft_with_a_small_open_model.ipynb)
+**Lab:** [sft_with_a_small_open_model.ipynb](`./lab.ipynb`)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -158,4 +158,10 @@ Complete:
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
