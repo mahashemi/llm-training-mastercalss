@@ -1,6 +1,5 @@
 # Lecture 08 — Distributed Training
 
-**Duration:** 25 minutes  
 **Lab:** [DDP and Sharding Simulation](`./lab.ipynb`)  
 **Primary anchor:** PyTorch FSDP documentation — https://pytorch.org/docs/main/distributed.fsdp.fully_shard.html
 
@@ -8,7 +7,7 @@
 
 Students can explain replication versus sharding and derive why more GPUs do not automatically produce linear throughput.
 
-## 0–4 — The one-GPU wall
+## The one-GPU wall
 
 Start with a model that cannot fit.
 
@@ -18,7 +17,7 @@ Ask:
 
 This distinguishes data parallelism from model/state sharding.
 
-## 4–9 — DDP
+## DDP
 
 Each worker holds a copy of model parameters.
 
@@ -37,7 +36,7 @@ Cost:
 
 - replication.
 
-## 9–14 — Sharding and parallelism
+## Sharding and parallelism
 
 Compare:
 
@@ -51,21 +50,21 @@ Compare:
 
 Real systems combine these.
 
-## 14–19 — Communication model
+## Communication model
 
 Use:
 
-**total throughput = compute time + communication + synchronization + input/output**
+$T_{total}=T_{compute}+T_{communication}+T_{sync}+T_{I/O}$
 
 As GPU count rises, communication and idle time can dominate.
 
 Define:
 
-**scaling efficiency = T_k / (k × T_1)**
+$E_k = \frac{T_k}{kT_1}$
 
 where T is throughput.
 
-## 19–22 — Laboratory
+## Laboratory
 
 Measure or simulate:
 
@@ -80,7 +79,7 @@ Record:
 
 Then deliberately lower the compute per step and see efficiency fall.
 
-## 22–24 — H100 bridge
+## H100 bridge
 
 The H100's value in a cluster depends on:
 
@@ -93,7 +92,7 @@ The H100's value in a cluster depends on:
 
 A fast accelerator in a badly fed cluster is still badly utilized.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Answer:
 
