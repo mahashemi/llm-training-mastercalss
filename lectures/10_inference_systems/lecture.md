@@ -1,6 +1,5 @@
 # Lecture 10 — Inference Systems: Prefill, Decode, KV Cache, and Serving
 
-**Duration:** 25 minutes  
 **Lab:** [Inference and KV Cache](`./lab.ipynb`)  
 **Primary anchor:** vLLM — https://docs.vllm.ai/en/stable/
 
@@ -8,7 +7,7 @@
 
 Students can separate prefill from decode, calculate why KV cache grows, and benchmark latency versus throughput.
 
-## 0–4 — Why inference is not training
+## Why inference is not training
 
 Training sees the target sequence and can parallelize positions.
 
@@ -20,7 +19,7 @@ Ask:
 
 KV cache.
 
-## 4–9 — Prefill versus decode
+## Prefill versus decode
 
 **Prefill:** process the prompt and construct cache.
 
@@ -31,7 +30,7 @@ Students identify:
 - compute-heavy prefill;
 - memory/latency-sensitive decode.
 
-## 9–14 — KV memory
+## KV memory
 
 A simplified per-token cache estimate is proportional to:
 
@@ -43,7 +42,7 @@ Then multiply by:
 
 The exact implementation adds runtime effects, but the scaling relationship is the key.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Vary:
 
@@ -59,7 +58,7 @@ Measure:
 | medium | measure | measure | measure | measure |
 | long | measure | measure | measure | measure |
 
-## 19–22 — Break it
+## Break it
 
 Increase concurrency until memory or latency becomes unacceptable.
 
@@ -67,7 +66,7 @@ Identify whether the failure is:
 
 **capacity → queueing → KV memory → scheduler**
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 An inference profile must state:
 
@@ -75,7 +74,7 @@ An inference profile must state:
 
 A single tokens/sec number is not a capacity plan.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Why can throughput rise while user-perceived latency gets worse?
 
