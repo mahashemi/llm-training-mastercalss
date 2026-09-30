@@ -1,6 +1,6 @@
 # Lecture 18 — LoRA, QLoRA, and PEFT
 
-**Lab:** [lora_qlora_comparison.ipynb](`./lab.ipynb`)
+**Lab:** [lora_qlora_comparison.ipynb](./lab.ipynb)
 **Primary anchors:** https://arxiv.org/abs/2106.09685 · https://arxiv.org/abs/2305.14314
 
 ## Outcome
@@ -160,3 +160,11 @@ You should explain why adapter parameter savings do not imply zero activation or
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 17 — Multimodality](../17_multimodality/lecture.md) · [Next lecture: Lecture 19 — Full Fine-Tuning and Continued Pretraining →](../19_full_fine_tuning_and_continued_pretraining/lecture.md)
+
+</div>
