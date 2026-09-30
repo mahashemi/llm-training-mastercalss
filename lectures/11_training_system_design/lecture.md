@@ -1,13 +1,12 @@
 # Lecture 11 — Training System Design and Instrumentation
 
-**Duration:** 25 minutes  
 **Lab:** [Training Loop Instrumentation](`./lab.ipynb`)
 
 ## Outcome
 
 Students can turn a Python training loop into an observable system and identify whether a failed run is statistical, numerical, or systems-related.
 
-## 0–4 — A training run is a state machine
+## A training run is a state machine
 
 Draw:
 
@@ -19,7 +18,7 @@ Ask:
 
 Not just model weights.
 
-## 4–9 — Training state
+## Training state
 
 A serious checkpoint can require:
 
@@ -32,7 +31,7 @@ A serious checkpoint can require:
 - dataloader position/metadata;
 - training step/configuration.
 
-## 9–14 — Observability
+## Observability
 
 Log at minimum:
 
@@ -48,7 +47,7 @@ Log at minimum:
 
 Explain why averages can hide pathological spikes.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Instrument a tiny model.
 
@@ -58,7 +57,7 @@ Produce a table and plot of:
 
 Then intentionally slow data loading and demonstrate the difference between a GPU bottleneck and an input bottleneck.
 
-## 19–22 — Break it
+## Break it
 
 Interrupt training during a checkpoint and restart.
 
@@ -66,11 +65,11 @@ Ask:
 
 > Which artifacts make the resume trustworthy?
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 Observability is not decoration. It changes what failures can be diagnosed before expensive scaling.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Name the three measurements you would require before approving a 100× longer run.
 
