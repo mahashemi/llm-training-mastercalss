@@ -212,3 +212,11 @@ https://arxiv.org/abs/1706.03762
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[Next lecture: Lecture 02 — Tokenization →](../02_tokenization/lecture.md)
+
+</div>
