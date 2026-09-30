@@ -1,6 +1,6 @@
 # Lecture 22 — API vs RAG vs Tools vs Training
 
-**Lab:** [build_vs_buy_decision_lab.ipynb](`./lab.ipynb`)
+**Lab:** [build_vs_buy_decision_lab.ipynb](./lab.ipynb)
 **Primary goal:** Diagnose the bottleneck before choosing an architecture.
 
 ## Learning outcome
@@ -203,3 +203,11 @@ Only escalate to weight updates when the simpler system layer cannot explain or 
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 21 — Safety, Robustness, and Failure Analysis](../21_safety_robustness_and_failure_analysis/lecture.md) · [Next lecture: Lecture 23 — Build an LLM Program →](../23_build_an_llm_program/lecture.md)
+
+</div>
