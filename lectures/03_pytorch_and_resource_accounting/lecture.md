@@ -1,14 +1,13 @@
 # Lecture 03 — PyTorch and Resource Accounting
 
-**Duration:** 25 minutes  
 **Lab:** [Resource Accounting — FLOPs and Memory](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
 
-Students learn to look at a model as a collection of tensors and resource terms rather than a parameter-count headline.
+You learn to look at a model as a collection of tensors and resource terms rather than a parameter-count headline.
 
-## 0–4 — The trap
+## The trap
 
 Write:
 
@@ -18,13 +17,13 @@ Ask whether that statement is enough to launch training.
 
 No.
 
-## 4–8 — Tensor dimensions first
+## Tensor dimensions first
 
 Take one linear layer:
 
-**X ∈ R^(B×L×d_in)**  
-**W ∈ R^(d_in×d_out)**  
-**Y = XW**
+$X \in \mathbb{R}^{B \times L \times d_{in}}$  
+$W \in \mathbb{R}^{d_{in} \times d_{out}}$  
+$Y = XW$
 
 Count the parameters:
 
@@ -34,15 +33,15 @@ Then ask what happens when B or L doubles.
 
 Students connect shape to compute before seeing FLOPs formulas.
 
-## 8–14 — Memory decomposition
+## Memory decomposition
 
 For training:
 
-**M ≈ weights + gradients + optimizer + activations + temporary/runtime**
+$M \approx M_{weights}+M_{gradients}+M_{optimizer}+M_{activations}+M_{runtime}$
 
 For inference:
 
-**M ≈ weights + KV cache + runtime**
+$M \approx M_{weights}+M_{KV}+M_{runtime}$
 
 Example:
 
@@ -50,11 +49,11 @@ Example:
 
 That is not a 14-GB training requirement.
 
-## 14–19 — FLOPs and arithmetic intensity
+## FLOPs and arithmetic intensity
 
 Introduce a first-order dense-model training heuristic:
 
-**FLOPs ≈ 6ND**
+$\mathrm{FLOPs} \approx 6ND$
 
 where N = parameters and D = training tokens.
 
@@ -66,9 +65,9 @@ Then distinguish:
 - memory bandwidth;
 - communication.
 
-Students should understand why a benchmark number from a GPU vendor is not the throughput of their training job.
+You should understand why a benchmark number from a GPU vendor is not the throughput of their training job.
 
-## 19–22 — Laboratory
+## Laboratory
 
 Run two controlled experiments:
 
@@ -82,13 +81,13 @@ Record:
 | baseline | measure | measure | measure |
 | changed | measure | measure | measure |
 
-## 22–24 — Break it
+## Break it
 
 Create a configuration that fits inference but fails training.
 
 Diagnose which memory term caused failure.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Students must answer:
 
