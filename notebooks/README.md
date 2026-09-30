@@ -31,34 +31,37 @@ Completing all cells is not the learning objective.
 
 ## Canonical notebooks
 
-| # | Notebook | Resource | Role |
-|---|---|---|---|
-| 00 | Orientation / Resource Accounting | CPU / optional GPU | hardware and memory mental model |
-| 01 | Next-token Prediction and Tiny LM | CPU / free Colab | objective + training loop |
-| 02 | Tokenizer Design and Measurement | CPU | tokenization + fertility |
-| 03 | Resource Accounting — FLOPs and Memory | CPU | model/training resource math |
-| 04 | Build a Tiny Transformer | CPU / free Colab | architecture implementation |
-| 05 | Attention Variants and MoE | CPU | MHA/GQA/MQA/MoE |
-| 06 | GPU Kernel Benchmark | GPU optional | hardware behavior |
-| 07 | Attention Memory and Tiling | CPU / GPU optional | IO/memory-aware attention |
-| 08 | DDP and Sharding Simulation | CPU | distributed resource reasoning |
-| 09 | Scaling-law Fit | CPU | model/data/compute allocation |
-| 10 | Inference and KV Cache | CPU / GPU optional | serving memory/latency |
-| 11 | Training Loop Instrumentation | CPU / GPU optional | observability/recovery |
-| 12 | Evaluation Harness | CPU | metrics and release gates |
-| 13 | Dataset Curation Pipeline | CPU | data transformation |
-| 14 | Deduplication and Data Mixing | CPU | corpus intervention |
-| 15 | SFT with a Small Open Model | GPU recommended | real open-weight training |
-| 16 | RLVR Toy Experiment | CPU | verifier/reward design |
-| 17 | Multimodal Alignment Map | CPU | visual-token/resource reasoning |
-| 18 | LoRA / QLoRA Comparison | GPU recommended | parameter-efficient training |
-| 19 | Full Fine-tuning vs LoRA | CPU accounting / GPU optional | adaptation resource trade-offs |
-| 20 | DPO and Distillation Concepts | CPU | preference/teacher-student |
-| 21 | Failure Analysis and Safety Evaluation | CPU | failure taxonomy |
-| 22 | Build-vs-Buy Decision Lab | CPU | architecture decisions |
-| 23 | National LLM Resource Plan | CPU | compute derivation |
-| 24 | Capstone Model Program | CPU | evidence-to-program |
-| 25 | Tiny GPT Pretraining Campaign | CPU / free Colab | end-to-end pretraining bridge |
+The executable labs align with the 24-lecture sequence, plus orientation, real-data, and end-to-end bridges.
+
+1. [Next-token Prediction and Tiny LM](./01_next_token_prediction_and_a_tiny_language_model.ipynb)
+2. [Tokenizer Design and Measurement](./tokenizer_design_and_measurement.ipynb)
+3. [Resource Accounting — FLOPs and Memory](./resource_accounting_flops_memory.ipynb)
+4. [Build a Tiny Transformer](./build_a_tiny_transformer.ipynb)
+5. [Attention Variants and MoE](./attention_and_moe_lab.ipynb)
+6. [GPU Kernel Benchmark](./gpu_kernel_benchmark.ipynb)
+7. [Attention Memory and Tiling](./attention_memory_and_tiling.ipynb)
+8. [DDP and Sharding Simulation](./ddp_and_sharding_simulation.ipynb)
+9. [Scaling-law Fit](./scaling_law_fit.ipynb)
+10. [Inference and KV Cache](./inference_and_kv_cache.ipynb)
+11. [Training Loop Instrumentation](./training_loop_instrumentation.ipynb)
+12. [Evaluation Harness](./evaluation_harness.ipynb)
+13. [Dataset Curation Pipeline](./dataset_curation_pipeline.ipynb)
+14. [Deduplication and Data Mixing](./dedup_and_data_mixing.ipynb)
+15. [SFT with a Small Open Model](./sft_with_a_small_open_model.ipynb)
+16. [RLVR Toy Experiment](./rlvr_toy_experiment.ipynb)
+17. [Multimodal Alignment Map](./multimodal_alignment_map.ipynb)
+18. [LoRA / QLoRA Comparison](./lora_qlora_comparison.ipynb)
+19. [Full Fine-tuning vs LoRA](./full_ft_vs_lora.ipynb)
+20. [DPO and Distillation Concepts](./dpo_and_distillation_concepts.ipynb)
+21. [Failure Analysis and Safety Evaluation](./failure_analysis_and_safety_eval.ipynb)
+22. [Build-vs-Buy Decision Lab](./build_vs_buy_decision_lab.ipynb)
+23. [National LLM Resource Plan](./national_llm_resource_plan.ipynb)
+24. [Capstone Model Program](./capstone_model_program.ipynb)
+25. [Tiny GPT Pretraining Campaign](./tiny_gpt_pretraining_campaign.ipynb)
+
+Additional bridges:
+- [Open-Weight Model Audit](./open_weight_model_audit.ipynb)
+- [Real Dataset Corpus Bench](./real_dataset_corpus_bench.ipynb)
 
 ## Open-weight training labs
 
