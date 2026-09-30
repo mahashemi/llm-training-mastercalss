@@ -52,7 +52,7 @@ Then produce:
 - loss vs tokens;
 - loss vs compute.
 
-Students must identify whether their extrapolation is inside or outside the observed regime.
+You must identify whether their extrapolation is inside or outside the observed regime.
 
 ## Break it
 
