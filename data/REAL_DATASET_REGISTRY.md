@@ -1,6 +1,6 @@
 # Real Dataset Registry
 
-**Audit date:** 2026-09-29
+**Audit date:** 2026-09-30
 
 This is the concrete dataset layer for the LLM Trainer Masterclass. The repository does not vendor multi-terabyte datasets. Students stream or sample them from the original host, record the exact dataset revision/version, and build a local experiment artifact.
 
@@ -16,6 +16,25 @@ This is the concrete dataset layer for the LLM Trainer Masterclass. The reposito
 | OpenWebMath | [open-web-math/open-web-math](https://huggingface.co/datasets/open-web-math/open-web-math) | English | 6.3M docs / 14.7B tokens | text, url, date, metadata | ODC-BY; also Common Crawl ToU | math corpus |
 
 The FineWeb and FineWeb-Edu repositories expose smaller sample configurations such as 10BT/100BT/350BT, which are useful for classroom streaming experiments rather than downloading full corpora.
+
+## Tier A-P — Persian-first corpus, synthetic data, and evaluation
+
+Persian is a first-class longitudinal case study. Do not confuse the **IbnSina-1.5B model** with a dataset: the model has 1.48B parameters, while its public model card reports 46B training tokens. The separate IbnSina synthetic corpus contains 2.075B tokens.
+
+| Dataset / model | Host / exact ID | Approx. scale | Key role | License / access |
+|---|---|---:|---|---|
+| IbnSina-1.5B | [Hugging Face model](https://huggingface.co/ibnsina-llm/ibnsina-1.5b) | 1.48B parameters; 46B training tokens reported by model card | Persian-first model case study; tokenizer, training mix, SFT, serving | Apache-2.0 model/code; source terms vary |
+| IbnSina Synthetic Persian v1 | [ibnsina-llm/synthetic-persian-v1](https://huggingface.co/datasets/ibnsina-llm/synthetic-persian-v1) | 883k docs / 2.075B tokens | synthetic-data filtering, decontamination, reasoning/STEM supplementation | Apache-2.0 |
+| Naab | [SLPL/naab](https://huggingface.co/datasets/SLPL/naab) | ~130GB / ~250M paragraphs / ~15B words | large cleaned Persian corpus; streaming and corpus engineering | review current dataset/source terms |
+| CulturaX — Persian | [uonlp/CulturaX](https://huggingface.co/datasets/uonlp/CulturaX), config `fa` | 59.5M docs / 45.95B tokens | multilingual-to-Persian scale comparison | gated; mC4/OSCAR terms apply |
+| FineWeb2-HQ — Persian | [epfml/FineWeb2-HQ](https://huggingface.co/datasets/epfml/FineWeb2-HQ), subset `fas_Arab` | 5.1M docs / 69GB | high-quality Persian web comparison | review current upstream terms |
+| Persian Corpus (Merged) | [PersianML/persian-text-corpus](https://huggingface.co/datasets/PersianML/persian-text-corpus) | 14.7M rows / ~5.1B tokens | multi-source aggregation and provenance audit | MIT on card; inspect component provenance |
+| Targoman Large Persian Corpus | [Targoman/TLPC](https://huggingface.co/datasets/Targoman/TLPC) | >75M docs / >41B tokens claimed by card | corpus-scale/provenance case study | review source terms carefully |
+| PersianMedQA | [MohammadJRanjbar/PersianMedQA](https://huggingface.co/datasets/MohammadJRanjbar/PersianMedQA) | 20,785 items / 23 specialties | Persian bilingual medical evaluation | gated; non-commercial academic research per card |
+| ParsiNLU | [persiannlp datasets](https://huggingface.co/datasets/persiannlp) | multiple task-specific datasets | Persian NLU evaluation | license varies by subset |
+| PerSpaCor | [PerSpaCor/bijankhan-peykare-annotated](https://huggingface.co/datasets/PerSpaCor/bijankhan-peykare-annotated) | 424,181 examples | Persian spacing/ZWNJ normalization | review current dataset card |
+
+**Why this matters:** the largest raw corpus is not automatically the best training corpus. Students compare scale, quality, provenance, token efficiency, license/access, domain coverage, and evaluation contamination.
 
 ## Tier B — Multilingual instruction / reasoning
 
@@ -69,6 +88,12 @@ Every experiment records:
 host → dataset ID → config/subset → split → revision/version → acquisition date → license/access basis → preprocessing commit
 
 ## First classroom corpus
+
+## Persian classroom path
+
+The Persian track is intentionally longitudinal rather than a new notebook family. Use the existing tokenizer, real-dataset, curation, deduplication, SFT/PEFT, and evaluation notebooks.
+
+See **[Persian Dataset Track](PERSIAN_DATASET_TRACK.md)** for the exact progression and reproducibility record.
 
 The recommended first real corpus is intentionally small:
 
