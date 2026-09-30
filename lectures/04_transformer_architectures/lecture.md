@@ -1,6 +1,6 @@
 # Lecture 04 — Transformer Architectures
 
-**Lab:** [Build a Tiny Transformer](`./lab.ipynb`)  
+**Lab:** [Build a Tiny Transformer](./lab.ipynb)  
 **Primary anchor:** *Attention Is All You Need* — https://arxiv.org/abs/1706.03762
 
 ## Outcome
@@ -13,7 +13,7 @@ Start with:
 
 **token IDs → embeddings → blocks → logits**
 
-Ask what each stage must provide for the next stage.
+Consider: what each stage must provide for the next stage.
 
 ## One Transformer block
 
@@ -92,3 +92,11 @@ Connect the implementation to the original Transformer paper, then identify whic
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 03 — PyTorch and Resource Accounting](../03_pytorch_and_resource_accounting/lecture.md) · [Next lecture: Lecture 05 — Attention Alternatives and MoE →](../05_attention_alternatives_and_moe/lecture.md)
+
+</div>
