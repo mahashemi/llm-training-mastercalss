@@ -1,7 +1,7 @@
 # Lecture 23 — Build an LLM Program
 
 **Duration:** 25 minutes
-**Lab:** [national_llm_resource_plan.ipynb](../../notebooks/national_llm_resource_plan.ipynb)
+**Lab:** [national_llm_resource_plan.ipynb](`./lab.ipynb`)
 
 ## Outcome
 
@@ -158,7 +158,7 @@ OLMo 2: https://allenai.org/olmo2
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
 
 ## Deepening — the model program is a dependency graph
 
@@ -196,3 +196,10 @@ For each milestone define:
 
 This converts a one-time funding request into a sequence of evidence gates.
 
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
