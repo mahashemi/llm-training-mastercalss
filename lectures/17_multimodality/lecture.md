@@ -1,7 +1,7 @@
 # Lecture 17 — Multimodality: Turning Images Into Model Inputs
 
 **Duration:** 25 minutes  
-**Lab:** [Multimodal Alignment Map](../../notebooks/multimodal_alignment_map.ipynb)  
+**Lab:** [Multimodal Alignment Map](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -86,3 +86,10 @@ Explain why “more image tokens” can simultaneously help quality and hurt lat
 ## Research bridge
 
 Read one modern vision-language model architecture and identify the encoder, alignment mechanism, language backbone, and training stages.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
