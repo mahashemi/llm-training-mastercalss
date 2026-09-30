@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students understand that attention optimization can come from reducing memory traffic and avoiding materialization, not only from reducing mathematical FLOPs.
+You understand that attention optimization can come from reducing memory traffic and avoiding materialization, not only from reducing mathematical FLOPs.
 
 ## Same equation, different system cost
 
@@ -29,7 +29,7 @@ Introduce the conceptual loop:
 
 **load tile → update running statistics → accumulate output → discard tile**
 
-Students do not need to implement production FlashAttention yet; they need to understand the data movement.
+You do not need to implement production FlashAttention yet; they need to understand the data movement.
 
 ## Triton mental model
 
