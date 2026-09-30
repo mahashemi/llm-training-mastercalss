@@ -212,3 +212,10 @@ The Transformer architecture was introduced in *Attention Is All You Need* (Vasw
 
 Primary source:
 https://arxiv.org/abs/1706.03762
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
