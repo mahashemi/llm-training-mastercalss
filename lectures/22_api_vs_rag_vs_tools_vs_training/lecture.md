@@ -11,7 +11,7 @@ The learner should be able to take a requirement such as:
 
 and decompose it into **knowledge, behavior, and action** problems.
 
-## 0–3 minutes — The trap
+## The trap
 
 Show four responses to:
 
@@ -22,13 +22,13 @@ B. make the prompt longer
 C. add retrieval  
 D. train a new foundation model
 
-Ask students which experiment would be most informative.
+Consider which experiment would be most informative.
 
 Then establish the rule:
 
 **If the source of truth changes externally, first test whether the model needs access to that source rather than new memorized weights.**
 
-## 3–7 minutes — The three-bucket model
+## The three-bucket model
 
 **KNOWLEDGE:** What information should the model see?  
 Typical method: RAG or live data.
@@ -44,7 +44,7 @@ Then add a fourth bucket:
 **REPRESENTATION:** Is the model fundamentally weak on the domain/language?  
 Possible method: continued pretraining.
 
-## 7–12 minutes — Decision matrix
+## Decision matrix
 
 | Dimension | API | API + RAG | API + tools | SFT/PEFT | Continued PT | Scratch |
 |---|---|---|---|---|---|---|
@@ -58,7 +58,7 @@ Possible method: continued pretraining.
 
 Stress that the table is a **problem-to-method map**, not a winner table.
 
-## 12–16 minutes — Worked scenario
+## Worked scenario
 
 Hospital assistant requirements:
 
@@ -85,7 +85,7 @@ Evaluate each requirement separately.
 | Latency | p50/p95 |
 | Cost | cost per successful task |
 
-## 16–19 minutes — Cost reasoning
+## Cost reasoning
 
 API request:
 
@@ -107,7 +107,7 @@ Break-even is about 100,000 successful tasks.
 
 Then add update cadence. Daily-changing knowledge can make repeated retraining uneconomic even when per-request inference becomes cheaper.
 
-## 19–22 minutes — Failure analysis
+## Failure analysis
 
 **Correct document never retrieved**  
 → retrieval failure.
@@ -126,7 +126,7 @@ Then add update cadence. Daily-changing knowledge can make repeated retraining u
 
 Learn to map **failure → system layer**.
 
-## 22–24 minutes — Escalation ladder
+## Escalation ladder
 
 **Strong baseline**  
 ↓  
@@ -142,7 +142,7 @@ Learn to map **failure → system layer**.
 
 Every escalation must record quality, latency, cost, regression, and operational complexity.
 
-## 24–25 minutes — Exit challenge
+## Exit challenge
 
 Write one sentence for each:
 
