@@ -19,7 +19,7 @@ By the end of this lecture, a student should be able to explain, without hand-wa
 
 ## Start with a prediction
 
-Ask the room:
+Consider:
 
 > Given the sentence “The capital of France is ___”, what should the model output?
 
