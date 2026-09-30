@@ -1,6 +1,6 @@
 # Lecture 08 — Distributed Training
 
-**Lab:** [DDP and Sharding Simulation](`./lab.ipynb`)  
+**Lab:** [DDP and Sharding Simulation](./lab.ipynb)  
 **Primary anchor:** PyTorch FSDP documentation — https://pytorch.org/docs/main/distributed.fsdp.fully_shard.html
 
 ## Outcome
@@ -108,3 +108,11 @@ Read a current PyTorch FSDP guide and compare its abstractions with the simulate
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 07 — Efficient Attention, FlashAttention, and Triton](../07_efficient_attention_and_triton/lecture.md) · [Next lecture: Lecture 09 — Scaling Laws →](../09_scaling_laws/lecture.md)
+
+</div>
