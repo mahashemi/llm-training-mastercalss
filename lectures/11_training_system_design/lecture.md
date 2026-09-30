@@ -4,7 +4,7 @@
 
 ## Outcome
 
-Students can turn a Python training loop into an observable system and identify whether a failed run is statistical, numerical, or systems-related.
+You can turn a Python training loop into an observable system and identify whether a failed run is statistical, numerical, or systems-related.
 
 ## A training run is a state machine
 
