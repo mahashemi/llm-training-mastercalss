@@ -1,6 +1,5 @@
 # Lecture 04 — Transformer Architectures
 
-**Duration:** 25 minutes  
 **Lab:** [Build a Tiny Transformer](`./lab.ipynb`)  
 **Primary anchor:** *Attention Is All You Need* — https://arxiv.org/abs/1706.03762
 
@@ -8,7 +7,7 @@
 
 Students can trace a decoder-only Transformer from token IDs to logits and explain why residual paths, normalization, positional information, attention, and the MLP exist.
 
-## 0–4 — Assemble before naming
+## Assemble before naming
 
 Start with:
 
@@ -16,7 +15,7 @@ Start with:
 
 Ask what each stage must provide for the next stage.
 
-## 4–9 — One Transformer block
+## One Transformer block
 
 Draw:
 
@@ -24,19 +23,19 @@ Draw:
 
 Then explain that the residual stream carries information forward while sublayers transform it.
 
-## 9–14 — Attention and MLP are different jobs
+## Attention and MLP are different jobs
 
 Attention allows positions to exchange information.
 
 The MLP transforms each position's representation after contextualization.
 
-Students should be able to state:
+You should be able to state:
 
 > Attention mixes across positions; the MLP transforms features within a position.
 
 Then introduce RoPE and normalization as components that affect the representation flow rather than optional decoration.
 
-## 14–19 — Tensor walkthrough
+## Tensor walkthrough
 
 Use concrete shapes:
 
@@ -54,7 +53,7 @@ Track:
 
 Students calculate parameter counts for one attention block.
 
-## 19–22 — Laboratory
+## Laboratory
 
 Run the tiny Transformer notebook.
 
@@ -66,7 +65,7 @@ Required experiment:
 
 Then break causal masking and observe leakage.
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 Architecture is a coupled system:
 
@@ -74,7 +73,7 @@ Architecture is a coupled system:
 
 Changing one term can alter memory and optimization behavior elsewhere.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Without naming a Transformer component, explain why the model needs:
 
