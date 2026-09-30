@@ -1,6 +1,6 @@
 # Lecture 10 — Inference Systems: Prefill, Decode, KV Cache, and Serving
 
-**Lab:** [Inference and KV Cache](`./lab.ipynb`)  
+**Lab:** [Inference and KV Cache](./lab.ipynb)  
 **Primary anchor:** vLLM — https://docs.vllm.ai/en/stable/
 
 ## Outcome
@@ -25,7 +25,7 @@ KV cache.
 
 **Decode:** generate one or a few new tokens repeatedly using cached K/V.
 
-Students identify:
+Identify: 
 
 - compute-heavy prefill;
 - memory/latency-sensitive decode.
@@ -88,3 +88,11 @@ Compare a small-model local benchmark with a serving runtime such as vLLM and ex
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 09 — Scaling Laws](../09_scaling_laws/lecture.md) · [Next lecture: Lecture 11 — Training System Design and Instrumentation →](../11_training_system_design/lecture.md)
+
+</div>
