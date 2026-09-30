@@ -8,21 +8,17 @@ This file is retained as a lightweight compatibility page for instructors and co
 
 ## Teaching model
 
-**Lecture = narrative → Book = deep mechanism/decision → Lab = executable proof → Dataset = reality → Runbook/decision = operation/choice → Evidence = mastery**
+**Lecture = the complete learning unit:** narrative → deep mechanism → executable proof → real data → decision → evidence
 
 At every stage:
 
 **understand → implement → measure → break → diagnose → decide → reproduce**
 
-Use the README matrix to determine the exact next lecture, textbook chapters, lab, dataset/case, operational aid, and evidence artifact.
+Use the README matrix to choose the next lecture. Everything required for that lecture is reachable from its own page.
 
 ## Materials
 
-- [Textbook](BOOK_TOC.md)
-- [Lecture Index](lectures/LECTURE_INDEX.md)
-- [Notebook laboratory](notebooks/README.md)
+- [Optional textbook reference](BOOK_TOC.md)
 - [Dataset registry](data/REAL_DATASET_REGISTRY.md)
 - [Persian longitudinal track](data/PERSIAN_DATASET_TRACK.md)
-- [Runbooks](INDEX.md#build)
-- [Decision aids](INDEX.md#decide)
-- [Projects](INDEX.md#projects)
+- [Projects](INDEX.md#projects)(INDEX.md#projects)
