@@ -31,7 +31,7 @@ Count the parameters:
 
 Then ask what happens when B or L doubles.
 
-Students connect shape to compute before seeing FLOPs formulas.
+Connect shape to compute before seeing FLOPs formulas.
 
 ## Memory decomposition
 
@@ -89,7 +89,7 @@ Diagnose which memory term caused failure.
 
 ## Exit challenge
 
-Students must answer:
+You must answer:
 
 > “Before renting another GPU, which quantity would you measure first, and why?”
 
