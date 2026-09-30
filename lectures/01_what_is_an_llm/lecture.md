@@ -155,10 +155,10 @@ For a tiny model, almost.
 For a neural language model, the probability function is represented by a very large parameterized computation:
 
 [
-p_	heta(x_t | x_{<t})
+$p_\theta(x_t \mid x_{<t})$
 ]
 
-The parameters (	heta) are learned from data.
+The parameters ($\theta$) are learned from data.
 
 A Transformer is a particular architecture for implementing this conditional distribution efficiently and expressively. We will derive it rather than treat it as magic.
 
