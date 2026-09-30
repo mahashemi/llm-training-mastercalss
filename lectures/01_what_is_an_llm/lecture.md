@@ -2,7 +2,7 @@
 
 **Duration:** ~25 minutes  
 **Level:** starts beginner-friendly, ends at Deep Learning engineer level  
-**Lab:** `notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb`
+**Lab:** `./lab.ipynb`
 
 ## Learning objective
 
