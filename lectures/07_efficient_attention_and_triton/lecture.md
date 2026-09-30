@@ -1,7 +1,7 @@
 # Lecture 07 — Efficient Attention, FlashAttention, and Triton
 
 **Duration:** 25 minutes  
-**Lab:** [Attention Memory and Tiling](../../notebooks/attention_memory_and_tiling.ipynb)  
+**Lab:** [Attention Memory and Tiling](`./lab.ipynb`)  
 **Primary anchor:** FlashAttention — https://arxiv.org/abs/2205.14135
 
 ## Outcome
@@ -77,3 +77,10 @@ Expected reasoning: memory movement/materialization rather than merely reducing 
 ## Research bridge
 
 Compare your measurements with FlashAttention's stated IO/memory motivation and identify where your small experiment does and does not represent the production algorithm.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
