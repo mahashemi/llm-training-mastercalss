@@ -1,6 +1,5 @@
 # Lecture 16 — Reinforcement Learning with Verifiable Rewards
 
-**Duration:** 25 minutes  
 **Lab:** [RLVR Toy Experiment](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
@@ -8,7 +7,7 @@
 
 Students can explain why verifiable rewards change the reinforcement-learning problem, build a simple verifier, and diagnose reward hacking.
 
-## 0–4 — Start with an objective we can check
+## Start with an objective we can check
 
 Consider a math problem with a known answer.
 
@@ -22,7 +21,7 @@ Ask:
 
 This frames RLVR as an objective-design problem.
 
-## 4–9 — Outcome versus process rewards
+## Outcome versus process rewards
 
 An outcome reward scores the final answer.
 
@@ -35,19 +34,19 @@ Discuss the trade-off:
 | outcome | simple, objective when verifiable | sparse |
 | process | denser feedback | evaluator errors / reward gaming |
 
-## 9–14 — Policy update intuition
+## Policy update intuition
 
 The policy generates candidate outputs.
 
 The training system uses rewards to change the probability of future outputs.
 
-Students should distinguish:
+You should distinguish:
 
 **policy model → sampled responses → verifier → reward → optimization**
 
 from ordinary supervised labels.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Run a toy task with a deterministic verifier.
 
@@ -63,7 +62,7 @@ Then compare two reward functions:
 1. exact correctness;
 2. a flawed heuristic that rewards formatting.
 
-## 19–22 — Break it: reward hacking
+## Break it: reward hacking
 
 Construct a response that satisfies the heuristic but not the real objective.
 
@@ -73,7 +72,7 @@ Ask:
 
 The answer is often the latter.
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 RLVR is attractive when:
 
@@ -83,7 +82,7 @@ RLVR is attractive when:
 
 Without a trustworthy verifier, a sophisticated RL loop can optimize the wrong thing very efficiently.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Write:
 
