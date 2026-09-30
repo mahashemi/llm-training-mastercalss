@@ -1,7 +1,7 @@
 # Lecture 21 — Safety, Robustness, and Failure Analysis
 
 **Duration:** 25 minutes  
-**Lab:** [failure_analysis_and_safety_eval.ipynb](../../notebooks/failure_analysis_and_safety_eval.ipynb)
+**Lab:** [failure_analysis_and_safety_eval.ipynb](`./lab.ipynb`)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -126,7 +126,7 @@ https://arxiv.org/abs/2203.02155
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
 
 ## Deepening — turn safety into a test matrix
 
@@ -158,3 +158,10 @@ Report both score and degradation relative to clean inputs.
 
 Safety evaluation is not cheaper simply because inference is cheap. At production scale the suite becomes an operational workload with queueing, evaluator cost, and release cadence.
 
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
