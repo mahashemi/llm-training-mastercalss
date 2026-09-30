@@ -206,8 +206,8 @@ The repository currently contains:
 
 - 24 lecture packages;
 - an optional 76-chapter deep-reference textbook;
-- executable labs now stored inside their owning lecture packages;
-- 14 operational runbooks;
+- 24 primary labs plus a small number of supporting experiments now stored inside their owning lecture packages;
+- 14 optional operational runbooks;
 - 4 capstone/project briefs;
 - research, proposal, model-card, dataset-card, and experiment templates;
 - curated lecture/video and paper-reading paths;
