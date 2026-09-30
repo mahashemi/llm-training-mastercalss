@@ -1,7 +1,7 @@
 # Lecture 08 — Distributed Training
 
 **Duration:** 25 minutes  
-**Lab:** [DDP and Sharding Simulation](../../notebooks/ddp_and_sharding_simulation.ipynb)  
+**Lab:** [DDP and Sharding Simulation](`./lab.ipynb`)  
 **Primary anchor:** PyTorch FSDP documentation — https://pytorch.org/docs/main/distributed.fsdp.fully_shard.html
 
 ## Outcome
@@ -102,3 +102,10 @@ Answer:
 ## Research bridge
 
 Read a current PyTorch FSDP guide and compare its abstractions with the simulated state partitioning.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
