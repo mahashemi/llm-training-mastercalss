@@ -1,6 +1,5 @@
 # Lecture 05 — Attention Alternatives and Mixture-of-Experts
 
-**Duration:** 25 minutes  
 **Lab:** [Attention and MoE Lab](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
@@ -8,7 +7,7 @@
 
 Students can compare MHA, MQA, GQA, local attention, and MoE by the tensors they replicate, the memory they consume, and the communication/routing they introduce.
 
-## 0–4 — Start from KV-cache pressure
+## Start from KV-cache pressure
 
 Ask:
 
@@ -20,22 +19,22 @@ Then ask:
 
 This motivates MQA/GQA.
 
-## 4–9 — Head geometry
+## Head geometry
 
 Let:
 
-- H_q = query heads;
-- H_kv = KV heads.
+- $H_q$ = query heads;
+- $H_{kv}$ = KV heads.
 
-MHA: H_q = H_kv.
+MHA: $H_q = H_{kv}$.
 
-MQA: H_kv = 1.
+MQA: $H_{kv}=1$.
 
 GQA: 1 < H_kv < H_q.
 
 Explain the memory implication for cached keys/values.
 
-## 9–14 — MoE
+## MoE
 
 Contrast dense and MoE:
 
@@ -55,7 +54,7 @@ The crucial lesson:
 
 > “Total parameters” and “active parameters per token” are different quantities.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Students vary:
 
@@ -74,7 +73,7 @@ Measure:
 
 For MoE, deliberately create imbalanced routing and inspect expert utilization.
 
-## 19–22 — Break it
+## Break it
 
 Force one expert to receive most tokens.
 
@@ -85,7 +84,7 @@ Ask:
 
 Separate algorithmic and systems failures.
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 Use a method when its resource benefit addresses the bottleneck:
 
@@ -95,7 +94,7 @@ Use a method when its resource benefit addresses the bottleneck:
 
 Do not treat architectural novelty as a reason by itself.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Explain one benefit and one cost of MoE without saying “it is cheaper.”
 
