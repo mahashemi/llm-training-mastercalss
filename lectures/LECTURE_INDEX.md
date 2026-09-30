@@ -1,58 +1,44 @@
 # Lecture Index
 
-The lecture numbers are **stable IDs**, not a mandatory reading order. The README defines the pedagogical order; this file is the canonical lecture-by-lecture reference.
+The **README Master Course Matrix is the single curriculum control plane**. It connects every lecture to its textbook chapters, primary laboratory, real dataset/case, runbook or decision aid, and learner evidence.
 
+**Start here:** [README → Master Course Matrix](../README.md#master-course-matrix--the-single-curriculum-control-plane)
 
-Every lecture has a linked executable laboratory and a required evidence artifact.
+This file is intentionally a lightweight lecture reference rather than a second curriculum table.
 
-| # | Lecture | Primary lab | Evidence |
-|---:|---|---|---|
-| 01 | [What Is an LLM](01_what_is_an_llm/lecture.md) | [Tiny LM](../notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb) | loss + generation + training/inference explanation |
-| 02 | [Tokenization](02_tokenization/lecture.md) | [Tokenizer](../notebooks/tokenizer_design_and_measurement.ipynb) | fertility + sequence expansion |
-| 03 | [PyTorch + Resource Accounting](03_pytorch_and_resource_accounting/lecture.md) | [Resources](../notebooks/resource_accounting_flops_memory.ipynb) | memory/FLOPs worksheet |
-| 04 | [Transformer Architectures](04_transformer_architectures/lecture.md) | [Tiny Transformer](../notebooks/build_a_tiny_transformer.ipynb) | tensor-shape audit |
-| 05 | [Attention Alternatives + MoE](05_attention_alternatives_and_moe/lecture.md) | [Attention/MoE](../notebooks/attention_and_moe_lab.ipynb) | KV/resource comparison |
-| 06 | [GPUs and Kernels](06_gpus_and_kernels/lecture.md) | [GPU benchmark](../notebooks/gpu_kernel_benchmark.ipynb) | measured throughput |
-| 07 | [Efficient Attention + Triton](07_efficient_attention_and_triton/lecture.md) | [Attention tiling](../notebooks/attention_memory_and_tiling.ipynb) | memory/latency comparison |
-| 08 | [Distributed Training](08_distributed_training/lecture.md) | [DDP/sharding](../notebooks/ddp_and_sharding_simulation.ipynb) | scaling-efficiency model |
-| 09 | [Scaling Laws](09_scaling_laws/lecture.md) | [Scaling fit](../notebooks/scaling_law_fit.ipynb) | fit + extrapolation error |
-| 10 | [Inference Systems](10_inference_systems/lecture.md) | [KV cache](../notebooks/inference_and_kv_cache.ipynb) | TTFT/ITL/memory |
-| 11 | [Training System Design](11_training_system_design/lecture.md) | [Instrumentation](../notebooks/training_loop_instrumentation.ipynb) | observable training run |
-| 12 | [Evaluation](12_evaluation/lecture.md) | [Evaluation harness](../notebooks/evaluation_harness.ipynb) | scorecard + slices |
-| 13 | [Data Sources + Construction](13_data_sources_and_dataset_construction/lecture.md) | [Curation](../notebooks/dataset_curation_pipeline.ipynb) | transformation accounting |
-| 14 | [Filtering + Dedup + Mixing](14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) | [Data interventions](../notebooks/dedup_and_data_mixing.ipynb) | controlled data experiment |
-| 15 | [SFT + RLHF](15_mid_and_post_training_sft_and_rlhf/lecture.md) | [Qwen3-0.6B SFT](../notebooks/sft_with_a_small_open_model.ipynb) | baseline → smoke → SFT |
-| 16 | [RLVR](16_reinforcement_learning_with_verifiable_rewards/lecture.md) | [RLVR toy](../notebooks/rlvr_toy_experiment.ipynb) | verifier/reward failure |
-| 17 | [Multimodality](17_multimodality/lecture.md) | [Alignment map](../notebooks/multimodal_alignment_map.ipynb) | visual-token budget |
-| 18 | [LoRA + QLoRA](18_lora_qlora_and_peft/lecture.md) | [PEFT comparison](../notebooks/lora_qlora_comparison.ipynb) | rank/precision/resource frontier |
-| 19 | [Full FT + Continued PT](19_full_fine_tuning_and_continued_pretraining/lecture.md) | [FT vs LoRA](../notebooks/full_ft_vs_lora.ipynb) | adaptation trade-off |
-| 20 | [Preference + Distillation](20_preference_optimization_and_distillation/lecture.md) | [DPO/distillation](../notebooks/dpo_and_distillation_concepts.ipynb) | preference + KL experiment |
-| 21 | [Safety + Failure Analysis](21_safety_robustness_and_failure_analysis/lecture.md) | [Failure analysis](../notebooks/failure_analysis_and_safety_eval.ipynb) | severity/type matrix |
-| 22 | [API/RAG/Tools/Training](22_api_vs_rag_vs_tools_vs_training/lecture.md) | [Build vs buy](../notebooks/build_vs_buy_decision_lab.ipynb) | architecture decision record |
-| 23 | [Build an LLM Program](23_build_an_llm_program/lecture.md) | [Resource plan](../notebooks/national_llm_resource_plan.ipynb) | evidence-to-resource chain |
-| 24 | [Fundable Model](24_from_experiment_to_fundable_model/lecture.md) | [Capstone](../notebooks/capstone_model_program.ipynb) | staged model program |
+## Lecture sequence
 
-## Persian longitudinal connections
-
-Persian is intentionally revisited across the lecture series rather than isolated into one lecture.
-
-| Lecture | Persian connection |
-|---|---|
-| 02 — Tokenization | Persian fertility, ZWNJ, Arabic/Persian Unicode normalization, target-language tokenizer decisions |
-| 12 — Evaluation | ParsiNLU, PersianMedQA, held-out Persian slices, multilingual regression |
-| 13 — Data Sources + Construction | Naab, CulturaX-fa, FineWeb2-HQ-fa, merged corpora, provenance |
-| 14 — Filtering + Dedup + Mixing | Persian web quality, deduplication, real-vs-synthetic mixtures |
-| 15 — SFT + RLHF | Persian instruction adaptation and evaluation |
-| 18 — LoRA + QLoRA | parameter-efficient Persian adaptation |
-| 19 — Full FT + Continued PT | Persian representation/domain adaptation and forgetting |
-| 23 — Build an LLM Program | Persian-first data/model program and compute/resource planning |
-
-See the [Persian Dataset Track](../data/PERSIAN_DATASET_TRACK.md) and [Learning Graph](../docs/LEARNING_GRAPH.md).
+1. [L01 · What Is an LLM](01_what_is_an_llm/lecture.md)
+2. [L02 · Tokenization](02_tokenization/lecture.md)
+3. [L03 · PyTorch + Resource Accounting](03_pytorch_and_resource_accounting/lecture.md)
+4. [L04 · Transformer Architectures](04_transformer_architectures/lecture.md)
+5. [L05 · Attention Alternatives + MoE](05_attention_alternatives_and_moe/lecture.md)
+6. [L06 · GPUs and Kernels](06_gpus_and_kernels/lecture.md)
+7. [L07 · Efficient Attention + Triton](07_efficient_attention_and_triton/lecture.md)
+8. [L08 · Distributed Training](08_distributed_training/lecture.md)
+9. [L09 · Scaling Laws](09_scaling_laws/lecture.md)
+10. [L10 · Inference Systems](10_inference_systems/lecture.md)
+11. [L11 · Training System Design](11_training_system_design/lecture.md)
+12. [L12 · Evaluation](12_evaluation/lecture.md)
+13. [L13 · Data Sources + Construction](13_data_sources_and_dataset_construction/lecture.md)
+14. [L14 · Filtering + Dedup + Mixing](14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
+15. [L15 · SFT + RLHF](15_mid_and_post_training_sft_and_rlhf/lecture.md)
+16. [L16 · RLVR](16_reinforcement_learning_with_verifiable_rewards/lecture.md)
+17. [L17 · Multimodality](17_multimodality/lecture.md)
+18. [L18 · LoRA + QLoRA](18_lora_qlora_and_peft/lecture.md)
+19. [L19 · Full FT + Continued PT](19_full_fine_tuning_and_continued_pretraining/lecture.md)
+20. [L20 · Preference + Distillation](20_preference_optimization_and_distillation/lecture.md)
+21. [L21 · Safety + Failure Analysis](21_safety_robustness_and_failure_analysis/lecture.md)
+22. [L22 · API / RAG / Tools / Training](22_api_vs_rag_vs_tools_vs_training/lecture.md)
+23. [L23 · Build an LLM Program](23_build_an_llm_program/lecture.md)
+24. [L24 · Fundable Model](24_from_experiment_to_fundable_model/lecture.md)
 
 ## Teaching invariant
 
-The lecture is not complete until students have:
+Every lecture should drive the same loop:
 
-**predicted → run → measured → broken → diagnosed → decided**
+**predict → run → measure → break → diagnose → decide**
 
-See [Book ↔ Lecture ↔ Laboratory Map](../BOOK_LAB_MAP.md).
+For connections to chapters, labs, datasets, runbooks, and evidence, use the README matrix rather than reconstructing the mapping here.
+
+[Persian longitudinal case](../data/PERSIAN_DATASET_TRACK.md) · [Dataset registry](../data/REAL_DATASET_REGISTRY.md)
