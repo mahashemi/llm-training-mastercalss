@@ -1,7 +1,7 @@
 # Lecture 05 — Attention Alternatives and Mixture-of-Experts
 
 **Duration:** 25 minutes  
-**Lab:** [Attention and MoE Lab](../../notebooks/attention_and_moe_lab.ipynb)  
+**Lab:** [Attention and MoE Lab](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -102,3 +102,10 @@ Explain one benefit and one cost of MoE without saying “it is cheaper.”
 ## Research bridge
 
 Read original GQA/MQA/MoE papers and compare active computation with total parameter count.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
