@@ -1,13 +1,12 @@
 # Lecture 13 — Data Sources and Dataset Construction
 
-**Duration:** 25 minutes  
 **Lab:** [Dataset Curation Pipeline](`./lab.ipynb`)
 
 ## Outcome
 
-Students learn to treat a dataset as an engineered artifact with provenance, transformations, rights, composition, and measurable quality.
+You learn to treat a dataset as an engineered artifact with provenance, transformations, rights, composition, and measurable quality.
 
-## 0–4 — Same source, different corpus
+## Same source, different corpus
 
 Start with a web crawl.
 
@@ -17,7 +16,7 @@ Ask:
 
 No. Parsing, filtering, deduplication, language identification, rights review, and sampling transform it.
 
-## 4–9 — Source inventory
+## Source inventory
 
 For each source record:
 
@@ -29,7 +28,7 @@ For each source record:
 - raw size;
 - processing version.
 
-## 9–14 — Transformation accounting
+## Transformation accounting
 
 Example:
 
@@ -37,7 +36,7 @@ Example:
 
 The learner must be able to explain every reduction.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Build a mini dataset pipeline and calculate survival rates after each stage.
 
@@ -51,13 +50,13 @@ Produce:
 | deduped | measure | measure | measure |
 | final | measure | measure | measure |
 
-## 19–22 — Break it
+## Break it
 
 Introduce a filter that removes one target language disproportionately.
 
 Detect the failure with per-language accounting.
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 Dataset readiness means:
 
@@ -65,7 +64,7 @@ Dataset readiness means:
 
 not “we have many tokens.”
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 What is the smallest metadata set you need to reproduce the exact corpus?
 
