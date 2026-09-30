@@ -1,6 +1,5 @@
 # Lecture 21 — Safety, Robustness, and Failure Analysis
 
-**Duration:** 25 minutes  
 **Lab:** [failure_analysis_and_safety_eval.ipynb](`./lab.ipynb`)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
@@ -8,7 +7,7 @@
 
 The learner can turn vague “safety concerns” into measurable failure categories, test them under realistic conditions, and use the results to drive engineering changes.
 
-## 0–4 — Start from failures
+## Start from failures
 
 Give five outputs:
 
@@ -22,7 +21,7 @@ Ask: “Are these the same failure?”
 
 No. They occur at different layers.
 
-## 4–8 — Failure taxonomy
+## Failure taxonomy
 
 | Failure | Example | Likely layer |
 |---|---|---|
@@ -35,7 +34,7 @@ No. They occur at different layers.
 
 This taxonomy turns evaluation into an intervention map.
 
-## 8–13 — Safety evaluation design
+## Safety evaluation design
 
 A serious safety set should specify:
 
@@ -58,7 +57,7 @@ Example severity:
 
 The exact definitions are domain-specific.
 
-## 13–17 — Robustness
+## Robustness
 
 Build perturbations:
 
@@ -75,7 +74,7 @@ clean score − perturbed score
 
 Also record latency/cost changes.
 
-## 17–20 — Worked failure analysis
+## Worked failure analysis
 
 Observed:
 
@@ -91,7 +90,7 @@ Test 4: Is the failure isolated to one language/intent?
 
 This converts a scary symptom into a causal debugging tree.
 
-## 20–22 — Red-team vs benchmark
+## Red-team vs benchmark
 
 | Benchmark | Red-team |
 |---|---|
@@ -102,7 +101,7 @@ This converts a scary symptom into a causal debugging tree.
 
 Use both.
 
-## 22–24 — Release decision
+## Release decision
 
 A release scorecard should include:
 
@@ -110,7 +109,7 @@ A release scorecard should include:
 
 Do not allow a large aggregate benchmark gain to silently override a critical failure.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Give the learner one failure and require:
 
