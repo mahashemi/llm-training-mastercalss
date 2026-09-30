@@ -4,7 +4,7 @@
 
 ## Outcome
 
-Students can isolate data interventions and quantify whether a cleaner corpus is actually more useful.
+You can isolate data interventions and quantify whether a cleaner corpus is actually more useful.
 
 ## The transformed budget
 
