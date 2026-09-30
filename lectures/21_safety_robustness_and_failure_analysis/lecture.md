@@ -1,6 +1,6 @@
 # Lecture 21 — Safety, Robustness, and Failure Analysis
 
-**Lab:** [failure_analysis_and_safety_eval.ipynb](`./lab.ipynb`)
+**Lab:** [failure_analysis_and_safety_eval.ipynb](./lab.ipynb)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
 ## Learning outcome
@@ -164,3 +164,11 @@ Safety evaluation is not cheaper simply because inference is cheap. At productio
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 20 — Preference Optimization and Distillation](../20_preference_optimization_and_distillation/lecture.md) · [Next lecture: Lecture 22 — API vs RAG vs Tools vs Training →](../22_api_vs_rag_vs_tools_vs_training/lecture.md)
+
+</div>
