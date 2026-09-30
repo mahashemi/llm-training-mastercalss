@@ -1,6 +1,6 @@
 # Lecture 20 — Preference Optimization and Distillation
 
-**Lab:** [dpo_and_distillation_concepts.ipynb](`./lab.ipynb`)
+**Lab:** [dpo_and_distillation_concepts.ipynb](./lab.ipynb)
 **Primary anchors:** https://arxiv.org/abs/2305.18290 · https://arxiv.org/abs/1503.02531
 
 ## Learning outcome
@@ -146,7 +146,7 @@ Construct two preference datasets.
 
 **Dataset B:** chosen responses are more correct and grounded.
 
-Ask what proxy each dataset creates.
+Consider: what proxy each dataset creates.
 
 ### DPO worksheet
 
@@ -178,3 +178,11 @@ The question is not whether the student copies the teacher. It is whether the st
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 19 — Full Fine-Tuning and Continued Pretraining](../19_full_fine_tuning_and_continued_pretraining/lecture.md) · [Next lecture: Lecture 21 — Safety, Robustness, and Failure Analysis →](../21_safety_robustness_and_failure_analysis/lecture.md)
+
+</div>
