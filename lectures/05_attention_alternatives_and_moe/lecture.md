@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can compare MHA, MQA, GQA, local attention, and MoE by the tensors they replicate, the memory they consume, and the communication/routing they introduce.
+You can compare MHA, MQA, GQA, local attention, and MoE by the tensors they replicate, the memory they consume, and the communication/routing they introduce.
 
 ## Start from KV-cache pressure
 
@@ -56,7 +56,7 @@ The crucial lesson:
 
 ## Laboratory
 
-Students vary:
+Vary:
 
 - number of KV heads;
 - sequence length;
