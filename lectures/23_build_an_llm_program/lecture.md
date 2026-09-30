@@ -1,13 +1,12 @@
 # Lecture 23 — Build an LLM Program
 
-**Duration:** 25 minutes
 **Lab:** [national_llm_resource_plan.ipynb](`./lab.ipynb`)
 
 ## Outcome
 
 The learner should be able to turn a model experiment into an operating program with explicit owners, resources, gates, risks, and evidence.
 
-## 0–4 — Start with the mission, not the model
+## Start with the mission, not the model
 
 Give the class this requirement:
 
@@ -34,7 +33,7 @@ Example:
 | Budget | fixed |
 | Governance | controlled data |
 
-## 4–8 — Build the evidence ladder
+## Build the evidence ladder
 
 Before requesting a large program:
 
@@ -47,7 +46,7 @@ Before requesting a large program:
 
 Each stage removes one uncertainty.
 
-## 8–13 — Program workstreams
+## Program workstreams
 
 Draw seven parallel tracks:
 
@@ -71,7 +70,7 @@ Then show the handoffs.
 | Governance | rights/risk record |
 | Program | budget + milestone plan |
 
-## 13–17 — Resource planning
+## Resource planning
 
 Teach the resource chain:
 
@@ -87,15 +86,15 @@ Example:
 
 7B parameters × 100B training tokens
 
-FLOPs ≈ 4.2e21
+$\mathrm{FLOPs} \approx 4.2\times10^{21}$
 
 If a pilot cluster delivers 5e15 effective FLOP/s:
 
-wall time ≈ 9.7 days
+$t_{wall} \approx 9.7\ \mathrm{days}$
 
 The point is not the number. The point is that every budget line has an assumption behind it.
 
-## 17–20 — Stage gates
+## Stage gates
 
 | Stage | Spend | Required evidence |
 |---|---:|---|
@@ -110,7 +109,7 @@ At every gate define:
 
 **metric → threshold → artifact → owner → next budget**
 
-## 20–22 — Team design
+## Team design
 
 Show a small pilot team:
 
@@ -125,7 +124,7 @@ Then ask what changes at scale.
 
 Answer: the functions do not disappear; they become dedicated roles.
 
-## 22–24 — Risk and governance
+## Risk and governance
 
 Create a live risk table:
 
@@ -138,7 +137,7 @@ Create a live risk table:
 | data rights | unresolved source | quarantine/remove |
 | serving cost | cost/task above limit | distill/smaller model |
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Produce one page:
 
