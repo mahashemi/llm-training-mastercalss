@@ -1,6 +1,5 @@
 # Lecture 22 — API vs RAG vs Tools vs Training
 
-**Duration:** 25 minutes  
 **Lab:** [build_vs_buy_decision_lab.ipynb](`./lab.ipynb`)
 **Primary goal:** Diagnose the bottleneck before choosing an architecture.
 
@@ -125,7 +124,7 @@ Then add update cadence. Daily-changing knowledge can make repeated retraining u
 **Persistent weak language performance despite correct evidence**  
 → possible representation problem; test continued pretraining.
 
-Teach students to map **failure → system layer**.
+Learn to map **failure → system layer**.
 
 ## 22–24 minutes — Escalation ladder
 
