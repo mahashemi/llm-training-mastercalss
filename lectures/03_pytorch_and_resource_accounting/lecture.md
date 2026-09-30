@@ -1,7 +1,7 @@
 # Lecture 03 — PyTorch and Resource Accounting
 
 **Duration:** 25 minutes  
-**Lab:** [Resource Accounting — FLOPs and Memory](../../notebooks/resource_accounting_flops_memory.ipynb)  
+**Lab:** [Resource Accounting — FLOPs and Memory](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -99,3 +99,10 @@ The expected reasoning is **resource decomposition → measurement → intervent
 ## Research bridge
 
 Read the relevant CS336 resource-accounting material and compare the assumptions behind its calculations with your measured run.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
