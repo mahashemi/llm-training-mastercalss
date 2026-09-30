@@ -1,19 +1,18 @@
 # Lecture 24 — From Experiment to Fundable Model
 
-**Duration:** 25 minutes
 **Lab:** [capstone_model_program.ipynb](`./lab.ipynb`)
 
 ## Outcome
 
 Turn an experiment into a fundable, reviewable technical case without hiding uncertainty.
 
-## 0–4 — The proposal is an evidence chain
+## The proposal is an evidence chain
 
 Start with:
 
 “We should train a 30B model.”
 
-Ask students to rewrite it.
+Consider how to rewrite it.
 
 Better:
 
@@ -21,7 +20,7 @@ Better:
 
 Every claim should point to evidence or an explicit assumption.
 
-## 4–8 — Proposal anatomy
+## Proposal anatomy
 
 | Section | Core question |
 |---|---|
@@ -38,9 +37,9 @@ Every claim should point to evidence or an explicit assumption.
 | Gates | When is more money released? |
 | Deliverables | What artifacts will exist? |
 
-## 8–13 — The reviewer objection table
+## The reviewer objection table
 
-Teach students to answer:
+Learn to answer:
 
 | Reviewer asks | Required evidence |
 |---|---|
@@ -57,7 +56,7 @@ Teach students to answer:
 
 This table makes the proposal falsifiable.
 
-## 13–17 — Budget from the workload
+## Budget from the workload
 
 For training:
 
@@ -65,11 +64,11 @@ FLOPs ≈ 6ND
 
 For time:
 
-time ≈ total FLOPs / measured effective throughput
+$t \approx \frac{\mathrm{total\ FLOPs}}{\mathrm{measured\ effective\ throughput}}$
 
 For compute cost:
 
-cost ≈ accelerator hours × blended rate
+$\mathrm{cost} \approx \mathrm{accelerator\ hours}\times\mathrm{blended\ rate}$
 
 Then add:
 
@@ -84,7 +83,7 @@ Then add:
 
 Never make the GPU line equal the project budget.
 
-## 17–20 — Milestone-funded development
+## Milestone-funded development
 
 Example:
 
@@ -99,7 +98,7 @@ Example:
 
 This converts a large request into a sequence of testable claims.
 
-## 20–22 — Make the proposal research-grade
+## Make the proposal research-grade
 
 Preserve:
 
@@ -115,7 +114,7 @@ Preserve:
 
 The proposal should be capable of becoming a paper, a reproduction package, and a future maintenance record.
 
-## 22–24 — Worked proposal
+## Worked proposal
 
 Claim:
 
@@ -137,7 +136,7 @@ Not yet:
 
 the final large cluster.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Write the first page of a proposal with exactly:
 
