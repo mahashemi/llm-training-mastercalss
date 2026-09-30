@@ -171,7 +171,7 @@ Every proposal paragraph should map to one element of this chain or be clearly l
 
 ### Reviewer challenge matrix
 
-Students must answer:
+You must answer:
 
 | Question | Evidence |
 |---|---|
