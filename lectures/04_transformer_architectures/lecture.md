@@ -1,7 +1,7 @@
 # Lecture 04 — Transformer Architectures
 
 **Duration:** 25 minutes  
-**Lab:** [Build a Tiny Transformer](../../notebooks/build_a_tiny_transformer.ipynb)  
+**Lab:** [Build a Tiny Transformer](`./lab.ipynb`)  
 **Primary anchor:** *Attention Is All You Need* — https://arxiv.org/abs/1706.03762
 
 ## Outcome
@@ -86,3 +86,10 @@ Without naming a Transformer component, explain why the model needs:
 ## Research bridge
 
 Connect the implementation to the original Transformer paper, then identify which modern decoder-only choices are inherited, modified, or newly introduced.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
