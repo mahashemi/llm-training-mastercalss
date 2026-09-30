@@ -1,6 +1,5 @@
 # Lecture 20 — Preference Optimization and Distillation
 
-**Duration:** 25 minutes  
 **Lab:** [dpo_and_distillation_concepts.ipynb](`./lab.ipynb`)
 **Primary anchors:** https://arxiv.org/abs/2305.18290 · https://arxiv.org/abs/1503.02531
 
@@ -11,7 +10,7 @@ The learner can explain two different goals:
 **preference optimization changes what the model prefers**  
 **distillation changes the economics of serving a capability**
 
-## 0–4 — Start with the product problem
+## Start with the product problem
 
 Suppose a model is accurate but:
 
@@ -30,7 +29,7 @@ Reveal two separate hypotheses:
 
 They can be combined later.
 
-## 4–8 — Preference data
+## Preference data
 
 A preference example contains:
 
@@ -50,7 +49,7 @@ Better pair:
 chosen = correct + concise + grounded  
 rejected = plausible + unsupported
 
-## 8–13 — DPO mechanics
+## DPO mechanics
 
 A common DPO objective compares policy and reference log-probability differences.
 
@@ -62,7 +61,7 @@ Parameters such as beta control how strongly preference differences affect optim
 
 Do not treat beta as a universal magic number; sweep it.
 
-## 13–17 — Distillation
+## Distillation
 
 Teacher → student.
 
@@ -75,7 +74,7 @@ Teacher → student.
 
 The student must be evaluated against the real task, not only teacher imitation.
 
-## 17–20 — Worked decision
+## Worked decision
 
 | Model | Quality | p95 latency | Cost/task |
 |---|---:|---:|---:|
@@ -91,7 +90,7 @@ Student B is a candidate for further testing.
 
 This is constraint satisfaction, not a “best model” ranking.
 
-## 20–22 — Failure analysis
+## Failure analysis
 
 **Preference win rate rises but factuality falls**  
 → preference proxy mismatch.
@@ -102,7 +101,7 @@ This is constraint satisfaction, not a “best model” ranking.
 **Student is cheaper but misses latency target**  
 → compression did not solve the relevant bottleneck.
 
-## 22–24 — Experiment design
+## Experiment design
 
 Run:
 
@@ -121,7 +120,7 @@ Measure:
 - cost;
 - rare-case failures.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 State one sentence each:
 
@@ -159,7 +158,7 @@ For a preference pair, identify:
 - relative margin;
 - beta.
 
-Students should understand how the objective turns labels into gradient pressure.
+You should understand how the objective turns labels into gradient pressure.
 
 ### Distillation frontier
 
