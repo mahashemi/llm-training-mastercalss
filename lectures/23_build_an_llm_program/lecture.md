@@ -185,7 +185,7 @@ Derive:
 
 **GPU count → accelerator hours → checkpoint storage → staffing load → TCO**
 
-Students must state assumptions next to every number.
+You must state assumptions next to every number.
 
 ### Gate design
 
