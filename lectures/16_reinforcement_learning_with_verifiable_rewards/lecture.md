@@ -1,7 +1,7 @@
 # Lecture 16 — Reinforcement Learning with Verifiable Rewards
 
 **Duration:** 25 minutes  
-**Lab:** [RLVR Toy Experiment](../../notebooks/rlvr_toy_experiment.ipynb)  
+**Lab:** [RLVR Toy Experiment](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -92,3 +92,10 @@ Write:
 ## Research bridge
 
 Compare the toy verifier with a real mathematical/code verifier and identify which assumptions become fragile at scale.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
