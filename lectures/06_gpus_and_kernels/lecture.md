@@ -1,6 +1,5 @@
 # Lecture 06 — GPUs and Kernels
 
-**Duration:** 25 minutes  
 **Lab:** [GPU Kernel Benchmark](`./lab.ipynb`)  
 **Primary anchor:** NVIDIA/H100 documentation + Stanford CS336 — https://cs336.stanford.edu/
 
@@ -8,7 +7,7 @@
 
 Students can explain why two mathematically equivalent implementations can have very different runtime.
 
-## 0–4 — The benchmark surprise
+## The benchmark surprise
 
 Run one matrix multiply two ways.
 
@@ -18,7 +17,7 @@ Ask:
 
 This opens the hardware discussion.
 
-## 4–9 — Memory hierarchy
+## Memory hierarchy
 
 Walk through:
 
@@ -33,7 +32,7 @@ Introduce:
 - kernel launch overhead;
 - occupancy.
 
-## 9–14 — Tensor Cores and precision
+## Tensor Cores and precision
 
 Compare:
 
@@ -48,7 +47,7 @@ Discuss:
 - hardware acceleration;
 - accumulation precision.
 
-## 14–19 — Profiling before optimization
+## Profiling before optimization
 
 Students run a benchmark and collect:
 
@@ -59,7 +58,7 @@ Students run a benchmark and collect:
 
 Then ask whether they are compute-bound or memory-bound.
 
-## 19–22 — Laboratory break
+## Laboratory break
 
 Make matrix dimensions unfriendly to hardware alignment.
 
@@ -67,7 +66,7 @@ Compare with dimensions that map cleanly to common accelerator tile sizes.
 
 Then discuss why kernels may change behavior abruptly.
 
-## 22–24 — H100 bridge
+## H100 bridge
 
 The H100 is not just “a faster GPU.”
 
@@ -77,7 +76,7 @@ The relevant question is:
 
 This is why the course measures the workload rather than quoting peak specifications.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Write:
 
@@ -85,7 +84,7 @@ Write:
 
 ## Research bridge
 
-Students should inspect one profiler trace and identify the top two contributors to step time.
+You should inspect one profiler trace and identify the top two contributors to step time.
 
 
 ## Lab — run it here
