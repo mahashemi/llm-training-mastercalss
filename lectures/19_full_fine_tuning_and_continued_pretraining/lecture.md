@@ -1,6 +1,6 @@
 # Lecture 19 — Full Fine-Tuning and Continued Pretraining
 
-**Lab:** [full_ft_vs_lora.ipynb](`./lab.ipynb`)
+**Lab:** [full_ft_vs_lora.ipynb](./lab.ipynb)
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -13,7 +13,7 @@ Learn to distinguish a narrow behavior update from a broad domain/language distr
 2. “Understand our specialist terminology better.”  
 3. “Become substantially better at a low-resource language.”
 
-Ask whether all three require the same training method.
+Consider: whether all three require the same training method.
 
 No.
 
@@ -118,7 +118,7 @@ Complete the linked laboratory before treating the lecture as mastered. Record a
 
 ## Deepening — separate adaptation breadth from parameter-update breadth
 
-Students often mix up:
+You often mix up:
 
 **what the model is learning**
 
@@ -162,3 +162,11 @@ Then ask:
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 18 — LoRA, QLoRA, and PEFT](../18_lora_qlora_and_peft/lecture.md) · [Next lecture: Lecture 20 — Preference Optimization and Distillation →](../20_preference_optimization_and_distillation/lecture.md)
+
+</div>
