@@ -1,6 +1,6 @@
 # Lecture 11 — Training System Design and Instrumentation
 
-**Lab:** [Training Loop Instrumentation](`./lab.ipynb`)
+**Lab:** [Training Loop Instrumentation](./lab.ipynb)
 
 ## Outcome
 
@@ -83,3 +83,11 @@ Compare your checkpoint state with the state required by the chosen training fra
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 10 — Inference Systems](../10_inference_systems/lecture.md) · [Next lecture: Lecture 12 — Evaluation That Can Block a Bad Model →](../12_evaluation/lecture.md)
+
+</div>
