@@ -62,27 +62,13 @@ Completing all cells is not the learning objective.
 
 ## Open-weight training labs
 
-| Lab | Purpose |
-|---|---|
-| [Open-Weight Model Audit](./open_weight_model_audit.ipynb) | download, inspect, resource-estimate, baseline inference |
-| [Qwen3-0.6B SFT](./sft_with_a_small_open_model.ipynb) | real open-weight SFT |
-| [LoRA / QLoRA](./lora_qlora_comparison.ipynb) | parameter-efficient training and resource trade-offs |
+- [Open-Weight Model Audit](./open_weight_model_audit.ipynb) — inspect, estimate resources, and establish a baseline.
+- [Qwen3-0.6B SFT](./sft_with_a_small_open_model.ipynb) — first real open-weight training workflow.
+- [LoRA / QLoRA](./lora_qlora_comparison.ipynb) — parameter-efficient training and resource trade-offs.
 
-### Real checkpoint path
+The progression is **download → inspect → estimate → infer → baseline → smoke test → train → evaluate → reload**.
 
-[Qwen3-0.6B SFT](./sft_with_a_small_open_model.ipynb) is the first real checkpoint-training lab.
-
-Students must:
-
-**download → inspect → estimate → infer → baseline → smoke test → SFT → evaluate → reload**
-
-### PEFT path
-
-[LoRA / QLoRA](./lora_qlora_comparison.ipynb) turns adapter theory into a measured rank/precision/resource experiment.
-
-### Scale path
-
-Use [Open-Weight Training Ladder](../docs/OPEN_WEIGHT_TRAINING_LADDER.md) to repeat the same methodology on larger checkpoints and H100s.
+For larger checkpoints, use the [Open-Weight Training Ladder](../docs/OPEN_WEIGHT_TRAINING_LADDER.md).
 
 ## Reporting
 
