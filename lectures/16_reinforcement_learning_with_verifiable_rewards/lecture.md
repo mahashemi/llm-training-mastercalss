@@ -1,6 +1,6 @@
 # Lecture 16 — Reinforcement Learning with Verifiable Rewards
 
-**Lab:** [RLVR Toy Experiment](`./lab.ipynb`)  
+**Lab:** [RLVR Toy Experiment](./lab.ipynb)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -84,7 +84,7 @@ Without a trustworthy verifier, a sophisticated RL loop can optimize the wrong t
 
 ## Exit challenge
 
-Write:
+Use:
 
 **task → verifier → reward → failure mode → protected metric**
 
@@ -98,3 +98,11 @@ Compare the toy verifier with a real mathematical/code verifier and identify whi
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 15 — Mid and Post Training: SFT and RLHF](../15_mid_and_post_training_sft_and_rlhf/lecture.md) · [Next lecture: Lecture 17 — Multimodality →](../17_multimodality/lecture.md)
+
+</div>
