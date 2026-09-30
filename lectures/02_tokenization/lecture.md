@@ -1,6 +1,6 @@
 # Lecture 02 — Tokenization: The First Hidden Model Decision
 
-**Lab:** [Tokenizer Design and Measurement](`./lab.ipynb`)  
+**Lab:** [Tokenizer Design and Measurement](./lab.ipynb)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -9,7 +9,7 @@ By the end, you can build a simple BPE intuition, measure tokenizer behavior on 
 
 ## Start with the surprising question
 
-Show:
+Inspect:
 
 - "internationalization"
 - "internationalization" split into subwords
@@ -115,3 +115,11 @@ Compare your measured result with a published tokenizer claim and identify what 
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 01 — What Is an LLM](../01_what_is_an_llm/lecture.md) · [Next lecture: Lecture 03 — PyTorch and Resource Accounting →](../03_pytorch_and_resource_accounting/lecture.md)
+
+</div>
