@@ -1,6 +1,5 @@
 # Lecture 01 — What Is an LLM?
 
-**Duration:** ~25 minutes  
 **Level:** starts beginner-friendly, ends at Deep Learning engineer level  
 **Lab:** `./lab.ipynb`
 
@@ -18,7 +17,7 @@ By the end of this lecture, a student should be able to explain, without hand-wa
 - why an LLM is more than an autocomplete demo;
 - what information is learned from data versus supplied at inference time.
 
-## 0–3 min — Start with a prediction
+## Start with a prediction
 
 Ask the room:
 
@@ -38,7 +37,7 @@ Do not begin with “Transformer.” Begin with prediction.
 
 That distinction becomes important later when we compare pretraining, retrieval, and fine-tuning.
 
-## 3–7 min — From text to tokens
+## From text to tokens
 
 A neural network does not receive “words” as ideas. It receives integer token IDs.
 
@@ -54,7 +53,7 @@ A tokenizer is therefore part of the model system, not just a preprocessing conv
 
 We will later study BPE, vocabulary size, multilingual tokenization, special tokens, and tokenizer training.
 
-## 7–12 min — Next-token prediction
+## Next-token prediction
 
 Given:
 
@@ -70,31 +69,25 @@ mat
 
 The model produces a vector of logits:
 
-[
-z in mathbb{R}^{|V|}
-]
+$z \in \mathbb{R}^{|V|}$
 
 where `|V|` is the vocabulary size.
 
 Softmax converts logits into probabilities:
 
-[
-p_i = rac{e^{z_i}}{sum_j e^{z_j}}
-]
+$p_i = \frac{e^{z_i}}{\sum_j e^{z_j}}$
 
 The training objective for the correct target token (y) is:
 
-[
-mathcal{L} = -log p(y)
-]
+$\mathcal{L} = -\log p(y)$
 
 This is the single idea we will keep returning to:
 
 > **Make the correct next token more probable.**
 
-## 12–16 min — Why this simple objective becomes powerful
+## Why this simple objective becomes powerful
 
-The student should now notice something surprising.
+You should now notice something surprising.
 
 A model trained on enough diverse text must learn statistical structure that helps it predict what comes next:
 
@@ -115,7 +108,7 @@ Next-token prediction alone does not guarantee truthfulness, reasoning, factual 
 
 Those properties depend on data, scale, architecture, post-training, inference, and evaluation.
 
-## 16–20 min — Training vs inference
+## Training vs inference
 
 ### Training
 
@@ -155,7 +148,7 @@ This is autoregressive generation.
 
 This distinction will become central when we later study GPU utilization, KV cache, and inference economics.
 
-## 20–23 min — Is an LLM just a probability table?
+## Is an LLM just a probability table?
 
 For a tiny model, almost.
 
@@ -169,7 +162,7 @@ The parameters (	heta) are learned from data.
 
 A Transformer is a particular architecture for implementing this conditional distribution efficiently and expressively. We will derive it rather than treat it as magic.
 
-## 23–25 min — Engineering takeaway
+## Engineering takeaway
 
 An LLM training project can be reduced to four questions:
 
