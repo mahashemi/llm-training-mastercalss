@@ -1,7 +1,7 @@
 # Lecture 19 — Full Fine-Tuning and Continued Pretraining
 
 **Duration:** 25 minutes  
-**Lab:** [full_ft_vs_lora.ipynb](../../notebooks/full_ft_vs_lora.ipynb)
+**Lab:** [full_ft_vs_lora.ipynb](`./lab.ipynb`)
 **Primary anchor:** https://cs336.stanford.edu/
 
 ## Outcome
@@ -115,7 +115,7 @@ Chinchilla: https://arxiv.org/abs/2203.15556
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
 
 ## Deepening — separate adaptation breadth from parameter-update breadth
 
@@ -156,3 +156,10 @@ Then ask:
 
 > Which additional measurement would determine whether sharding is required?
 
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
