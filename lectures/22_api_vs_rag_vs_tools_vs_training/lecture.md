@@ -1,7 +1,7 @@
 # Lecture 22 — API vs RAG vs Tools vs Training
 
 **Duration:** 25 minutes  
-**Lab:** [build_vs_buy_decision_lab.ipynb](../../notebooks/build_vs_buy_decision_lab.ipynb)
+**Lab:** [build_vs_buy_decision_lab.ipynb](`./lab.ipynb`)
 **Primary goal:** Diagnose the bottleneck before choosing an architecture.
 
 ## Learning outcome
@@ -168,7 +168,7 @@ Create an architecture decision record:
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
 
 ## Deepening — solve the smallest layer first
 
@@ -197,3 +197,10 @@ Students must identify the assumption with the greatest sensitivity.
 
 Only escalate to weight updates when the simpler system layer cannot explain or solve the measured failure.
 
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
