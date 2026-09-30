@@ -1,10 +1,10 @@
 # Lecture 12 — Evaluation That Can Block a Bad Model
 
-**Lab:** [Evaluation Harness](`./lab.ipynb`)
+**Lab:** [Evaluation Harness](./lab.ipynb)
 
 ## Outcome
 
-Students design evaluation before training, partition failures by layer, and distinguish statistical evidence from release significance.
+You design evaluation before training, partition failures by layer, and distinguish statistical evidence from release significance.
 
 ## The benchmark trap
 
@@ -81,3 +81,11 @@ Connect your benchmark protocol to the evaluation chapters and preserve the exac
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 11 — Training System Design and Instrumentation](../11_training_system_design/lecture.md) · [Next lecture: Lecture 13 — Data Sources and Dataset Construction →](../13_data_sources_and_dataset_construction/lecture.md)
+
+</div>
