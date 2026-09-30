@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can explain why verifiable rewards change the reinforcement-learning problem, build a simple verifier, and diagnose reward hacking.
+You can explain why verifiable rewards change the reinforcement-learning problem, build a simple verifier, and diagnose reward hacking.
 
 ## Start with an objective we can check
 
