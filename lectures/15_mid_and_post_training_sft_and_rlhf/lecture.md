@@ -1,6 +1,5 @@
 # Lecture 15 — Mid and Post Training: SFT, RLHF, and the Post-Training Stack
 
-**Duration:** 25 minutes  
 **Lab:** [sft_with_a_small_open_model.ipynb](`./lab.ipynb`)
 **Primary anchor:** https://arxiv.org/abs/2203.02155
 
@@ -12,7 +11,7 @@ By the end, the learner can distinguish:
 
 and decide which stage addresses a measured failure.
 
-## 0–4 — Why “train the model more” is ambiguous
+## Why “train the model more” is ambiguous
 
 Start with three failures:
 
@@ -30,7 +29,7 @@ Reveal:
 | Stable behavior | SFT / PEFT |
 | Preference trade-offs | DPO / RLHF-style methods |
 
-## 4–8 — The post-training stack
+## The post-training stack
 
 Draw:
 
@@ -48,7 +47,7 @@ Draw:
 
 Explain that stages are composable, not mandatory.
 
-## 8–13 — SFT in concrete terms
+## SFT in concrete terms
 
 SFT learns from:
 
@@ -75,7 +74,7 @@ Explain:
 
 **dataset composition = gradient pressure on behavior.**
 
-## 13–17 — Preference optimization vs RLHF
+## Preference optimization vs RLHF
 
 | Property | SFT | DPO-style preference optimization | Classic RLHF |
 |---|---|---|---|
@@ -89,7 +88,7 @@ Key lesson:
 
 A more complex training loop is justified only when it solves a problem the simpler loop cannot.
 
-## 17–20 — Worked example
+## Worked example
 
 Target: “safe, concise, grounded medical responses.”
 
@@ -117,7 +116,7 @@ Measure:
 | Mean output tokens | 240 | measure |
 | Safety failures | measure | measure |
 
-## 20–22 — Break it
+## Break it
 
 Give a preference dataset where chosen responses are always longer.
 
@@ -129,7 +128,7 @@ Predict:
 
 Then inspect the preference data.
 
-## 22–24 — Engineering judgment
+## Engineering judgment
 
 The learner must answer:
 
@@ -144,7 +143,7 @@ Require:
 - known resource cost;
 - acceptable regression.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Complete:
 
