@@ -78,7 +78,7 @@ Use current data-processing documentation from the referenced implementation eco
 
 Do not substitute the four-row toy dataset for the real exercise. Run the [Real Dataset Corpus Bench](`./lab.ipynb`).
 
-Students must inspect multiple source schemas, normalize them into a common schema, measure distributions, run filtering, check cross-source exact duplicates, and construct two competing mixtures.
+You must inspect multiple source schemas, normalize them into a common schema, measure distributions, run filtering, check cross-source exact duplicates, and construct two competing mixtures.
 
 Minimum sources:
 
