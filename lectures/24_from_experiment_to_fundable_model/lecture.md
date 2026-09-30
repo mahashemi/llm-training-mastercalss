@@ -1,6 +1,6 @@
 # Lecture 24 — From Experiment to Fundable Model
 
-**Lab:** [capstone_model_program.ipynb](`./lab.ipynb`)
+**Lab:** [capstone_model_program.ipynb](./lab.ipynb)
 
 ## Outcome
 
@@ -196,3 +196,11 @@ Using the course's Qwen3-0.6B → H100 ladder, write a one-page scale proposal t
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 23 — Build an LLM Program](../23_build_an_llm_program/lecture.md)
+
+</div>
