@@ -90,17 +90,11 @@ The course distinguishes four different activities that are often incorrectly ca
 
 ### Open-weight model ladder
 
-| Stage | Model class | Student outcome | Hardware target |
-|---|---|---|---|
-| Foundation mechanics | tiny GPT | understand every tensor and gradient | CPU / Colab |
-| First real checkpoint | Qwen3-0.6B | download, inspect, infer, SFT | free Colab |
-| Resource scaling | Qwen3-1.7B/4B | precision, sequence, adapter experiments | Colab / single GPU |
-| Professional adaptation | 7B–8B | LoRA, QLoRA, profiling, evaluation | 1× H100 |
-| Large-model adaptation | Qwen3.8-27B | memory accounting and parameter-efficient training | 1× H100 for selected workflows; multi-GPU for broader training |
-| Distributed training | 7B–30B+ | sharding, communication, checkpointing | multi-GPU H100 |
-| Foundation model | project-specific | data + architecture + pretraining program | H100 cluster |
+The practical hardware/model progression is maintained in the dedicated [Open-Weight Training Ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md). The curriculum matrix above tells you **when** to use that ladder; the ladder contains the detailed hardware and model sizing reference.
 
-This is intentionally **not** a claim that every model at a given size fits every operation on that hardware. Each notebook must calculate the resource requirement before launching a run.
+This is intentionally **not another curriculum table**. The same workflow is applied at different resource scales:
+
+**CPU tiny GPT → Qwen3-0.6B on free Colab → 1.7B/4B experiments → 7B–8B on H100 → 27B adaptation → multi-GPU training → foundation-model planning.**
 
 ## Learning engine
 
