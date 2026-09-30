@@ -21,8 +21,8 @@ The textbook and lecture layers are intentionally many-to-one with laboratories.
 | Inference / KV cache | prefill, decode, KV cache, batching, latency | Ch. 51–56; Lecture 10 |
 | Training instrumentation | optimizer state, checkpointing, accumulation, observability | Ch. 10, 14–16, 25, 39; Lecture 11 |
 | Evaluation harness | benchmark design, statistics, release gates | Ch. 22, 41–47, 50, 73; Lecture 12 |
-| Dataset curation | sources, filtering, provenance, quality | Ch. 17–18, 21, 23, 66, 72; Lecture 13 | [Real Dataset Bench](notebooks/real_dataset_corpus_bench.ipynb) + [Persian Track](data/PERSIAN_DATASET_TRACK.md) |
-| Dedup + data mixing | deduplication, mixture weights, sampling | Ch. 19–20; Lecture 14 |
+| Dataset curation | sources, filtering, provenance, quality | Ch. 17–18, 21, 23, 66, 72; Lecture 13; [Real Dataset Bench](notebooks/real_dataset_corpus_bench.ipynb); [Persian Track](data/PERSIAN_DATASET_TRACK.md) |
+| Dedup + data mixing | deduplication, mixture weights, sampling | Ch. 19–20; Lecture 14 |\n| Persian longitudinal case | target-language tokenizer, corpus quality, synthetic-vs-real data, continued PT, SFT/PEFT, evaluation | Ch. 2, 17–24, 26–33, 41–50, 62–65; Lectures 2, 12–15, 18–19, 23 | [Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md) using existing labs |
 | Qwen3-0.6B SFT | real open-weight model loading, SFT, evaluation | Ch. 27, 33, 62; Lecture 15 |
 | RLVR toy | reward verification, reward hacking | Lecture 16 |
 | Multimodal alignment | modality encoders, token budgets, alignment | Lecture 17 |
