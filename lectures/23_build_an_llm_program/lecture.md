@@ -1,6 +1,6 @@
 # Lecture 23 — Build an LLM Program
 
-**Lab:** [national_llm_resource_plan.ipynb](`./lab.ipynb`)
+**Lab:** [national_llm_resource_plan.ipynb](./lab.ipynb)
 
 ## Outcome
 
@@ -202,3 +202,11 @@ This converts a one-time funding request into a sequence of evidence gates.
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 22 — API vs RAG vs Tools vs Training](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Next lecture: Lecture 24 — From Experiment to Fundable Model →](../24_from_experiment_to_fundable_model/lecture.md)
+
+</div>
