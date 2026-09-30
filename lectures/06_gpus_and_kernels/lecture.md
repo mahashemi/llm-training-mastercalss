@@ -1,7 +1,7 @@
 # Lecture 06 — GPUs and Kernels
 
 **Duration:** 25 minutes  
-**Lab:** [GPU Kernel Benchmark](../../notebooks/gpu_kernel_benchmark.ipynb)  
+**Lab:** [GPU Kernel Benchmark](`./lab.ipynb`)  
 **Primary anchor:** NVIDIA/H100 documentation + Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -86,3 +86,10 @@ Write:
 ## Research bridge
 
 Students should inspect one profiler trace and identify the top two contributors to step time.
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
