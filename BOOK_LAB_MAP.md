@@ -1,5 +1,7 @@
 # Book ↔ Lecture ↔ Laboratory Map
 
+**Curriculum control plane:** [Learning Graph](docs/LEARNING_GRAPH.md) · [Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)
+
 The textbook and lecture layers are intentionally many-to-one with laboratories. A chapter may reuse a laboratory when one executable experiment can teach several related concepts.
 
 ## Primary laboratory families
@@ -19,7 +21,7 @@ The textbook and lecture layers are intentionally many-to-one with laboratories.
 | Inference / KV cache | prefill, decode, KV cache, batching, latency | Ch. 51–56; Lecture 10 |
 | Training instrumentation | optimizer state, checkpointing, accumulation, observability | Ch. 10, 14–16, 25, 39; Lecture 11 |
 | Evaluation harness | benchmark design, statistics, release gates | Ch. 22, 41–47, 50, 73; Lecture 12 |
-| Dataset curation | sources, filtering, provenance, quality | Ch. 17–18, 21, 23, 66, 72; Lecture 13 |
+| Dataset curation | sources, filtering, provenance, quality | Ch. 17–18, 21, 23, 66, 72; Lecture 13 | [Real Dataset Bench](notebooks/real_dataset_corpus_bench.ipynb) + [Persian Track](data/PERSIAN_DATASET_TRACK.md) |
 | Dedup + data mixing | deduplication, mixture weights, sampling | Ch. 19–20; Lecture 14 |
 | Qwen3-0.6B SFT | real open-weight model loading, SFT, evaluation | Ch. 27, 33, 62; Lecture 15 |
 | RLVR toy | reward verification, reward hacking | Lecture 16 |
