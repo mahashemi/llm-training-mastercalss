@@ -1,13 +1,12 @@
 # Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data
 
-**Duration:** 25 minutes  
 **Lab:** [Deduplication and Data Mixing](`./lab.ipynb`)
 
 ## Outcome
 
 Students can isolate data interventions and quantify whether a cleaner corpus is actually more useful.
 
-## 0–4 — The transformed budget
+## The transformed budget
 
 Show:
 
@@ -15,7 +14,7 @@ Show:
 
 Ask what changed besides token count.
 
-## 4–9 — Filtering
+## Filtering
 
 Filtering trades:
 
@@ -23,7 +22,7 @@ Filtering trades:
 
 Teach thresholds as experiment variables.
 
-## 9–14 — Deduplication and mixing
+## Deduplication and mixing
 
 Exact and near dedup remove repeated content.
 
@@ -31,11 +30,11 @@ Mixing changes exposure rates across domains/languages.
 
 For temperature sampling:
 
-**q_i = p_i^α / Σp_j^α**
+$q_i = \frac{p_i^{\alpha}}{\sum_j p_j^{\alpha}}$
 
 The alpha choice changes the balance.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Run a four-arm study:
 
@@ -52,19 +51,19 @@ Measure:
 - target score;
 - duplicate rate.
 
-## 19–22 — Break it
+## Break it
 
 Increase synthetic data until teacher-correlated failures become visible.
 
 Ask whether a larger dataset produced more useful diversity.
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 Every data transformation needs:
 
 **hypothesis → isolated variable → metric → regression check**
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Name one reason aggressive deduplication can hurt rather than help.
 
