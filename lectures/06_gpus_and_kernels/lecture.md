@@ -1,6 +1,6 @@
 # Lecture 06 — GPUs and Kernels
 
-**Lab:** [GPU Kernel Benchmark](`./lab.ipynb`)  
+**Lab:** [GPU Kernel Benchmark](./lab.ipynb)  
 **Primary anchor:** NVIDIA/H100 documentation + Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -78,7 +78,7 @@ This is why the course measures the workload rather than quoting peak specificat
 
 ## Exit challenge
 
-Write:
+Use:
 
 **kernel → bottleneck → measurement → optimization → regression test**
 
@@ -92,3 +92,11 @@ You should inspect one profiler trace and identify the top two contributors to s
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 05 — Attention Alternatives and MoE](../05_attention_alternatives_and_moe/lecture.md) · [Next lecture: Lecture 07 — Efficient Attention, FlashAttention, and Triton →](../07_efficient_attention_and_triton/lecture.md)
+
+</div>
