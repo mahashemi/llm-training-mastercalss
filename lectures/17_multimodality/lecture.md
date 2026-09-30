@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can explain how a non-text modality becomes usable by a language model and calculate the resulting token/resource budget.
+You can explain how a non-text modality becomes usable by a language model and calculate the resulting token/resource budget.
 
 ## The representation problem
 
