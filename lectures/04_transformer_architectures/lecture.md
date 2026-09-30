@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can trace a decoder-only Transformer from token IDs to logits and explain why residual paths, normalization, positional information, attention, and the MLP exist.
+You can trace a decoder-only Transformer from token IDs to logits and explain why residual paths, normalization, positional information, attention, and the MLP exist.
 
 ## Assemble before naming
 
@@ -51,7 +51,7 @@ Track:
 - MLP expansion;
 - final logits.
 
-Students calculate parameter counts for one attention block.
+Calculate parameter counts for one attention block.
 
 ## Laboratory
 
