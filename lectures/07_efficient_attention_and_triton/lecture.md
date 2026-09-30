@@ -1,6 +1,6 @@
 # Lecture 07 — Efficient Attention, FlashAttention, and Triton
 
-**Lab:** [Attention Memory and Tiling](`./lab.ipynb`)  
+**Lab:** [Attention Memory and Tiling](./lab.ipynb)  
 **Primary anchor:** FlashAttention — https://arxiv.org/abs/2205.14135
 
 ## Outcome
@@ -61,7 +61,7 @@ Compare against a naïve/materializing implementation where feasible.
 
 Use a shape that causes excessive padding/masking or a context length that exceeds practical memory.
 
-Ask what failed:
+Consider: what failed:
 
 **algorithm → kernel → memory → configuration**
 
@@ -83,3 +83,11 @@ Compare your measurements with FlashAttention's stated IO/memory motivation and 
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 06 — GPUs and Kernels](../06_gpus_and_kernels/lecture.md) · [Next lecture: Lecture 08 — Distributed Training →](../08_distributed_training/lecture.md)
+
+</div>
