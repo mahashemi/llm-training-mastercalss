@@ -1,6 +1,6 @@
 # Lecture 03 — PyTorch and Resource Accounting
 
-**Lab:** [Resource Accounting — FLOPs and Memory](`./lab.ipynb`)  
+**Lab:** [Resource Accounting — FLOPs and Memory](./lab.ipynb)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -9,11 +9,11 @@ You learn to look at a model as a collection of tensors and resource terms rathe
 
 ## The trap
 
-Write:
+Use:
 
 > “This is a 7B model and it fits in 16 GB.”
 
-Ask whether that statement is enough to launch training.
+Consider: whether that statement is enough to launch training.
 
 No.
 
@@ -105,3 +105,11 @@ Read the relevant CS336 resource-accounting material and compare the assumptions
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 02 — Tokenization](../02_tokenization/lecture.md) · [Next lecture: Lecture 04 — Transformer Architectures →](../04_transformer_architectures/lecture.md)
+
+</div>
