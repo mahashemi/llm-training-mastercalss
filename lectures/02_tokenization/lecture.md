@@ -5,7 +5,7 @@
 
 ## Outcome
 
-By the end, students can build a simple BPE intuition, measure tokenizer behavior on real text, and explain why tokenization changes model compute, context utilization, and multilingual performance.
+By the end, you can build a simple BPE intuition, measure tokenizer behavior on real text, and explain why tokenization changes model compute, context utilization, and multilingual performance.
 
 ## Start with the surprising question
 
