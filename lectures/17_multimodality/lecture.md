@@ -1,6 +1,5 @@
 # Lecture 17 — Multimodality: Turning Images Into Model Inputs
 
-**Duration:** 25 minutes  
 **Lab:** [Multimodal Alignment Map](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
@@ -8,7 +7,7 @@
 
 Students can explain how a non-text modality becomes usable by a language model and calculate the resulting token/resource budget.
 
-## 0–4 — The representation problem
+## The representation problem
 
 A language model receives token embeddings.
 
@@ -20,7 +19,7 @@ Ask:
 
 Introduce the modality encoder/projector path.
 
-## 4–9 — Typical architecture
+## Typical architecture
 
 Draw:
 
@@ -32,13 +31,13 @@ Then compare against:
 
 The alignment problem is connecting the two representation spaces.
 
-## 9–14 — Token budget is a systems budget
+## Token budget is a systems budget
 
 Suppose an image becomes V visual tokens.
 
 For B examples and context length L:
 
-total positions ≈ text tokens + V
+$N_{positions} \approx N_{text} + V$
 
 Increasing visual tokens can affect:
 
@@ -49,7 +48,7 @@ Increasing visual tokens can affect:
 
 The “resolution setting” is therefore not purely a quality parameter.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Build a small model-flow map and vary visual token count.
 
@@ -61,7 +60,7 @@ Record:
 | medium | measure | measure | measure |
 | high | measure | measure | measure |
 
-## 19–22 — Break it
+## Break it
 
 Use an input whose image encoding consumes most of the context window.
 
@@ -71,7 +70,7 @@ Then ask whether the failure is:
 
 **representation → context → memory → quality**
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 A multimodal model is a complete system:
 
@@ -79,7 +78,7 @@ A multimodal model is a complete system:
 
 Do not compare multimodal systems on language-model parameter count alone.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Explain why “more image tokens” can simultaneously help quality and hurt latency.
 
