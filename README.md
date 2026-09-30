@@ -6,6 +6,12 @@ A free-first, implementation-heavy curriculum for learning how to **understand, 
 
 **Audience:** high-school graduates, engineers, researchers, and organizations.
 
+## Learning Graph — the one path through the repository
+
+**[Open the complete Learning Graph](docs/LEARNING_GRAPH.md)** · **[Open the Dataset Learning Matrix](data/REAL_DATASET_REGISTRY.md)** · **[Open the Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)**
+
+The repository is organized as one learning graph, not as separate lecture/notebook/runbook courses. Each stage connects concept → lecture → book → real artifact → experiment → evaluation → decision.
+
 ## Master Course Flow — the one path through the repository
 
 **This README is the canonical learning path.** Do not try to complete folders independently. For each stage, use this order:
@@ -34,7 +40,7 @@ flowchart TD
 | **1. Foundations** | L01 → L02 → L04 → L05 | Ch. 01–13 | Tiny LM, tokenizer, tiny Transformer, attention/MoE |
 | **2. Training + systems** | L03 → L06 → L07 → L08 → L09 → L11 | Ch. 14–16, 25, 39–40 | resource accounting, GPU/kernel, tiling, distributed, scaling, instrumentation |
 | **3. Evaluation contract** | L12 | Ch. 41–47 | evaluation harness + benchmark design before expensive training |
-| **4. Real data** | L13 → L14 | Ch. 17–24 | [Real Dataset Corpus Bench](notebooks/real_dataset_corpus_bench.ipynb), curation, filtering, dedup, mixing |
+| **4. Real data** | L13 → L14 | Ch. 17–24 | [Real Dataset Corpus Bench](notebooks/real_dataset_corpus_bench.ipynb), curation, filtering, dedup, mixing, **[Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)** |
 | **5. Train + adapt** | L15 → L18 → L19 | Ch. 26–33, 38 | [Qwen3-0.6B SFT](notebooks/sft_with_a_small_open_model.ipynb), [LoRA/QLoRA](notebooks/lora_qlora_comparison.ipynb), [Full FT vs LoRA](notebooks/full_ft_vs_lora.ipynb), [Tiny-GPT pretraining campaign](notebooks/25_tiny_gpt_pretraining_campaign.ipynb) |
 | **6. Align** | L16 → L20 | Ch. 34–37 | RLVR verifier experiment; DPO + distillation concepts |
 | **7. Extend + release** | L17 → L21 | Ch. 48–50, 73; L17 is a lecture-led multimodality extension with no dedicated textbook chapter | multimodal alignment map; failure/safety evaluation |
@@ -208,9 +214,9 @@ This chapter is the bridge from the conceptual textbook to actual checkpoint dow
 | **Deep explanation** | [Textbook](BOOK_TOC.md) |
 | **Instructor narrative** | [Lecture Index](lectures/LECTURE_INDEX.md) |
 | **Executable work** | [Notebook map](notebooks/README.md) |
-| **Real data** | [Dataset registry](data/REAL_DATASET_REGISTRY.md) · [Real-data bench](notebooks/real_dataset_corpus_bench.ipynb) |
+| **Real data** | [Dataset registry](data/REAL_DATASET_REGISTRY.md) · [Real-data bench](notebooks/real_dataset_corpus_bench.ipynb) · **[Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)** |
 | **Operational procedure** | [Runbook index](INDEX.md#build) |
-| **Engineering decisions** | [Training Method Matrix](docs/TRAINING_METHOD_MATRIX.md) · [Decision Trees](docs/ENGINEERING_DECISION_TREES.md) |
+| **Engineering decisions** | [Training Method Matrix](docs/TRAINING_METHOD_MATRIX.md) · [Decision Trees](docs/ENGINEERING_DECISION_TREES.md) · **[Learning Graph](docs/LEARNING_GRAPH.md)** |
 | **Research / reproducibility** | [Paper Pipeline](docs/PAPER_PIPELINE.md) · [Reproducibility Standard](REPRODUCIBILITY.md) |
 | **Final synthesis** | [Projects](INDEX.md#projects) · [Model Program Dossier](projects/04_llm_program_dossier.md) |
 
