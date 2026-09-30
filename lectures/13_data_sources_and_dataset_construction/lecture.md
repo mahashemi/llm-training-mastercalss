@@ -1,6 +1,6 @@
 # Lecture 13 — Data Sources and Dataset Construction
 
-**Lab:** [Dataset Curation Pipeline](`./lab.ipynb`)
+**Lab:** [Dataset Curation Pipeline](./lab.ipynb)
 
 ## Outcome
 
@@ -76,7 +76,7 @@ Use current data-processing documentation from the referenced implementation eco
 
 ## Required real-data laboratory
 
-Do not substitute the four-row toy dataset for the real exercise. Run the [Real Dataset Corpus Bench](`./lab.ipynb`).
+Do not substitute the four-row toy dataset for the real exercise. Run the [Real Dataset Corpus Bench](./lab.ipynb).
 
 You must inspect multiple source schemas, normalize them into a common schema, measure distributions, run filtering, check cross-source exact duplicates, and construct two competing mixtures.
 
@@ -102,3 +102,11 @@ Produce:
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 12 — Evaluation That Can Block a Bad Model](../12_evaluation/lecture.md) · [Next lecture: Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
+
+</div>
