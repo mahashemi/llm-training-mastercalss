@@ -1,7 +1,7 @@
 # Lecture 24 — From Experiment to Fundable Model
 
 **Duration:** 25 minutes
-**Lab:** [capstone_model_program.ipynb](../../notebooks/capstone_model_program.ipynb)
+**Lab:** [capstone_model_program.ipynb](`./lab.ipynb`)
 
 ## Outcome
 
@@ -158,7 +158,7 @@ Chinchilla: https://arxiv.org/abs/2203.15556
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
 
 ## Deepening — write the proposal from the experiment backwards
 
@@ -190,3 +190,10 @@ Using the course's Qwen3-0.6B → H100 ladder, write a one-page scale proposal t
 
 **current evidence → proposed model → hardware → training method → evaluation → budget assumptions → gate → fallback**.
 
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
