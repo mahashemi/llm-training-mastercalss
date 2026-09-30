@@ -190,7 +190,7 @@ For each architecture estimate:
 
 **quality → latency → successful tasks → recurring cost → one-time cost → engineering burden**
 
-Students must identify the assumption with the greatest sensitivity.
+You must identify the assumption with the greatest sensitivity.
 
 ### Training escalation
 
