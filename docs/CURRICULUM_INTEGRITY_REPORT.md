@@ -1,6 +1,6 @@
 # Curriculum Integrity Report
 
-Audit date: 2026-09-29
+Audit date: 2026-09-30
 
 ## Resource inventory
 
@@ -18,11 +18,13 @@ Audit date: 2026-09-29
 - Textbook laboratory references were audited; Chapter 1 now has an immediate Notebook 01 link next to its prediction exercise.
 - Shared textbook laboratories are explicitly documented in BOOK_LAB_MAP.md.
 - All 24 numbered lectures have explicit notebook links and evidence contracts.
-- The 27 notebooks on the audited branch parse as valid JSON.
+- The 28 notebooks on the audited branch parse as valid JSON.
 - Core notebooks now include quantitative experiments and deliberate break cases.
 - Runbooks include preflight, resource accounting, smoke tests, recovery, acceptance, and release procedures.
 - Projects and templates now require measured baselines, resource metrics, failure analysis, and reproducibility metadata.
-- README, INDEX, COURSE_MAP, BOOK_TOC, lecture index, and notebook map were aligned around one practical training spine.
+- README, INDEX, COURSE_MAP, BOOK_TOC, lecture index, notebook map, and the new Learning Graph were aligned around one practical training spine.
+- The real-data layer now includes a Persian longitudinal case with corpus, synthetic-data, evaluation, tokenizer, SFT/PEFT, and continued-pretraining connections.
+- The repository does not vendor large Persian corpora; experiments use streamed/sample slices and record source revisions and access/license basis.
 
 ## Curriculum invariant
 
