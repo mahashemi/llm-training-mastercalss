@@ -1,6 +1,6 @@
 # Lecture 05 — Attention Alternatives and Mixture-of-Experts
 
-**Lab:** [Attention and MoE Lab](`./lab.ipynb`)  
+**Lab:** [Attention and MoE Lab](./lab.ipynb)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
 ## Outcome
@@ -108,3 +108,11 @@ Read original GQA/MQA/MoE papers and compare active computation with total param
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
 
 This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+
+---
+
+<div align="center">
+
+[← Previous lecture: Lecture 04 — Transformer Architectures](../04_transformer_architectures/lecture.md) · [Next lecture: Lecture 06 — GPUs and Kernels →](../06_gpus_and_kernels/lecture.md)
+
+</div>
