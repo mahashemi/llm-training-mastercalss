@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can explain replication versus sharding and derive why more GPUs do not automatically produce linear throughput.
+You can explain replication versus sharding and derive why more GPUs do not automatically produce linear throughput.
 
 ## The one-GPU wall
 
