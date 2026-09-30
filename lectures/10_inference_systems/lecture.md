@@ -5,7 +5,7 @@
 
 ## Outcome
 
-Students can separate prefill from decode, calculate why KV cache grows, and benchmark latency versus throughput.
+You can separate prefill from decode, calculate why KV cache grows, and benchmark latency versus throughput.
 
 ## Why inference is not training
 
