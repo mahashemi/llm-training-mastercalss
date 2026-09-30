@@ -1,6 +1,5 @@
 # Lecture 02 — Tokenization: The First Hidden Model Decision
 
-**Duration:** 25 minutes  
 **Lab:** [Tokenizer Design and Measurement](`./lab.ipynb`)  
 **Primary anchor:** Stanford CS336 — https://cs336.stanford.edu/
 
@@ -8,7 +7,7 @@
 
 By the end, students can build a simple BPE intuition, measure tokenizer behavior on real text, and explain why tokenization changes model compute, context utilization, and multilingual performance.
 
-## 0–4 — Start with the surprising question
+## Start with the surprising question
 
 Show:
 
@@ -22,13 +21,13 @@ Ask:
 
 The answer is not “because that language is worse.” Tokenization is an encoding choice learned from a corpus.
 
-## 4–9 — From characters to subwords
+## From characters to subwords
 
 Walk through:
 
 **characters → candidate pairs → frequent merges → vocabulary**
 
-Explain BPE using a tiny corpus. Students should manually perform two merges.
+Explain BPE using a tiny corpus. You should manually perform two merges.
 
 Then distinguish:
 
@@ -40,11 +39,11 @@ Then distinguish:
 
 Define **fertility** as average tokenizer-produced token count for a chosen unit of text.
 
-## 9–14 — Formal resource consequence
+## Formal resource consequence
 
 For a corpus with C characters and fertility f:
 
-**tokens ≈ C × f**
+$\mathrm{tokens} \approx C \times f$
 
 If tokenizer A gives 1.0M tokens and B gives 1.4M for the same corpus, B creates roughly 40% more token positions.
 
@@ -57,9 +56,9 @@ That can affect:
 - inference latency;
 - KV-cache growth.
 
-Students should not leave this lecture thinking vocabulary design is cosmetic.
+You should not leave this lecture thinking vocabulary design is cosmetic.
 
-## 14–19 — Laboratory
+## Laboratory
 
 Open the tokenizer notebook.
 
@@ -80,7 +79,7 @@ Measure:
 | vocabulary utilization | measure |
 | per-language fertility | measure |
 
-## 19–22 — Break it
+## Break it
 
 Use a corpus distribution that is mostly English while evaluating a low-resource target language.
 
@@ -92,7 +91,7 @@ Then test it.
 
 Failure category: **distribution mismatch**.
 
-## 22–24 — Engineering decision
+## Engineering decision
 
 Tokenizer choice should be evaluated against:
 
@@ -100,7 +99,7 @@ Tokenizer choice should be evaluated against:
 
 For multilingual projects, report fertility by language rather than one global average.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 Complete:
 
