@@ -58,9 +58,9 @@ corpora        corpora           + Persian-first    reasoning
 
 ## 2. Stage contract
 
-Every stage uses:
+Every stage uses one learner-facing unit:
 
-**intuition → reading → lecture → real artifact → experiment → measurement → failure → decision → reproducibility**
+**intuition → explanation → experiment → measurement → failure → decision → reproducibility**
 
 The README matrix is the authoritative answer to “which material do I open next?”
 
@@ -79,9 +79,11 @@ The stages are:
 
 ## 3. Material relationship
 
-There is deliberately one curriculum map:
+There is deliberately one learner path:
 
-**Lecture → Book → Lab → Dataset → Evaluation → Runbook/Decision → Project**
+**Lecture → embedded Lab → real data → evaluation → decision → evidence**
+
+The textbook and runbooks remain optional reference layers; they do not create additional navigation steps.
 
 A laboratory may serve several lectures or chapters. Reuse is intentional; a new notebook is justified only when an existing experiment cannot demonstrate the required mechanism.
 
@@ -114,10 +116,10 @@ A stage is complete only when the learner can save the relevant artifact:
 
 ## 6. Rules that prevent curriculum sprawl
 
-1. A new dataset must attach to an existing stage and lab.
-2. A new notebook must replace a missing executable experiment; it must not duplicate an existing lab.
-3. A runbook is a procedure, not another reading track.
-4. A lecture must point to its primary laboratory and evidence artifact.
+1. A new dataset must attach to an existing lecture and lab.
+2. A new notebook must live inside the lecture that owns the experiment.
+3. A runbook is a procedure, not another learner track.
+4. A lecture must contain or directly expose its primary laboratory and evidence artifact.
 5. A book chapter explains mechanism and decision; it does not duplicate the lecture verbatim.
 6. Every real-data experiment records source, revision, split, license/access basis, and preprocessing.
 7. Comparisons hold the relevant budget and evaluation protocol constant.
@@ -127,6 +129,6 @@ A stage is complete only when the learner can save the relevant artifact:
 
 The curriculum is complete when every major stage has:
 
-**concept → lecture → book → real artifact → executable experiment → evaluation → failure mode → engineering decision → reproducible evidence**
+**concept → lecture → embedded experiment → real artifact → evaluation → failure mode → engineering decision → reproducible evidence**
 
 Content can evolve; the graph and the single curriculum matrix should remain stable.
