@@ -1,7 +1,7 @@
 # Lecture 18 — LoRA, QLoRA, and PEFT
 
 **Duration:** 25 minutes  
-**Lab:** [lora_qlora_comparison.ipynb](../../notebooks/lora_qlora_comparison.ipynb)
+**Lab:** [lora_qlora_comparison.ipynb](`./lab.ipynb`)
 **Primary anchors:** https://arxiv.org/abs/2106.09685 · https://arxiv.org/abs/2305.14314
 
 ## Outcome
@@ -117,7 +117,7 @@ QLoRA: https://arxiv.org/abs/2305.14314
 
 ## Lab contract
 
-Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See [Book ↔ Lecture ↔ Laboratory Map](../../BOOK_LAB_MAP.md).
+Complete the linked laboratory before treating the lecture as mastered. Record a baseline, one intervention, at least one failure, and the next experiment. See the lecture's lab contract.
 
 ## Deepening — make the PEFT decision quantitative
 
@@ -154,3 +154,10 @@ Compare what scales with model size:
 
 Students should explain why adapter parameter savings do not imply zero activation or runtime cost.
 
+
+
+## Lab — run it here
+
+**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+
+The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
