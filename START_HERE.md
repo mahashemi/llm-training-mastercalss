@@ -1,18 +1,15 @@
 # Start Here
 
-The repository is intentionally large because it contains the **textbook, 24 lectures, executable laboratories, operational runbooks, research materials, and projects**. You should not approach these as six separate courses.
+The repository contains deep reference material, but the learner path is intentionally simple: **README → Lecture 01 → Lecture 02 → … → Lecture 24**. Each lecture owns its primary laboratory, real-data connection, decision exercise, and evidence.
 
-Start from the **[Master Course Flow in the README](README.md#master-course-flow--the-one-path-through-the-repository)**. It gives the natural dependency order and tells you which book chapters, lecture IDs, and primary labs belong to each stage.
+You do not need to open the textbook, notebook index, or runbook to complete the core course. Those are optional reference layers.
 
 ## Your first 90 minutes
 
 ### 1. Orient — 10 min
 
 Read:
-[Chapter 00 — The Open-Weight Training Path](book/00_open_weight_training_path.md)
-
-Then open:
-[Open-Weight Model Audit](notebooks/open_weight_model_audit.ipynb)
+Start directly with [Lecture 01 — What Is an LLM?](lectures/01_what_is_an_llm/lecture.md).
 
 The goal is to learn the recurring workflow:
 
@@ -23,19 +20,13 @@ The goal is to learn the recurring workflow:
 Read:
 [Lecture 01 — What Is an LLM?](lectures/01_what_is_an_llm/lecture.md)
 
-### 3. Laboratory — 30–45 min
+### 3. Run the embedded laboratory
 
-Open:
-[Notebook 01 — Next-token prediction and a tiny language model](notebooks/01_next_token_prediction_and_a_tiny_language_model.ipynb)
+Open the lab directly from Lecture 01: [run the Lecture 01 lab](lectures/01_what_is_an_llm/lab.ipynb).
 
-The lab starts with a bigram model so the objective and training loop are visible before Transformer abstractions.
+The lab is part of the lecture—not a separate course resource.
 
-### 4. Textbook — 15–20 min
-
-Read:
-[Chapter 01 — A Language Model Is a Probability Model](book/01_language_models_without_magic/01_a_language_model_is_a_probability_model.md)
-
-### 5. Exit test
+### 4. Exit test
 
 Without looking back, explain:
 
