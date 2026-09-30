@@ -1,6 +1,5 @@
 # Lecture 18 — LoRA, QLoRA, and PEFT
 
-**Duration:** 25 minutes  
 **Lab:** [lora_qlora_comparison.ipynb](`./lab.ipynb`)
 **Primary anchors:** https://arxiv.org/abs/2106.09685 · https://arxiv.org/abs/2305.14314
 
@@ -8,7 +7,7 @@
 
 Understand why parameter-efficient fine-tuning changes the training resource equation and how to choose rank, target modules, and quantization experimentally.
 
-## 0–4 — The resource problem
+## The resource problem
 
 Suppose a 7B model fits for inference but does not fit for full fine-tuning.
 
@@ -20,11 +19,11 @@ Introduce PEFT:
 
 **freeze base → learn small update → preserve base weights**
 
-## 4–8 — LoRA mechanics
+## LoRA mechanics
 
 For W:
 
-W' = W + BA
+$W' = W + BA$
 
 where the adapter rank r is much smaller than the original matrix dimensions.
 
@@ -42,7 +41,7 @@ rank 16 LoRA:
 
 That is roughly 128× fewer trainable parameters for that matrix.
 
-## 8–12 — Rank is a capacity/resource knob
+## Rank is a capacity/resource knob
 
 | Rank | Adapter capacity | Memory | Experiment |
 |---:|---|---|---|
@@ -54,7 +53,7 @@ That is roughly 128× fewer trainable parameters for that matrix.
 
 Do not assume a higher rank improves quality enough to pay for itself.
 
-## 12–16 — What should be adapted?
+## What should be adapted?
 
 Compare:
 
@@ -66,7 +65,7 @@ Compare:
 
 Hold data, training tokens, and evaluation constant.
 
-## 16–19 — QLoRA
+## QLoRA
 
 QLoRA combines adapter training with a quantized frozen base.
 
@@ -83,7 +82,7 @@ But measure:
 
 Do not assume quantization is free.
 
-## 19–22 — Worked decision
+## Worked decision
 
 | Method | Target score | Peak memory | GPU-hours | Adapter/checkpoint |
 |---|---:|---:|---:|---|
@@ -95,7 +94,7 @@ If the hardware budget is 24 GB, full FT is infeasible in this example.
 
 The next question is whether 84/83 quality is enough. If not, increase adapter capacity or reconsider the task.
 
-## 22–24 — Failure analysis
+## Failure analysis
 
 **Target task underfits:** rank/data coverage may be insufficient.
 
@@ -103,7 +102,7 @@ The next question is whether 84/83 quality is enough. If not, increase adapter c
 
 **QLoRA slower than expected:** kernels or quantization path may dominate.
 
-## 24–25 — Exit challenge
+## Exit challenge
 
 State:
 
@@ -123,11 +122,11 @@ Complete the linked laboratory before treating the lecture as mastered. Record a
 
 For a matrix with dimensions d_in × d_out:
 
-**full parameters = d_in × d_out**
+$P_{full}=d_{in}d_{out}$
 
-**LoRA parameters = r(d_in + d_out)**
+$P_{LoRA}=r(d_{in}+d_{out})$
 
-Have students calculate both for several layers and sum across the architecture.
+Work through calculate both for several layers and sum across the architecture.
 
 ### Controlled matrix
 
@@ -152,7 +151,7 @@ Compare what scales with model size:
 - activations;
 - throughput.
 
-Students should explain why adapter parameter savings do not imply zero activation or runtime cost.
+You should explain why adapter parameter savings do not imply zero activation or runtime cost.
 
 
 
