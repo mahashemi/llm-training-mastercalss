@@ -10,7 +10,16 @@ This is the dependency graph for the curriculum. It explains the progression; th
 ORIENT
   │
   ▼
-FOUNDATIONS
+NEURAL COMPUTING FOUNDATION
+  │
+  ├─ perceptron → backprop → SOM
+  ├─ CNN → autoencoder → generative models
+  ├─ RNN/LSTM/GRU → forecasting
+  ├─ RBM/DBN → attention/Transformer
+  └─ deep RL → research capstone
+  │
+  ▼
+LLM FOUNDATIONS
   │
   ▼
 TRAINING SYSTEMS
@@ -65,6 +74,8 @@ Every stage uses one learner-facing unit:
 The README matrix is the authoritative answer to “which material do I open next?”
 
 The stages are:
+
+- **-1 · Neural Computing Foundation** — 12 units covering classical and modern neural computation, with executable real-data laboratories and a publication-oriented capstone.
 
 - **0 · Orient** — open-weight workflow, reproducibility, model audit.
 - **1 · Foundations** — probability, tokenization, Transformer mechanics, attention, MoE.
