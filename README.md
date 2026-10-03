@@ -34,6 +34,18 @@ The repository's other folders are supporting references. They do **not** define
 
 | # / Stage | Lecture | Textbook chapters | Primary laboratory | Real data / longitudinal case | Runbook / decision aid | Evidence / deliverable |
 |---|---|---|---|---|---|---|
+| **00.01 · Neural Computing** | [NC01 · Introduction](lectures/00_neural_computing/01_neural_computing_foundations/lecture.md) | Neural foundations | [Lab 01–03](lectures/00_neural_computing/01_neural_computing_foundations/lab.ipynb) | HF MNIST | Research workflow | perceptron/Adaline evidence |
+| **00.02 · Neural Computing** | [NC02 · Feedforward + Backprop](lectures/00_neural_computing/02_feedforward_and_backprop/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/02_feedforward_and_backprop/lab.ipynb) | HF Banknote | Optimization study | gradient verification |
+| **00.03 · Neural Computing** | [NC03 · Competitive Learning + SOM](lectures/00_neural_computing/03_competitive_learning_and_som/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/03_competitive_learning_and_som/lab.ipynb) | UCI-HAR HF | Representation analysis | topology map |
+| **00.04 · Neural Computing** | [NC04 · CNNs](lectures/00_neural_computing/04_convolutional_networks/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/04_convolutional_networks/lab.ipynb) | HF MNIST | Architecture ablation | CNN/ResNet comparison |
+| **00.05 · Neural Computing** | [NC05 · Autoencoders](lectures/00_neural_computing/05_autoencoders/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/05_autoencoders/lab.ipynb) | HF MNIST | Representation study | reconstruction/latent report |
+| **00.06 · Neural Computing** | [NC06 · Generative Models](lectures/00_neural_computing/06_generative_models/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/06_generative_models/lab.ipynb) | HF MNIST | Generative comparison | VAE/GAN/diffusion study |
+| **00.07 · Neural Computing** | [NC07 · RNN/LSTM/GRU](lectures/00_neural_computing/07_recurrent_networks/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/07_recurrent_networks/lab.ipynb) | Electricity Load Diagrams | Forecasting protocol | horizon results |
+| **00.08 · Neural Computing** | [NC08 · Recurrent Forecasting](lectures/00_neural_computing/08_sequence_architectures_and_forecasting/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/08_sequence_architectures_and_forecasting/lab.ipynb) | Electricity Load Diagrams | Leakage audit | chronological evaluation |
+| **00.09 · Neural Computing** | [NC09 · Boltzmann Machines](lectures/00_neural_computing/09_boltzmann_machines/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/09_boltzmann_machines/lab.ipynb) | HF MNIST | Energy-based study | RBM/CD-k evidence |
+| **00.10 · Neural Computing** | [NC10 · Attention + Transformers](lectures/00_neural_computing/10_attention_transformers_and_llms/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/10_attention_transformers_and_llms/lab.ipynb) | HF IMDB | Transformer bridge | tensor/objective audit |
+| **00.11 · Neural Computing** | [NC11 · Deep RL](lectures/00_neural_computing/11_deep_reinforcement_learning/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/11_deep_reinforcement_learning/lab.ipynb) | CartPole | DQN ablation | return distribution |
+| **00.12 · Research** | [NC12 · Research Capstone](lectures/00_neural_computing/12_research_capstone/lecture.md) | Research methods | [Capstone lab](lectures/00_neural_computing/12_research_capstone/lab.ipynb) | Prior experiment | Publication path | paper + artifacts |
 | **01 · Foundations** | [L01 · What Is an LLM](lectures/01_what_is_an_llm/lecture.md) | Ch. 01–03, 09 | [Tiny LM](lectures/01_what_is_an_llm/lab.ipynb) | [Open-weight audit](lectures/23_build_an_llm_program/open_weight_model_audit.ipynb) | [Open-weight runbook](runbooks/12_open_weight_model_runbook.md) | loss, generation, training-vs-inference explanation |
 | **02 · Foundations** | [L02 · Tokenization](lectures/02_tokenization/lecture.md) | Ch. 02, 24 | [Tokenizer measurement](lectures/02_tokenization/lab.ipynb) | [Persian track](data/PERSIAN_DATASET_TRACK.md) · PerSpaCor · CulturaX-fa | [Dataset curation runbook](runbooks/01_dataset_curation_runbook.md) | fertility + Unicode/ZWNJ analysis |
 | **03 · Training systems** | [L03 · PyTorch + Resource Accounting](lectures/03_pytorch_and_resource_accounting/lecture.md) | Ch. 11, 40 | [FLOPs + memory](lectures/03_pytorch_and_resource_accounting/lab.ipynb) | Qwen3-0.6B resource baseline | [Resource estimation](docs/RESOURCE_ESTIMATION.md) | memory/FLOPs worksheet |
@@ -216,9 +228,9 @@ The project includes contribution guidelines, a code of conduct, security guidan
 
 The repository currently contains:
 
-- 24 lecture packages;
+- 36 core lecture packages (12 Neural Computing + 24 LLM Training);
 - an optional 76-chapter deep-reference textbook;
-- 24 primary labs plus a small number of supporting experiments now stored inside their owning lecture packages;
+- 36 primary lecture labs plus supporting experiments, with the Neural Computing laboratories designed around real datasets and publication-ready evidence;
 - 14 optional operational runbooks;
 - 4 capstone/project briefs;
 - research, proposal, model-card, dataset-card, and experiment templates;
