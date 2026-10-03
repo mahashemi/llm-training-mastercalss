@@ -60,11 +60,11 @@ Choose a project by the skill you want to develop, not by the fashionable model.
 | Reliability | P16, P17 | robustness/calibration study |
 | Multilingual NLP | P18, P19 | low-resource transfer study |
 | Persian NLP | P20–P24 | Persian-first research program |
-| Islamic text | P25–P27 | provenance/retrieval/evaluation study |
-| Multimodal learning | P28, P29 | compositional/generalization study |
-| Systems | P30–P33 | efficiency/serving benchmark |
-| Agents/tools | P34, P35 | reliability/evaluation research |
-| Research methodology | P36 | independent paper |
+| Islamic text | P27–P29 | provenance/retrieval/evaluation study |
+| Multimodal learning | P30, P31 | compositional/generalization study |
+| Systems | P32–P34 | efficiency/serving benchmark |
+| Agents/tools | P35, P36 | reliability/evaluation research |
+| Research methodology | P37–P48 | independent paper / benchmark / dataset / systems study |
 
 ---
 
