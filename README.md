@@ -12,7 +12,7 @@ Before the 24 modern LLM-training lectures, learners now complete a **12-unit Ne
 
 **[Open the Neural Computing Foundation](lectures/00_neural_computing/README.md)** · **[Open the Research & Publication Path](projects/05_research_publication_path.md)**
 
-The foundation is practical by construction: every unit has a real-data laboratory, baseline, controlled intervention, ablation, error analysis, resource/reproducibility record, and a research question. Real-data anchors include MNIST, UCI Banknote, UCI-HAR-derived sensor data, Electricity Load Diagrams, and IMDB. Hugging Face provides the dataset-loading workflow used throughout the labs. citeturn0search2turn1search1turn1search10
+The foundation is practical by construction: every unit has a real-data laboratory, baseline, controlled intervention, ablation, error analysis, resource/reproducibility record, and a research question. Real-data anchors include MNIST, UCI Banknote, UCI-HAR-derived sensor data, Electricity Load Diagrams, and IMDB. Hugging Face provides the dataset-loading workflow used throughout the labs.
 
 **The complete learner flow is now:**
 
