@@ -10,7 +10,7 @@ A free-first, implementation-heavy curriculum for learning how to **understand, 
 
 Before the 24 modern LLM-training lectures, learners now complete a **12-unit Neural Computing Foundation** covering perceptrons, feedforward networks/backpropagation, competitive learning/SOMs, CNNs, autoencoders, VAE/GAN/diffusion, RNN/LSTM/GRU, recurrent forecasting, Boltzmann machines/DBNs, attention/Transformers/BERT/GPT, deep reinforcement learning, and a research publication capstone.
 
-**[Open the Neural Computing Foundation](lectures/00_neural_computing/README.md)** · **[Open the Research & Publication Path](projects/05_research_publication_path.md)**
+**[Open the Neural Computing Foundation](lectures/00_neural_computing/README.md)** · **[Open the Research & Publication Path](projects/05_research_publication_path.md)** · **[Open the Student Research Project Catalog](projects/06_student_research_project_catalog.md)**
 
 The foundation is practical by construction: every unit has a real-data laboratory, baseline, controlled intervention, ablation, error analysis, resource/reproducibility record, and a research question. Real-data anchors include MNIST, UCI Banknote, UCI-HAR-derived sensor data, Electricity Load Diagrams, and IMDB. Hugging Face provides the dataset-loading workflow used throughout the labs.
 
@@ -136,20 +136,20 @@ For large-scale training, the course uses small reproducible runs to teach the m
 
 ## Repository architecture
 
-- `lectures/` — the primary 24 self-contained learning packages; each owns its primary lab
+- `lectures/` — the primary 36 self-contained learning packages (12 Neural Computing + 24 LLM Training); each owns its primary lab
 - `book/` — optional deep-reference chapters; not required for the learner path
 - `runbooks/` — reusable operational procedures for instructors/advanced practitioners
 - `visuals/` — diagrams and visual teaching assets
 - `videos/` — curated public lectures with timestamps, purpose, and critical questions
 - `papers/` — paper-reading guides and reproduction plans
 - `cheat_sheets/` — compact references
-- `projects/` — graded and capstone projects
-- `templates/` — experiment cards, paper reports, technical proposals, funding proposals
+- `projects/` — research projects, graded/capstone work, and the publication path
+- `templates/` — experiment cards, research-project specifications, paper reports, technical proposals, funding proposals
 - `references/` — canonical sources and citations
 
 ## Research philosophy
 
-The course treats model training as an experimental science and an engineering discipline. Claims are tied to evidence, configurations are recorded, and every major result is accompanied by a failure analysis and a reproducibility checklist.
+The course treats model training as an experimental science and an engineering discipline. Claims are tied to evidence, configurations are recorded, and every major result is accompanied by a failure analysis and a reproducibility checklist. The [Student Research Project Catalog](projects/06_student_research_project_catalog.md) turns the curriculum into a progression from first experiment to benchmark, dataset contribution, reproducibility study, efficiency study, or paper-quality research.
 
 ## Canonical external foundations
 
@@ -232,7 +232,7 @@ The repository currently contains:
 - an optional 76-chapter deep-reference textbook;
 - 36 primary lecture labs plus supporting experiments, with the Neural Computing laboratories designed around real datasets and publication-ready evidence;
 - 14 optional operational runbooks;
-- 4 capstone/project briefs;
+- a research project catalog spanning 48 project tracks from foundational experiments to publication-grade capstones;
 - research, proposal, model-card, dataset-card, and experiment templates;
 - curated lecture/video and paper-reading paths;
 - citation, reproducibility, maintenance, governance, security, and contribution standards.
