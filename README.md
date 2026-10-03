@@ -6,11 +6,23 @@ A free-first, implementation-heavy curriculum for learning how to **understand, 
 
 **Audience:** high-school graduates, engineers, researchers, and organizations.
 
+## Neural Computing Foundation — now part of the core path
+
+Before the 24 modern LLM-training lectures, learners now complete a **12-unit Neural Computing Foundation** covering perceptrons, feedforward networks/backpropagation, competitive learning/SOMs, CNNs, autoencoders, VAE/GAN/diffusion, RNN/LSTM/GRU, recurrent forecasting, Boltzmann machines/DBNs, attention/Transformers/BERT/GPT, deep reinforcement learning, and a research publication capstone.
+
+**[Open the Neural Computing Foundation](lectures/00_neural_computing/README.md)** · **[Open the Research & Publication Path](projects/05_research_publication_path.md)**
+
+The foundation is practical by construction: every unit has a real-data laboratory, baseline, controlled intervention, ablation, error analysis, resource/reproducibility record, and a research question. Real-data anchors include MNIST, UCI Banknote, UCI-HAR-derived sensor data, Electricity Load Diagrams, and IMDB. Hugging Face provides the dataset-loading workflow used throughout the labs. citeturn0search2turn1search1turn1search10
+
+**The complete learner flow is now:**
+
+**Neural Computing → Deep Learning → Transformers → LLM Training → Data → Adaptation → Alignment → Evaluation → Serving → Research / Program Design**
+
 ## Learning Graph — the one path through the repository
 
 **[Open the complete Learning Graph](docs/LEARNING_GRAPH.md)** · **[Open the Dataset Learning Matrix](data/REAL_DATASET_REGISTRY.md)** · **[Open the Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)**
 
-The repository is organized as one learning graph, not as separate lecture/notebook/runbook courses. Each stage connects concept → lecture → book → real artifact → experiment → evaluation → decision.
+The repository is organized as one learning graph, not as separate lecture/notebook/runbook courses. The 12-unit Neural Computing Foundation is the prerequisite foundation; the existing 24-lecture LLM sequence follows it. Each stage connects concept → lecture → embedded lab → real artifact → experiment → evaluation → decision.
 
 ## Master Course Matrix — the single curriculum control plane
 
