@@ -1,6 +1,6 @@
 # Start Here
 
-The repository contains deep reference material, but the learner path is intentionally simple: **README → Lecture 01 → Lecture 02 → … → Lecture 24**. Each lecture owns its primary laboratory, real-data connection, decision exercise, and evidence.
+The repository contains deep reference material, but the learner path is intentionally simple: **README → Neural Computing 01–12 → LLM Lecture 01–24 → Research/Program Capstone**. The Neural Computing Foundation is now part of the core path, not an optional side course. Each lecture owns its primary laboratory, real-data connection, decision exercise, and evidence.
 
 You do not need to open the textbook, notebook index, or runbook to complete the core course. Those are optional reference layers.
 
@@ -9,34 +9,25 @@ You do not need to open the textbook, notebook index, or runbook to complete the
 ### 1. Orient — 10 min
 
 Read:
-Start directly with [Lecture 01 — What Is an LLM?](lectures/01_what_is_an_llm/lecture.md).
+Start with the [Neural Computing Foundation](lectures/00_neural_computing/README.md), then enter [Lecture 01 — What Is an LLM?](lectures/01_what_is_an_llm/lecture.md).
 
 The goal is to learn the recurring workflow:
 
 **inspect → estimate → load → baseline → smoke test → train → evaluate → break → report → scale**
 
-### 2. Lecture 01 — 25 min
+### 2. Neural Computing Foundation — core prerequisite
 
-Read:
-[Lecture 01 — What Is an LLM?](lectures/01_what_is_an_llm/lecture.md)
+Complete the 12 neural-computing units and their embedded laboratories. The goal is to implement the major neural architectures, compare them experimentally, and produce paper-ready evidence.
 
-### 3. Run the embedded laboratory
+### 3. Enter the LLM training sequence
 
-Open the lab directly from Lecture 01: [run the Lecture 01 lab](lectures/01_what_is_an_llm/lab.ipynb).
+Continue to [Lecture 01 — What Is an LLM?](lectures/01_what_is_an_llm/lecture.md). Its lab begins the modern language-model portion of the course.
 
 The lab is part of the lecture—not a separate course resource.
 
-### 4. Exit test
+### 4. Research standard
 
-Without looking back, explain:
-
-1. token;
-2. next-token objective;
-3. logit;
-4. cross-entropy;
-5. training versus inference;
-6. why generation is autoregressive;
-7. why the tiny model is useful.
+Every major stage must end with evidence: baseline → intervention → ablation → measurement → failure analysis → interpretation → reproducibility. The final [Research & Publication Path](projects/05_research_publication_path.md) turns this evidence into a paper-style artifact.
 
 ## What comes next
 
