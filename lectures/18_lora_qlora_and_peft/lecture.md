@@ -168,3 +168,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 15 — SFT and Post-Training](../15_mid_and_post_training_sft_and_rlhf/lecture.md) · [Next: Lecture 17 — Full Fine-Tuning and Continued Pretraining →](../19_full_fine_tuning_and_continued_pretraining/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: LoRA, QLoRA and PEFT](https://www.youtube.com/results?search_query=LoRA+QLoRA+PEFT+lecture)
+
+## Navigation
+
+[← Previous](../17_multimodality/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../19_full_fine_tuning_and_continued_pretraining/lecture.md)
