@@ -136,3 +136,11 @@ Predefine the threshold, seeds, evaluation episodes, and stopping rule.
 5. RL is stochastic; one trajectory can be lucky.
 
 [← Previous](../10_attention_transformers_and_llms/lecture.md) · [Course 1 home](../README.md) · [Next →](../12_research_capstone/lecture.md)
+
+## Video companions
+
+[Video companions: deep reinforcement learning](https://www.youtube.com/results?search_query=deep+reinforcement+learning+lecture)
+
+## Navigation
+
+[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
