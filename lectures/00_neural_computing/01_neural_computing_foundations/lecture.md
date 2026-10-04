@@ -16,7 +16,7 @@ $$
 and a binary target
 
 $$
-y in {0,1}.
+y \in {0,1}.
 $$
 
 A useful first question is not “Which neural network should we use?”
@@ -30,7 +30,7 @@ That is the central idea behind neural computation.
 A learning algorithm receives examples
 
 $$
-(x^{(1)},y^{(1)}),ldots,(x^{(n)},y^{(n)})
+(x^{(1)},y^{(1)}),\ldots,(x^{(n)},y^{(n)})
 $$
 
 and searches for parameters that make its predictions agree with the observed targets.
@@ -258,7 +258,8 @@ Imagine the original features cannot be separated by a straight line.
 A hidden layer transforms
 
 $$
-x ightarrow h.
+x 
+ightarrow h.
 $$
 
 The goal is not merely to create more numbers. It is to create a representation in which the desired relationship becomes easier for later layers to model.
