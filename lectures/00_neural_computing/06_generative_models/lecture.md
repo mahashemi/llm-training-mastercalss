@@ -1,38 +1,150 @@
-# Course 1 · Chapter — VAE, GANs + Diffusion
+# Course 1 · Chapter 6 — Generative Models: VAE, GANs, and Diffusion
 
-**Lab:** [Open the executable laboratory](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
 
-Study \\\\generative modeling through variational autoencoders, \\\\generative adversarial networks and diffusion models. Focus on the objective, sampling process, latent representation, training stability and evaluation—not only \\\\generated pictures.
+## 1. The problem: learning a distribution, not only a label
 
-## Practical laboratory
+A classifier learns a mapping
 
-Use the real MNIST dataset. Implement a small VAE, a tiny GAN and a simple denoising diffusion model. Compare reconstruction/sample quality, diversity, failure rate, stability and compute.
+$$
+x \rightarrow y.
+$$
 
-## Research exercise
+A generative model instead tries to learn enough about the data distribution to produce new samples:
 
-Run one controlled comparison with a fixed data bud\\\\get and document observed mode collapse, blurry samples, unstable optimization, or other failures. Separate direct observations from explanations.
+$$
+z \rightarrow x.
+$$
 
-## Evidence
+The central question is: **what does it mean for a generated example to be plausible?**
 
-Produce a comparison table, representative samples, quantitative metrics, resource measurements, failure analysis and one falsifiable next experiment.
+## 2. Three different answers
 
-__NEXT__
+### VAE: structured latent-variable learning
 
+An encoder produces an approximate posterior
 
-## Laboratory — run this experiment end to end
+$$
+q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\operatorname{diag}(\sigma_\phi^2(x))\right).
+$$
 
-**[Open the executable lab notebook](./lab.ipynb)**
+The reparameterization trick is
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+$$
+z=\mu_\phi(x)+\sigma_\phi(x)\odot\epsilon,
+\qquad
+\epsilon\sim\mathcal N(0,I).
+$$
 
-## Laboratory — run this experiment end to end
+The objective is
 
-**[Open the executable lab notebook](./lab.ipynb)**
+$$
+\mathcal L=
+\mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]
+-D_{\mathrm{KL}}(q_\phi(z\mid x)\|p(z)).
+$$
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+The first term rewards reconstruction; the second regularizes the latent distribution.
 
-<div align="center">
+### GAN: adversarial distribution matching
+
+A discriminator tries to distinguish real data from generated data while the generator tries to fool it:
+
+$$
+\min_G\max_D
+\mathbb E_{x\sim p_{data}}[\log D(x)]
++
+\mathbb E_{z\sim p(z)}[\log(1-D(G(z)))].
+$$
+
+Because the two players continuously change one another's objective, optimization can be unstable. **Mode collapse** occurs when the generator covers only a narrow part of the data distribution.
+
+### Diffusion: learn iterative denoising
+
+A forward process gradually corrupts data:
+
+$$
+q(x_t\mid x_{t-1})
+=
+\mathcal N\left(
+\sqrt{1-\beta_t}x_{t-1},
+\beta_t I
+\right).
+$$
+
+The learned reverse process attempts to remove that corruption step by step.
+
+## 3. Worked comparison
+
+Imagine generating handwritten digits.
+
+A VAE may generate smooth but blurry digits because likelihood and latent regularization favor a broad reconstruction distribution.
+
+A GAN may generate sharp digits but repeatedly produce similar examples.
+
+A diffusion model can generate diverse, high-fidelity examples but usually requires multiple denoising steps at inference.
+
+Therefore there is no universal “best generator.” The application may prioritize fidelity, diversity, controllability, latency, or compute.
+
+| Method | Main strength | Typical failure | Systems consequence |
+|---|---|---|---|
+| VAE | Structured latent space | Blurry reconstruction / posterior collapse | Relatively simple sampling |
+| GAN | Sharp samples | Instability / mode collapse | Adversarial training |
+| Diffusion | Fidelity and diversity | Sampling cost | Iterative generation |
+
+## 4. What to measure
+
+Do not rely only on a visual gallery.
+
+Measure:
+
+- reconstruction error for a VAE;
+- diversity and mode coverage for a GAN;
+- denoising error for diffusion;
+- sampling time;
+- parameter count;
+- memory usage.
+
+A model that improves a quality metric by 1% but multiplies inference cost by 20× may be the wrong engineering choice.
+
+## 5. Failure analysis
+
+If a VAE reconstructs poorly, distinguish insufficient capacity from excessive KL regularization.
+
+If a GAN loses modes, inspect diversity rather than only generator/discriminator losses.
+
+If diffusion remains noisy, distinguish a weak denoiser from an unsuitable noise schedule.
+
+## 6. Laboratory
+
+**[Open the executable laboratory](./lab.ipynb).**
+
+Predict first. Then run the VAE, inspect the diffusion corruption process, and study GAN instability on a toy distribution. The notebook produces quantitative tables and an answer key.
+
+## 7. Research extension
+
+Choose one variable:
+
+- VAE latent dimension;
+- VAE KL weight;
+- GAN discriminator/generator update ratio;
+- diffusion number of steps.
+
+State the hypothesis before the intervention and report quality **and** compute.
+
+## Mastery questions
+
+1. Why does a VAE need the KL term?
+2. Why can GAN training become unstable?
+3. What is mode collapse?
+4. Why does diffusion trade sampling speed for iterative denoising?
+
+### Answers
+
+1. It regularizes the learned latent distribution toward a prior.
+2. The generator and discriminator continually move each other's optimization target.
+3. The generator covers only a subset of the data distribution.
+4. Each reverse step performs part of the learned denoising trajectory.
 
 [← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
-
-</div>
