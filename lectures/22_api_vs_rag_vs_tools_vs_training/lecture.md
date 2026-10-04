@@ -208,6 +208,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 21 — Safety, Robustness, and Failure Analysis](../21_safety_robustness_and_failure_analysis/lecture.md) · [Next lecture: Lecture 23 — Build an LLM Program →](../23_build_an_llm_program/lecture.md)
+[← Previous: Lecture 21 — Safety, Robustness, and Failure Analysis](../21_safety_robustness_and_failure_analysis/lecture.md) · [Next: Lecture 23 — Build an LLM Program →](../23_build_an_llm_program/lecture.md)
 
 </div>
