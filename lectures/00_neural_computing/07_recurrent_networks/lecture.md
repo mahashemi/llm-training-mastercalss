@@ -12,7 +12,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Start with a sequence whose interpr\etation depends on earlier context. A recurrent model maintains a state:
+Start with a sequence whose interpretation depends on earlier context. A recurrent model maintains a state:
 h_t = φ(W_x x_t + W_h h_{t-1}+b).
 The same parameters are reused at every time step.
 
@@ -24,7 +24,7 @@ LSTM introduces gates to control information flow:
 i_t = σ(...), f_t = σ(...), o_t = σ(...).
 Its cell state provides a more controlled path for long-ran\ge information.
 
-GRU simplifies the gating structure while r\etaining explicit control over updates.
+GRU simplifies the gating structure while retaining explicit control over updates.
 
 Real connection: speech, forecasting, event streams, and historical sequence models. Transformers later replace recurrence with direct content-based interactions across positions.
 
@@ -32,7 +32,7 @@ Failure experiment: train RNN/LSTM/GRU on a task requiring long-ran\ge dependenc
 
 ## Core concepts
 
-This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a lar\ger parameter count or better optimization.
+This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -40,11 +40,11 @@ This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teache
 2. Build the smallest defensible baseline.
 3. Implement the central mechanism once from first principles.
 4. Run the framework implementation.
-5. Keep the primary bud\get fixed while changing one factor.
+5. Keep the primary budget fixed while changing one factor.
 6. Measure quality, compute, memory, and failure modes.
 7. Repeat with seeds when feasible and report uncertainty.
 8. Inspect qualitative examples—not only aggregate metrics.
-9. Write a short interpr\etation that separates observation from explanation.
+9. Write a short interpretation that separates observation from explanation.
 10. Propose the next falsifiable experiment.
 
 ## Research exercise
@@ -52,7 +52,7 @@ This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teache
 The lab must end with a research question. A good question has a measurable independent variable, a defined outcome, a baseline, and a reason the result would matter. Examples include:
 
 - Does the mechanism improve accuracy at the same parameter count?
-- Does it improve sample efficiency at the same training bud\get?
+- Does it improve sample efficiency at the same training budget?
 - Does it improve robustness under distribution shift?
 - Does it reduce inference memory or latency?
 - Which failure mode becomes more or less common?
