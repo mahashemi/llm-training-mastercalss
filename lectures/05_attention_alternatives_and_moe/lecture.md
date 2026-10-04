@@ -113,6 +113,6 @@ This lab is part of this lecture. Do not leave the lecture to find the experimen
 
 <div align="center">
 
-[← Previous lecture: Lecture 04 — Transformer Architectures](../04_transformer_architectures/lecture.md) · [Next lecture: Lecture 06 — GPUs and Kernels →](../06_gpus_and_kernels/lecture.md)
+[← Previous: Lecture 04 — Transformer Architectures](../04_transformer_architectures/lecture.md) · [Next: Lecture 06 — Data Sources and Construction →](../13_data_sources_and_dataset_construction/lecture.md)
 
 </div>
