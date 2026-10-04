@@ -1,4 +1,4 @@
-# Neural Computing 05 — Autoencoder Networks
+# Course 1 · Chapter — Autoencoders
 
 **Track:** Neural Computing Foundation  
 **Topics:** basic, regularized, sparse, denoising, stacked denoising, contractive objectives  
@@ -8,9 +8,28 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Begin with compression. Suppose an image has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns
+z = f_θ(x),  x̂ = g_φ(z)
+and minimizes a reconstruction loss such as
+L = ||x-x̂||².
+
+The encoder is forced to preserve information useful for reconstruction; the bottleneck controls how much information can pass.
+
+Work through a tiny 4-dimensional example compressed to 2 dimensions. Explain why a linear autoencoder is closely related to principal-component analysis, while nonlinear activations let the learned representation bend around nonlinear structure.
+
+Then distinguish variants:
+- sparse: encourage only a small number of latent activations;
+- denoising: reconstruct clean x from corrupted x̃;
+- contractive: penalize sensitivity to small input changes;
+- stacked: compose multiple encoder/decoder layers.
+
+Real connection: anomaly detection, representation learning, dimensionality reduction, denoising, and pretraining.
+
+Failure experiment: make the bottleneck too wide. Reconstruction may become excellent while the latent representation becomes less useful. Then corrupt the input and compare ordinary and denoising autoencoders.
 
 ## Core concepts
 
