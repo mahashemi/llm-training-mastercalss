@@ -97,6 +97,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 16 — Reinforcement Learning with Verifiable Rewards](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Next lecture: Lecture 18 — LoRA, QLoRA, and PEFT →](../18_lora_qlora_and_peft/lecture.md)
+[← Previous: Lecture 19 — RL with Verifiable Rewards](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Next: Lecture 21 — Safety, Robustness, and Failure Analysis →](../21_safety_robustness_and_failure_analysis/lecture.md)
 
 </div>
