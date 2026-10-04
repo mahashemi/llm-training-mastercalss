@@ -97,3 +97,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 04 — Transformer Architectures](../04_transformer_architectures/lecture.md) · [Next: Lecture 06 — Data Sources and Dataset Construction →](../13_data_sources_and_dataset_construction/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: MoE, MQA, GQA and efficient attention](https://www.youtube.com/results?search_query=Mixture+of+Experts+GQA+MQA+efficient+attention+lecture)
+
+## Navigation
+
+[← Previous](../04_transformer_architectures/lecture.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../06_gpus_and_kernels/lecture.md)
