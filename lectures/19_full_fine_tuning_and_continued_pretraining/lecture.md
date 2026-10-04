@@ -167,6 +167,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 18 — LoRA, QLoRA, and PEFT](../18_lora_qlora_and_peft/lecture.md) · [Next lecture: Lecture 20 — Preference Optimization and Distillation →](../20_preference_optimization_and_distillation/lecture.md)
+[← Previous: Lecture 16 — LoRA, QLoRA, and PEFT](../18_lora_qlora_and_peft/lecture.md) · [Next: Lecture 18 — Preference Optimization and Distillation →](../20_preference_optimization_and_distillation/lecture.md)
 
 </div>
