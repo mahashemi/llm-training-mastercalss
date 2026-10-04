@@ -204,3 +204,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 23 — Build an LLM Program](../23_build_an_llm_program/lecture.md) · Course 2 complete
 
 </div>
+## Video companions
+
+[Video companions: ML research, scaling and project proposals](https://www.youtube.com/results?search_query=machine+learning+research+proposal+scaling+project+lecture)
+
+## Navigation
+
+[← Previous](../23_build_an_llm_program/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Course 2 home →](../../courses/02_llm_engineering_and_training/README.md)
