@@ -20,20 +20,20 @@ In 2-D the same idea becomes a sliding kernel over height and width. A feature m
 
 Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 ima\ge and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
 
-Then explain depth: early layers can detect ed\ges/textures, later layers can combine them into more complex patterns. Residual networks chan\ge the optimization problem by learning a residual:
+Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks chan\ge the optimization problem by learning a residual:
 y = F(x) + x.
 The shortcut gives information and gradients a direct path.
 
 Dense networks instead concatenate earlier representations:
 x_l = H_l([x_0,...,x_{l-1}]).
 
-Real connection: CNNs power visual inspection, medical imaging, OCR, satellite ima\gery, and many multimodal encoders.
+Real connection: CNNs power visual inspection, medical imaging, OCR, satellite imagery, and many multimodal encoders.
 
 Failure experiment: compare a CNN with and without augmentation under a controlled background shift. Ask whether the model learned the object or a shortcut.
 
 ## Core concepts
 
-This unit covers **convolution, pooling, receptive fields, CNN extensions, residual and dense networks**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a lar\ger parameter count or better optimization.
+This unit covers **convolution, pooling, receptive fields, CNN extensions, residual and dense networks**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -41,11 +41,11 @@ This unit covers **convolution, pooling, receptive fields, CNN extensions, resid
 2. Build the smallest defensible baseline.
 3. Implement the central mechanism once from first principles.
 4. Run the framework implementation.
-5. Keep the primary bud\get fixed while changing one factor.
+5. Keep the primary budget fixed while changing one factor.
 6. Measure quality, compute, memory, and failure modes.
 7. Repeat with seeds when feasible and report uncertainty.
 8. Inspect qualitative examples—not only aggregate metrics.
-9. Write a short interpr\etation that separates observation from explanation.
+9. Write a short interpretation that separates observation from explanation.
 10. Propose the next falsifiable experiment.
 
 ## Research exercise
@@ -53,7 +53,7 @@ This unit covers **convolution, pooling, receptive fields, CNN extensions, resid
 The lab must end with a research question. A good question has a measurable independent variable, a defined outcome, a baseline, and a reason the result would matter. Examples include:
 
 - Does the mechanism improve accuracy at the same parameter count?
-- Does it improve sample efficiency at the same training bud\get?
+- Does it improve sample efficiency at the same training budget?
 - Does it improve robustness under distribution shift?
 - Does it reduce inference memory or latency?
 - Which failure mode becomes more or less common?
