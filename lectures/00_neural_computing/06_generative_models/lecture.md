@@ -16,13 +16,13 @@ The lab emphasizes measurable quality, diversity, and compute rather than attrac
 A classifier learns a mapping
 
 $$
-x \rightarrow y.
+x \r\rightarrow y.
 $$
 
 A generative model instead tries to learn enough about the data distribution to produce new samples:
 
 $$
-z \rightarrow x.
+z \r\rightarrow x.
 $$
 
 The central question is: **what does it mean for a generated example to be plausible?**
@@ -34,7 +34,7 @@ The central question is: **what does it mean for a generated example to be plaus
 An encoder produces an approximate posterior
 
 $$
-q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\operatorname{diag}(\sigma_\phi^2(x))\right).
+q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\\operatorname{diag}(\sigma_\phi^2(x))\right).
 $$
 
 The reparameterization trick is
