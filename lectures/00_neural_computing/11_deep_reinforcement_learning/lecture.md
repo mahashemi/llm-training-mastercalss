@@ -103,11 +103,13 @@ For each condition measure:
 | Failure episodes | Safety/robustness |
 | Runtime | Engineering cost |
 
-## 6. Laboratory
+## Laboratory — run the experiment end to end
 
-**[Open the executable laboratory](./lab.ipynb).**
+**[Open the executable laboratory](./lab.ipynb)**
 
-Run the full DQN, remove replay, and remove the target network separately. Evaluate each condition on 20 fresh episodes with exploration disabled. The notebook produces the comparison table and an answer key.
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work: **predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+You will train a DQN on CartPole, remove replay and the target network separately, and evaluate each condition on fresh episodes. The final cells contain the answer key and a research extension.
 
 ## 7. Research question
 
