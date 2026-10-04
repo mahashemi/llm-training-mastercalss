@@ -100,8 +100,13 @@ This notebook is part of the chapter, not optional homework. Follow the same sci
 
 The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
 
+## Video companions
+
+[Video companions: RNNs, LSTM and GRU](https://www.youtube.com/results?search_query=RNN+LSTM+GRU+lecture)
+
 ## Navigation
 
 [← Previous](../06_generative_models/lecture.md) · [Course 1 home](../README.md) · [Next →](../08_sequence_architectures_and_forecasting/lecture.md)
 
 </div>
+
