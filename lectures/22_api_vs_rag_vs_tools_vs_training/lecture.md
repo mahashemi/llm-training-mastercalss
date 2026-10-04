@@ -211,3 +211,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 21 — Safety, Robustness and Failure Analysis](../21_safety_robustness_and_failure_analysis/lecture.md) · [Next: Lecture 23 — Build an LLM Program →](../23_build_an_llm_program/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: RAG vs fine-tuning vs tools](https://www.youtube.com/results?search_query=RAG+vs+fine+tuning+tools+LLM+lecture)
+
+## Navigation
+
+[← Previous](../21_safety_robustness_and_failure_analysis/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../23_build_an_llm_program/lecture.md)
