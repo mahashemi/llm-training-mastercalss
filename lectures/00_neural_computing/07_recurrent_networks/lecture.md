@@ -29,17 +29,76 @@ Explain vanishing and exploding gradients. If the relevant Jacobian repeatedly s
 
 LSTM introduces gates to control information flow:
 i_t = σ(...), f_t = σ(...), o_t = σ(...).
-Its cell state provides a more controlled path for long-ran\ge information.
+Its cell state provides a more controlled path for long-range information.
 
 GRU simplifies the gating structure while retaining explicit control over updates.
 
 Real connection: speech, forecasting, event streams, and historical sequence models. Transformers later replace recurrence with direct content-based interactions across positions.
 
-Failure experiment: train RNN/LSTM/GRU on a task requiring long-ran\ge dependency and measure performance as the dependency length increases.
+Failure experiment: train RNN/LSTM/GRU on a task requiring long-range dependency and measure performance as the dependency length increases.
+
+## Build the intuition before the notation
+
+Imagine reading a sentence one word at a time while carrying a small notebook.
+
+After each word, you update the notebook.
+
+That notebook is the hidden state $h_t$.
+
+An RNN says:
+
+> “Use the current input plus the notebook from the previous step to create the next notebook.”
+
+The difficulty is that the notebook must preserve the right information for potentially hundreds or thousands of steps.
+
+### See the gradient problem numerically
+
+Suppose the relevant gradient factor is approximately $0.8$ at each step.
+
+After 50 steps:
+
+$
+0.8^{50}\approx1.43\times10^{-5}.
+$
+
+The signal is tiny.
+
+If the factor is $1.2$:
+
+$
+1.2^{50}\approx9,100.
+$
+
+The signal can become enormous.
+
+These are simplified examples, not exact descriptions of every RNN. Their purpose is to make the words **vanishing** and **exploding** concrete.
+
+### Why gates help
+
+A gate can learn to preserve information rather than repeatedly transforming it.
+
+The LSTM cell-state update
+
+$
+c_t=f_t\odot c_{t-1}+i_t\odot\tilde c_t
+$
+
+contains an additive path.
+
+If $f_t$ is close to 1 and the new contribution is small, information can persist with much less destructive transformation.
+
+That is the conceptual reason gating helps long-range credit assignment.
+
+### Controlled comparison
+
+Do not compare RNN, LSTM, and GRU using different hidden sizes or different training budgets and then attribute every difference to the architecture.
+
+Keep the important variables fixed, vary the recurrent cell, and repeat across seeds.
+
 
 ## Core concepts
 
-This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -66,7 +125,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
