@@ -207,6 +207,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 22 — API vs RAG vs Tools vs Training](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Next lecture: Lecture 24 — From Experiment to Fundable Model →](../24_from_experiment_to_fundable_model/lecture.md)
+[← Previous: Lecture 22 — API vs RAG vs Tools vs Training](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Next: Lecture 24 — From Experiment to Fundable Model →](../24_from_experiment_to_fundable_model/lecture.md)
 
 </div>
