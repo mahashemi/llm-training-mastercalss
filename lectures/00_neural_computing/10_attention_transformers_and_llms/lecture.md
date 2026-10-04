@@ -38,11 +38,11 @@ Real connection: machine translation, BERT-style encoders, GPT-style decoders, r
 
 Failure experiment: remove the causal mask in a next-token training task. The model may appear to learn extraordinarily well because it can see the answer. This is data leaka\ge inside the architecture.
 
-The next course uses this brid\ge to derive decoder-only LLMs in much greater d\etail.
+The next course uses this brid\ge to derive decoder-only LLMs in much greater detail.
 
 ## Core concepts
 
-This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, brid\ge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a lar\ger parameter count or better optimization.
+This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, brid\ge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -54,7 +54,7 @@ This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bri
 6. Measure quality, compute, memory, and failure modes.
 7. Repeat with seeds when feasible and report uncertainty.
 8. Inspect qualitative examples—not only aggregate metrics.
-9. Write a short interpr\etation that separates observation from explanation.
+9. Write a short interpretation that separates observation from explanation.
 10. Propose the next falsifiable experiment.
 
 ## Research exercise
