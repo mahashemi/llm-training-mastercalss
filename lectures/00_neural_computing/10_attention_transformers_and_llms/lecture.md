@@ -110,8 +110,13 @@ This notebook is part of the chapter, not optional homework. Follow the same sci
 
 The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
 
+## Video companions
+
+[Attention in transformers, step-by-step](https://www.youtube.com/watch?v=eMlx5fFNoYc) · [Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY)
+
 ## Navigation
 
 [← Previous](../undefined/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
 
 </div>
+
