@@ -553,6 +553,12 @@ Choose one:
 
 State the hypothesis before running the experiment.
 
+## Lab — run it here
+
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
+
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
+
 ---
 
 <div align="center">
