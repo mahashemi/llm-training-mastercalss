@@ -120,6 +120,6 @@ This lab is part of this lecture. Do not leave the lecture to find the experimen
 
 <div align="center">
 
-[← Previous lecture: Lecture 01 — What Is an LLM](../01_what_is_an_llm/lecture.md) · [Next lecture: Lecture 03 — PyTorch and Resource Accounting →](../03_pytorch_and_resource_accounting/lecture.md)
+[← Previous: Lecture 01 — What Is an LLM](../01_what_is_an_llm/lecture.md) · [Next: Lecture 03 — PyTorch and Resource Accounting →](../03_pytorch_and_resource_accounting/lecture.md)
 
 </div>
