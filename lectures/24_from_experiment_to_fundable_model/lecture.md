@@ -193,14 +193,14 @@ Using the course's Qwen3-0.6B → H100 ladder, write a one-page scale proposal t
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 23 — Build an LLM Program](../23_build_an_llm_program/lecture.md) · Course 2 complete — [return to Course 2 home](../../courses/02_llm_engineering_and_training/README.md)
+[← Previous: Lecture 23 — Build an LLM Program](../23_build_an_llm_program/lecture.md) · Course 2 complete
 
 </div>
