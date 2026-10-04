@@ -172,3 +172,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 11 — Efficient Attention and Triton](../07_efficient_attention_and_triton/lecture.md) · [Next: Lecture 13 — Evaluation →](../12_evaluation/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: distributed deep learning and data parallelism](https://www.youtube.com/results?search_query=distributed+deep+learning+data+parallelism+lecture)
+
+## Navigation
+
+[← Previous](../07_efficient_attention_and_triton/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../09_scaling_laws/lecture.md)
