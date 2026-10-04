@@ -67,20 +67,6 @@ Then distinguish:
 
 You should understand why a benchmark number from a GPU vendor is not the throughput of their training job.
 
-## Laboratory
-
-Run two controlled experiments:
-
-1. fixed model, sequence length 512 vs 2048;
-2. fixed sequence, batch 1 vs batch 4.
-
-Record:
-
-| Condition | Peak memory | tokens/sec | step time |
-|---|---:|---:|---:|
-| baseline | measure | measure | measure |
-| changed | measure | measure | measure |
-
 ## Break it
 
 Create a configuration that fits inference but fails training.
@@ -99,6 +85,86 @@ The expected reasoning is **resource decomposition → measurement → intervent
 
 Read the relevant CS336 resource-accounting material and compare the assumptions behind its calculations with your measured run.
 
+
+
+## A worked example: why “7B” is not a memory specification
+
+Suppose a model has 7 billion parameters and stores each parameter in BF16. Each BF16 value uses 2 bytes, so raw parameter storage is approximately:
+
+$$
+7\times10^9\times2 \approx 14\times10^9\text{ bytes} \approx 14\text{ GB}.
+$$
+
+That is only one term in a training system. Optimizer state, gradients, activations, temporary buffers, and runtime overhead can all matter.
+
+### A concrete shape calculation
+
+Let
+
+$$
+B=4,\quad L=2048,\quad d=4096.
+$$
+
+A hidden activation contains
+
+$$
+BLd=4\times2048\times4096\approx33.6\text{ million}
+$$
+
+elements. At BF16, one such tensor is about 67 MB. A Transformer keeps many intermediate tensors across layers, so activation memory can become substantial.
+
+Now double the context length from 2048 to 4096. The hidden activation above doubles. Attention-related work also changes with sequence length, so “the model is still 7B” tells us very little about the actual run.
+
+> **Never answer “Will it fit?” from parameter count alone. Write down the memory terms.**
+
+## From formula to PyTorch
+
+A useful resource-accounting workflow is:
+
+1. inspect tensor shapes;
+2. calculate parameter storage;
+3. estimate activation storage;
+4. account for gradients and optimizer state;
+5. measure peak memory;
+6. compare estimate with measurement;
+7. identify the largest gap;
+8. change one variable and measure again.
+
+PyTorch matters here because it makes the computation inspectable: tensors, dtypes, devices, gradients, and memory can be observed rather than guessed.
+
+## Real-world connection: choosing a training strategy
+
+| Choice | What changes | Typical reason |
+|---|---|---|
+| smaller batch | fewer activations | fit memory |
+| gradient accumulation | effective batch without larger per-step batch | fit memory |
+| activation checkpointing | recompute instead of store | trade compute for memory |
+| lower precision | fewer bytes and accelerated kernels | memory + throughput |
+| sharding | distribute states | model does not fit on one GPU |
+
+There is no universally best choice. The engineering question is:
+
+> **Which resource is limiting this workload, and what trade-off am I willing to make?**
+
+## Failure analysis
+
+If a run runs out of memory, classify the failure:
+
+- **weights:** the model itself does not fit;
+- **optimizer:** training state is too large;
+- **activations:** batch, sequence length, or depth is driving memory;
+- **temporary/runtime:** kernels or allocators create large transient buffers;
+- **distributed state:** replication or communication buffers are responsible.
+
+Reproduce the smallest configuration that still fails. An OOM then becomes an experiment rather than a mysterious crash.
+
+## Research extension
+
+Make a falsifiable prediction before running the notebook. For example:
+
+> Increasing sequence length from 1024 to 2048 will increase this experiment’s hidden-state activation memory by approximately 2×.
+
+Measure the deviation and explain it instead of hiding it.
 
 ## Lab — run it here
 
