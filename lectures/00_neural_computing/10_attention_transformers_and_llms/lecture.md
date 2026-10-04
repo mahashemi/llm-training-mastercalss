@@ -1,8 +1,15 @@
-# Course 1 · Chapter — Attention + Transformer Brid\ge
+# Course 1 · Chapter — Attention and the Transformer Bridge
 
-**Track:** Neural Computing Foundation  
-**Topics:** attention types, Transformer, encoder/decoder, BERT, GPT, brid\ge to LLM training  
-**Primary lab:** [Open the executable laboratory](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+A recurrent model carries information step by step. Attention lets one position directly consult other positions, making long-range relationships much easier to represent.
+
+Queries ask what a token is looking for; keys describe what each token offers; values contain the information retrieved. The Transformer combines this mechanism with residual paths, normalization, and feed-forward layers.
+
+The causal-mask experiment demonstrates a critical idea: an autoregressive model must not see the future answer.
 
 ## Learning objective
 
@@ -87,19 +94,23 @@ The notebook is intentionally part of this lecture. It uses a real dataset and r
 
 
 
-## Laboratory — run this experiment end to end
 
-**[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+[← Previous](../undefined/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
 
-## Laboratory — run this experiment end to end
+</div>
 
-**[Open the executable lab notebook](./lab.ipynb)**
+## Laboratory — run the experiment end to end
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+**[Open the executable laboratory](./lab.ipynb)**
 
-<div align="center">
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
 
 [← Previous](../undefined/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
 
