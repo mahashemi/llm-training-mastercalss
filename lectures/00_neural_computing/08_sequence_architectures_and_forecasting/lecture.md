@@ -1,8 +1,15 @@
-# Course 1 · Chapter — Recurrent Architectures + Forecasting
+# Course 1 · Chapter — Recurrent Architectures and Time-Series Forecasting
 
-**Track:** Neural Computing Foundation  
-**Topics:** Elman, Jordan, fully recurrent networks, forecasting protocol, leaka\ge  
-**Primary lab:** [Open the executable laboratory](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+Forecasting is a perfect place to learn experimental discipline because time gives us a hard rule: information from the future must never leak into the past.
+
+We compare sequence architectures and build a forecast pipeline with chronological splits, a simple baseline, multi-step prediction, and failure analysis.
+
+The goal is not merely a low error number; it is a trustworthy forecast.
 
 ## Learning objective
 
@@ -77,19 +84,23 @@ The notebook is intentionally part of this lecture. It uses a real dataset and r
 
 
 
-## Laboratory — run this experiment end to end
 
-**[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+[← Previous](../07_recurrent_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../09_boltzmann_machines/lecture.md)
 
-## Laboratory — run this experiment end to end
+</div>
 
-**[Open the executable lab notebook](./lab.ipynb)**
+## Laboratory — run the experiment end to end
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+**[Open the executable laboratory](./lab.ipynb)**
 
-<div align="center">
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
 
 [← Previous](../07_recurrent_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../09_boltzmann_machines/lecture.md)
 
