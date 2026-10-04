@@ -52,7 +52,7 @@ The hidden representation $h$ is simply a new set of numbers computed from the o
 Consider one tiny network:
 
 $$
-x\r\rightarrow z_1\r\rightarrow h\r\rightarrow z_2\r\rightarrow\hat y.
+x\rightarrow z_1\rightarrow h\rightarrow z_2\rightarrow\hat y.
 $$
 
 The arrow means “the output of one computation becomes the input to the next.”
@@ -236,11 +236,11 @@ The dependency chain is:
 
 $$
 W_1
-\r\rightarrow z_1
-\r\rightarrow h
-\r\rightarrow z_2
-\r\rightarrow \hat y
-\r\rightarrow L.
+\rightarrow z_1
+\rightarrow h
+\rightarrow z_2
+\rightarrow \hat y
+\rightarrow L.
 $$
 
 The chain rule says that the total effect of changing $W_1$ can be found by multiplying the local effects along the path:
@@ -336,7 +336,7 @@ $$
 =
 \theta_{\text{old}}
 -
-\eta\n\nabla_\theta L.
+\eta\nabla_\theta L.
 $$
 
 Here $\nabla_\theta L$ is just a vector containing all those individual partial derivatives.
@@ -404,11 +404,11 @@ $$
 The corresponding gradient is the average of the example gradients:
 
 $$
-\n\nabla_\theta L_B
+\nabla_\theta L_B
 =
 \frac{1}{|B|}
 \sum_{i\in B}
-\n\nabla_\theta L_i.
+\nabla_\theta L_i.
 $$
 
 Larger batches often make this estimate less noisy, but they also require more memory and can change optimization behavior.
@@ -549,6 +549,10 @@ Follow:
 
 **predict → baseline → controlled change → measure → inspect failure → explain → propose next experiment.**
 
+## Video companions
+
+[Backpropagation, intuitively](https://www.youtube.com/watch?v=Ilg3gGewQ5U) · [Backpropagation calculus](https://www.youtube.com/watch?v=tIeHLnjs5U8)
+
 ## Navigation
 
-[← Previous](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next →](../03_competitive_learning_and_som/lecture.md)
+[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
