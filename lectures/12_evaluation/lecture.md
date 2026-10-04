@@ -138,3 +138,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 12 — Distributed Training](../08_distributed_training/lecture.md) · [Next: Lecture 14 — Inference Systems →](../10_inference_systems/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: LLM evaluation and benchmarking](https://www.youtube.com/results?search_query=LLM+evaluation+benchmarking+lecture)
+
+## Navigation
+
+[← Previous](../11_training_system_design/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../13_data_sources_and_dataset_construction/lecture.md)
