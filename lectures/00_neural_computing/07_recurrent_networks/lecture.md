@@ -166,6 +166,3 @@ The notebook uses a real dataset or environment, records quantitative results, a
 ## Navigation
 
 [← Previous](../06_generative_models/lecture.md) · [Course 1 home](../README.md) · [Next →](../08_sequence_architectures_and_forecasting/lecture.md)
-
-</div>
-
