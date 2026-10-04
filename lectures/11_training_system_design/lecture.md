@@ -81,3 +81,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 07 — Filtering, Deduplication, Mixing and Synthetic Data](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Next: Lecture 09 — Scaling Laws →](../09_scaling_laws/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: large-scale language-model training systems](https://www.youtube.com/results?search_query=large+scale+language+model+training+systems+lecture)
+
+## Navigation
+
+[← Previous](../10_inference_systems/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../12_evaluation/lecture.md)
