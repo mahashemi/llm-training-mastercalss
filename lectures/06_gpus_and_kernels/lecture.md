@@ -87,6 +87,86 @@ Use:
 You should inspect one profiler trace and identify the top two contributors to step time.
 
 
+
+## A worked example: the same matrix multiply can have different costs
+
+Consider
+
+$$
+Y=AB
+$$
+
+with
+
+$$
+A\in\mathbb{R}^{1024\times4096},\qquad
+B\in\mathbb{R}^{4096\times4096}.
+$$
+
+The mathematical operation is fixed, but the implementation decides where A and B live, how they are tiled, how threads cooperate, whether Tensor Cores are used, what precision is used, and how often data is moved.
+
+A kernel is therefore not “just the equation.” It is a program that schedules the equation onto hardware.
+
+## The memory hierarchy as a teaching model
+
+Think of the GPU as a hierarchy:
+
+**HBM → cache/shared memory → registers**
+
+If a tile is reused by many multiply-add operations, loading it into a faster memory level can avoid repeatedly fetching it from HBM.
+
+This is the intuition behind tiling and explains why two implementations with identical FLOPs can have very different runtimes.
+
+## Precision is a systems decision
+
+| Question | What to inspect |
+|---|---|
+| Can values be represented safely? | range and precision |
+| Does hardware accelerate the format? | Tensor Core support |
+| Where should accumulation happen? | accumulation precision |
+| Does quality change? | task/error metric |
+| Does throughput change? | samples/sec or tokens/sec |
+| Does memory change? | peak bytes |
+
+The correct experiment is not “BF16 is faster.” It is:
+
+> **Does BF16 preserve the required quality while improving this workload’s resource profile?**
+
+## Profiling walkthrough
+
+1. Warm up the GPU.
+2. Synchronize before timing.
+3. Run repeated measurements.
+4. Report median and spread.
+5. Vary one dimension.
+6. Inspect utilization/profile information.
+7. Form a bottleneck hypothesis.
+8. Change the implementation.
+9. Rerun the same measurement.
+
+Without warmup and synchronization, a timing number can describe Python scheduling rather than GPU execution.
+
+## Real-world connection
+
+Transformer training is a sequence of kernels: matrix multiplications, normalization, attention, communication, data movement, and bookkeeping.
+
+A kernel that becomes 2× faster but occupies 1% of the step may barely move end-to-end training time. This is the difference between **microbenchmark optimization** and **system optimization**.
+
+## Failure analysis
+
+When an optimization disappoints, ask:
+
+1. Did the optimized kernel actually run?
+2. Did launch overhead dominate?
+3. Was the workload memory-bound?
+4. Was this kernel only a small fraction of end-to-end latency?
+5. Did synchronization hide the gain?
+6. Did the change increase another cost?
+
+## Research extension
+
+Change only matrix alignment or only precision. Predict the direction of latency and throughput before measuring. Explain non-monotonic behavior instead of treating it as noise.
+
 ## Lab — run it here
 
 **Primary laboratory:** [Open the lab notebook](./lab.ipynb)
