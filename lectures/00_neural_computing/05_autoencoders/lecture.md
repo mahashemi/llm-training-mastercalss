@@ -156,6 +156,3 @@ The notebook uses a real dataset or environment, records quantitative results, a
 ## Navigation
 
 [← Previous](../04_convolutional_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../06_generative_models/lecture.md)
-
-</div>
-
