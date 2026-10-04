@@ -42,22 +42,6 @@ Then multiply by:
 
 The exact implementation adds runtime effects, but the scaling relationship is the key.
 
-## Laboratory
-
-Vary:
-
-- prompt length;
-- batch/concurrency;
-- output length.
-
-Measure:
-
-| Condition | TTFT | ITL | peak memory | output tok/s |
-|---|---:|---:|---:|---:|
-| short | measure | measure | measure | measure |
-| medium | measure | measure | measure | measure |
-| long | measure | measure | measure | measure |
-
 ## Break it
 
 Increase concurrency until memory or latency becomes unacceptable.
@@ -85,9 +69,9 @@ Compare a small-model local benchmark with a serving runtime such as vLLM and ex
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
