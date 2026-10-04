@@ -47,16 +47,6 @@ Log at minimum:
 
 Explain why averages can hide pathological spikes.
 
-## Laboratory
-
-Instrument a tiny model.
-
-Produce a table and plot of:
-
-**step → loss → LR → step time → memory**
-
-Then intentionally slow data loading and demonstrate the difference between a GPU bottleneck and an input bottleneck.
-
 ## Break it
 
 Interrupt training during a checkpoint and restart.
@@ -80,14 +70,14 @@ Compare your checkpoint state with the state required by the chosen training fra
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 07 — Filtering, Deduplication, Mixing, and Synthetic Data](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Next: Lecture 09 — Scaling Laws →](../09_scaling_laws/lecture.md)
+[← Previous: Lecture 07 — Filtering, Deduplication, Mixing and Synthetic Data](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Next: Lecture 09 — Scaling Laws →](../09_scaling_laws/lecture.md)
 
 </div>
