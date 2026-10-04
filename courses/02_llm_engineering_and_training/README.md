@@ -35,32 +35,32 @@ The notebook is part of the chapter rather than a detached assignment.
 
 ## Course sequence
 
-| # | Chapter | Learner question |
-|---|---|---|
-| 1 | What is a language model? | What exactly is being learned? |
-| 2 | Tokenization | How does text become the computational units the model sees? |
-| 3 | PyTorch + resource accounting | How do tensors, autograd, memory, FLOPs, and hardware meet? |
-| 4 | Transformer architecture | How does a decoder-only model turn context into next-token probabilities? |
-| 5 | Attention alternatives + MoE | What changes when we redesign attention or sparsify computation? |
-| 6 | GPUs + kernels | Why does the same mathematical model run at very different speeds? |
-| 7 | Efficient attention + Triton | How do implementation details change memory and latency? |
-| 8 | Distributed training | How do we train beyond one GPU? |
-| 9 | Scaling laws | How do model size, data, and compute interact? |
-| 10 | Inference systems | What actually determines serving cost and latency? |
-| 11 | Training-system design | How do we run a reliable training campaign? |
-| 12 | Evaluation | How do we know a model improved? |
-| 13 | Data sources + construction | Where does training data come from and how do we make it usable? |
-| 14 | Filtering, deduplication, mixing + synthetic data | What makes a training mixture useful? |
-| 15 | SFT + RLHF | How do we turn a base model into a useful assistant? |
-| 16 | RL with verifiable rewards | When can correctness become a training signal? |
-| 17 | Multimodality | How do language models connect to other modalities? |
-| 18 | LoRA + QLoRA + PEFT | How can we adapt models cheaply? |
-| 19 | Full fine-tuning + continued pretraining | When should we update all weights or change the model's knowledge? |
-| 20 | Preference optimization + distillation | How do we shape behavior and transfer capability? |
-| 21 | Safety, robustness + failure analysis | Where does the model fail and how do we release responsibly? |
-| 22 | API vs RAG vs tools vs training | What is the right intervention for a real product problem? |
-| 23 | Building an LLM program | How do experiments become an engineering program? |
-| 24 | From experiment to fundable model | How do evidence, resources, people, risk, and milestones become a plan? |
+| # | Chapter | Primary lecture | Learner question |
+|---|---|---|---|
+| 1 | What is a language model? | [L01](../../lectures/01_what_is_an_llm/lecture.md) | What exactly is being learned? |
+| 2 | Tokenization | [L02](../../lectures/02_tokenization/lecture.md) | How does text become computational units? |
+| 3 | PyTorch + resource accounting | [L03](../../lectures/03_pytorch_and_resource_accounting/lecture.md) | How do tensors, autograd, memory, FLOPs, and hardware meet? |
+| 4 | Transformer architecture + tiny GPT | [L04](../../lectures/04_transformer_architectures/lecture.md) | How does a decoder-only model turn context into next-token probabilities? |
+| 5 | Attention alternatives + MoE | [L05](../../lectures/05_attention_alternatives_and_moe/lecture.md) | What changes when we redesign or sparsify computation? |
+| 6 | Data sources + construction | [L13](../../lectures/13_data_sources_and_dataset_construction/lecture.md) | Where does training data come from and how do we make it usable? |
+| 7 | Filtering + deduplication + mixing | [L14](../../lectures/14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) | What makes a training mixture useful? |
+| 8 | Pretraining systems | [L11](../../lectures/11_training_system_design/lecture.md) | How do we turn a training loop into a reliable experiment? |
+| 9 | Scaling laws | [L09](../../lectures/09_scaling_laws/lecture.md) | How do model size, data, and compute interact? |
+| 10 | GPUs + kernels | [L06](../../lectures/06_gpus_and_kernels/lecture.md) | Why does the same model run at very different speeds? |
+| 11 | Efficient attention + Triton | [L07](../../lectures/07_efficient_attention_and_triton/lecture.md) | How do implementation details change memory and latency? |
+| 12 | Distributed training | [L08](../../lectures/08_distributed_training/lecture.md) | How do we train beyond one GPU? |
+| 13 | Evaluation | [L12](../../lectures/12_evaluation/lecture.md) | How do we know a model improved? |
+| 14 | Inference systems | [L10](../../lectures/10_inference_systems/lecture.md) | What determines serving cost and latency? |
+| 15 | SFT + post-training | [L15](../../lectures/15_mid_and_post_training_sft_and_rlhf/lecture.md) | How do we turn a base model into a useful assistant? |
+| 16 | LoRA + QLoRA + PEFT | [L18](../../lectures/18_lora_qlora_and_peft/lecture.md) | How can we adapt models cheaply? |
+| 17 | Continued pretraining + full fine-tuning | [L19](../../lectures/19_full_fine_tuning_and_continued_pretraining/lecture.md) | When should we change knowledge or update all weights? |
+| 18 | Preference optimization + distillation | [L20](../../lectures/20_preference_optimization_and_distillation/lecture.md) | How do we shape behavior and transfer capability? |
+| 19 | RL with verifiable rewards | [L16](../../lectures/16_reinforcement_learning_with_verifiable_rewards/lecture.md) | When can correctness become a training signal? |
+| 20 | Multimodality | [L17](../../lectures/17_multimodality/lecture.md) | How do language models connect to other modalities? |
+| 21 | Safety + robustness + failure analysis | [L21](../../lectures/21_safety_robustness_and_failure_analysis/lecture.md) | Where does the model fail and how do we release responsibly? |
+| 22 | API vs RAG vs tools vs training | [L22](../../lectures/22_api_vs_rag_vs_tools_vs_training/lecture.md) | What is the right intervention for a real product problem? |
+| 23 | Building an LLM program | [L23](../../lectures/23_build_an_llm_program/lecture.md) | How do experiments become an engineering program? |
+| 24 | From experiment to fundable model | [L24](../../lectures/24_from_experiment_to_fundable_model/lecture.md) | How do evidence, resources, people, risk, and milestones become a plan? |
 
 ## Production-grade learning loop
 
