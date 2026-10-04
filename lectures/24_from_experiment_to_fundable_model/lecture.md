@@ -201,6 +201,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 23 — Build an LLM Program](../23_build_an_llm_program/lecture.md)
+[← Previous: Lecture 23 — Build an LLM Program](../23_build_an_llm_program/lecture.md) · Course 2 complete — [return to Course 2 home](../../courses/02_llm_engineering_and_training/README.md)
 
 </div>
