@@ -1,7 +1,15 @@
-# Course 1 · Chapter 2 — Feedforward Networks and Backpropagation
+# Course 1 · Chapter — Feedforward Networks and Backpropagation
 
 **Course:** Deep Learning & Neural Computing Foundations  
-**Lab:** [Executable laboratory](./lab.ipynb)
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+We now turn a single adjustable computation into a network that can represent nonlinear relationships and learn which parameters deserve credit for an error.
+
+The central idea is credit assignment: if the prediction is wrong, which weights should change, and by how much?
+
+You will derive the chain rule on a tiny network before using automatic differentiation.
 
 ## 1. The problem: one neuron is not enough
 
@@ -388,19 +396,23 @@ State a hypothesis **before** running the experiment.
 
 
 
-## Laboratory — run this experiment end to end
 
-**[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+[← Previous](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next →](../03_competitive_learning_and_som/lecture.md)
 
-## Laboratory — run this experiment end to end
+</div>
 
-**[Open the executable lab notebook](./lab.ipynb)**
+## Laboratory — run the experiment end to end
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+**[Open the executable laboratory](./lab.ipynb)**
 
-<div align="center">
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
 
 [← Previous](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next →](../03_competitive_learning_and_som/lecture.md)
 
