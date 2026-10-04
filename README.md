@@ -6,80 +6,87 @@ A free-first, implementation-heavy curriculum for learning how to **understand, 
 
 **Audience:** high-school graduates, engineers, researchers, and organizations.
 
-## Neural Computing Foundation — now part of the core path
+## Two-course structure
 
-Before the 24 modern LLM-training lectures, learners now complete a **12-unit Neural Computing Foundation** covering perceptrons, feedforward networks/backpropagation, competitive learning/SOMs, CNNs, autoencoders, VAE/GAN/diffusion, RNN/LSTM/GRU, recurrent forecasting, Boltzmann machines/DBNs, attention/Transformers/BERT/GPT, deep reinforcement learning, and a research publication capstone.
+This repository now contains **two coherent courses**, not one 36-lecture prerequisite chain.
 
-**[Open the Neural Computing Foundation](lectures/00_neural_computing/README.md)** · **[Open the Research & Publication Path](projects/05_research_publication_path.md)** · **[Open the Student Research Project Catalog](projects/06_student_research_project_catalog.md)**
+### Course 1 — Deep Learning & Neural Computing Foundations
 
-The foundation is practical by construction: every unit has a real-data laboratory, baseline, controlled intervention, ablation, error analysis, resource/reproducibility record, and a research question. Real-data anchors include MNIST, UCI Banknote, UCI-HAR-derived sensor data, Electricity Load Diagrams, and IMDB. Hugging Face provides the dataset-loading workflow used throughout the labs.
+A standalone deep-learning course covering the mechanisms that make modern neural networks understandable.
 
-**The complete learner flow is now:**
+**[Open Course 1](courses/01_deep_learning_and_neural_computing/README.md)**
 
-**Neural Computing → Deep Learning → Transformers → LLM Training → Data → Adaptation → Alignment → Evaluation → Serving → Research / Program Design**
+| # | Course 1 chapter | Main practical outcome |
+|---|---|---|
+| 1 | Neural computation | Build and reason about a perceptron/Adaline |
+| 2 | Feedforward networks + backpropagation | Derive gradients and train an MLP |
+| 3 | Competitive learning + SOM | Analyze unsupervised topology |
+| 4 | CNNs + residual/dense networks | Understand spatial inductive bias and depth |
+| 5 | Autoencoders | Learn and probe latent representations |
+| 6 | VAE, GANs + diffusion | Understand and compare generative learning |
+| 7 | RNNs, LSTM + GRU | Understand neural sequence memory |
+| 8 | Recurrent architectures + forecasting | Build and correctly evaluate sequence predictors |
+| 9 | Boltzmann machines + DBNs | Understand energy-based representation learning |
+| 10 | Attention + Transformer bridge | Understand why attention changed sequence modeling |
+| 11 | Deep reinforcement learning | Learn from actions and delayed rewards |
+| 12 | Research capstone | Reproduce, intervene, ablate, and communicate evidence |
 
-## Learning Graph — the one path through the repository
+### Course 2 — LLM Engineering & Training Masterclass
 
-**[Open the complete Learning Graph](docs/LEARNING_GRAPH.md)** · **[Open the Dataset Learning Matrix](data/REAL_DATASET_REGISTRY.md)** · **[Open the Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)**
+A standalone LLM course that takes the learner from text and tokens through a tiny GPT, real data, training systems, adaptation, evaluation, serving, and research/program design.
 
-The repository is organized as one learning graph, not as separate lecture/notebook/runbook courses. The 12-unit Neural Computing Foundation is the prerequisite foundation; the existing 24-lecture LLM sequence follows it. Each stage connects concept → lecture → embedded lab → real artifact → experiment → evaluation → decision.
+**[Open Course 2](courses/02_llm_engineering_and_training/README.md)**
 
-## Master Course Matrix — the single curriculum control plane
+| # | Course 2 chapter | Main practical outcome |
+|---|---|---|
+| 1 | What is a language model? | Build a language-model mental model |
+| 2 | Tokenization | Measure tokenizer/computation consequences |
+| 3 | PyTorch + resource accounting | Reason about tensors, autograd, memory, and FLOPs |
+| 4 | Transformer architecture | Trace a decoder-only model end to end |
+| 5 | Build a tiny GPT | Train a real miniature language model |
+| 6 | Data sources + construction | Build a defensible corpus |
+| 7 | Filtering + deduplication + mixing | Run controlled data interventions |
+| 8 | Pretraining systems | Turn a training loop into a reliable experiment |
+| 9 | Scaling laws | Connect model/data/compute budgets |
+| 10 | GPUs + kernels | Understand hardware-level performance |
+| 11 | Efficient attention + Triton | Optimize memory and latency |
+| 12 | Distributed training | Scale beyond one GPU |
+| 13 | Evaluation | Design evaluation before changing the model |
+| 14 | Inference systems | Measure latency, throughput, and KV-cache economics |
+| 15 | SFT + post-training | Turn a base model into a useful assistant |
+| 16 | LoRA + QLoRA + PEFT | Adapt models under tight resource budgets |
+| 17 | Continued pretraining + full FT | Change knowledge and compare update strategies |
+| 18 | Preference optimization + distillation | Shape behavior and transfer capability |
+| 19 | RL with verifiable rewards | Train against automatically checkable outcomes |
+| 20 | Multimodality | Extend language-model training beyond text |
+| 21 | Safety + robustness + failure analysis | Find and characterize failures |
+| 22 | API vs RAG vs tools vs training | Make the right product intervention |
+| 23 | Building an LLM program | Turn evidence into a technical program |
+| 24 | From experiment to fundable model | Turn evidence into resources, milestones, and risk |
 
-**This is the one table you need to navigate the course.** Follow each row from left to right:
+### One relationship, not one course
 
-**lecture → embedded lab → real data/case → decision → evidence**
+**Course 1 teaches deep learning. Course 2 applies that foundation specifically to language-model engineering.**
 
-The repository's other folders are supporting references. They do **not** define another learning order. A learner should be able to stay inside the lecture sequence and complete each stage without hunting through indexes.
+Course 1 is recommended preparation for Course 2, but the two have separate learning goals, navigation, labs, and completion criteria.
 
-| # / Stage | Lecture | Textbook chapters | Primary laboratory | Real data / longitudinal case | Runbook / decision aid | Evidence / deliverable |
-|---|---|---|---|---|---|---|
-| **00.01 · Neural Computing** | [NC01 · Introduction](lectures/00_neural_computing/01_neural_computing_foundations/lecture.md) | Neural foundations | [Lab 01–03](lectures/00_neural_computing/01_neural_computing_foundations/lab.ipynb) | HF MNIST | Research workflow | perceptron/Adaline evidence |
-| **00.02 · Neural Computing** | [NC02 · Feedforward + Backprop](lectures/00_neural_computing/02_feedforward_and_backprop/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/02_feedforward_and_backprop/lab.ipynb) | HF Banknote | Optimization study | gradient verification |
-| **00.03 · Neural Computing** | [NC03 · Competitive Learning + SOM](lectures/00_neural_computing/03_competitive_learning_and_som/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/03_competitive_learning_and_som/lab.ipynb) | UCI-HAR HF | Representation analysis | topology map |
-| **00.04 · Neural Computing** | [NC04 · CNNs](lectures/00_neural_computing/04_convolutional_networks/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/04_convolutional_networks/lab.ipynb) | HF MNIST | Architecture ablation | CNN/ResNet comparison |
-| **00.05 · Neural Computing** | [NC05 · Autoencoders](lectures/00_neural_computing/05_autoencoders/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/05_autoencoders/lab.ipynb) | HF MNIST | Representation study | reconstruction/latent report |
-| **00.06 · Neural Computing** | [NC06 · Generative Models](lectures/00_neural_computing/06_generative_models/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/06_generative_models/lab.ipynb) | HF MNIST | Generative comparison | VAE/GAN/diffusion study |
-| **00.07 · Neural Computing** | [NC07 · RNN/LSTM/GRU](lectures/00_neural_computing/07_recurrent_networks/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/07_recurrent_networks/lab.ipynb) | Electricity Load Diagrams | Forecasting protocol | horizon results |
-| **00.08 · Neural Computing** | [NC08 · Recurrent Forecasting](lectures/00_neural_computing/08_sequence_architectures_and_forecasting/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/08_sequence_architectures_and_forecasting/lab.ipynb) | Electricity Load Diagrams | Leakage audit | chronological evaluation |
-| **00.09 · Neural Computing** | [NC09 · Boltzmann Machines](lectures/00_neural_computing/09_boltzmann_machines/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/09_boltzmann_machines/lab.ipynb) | HF MNIST | Energy-based study | RBM/CD-k evidence |
-| **00.10 · Neural Computing** | [NC10 · Attention + Transformers](lectures/00_neural_computing/10_attention_transformers_and_llms/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/10_attention_transformers_and_llms/lab.ipynb) | HF IMDB | Transformer bridge | tensor/objective audit |
-| **00.11 · Neural Computing** | [NC11 · Deep RL](lectures/00_neural_computing/11_deep_reinforcement_learning/lecture.md) | Neural foundations | [Lab](lectures/00_neural_computing/11_deep_reinforcement_learning/lab.ipynb) | CartPole | DQN ablation | return distribution |
-| **00.12 · Research** | [NC12 · Research Capstone](lectures/00_neural_computing/12_research_capstone/lecture.md) | Research methods | [Capstone lab](lectures/00_neural_computing/12_research_capstone/lab.ipynb) | Prior experiment | Publication path | paper + artifacts |
-| **01 · Foundations** | [L01 · What Is an LLM](lectures/01_what_is_an_llm/lecture.md) | Ch. 01–03, 09 | [Tiny LM](lectures/01_what_is_an_llm/lab.ipynb) | [Open-weight audit](lectures/23_build_an_llm_program/open_weight_model_audit.ipynb) | [Open-weight runbook](runbooks/12_open_weight_model_runbook.md) | loss, generation, training-vs-inference explanation |
-| **02 · Foundations** | [L02 · Tokenization](lectures/02_tokenization/lecture.md) | Ch. 02, 24 | [Tokenizer measurement](lectures/02_tokenization/lab.ipynb) | [Persian track](data/PERSIAN_DATASET_TRACK.md) · PerSpaCor · CulturaX-fa | [Dataset curation runbook](runbooks/01_dataset_curation_runbook.md) | fertility + Unicode/ZWNJ analysis |
-| **03 · Training systems** | [L03 · PyTorch + Resource Accounting](lectures/03_pytorch_and_resource_accounting/lecture.md) | Ch. 11, 40 | [FLOPs + memory](lectures/03_pytorch_and_resource_accounting/lab.ipynb) | Qwen3-0.6B resource baseline | [Resource estimation](docs/RESOURCE_ESTIMATION.md) | memory/FLOPs worksheet |
-| **04 · Foundations** | [L04 · Transformer Architectures](lectures/04_transformer_architectures/lecture.md) | Ch. 04–07, 11 | [Tiny Transformer](lectures/04_transformer_architectures/lab.ipynb) | tiny GPT / open-weight checkpoint comparison | [Model selection](runbooks/MODEL_SELECTION_RUNBOOK.md) | tensor-shape audit |
-| **05 · Foundations** | [L05 · Attention Alternatives + MoE](lectures/05_attention_alternatives_and_moe/lecture.md) | Ch. 08, 12–13 | [Attention + MoE](lectures/05_attention_alternatives_and_moe/lab.ipynb) | open-weight architecture configs | [Systems stack](docs/SYSTEMS_STACK.md) | KV/resource comparison |
-| **06 · Training systems** | [L06 · GPUs and Kernels](lectures/06_gpus_and_kernels/lecture.md) | Ch. 14–16 | [GPU benchmark](lectures/06_gpus_and_kernels/lab.ipynb) | Qwen3 workload shapes | [Systems stack](docs/SYSTEMS_STACK.md) | measured throughput |
-| **07 · Training systems** | [L07 · Efficient Attention + Triton](lectures/07_efficient_attention_and_triton/lecture.md) | Ch. 15–16 | [Attention tiling](lectures/07_efficient_attention_and_triton/lab.ipynb) | long-context workload slices | [Systems stack](docs/SYSTEMS_STACK.md) | memory/latency comparison |
-| **08 · Training systems** | [L08 · Distributed Training](lectures/08_distributed_training/lecture.md) | Ch. 25, 39 | [DDP + sharding](lectures/08_distributed_training/lab.ipynb) | multi-GPU scaling scenario | [Distributed training runbook](runbooks/06_distributed_training_runbook.md) | scaling-efficiency model |
-| **09 · Training systems** | [L09 · Scaling Laws](lectures/09_scaling_laws/lecture.md) | Ch. 40 | [Scaling-law fit](lectures/09_scaling_laws/lab.ipynb) | controlled model/data/compute sweeps | [Resource estimation](docs/RESOURCE_ESTIMATION.md) | fit + extrapolation error |
-| **10 · Serve + systems** | [L10 · Inference Systems](lectures/10_inference_systems/lecture.md) | Ch. 51–56 | [KV cache](lectures/10_inference_systems/lab.ipynb) | Qwen3 serving workload | [Inference runbook](runbooks/08_inference_serving_runbook.md) | TTFT / ITL / memory report |
-| **11 · Training systems** | [L11 · Training System Design](lectures/11_training_system_design/lecture.md) | Ch. 10, 14–16, 25, 39 | [Training instrumentation](lectures/11_training_system_design/lab.ipynb) | end-to-end training campaign | [Pretraining runbook](runbooks/02_pretraining_runbook.md) | observable training run |
-| **12 · Evaluation** | [L12 · Evaluation](lectures/12_evaluation/lecture.md) | Ch. 22, 41–47, 50, 73 | [Evaluation harness](lectures/12_evaluation/lab.ipynb) | ParsiNLU · PersianMedQA · held-out slices | [Evaluation runbook](runbooks/07_evaluation_runbook.md) | scorecard + failure taxonomy |
-| **13 · Real data** | [L13 · Data Sources + Construction](lectures/13_data_sources_and_dataset_construction/lecture.md) | Ch. 17–18, 21, 23, 66, 72 | [Real Dataset Corpus Bench](lectures/13_data_sources_and_dataset_construction/lab.ipynb) · [Curation](lectures/13_data_sources_and_dataset_construction/curation_deep_dive.ipynb) | FineWeb · Dolma · CulturaX · Naab · FineWeb2-HQ | [Dataset curation](runbooks/01_dataset_curation_runbook.md) | source manifest + transformation accounting |
-| **14 · Real data** | [L14 · Filtering + Dedup + Mixing](lectures/14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) | Ch. 19–20 | [Dedup + mixing](lectures/14_filtering_deduplication_mixing_and_synthetic_data/lab.ipynb) | real-vs-synthetic Persian · FineWeb-Edu · OpenWebMath | [Dataset curation](runbooks/01_dataset_curation_runbook.md) | controlled data intervention |
-| **15 · Train + adapt** | [L15 · SFT + RLHF](lectures/15_mid_and_post_training_sft_and_rlhf/lecture.md) | Ch. 26–27, 33 | [Qwen3-0.6B SFT](lectures/15_mid_and_post_training_sft_and_rlhf/lab.ipynb) | Aya · Persian instruction data | [SFT runbook](runbooks/03_sft_runbook.md) | baseline → smoke → SFT → evaluation |
-| **16 · Align** | [L16 · RLVR](lectures/16_reinforcement_learning_with_verifiable_rewards/lecture.md) | Ch. 34–35 | [RLVR toy](lectures/16_reinforcement_learning_with_verifiable_rewards/lab.ipynb) | OpenR1-Math-220k · verifier data | [Pretraining decision](runbooks/PRETRAINING_DECISION_RUNBOOK.md) | verifier/reward failure analysis |
-| **17 · Extend** | [L17 · Multimodality](lectures/17_multimodality/lecture.md) | Ch. 48–50 | [Multimodal alignment](lectures/17_multimodality/lab.ipynb) | text + image/audio/video modality budget | [Systems stack](docs/SYSTEMS_STACK.md) | modality/token-budget analysis |
-| **18 · Train + adapt** | [L18 · LoRA + QLoRA](lectures/18_lora_qlora_and_peft/lecture.md) | Ch. 29–31, 38 | [LoRA / QLoRA](lectures/18_lora_qlora_and_peft/lab.ipynb) | Qwen3-0.6B + Persian adaptation | [PEFT runbook](runbooks/04_peft_lora_qlora_runbook.md) | rank/precision/resource frontier |
-| **19 · Train + adapt** | [L19 · Full FT + Continued PT](lectures/19_full_fine_tuning_and_continued_pretraining/lecture.md) | Ch. 28, 32, 63 | [FT vs LoRA](lectures/19_full_fine_tuning_and_continued_pretraining/lab.ipynb) | Persian corpus / domain adaptation | [Full FT runbook](runbooks/05_full_finetuning_runbook.md) | adaptation + forgetting trade-off |
-| **20 · Align** | [L20 · Preference + Distillation](lectures/20_preference_optimization_and_distillation/lecture.md) | Ch. 36–37 | [DPO + distillation](lectures/20_preference_optimization_and_distillation/lab.ipynb) | preference pairs / teacher traces | [SFT runbook](runbooks/03_sft_runbook.md) | preference + KL experiment |
-| **21 · Evaluate + release** | [L21 · Safety + Failure Analysis](lectures/21_safety_robustness_and_failure_analysis/lecture.md) | Ch. 43, 45, 48–49 | [Failure analysis](lectures/21_safety_robustness_and_failure_analysis/lab.ipynb) | multilingual + adversarial slices | [Model release](runbooks/11_model_release_runbook.md) · [Evaluation](runbooks/07_evaluation_runbook.md) | severity/type matrix + release gate |
-| **22 · Serve + decide** | [L22 · API / RAG / Tools / Training](lectures/22_api_vs_rag_vs_tools_vs_training/lecture.md) | Ch. 57–61 | [Build-vs-buy decision lab](lectures/22_api_vs_rag_vs_tools_vs_training/lab.ipynb) | representative application workload | [Training Method Matrix](docs/TRAINING_METHOD_MATRIX.md) · [Decision Trees](docs/ENGINEERING_DECISION_TREES.md) | architecture decision record + TCO |
-| **23 · Program + research** | [L23 · Build an LLM Program](lectures/23_build_an_llm_program/lecture.md) | Ch. 64–72 | [National LLM resource plan](lectures/23_build_an_llm_program/lab.ipynb) | Persian-first national-language case | [Funding runbook](runbooks/09_funding_and_program_proposal_runbook.md) · [Experiment → Program](docs/EXPERIMENT_TO_PROGRAM.md) | evidence-to-resource chain |
-| **24 · Program + research** | [L24 · Fundable Model](lectures/24_from_experiment_to_fundable_model/lecture.md) | Ch. 73–75 | [Capstone model program](lectures/24_from_experiment_to_fundable_model/lab.ipynb) | all prior evidence | [Funding runbook](runbooks/09_funding_and_program_proposal_runbook.md) | **Model Program Dossier** |
+## Learning Graph
 
-> **Learning loop:** define the evaluation contract early → build/train → measure → break → diagnose → decide → reproduce. The same real-data and Persian cases recur across the matrix so the learner sees how data decisions propagate into tokenization, training, evaluation, serving, and program economics.
+**[Open the complete Learning Graph](docs/LEARNING_GRAPH.md)** · **[Dataset Learning Matrix](data/REAL_DATASET_REGISTRY.md)** · **[Persian Dataset Track](data/PERSIAN_DATASET_TRACK.md)**
 
-### How to use the matrix
+The repository is organized so that a learner follows one course at a time. Supporting books, runbooks, papers, and references deepen the chapter rather than defining a competing learning order.
 
-Do **not** read every folder independently. Pick the next row, follow its links left-to-right, produce the evidence in the final column, then move to the next row.
+### The new lecture standard
 
-****Lecture = the complete learning unit.** The lecture contains the explanation, deep technical material, primary experiment, real-data connection, decision exercise, and mastery evidence. Books and runbooks are optional reference material for instructors or deeper study.**
+A lecture is not a list of topics.
 
-[Full textbook TOC](BOOK_TOC.md) · [Dataset registry](data/REAL_DATASET_REGISTRY.md) · [Persian longitudinal track](data/PERSIAN_DATASET_TRACK.md) · [Open-weight training ladder](docs/OPEN_WEIGHT_TRAINING_LADDER.md)
+Every chapter must contain:
+
+**Motivating problem → intuition → worked example → concept → mathematics → implementation → real-world connection → real dataset → experiment → failure analysis → engineering decision → research extension → mastery questions**
+
+The lab is embedded in that story.
+
+The standard is deliberately similar to learning from a good textbook with a laboratory beside it: the reader should understand the idea **before** being asked to run code.
 
 ## North-star outcome
 
@@ -100,7 +107,7 @@ A graduate of this curriculum should be able to:
 
 ## Practical Open-Weight Training Track
 
-The course now has an explicit hardware-to-training ladder. Start with a real open-weight model on free Colab, then move the same experiment to larger single-GPU and H100 environments.
+Course 2 now has an explicit hardware-to-training ladder. Start with a real open-weight model on free Colab, then move the same experiment to larger single-GPU and H100 environments.
 
 **Practical progression:**
 
@@ -136,7 +143,7 @@ For large-scale training, the course uses small reproducible runs to teach the m
 
 ## Repository architecture
 
-- `lectures/` — the primary 36 self-contained learning packages (12 Neural Computing + 24 LLM Training); each owns its primary lab
+- `lectures/` — the chapter implementations and embedded laboratories for Course 1 and Course 2
 - `book/` — optional deep-reference chapters; not required for the learner path
 - `runbooks/` — reusable operational procedures for instructors/advanced practitioners
 - `visuals/` — diagrams and visual teaching assets
@@ -228,9 +235,9 @@ The project includes contribution guidelines, a code of conduct, security guidan
 
 The repository currently contains:
 
-- 36 core lecture packages (12 Neural Computing + 24 LLM Training);
+- two standalone courses with 12 deep-learning chapters and 24 LLM-engineering chapters;
 - an optional 76-chapter deep-reference textbook;
-- 36 primary lecture labs plus supporting experiments, with the Neural Computing laboratories designed around real datasets and publication-ready evidence;
+- primary laboratories attached to the course chapters, with real datasets, worked experiments, answer keys, and research extensions;
 - 14 optional operational runbooks;
 - a research project catalog spanning 48 project tracks from foundational experiments to publication-grade capstones;
 - research, proposal, model-card, dataset-card, and experiment templates;
