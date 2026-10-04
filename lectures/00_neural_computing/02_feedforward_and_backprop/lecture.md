@@ -144,7 +144,7 @@ Its simplicity is one reason it became so useful in deep networks.
 
 ## 4. Loss turns prediction into an optimization problem
 
-Suppose the tar\get is $y=1$ and the model predicts $\hat{y}=0.682$.
+Suppose the target is $y=1$ and the model predicts $\hat{y}=0.682$.
 
 For binary cross-entropy:
 
@@ -200,7 +200,7 @@ Which parameter deserves blame?
 
 Backpropagation sends information about the error backward through the computation graph.
 
-Parameters that had a stron\ger effect on the loss receive lar\ger gradients.
+Parameters that had a stronger effect on the loss receive larger gradients.
 
 So:
 
@@ -232,7 +232,7 @@ If it is too lar\ge, updates can overshoot or become unstable.
 
 This gives us the first major optimization experiment.
 
-## 8. Batch training chan\ges the estimate
+## 8. Batch training changes the estimate
 
 A single example gives a noisy gradient.
 
@@ -246,15 +246,15 @@ sum_{iin B}
 abla_\th\eta L_i.
 $$
 
-Increasing batch size often makes the gradient estimate less noisy, but it chan\ges memory requirements and optimization behavior.
+Increasing batch size often makes the gradient estimate less noisy, but it changes memory requirements and optimization behavior.
 
 There is no universally best batch size.
 
 The right question is:
 
-> What batch size gives the desired optimization behavior under the available memory and throughput bud\get?
+> What batch size gives the desired optimization behavior under the available memory and throughput budget?
 
-## 9. Memorization versus \generalization
+## 9. Memorization versus generalization
 
 A model can drive training error almost to zero and still fail on unseen data.
 
@@ -279,7 +279,7 @@ Suppose:
 | small model | 91% | 89% |
 | lar\ge model | 100% | 88% |
 
-The lar\ge model optimized the training set better but \generalized worse.
+The lar\ge model optimized the training set better but generalized worse.
 
 Possible explanations include:
 
@@ -312,7 +312,7 @@ Before running the notebook, predict:
 - how the loss should chan\ge when the learning rate increases;
 - what happens when the labels are shuffled;
 - how depth affects parameter count;
-- whether normalization chan\ges optimization stability.
+- whether normalization changes optimization stability.
 
 Then:
 
@@ -343,23 +343,23 @@ This is one of the most useful debugging techniques in deep-learning implementat
 **“Backpropagation updates the weights.”**  
 Not exactly. Backpropagation computes gradients. The optimizer uses those gradients to update parameters.
 
-**“A big\ger model is always better.”**  
-A big\ger model increases capacity but can also increase cost, instability, or memorization.
+**“A bigger model is always better.”**  
+A bigger model increases capacity but can also increase cost, instability, or memorization.
 
 **“Training accuracy proves learning.”**  
 It proves the model can fit the training examples. Generalization requires held-out evidence.
 
-**“The learning rate is just a tuning d\etail.”**  
+**“The learning rate is just a tuning detail.”**  
 It determines the scale of parameter updates and can completely chan\ge whether optimization succeeds.
 
 ## 14. Research extension
 
 Choose one:
 
-- width at fixed parameter bud\get;
-- depth at fixed parameter bud\get;
+- width at fixed parameter budget;
+- depth at fixed parameter budget;
 - optimizer at fixed compute;
-- batch size at fixed token/example bud\get;
+- batch size at fixed token/example budget;
 - initialization under controlled seeds;
 - regularization under fixed architecture.
 
@@ -378,7 +378,7 @@ State a hypothesis **before** running the experiment.
 
 1. Without them, stacked linear layers collapse into one linear transformation.
 2. Backpropagation efficiently applies the chain rule through the computation graph.
-3. The local direction and magnitude in which the loss chan\ges with respect to parameters.
+3. The local direction and magnitude in which the loss changes with respect to parameters.
 4. A sufficiently expressive model can memorize arbitrary training associations.
 5. Otherwise we cannot reliably estimate performance on unseen data.
 6. Whether the implemented analytic gradient agrees with an independent numerical approximation.
