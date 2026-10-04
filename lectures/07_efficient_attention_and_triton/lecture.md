@@ -167,3 +167,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 10 — GPUs and Kernels](../06_gpus_and_kernels/lecture.md) · [Next: Lecture 12 — Distributed Training →](../08_distributed_training/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: FlashAttention and Triton](https://www.youtube.com/results?search_query=FlashAttention+Triton+lecture)
+
+## Navigation
+
+[← Previous](../06_gpus_and_kernels/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../08_distributed_training/lecture.md)
