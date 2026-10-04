@@ -159,14 +159,14 @@ Then ask:
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 16 — LoRA, QLoRA, and PEFT](../18_lora_qlora_and_peft/lecture.md) · [Next: Lecture 18 — Preference Optimization and Distillation →](../20_preference_optimization_and_distillation/lecture.md)
+[← Previous: Lecture 16 — LoRA, QLoRA and PEFT](../18_lora_qlora_and_peft/lecture.md) · [Next: Lecture 18 — Preference Optimization and Distillation →](../20_preference_optimization_and_distillation/lecture.md)
 
 </div>
