@@ -13,7 +13,7 @@ $$
 x = [x_1,x_2]
 $$
 
-and a binary tar\get
+and a binary target
 
 $$
 y \in {0,1}.
@@ -33,7 +33,7 @@ $$
 (x^{(1)},y^{(1)}),\ldots,(x^{(n)},y^{(n)})
 $$
 
-and searches for parameters that make its predictions agree with the observed tar\gets.
+and searches for parameters that make its predictions agree with the observed targets.
 
 The important word is **parameters**. Instead of manually writing every decision rule, we specify a family of functions and let data determine the useful parameters.
 
@@ -87,7 +87,7 @@ $$
 x=[1,0],
 $$
 
-we \get
+we get
 
 $$
 z=2(1)-1(0)-0.5=1.5,
@@ -101,7 +101,7 @@ $$
 x=[0,1],
 $$
 
-we \get
+we get
 
 $$
 z=-1.5,
@@ -109,7 +109,7 @@ $$
 
 so the prediction is 0.
 
-The neuron has not “understood medicine.” It has learned a \geometric separation in the feature space.
+The neuron has not “understood medicine.” It has learned a geometric separation in the feature space.
 
 That distinction matters throughout deep learning.
 
@@ -163,7 +163,7 @@ If the prediction is correct, the update is zero.
 The update demonstrates an idea that survives into modern training:
 
 1. make a prediction;
-2. compare it with the tar\get;
+2. compare it with the target;
 3. measure an error;
 4. chan\ge parameters in a direction intended to reduce future error.
 
@@ -239,7 +239,7 @@ W_2(W_1x+b_1)+b_2
 (W_2W_1)x+(W_2b_1+b_2).
 $$
 
-So stacking linear layers without nonlinearities does **not** create a \genuinely deeper function class.
+So stacking linear layers without nonlinearities does **not** create a genuinely deeper function class.
 
 With nonlinearities, composition becomes much more expressive:
 
@@ -274,7 +274,7 @@ This idea will return in:
 
 A useful mental model is:
 
-> **Each layer chan\ges the coordinate system in which the next layer sees the problem.**
+> **Each layer changes the coordinate system in which the next layer sees the problem.**
 
 ---
 
@@ -287,7 +287,7 @@ The same mathematical mechanism appears in very different systems:
 - speech models transform acoustic patterns into linguistic representations;
 - langua\ge models transform token representations through many contextual layers.
 
-The domain chan\ges. The learning loop remains recognizable:
+The domain changes. The learning loop remains recognizable:
 
 **data → computation → prediction → loss → gradient → parameter update.**
 
@@ -307,7 +307,7 @@ Therefore:
 
 > **A trained model is not automatically a causal model, a truthful model, or a robust model.**
 
-This is why later chapters will study \generalization, distribution shift, evaluation, and failure analysis.
+This is why later chapters will study generalization, distribution shift, evaluation, and failure analysis.
 
 ---
 
@@ -378,10 +378,10 @@ That question leads to **backpropagation**.
 ### Answers
 
 1. A single perceptron produces one linear decision boundary.
-2. It allows composition of \genuinely nonlinear functions.
+2. It allows composition of genuinely nonlinear functions.
 3. The composition of linear functions is still linear.
 4. A learned quantity, such as a weight or bias, that determines the model's computation.
-5. A prediction is the model output; a loss quantifies disagreement with the tar\get.
+5. A prediction is the model output; a loss quantifies disagreement with the target.
 6. Poorly scaled dimensions can make optimization poorly conditioned.
 7. It tests how much performance depends on learnable structure versus memorization/capacity.
 
