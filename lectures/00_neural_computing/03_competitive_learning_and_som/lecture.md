@@ -99,8 +99,13 @@ This notebook is part of the chapter, not optional homework. Follow the same sci
 
 The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
 
+## Video companions
+
+[Video companions: competitive learning and self-organizing maps](https://www.youtube.com/results?search_query=self+organizing+maps+competitive+learning+lecture)
+
 ## Navigation
 
 [← Previous](../02_feedforward_and_backprop/lecture.md) · [Course 1 home](../README.md) · [Next →](../04_convolutional_networks/lecture.md)
 
 </div>
+
