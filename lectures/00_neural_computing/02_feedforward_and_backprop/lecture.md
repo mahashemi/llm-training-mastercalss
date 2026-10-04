@@ -1,11 +1,11 @@
 # Course 1 · Chapter 2 — Feedforward Networks and Backpropagation
 
-**Course:** Deep Learning & Neural Computing Foundations  
+**Course:** Deep Learn\\ing & Neural Comput\\ing Foundations  
 **Lab:** [Executable laboratory](./lab.ipynb)
 
 ## 1. The problem: one neuron is not enough
 
-Chapter 1 showed that a single neuron can learn a linear boundary. Real problems are rarely that simple.
+Chapter 1 showed that a s\\ingle neuron can learn a l\\inear boundary. Real problems are rarely that simple.
 
 Suppose we want to learn XOR:
 
@@ -16,34 +16,34 @@ Suppose we want to learn XOR:
 | 1 | 0 | 1 |
 | 1 | 1 | 0 |
 
-No single line can solve it.
+No s\\ingle l\\ine can solve it.
 
 A multilayer network can:
 
 $$
-h=phi(W_1x+b_1)
+h=\\phi(W_1x+b_1)
 $$
 
 followed by
 
 $$
-hat y=g(W_2h+b_2).
+\\hat{y}=g(W_2h+b_2).
 $$
 
-The hidden layer creates an intermediate representation. The output layer reads that representation.
+The hidden layer creates an \\intermediate representation. The output layer reads that representation.
 
 The key question of this chapter is:
 
-> **If the final error depends on thousands or millions of parameters, how do we know how to change each parameter?**
+> **If the f\\inal error depends on thousands or millions of parameters, how do we know how to chan\\ge each parameter?**
 
 That is the backpropagation problem.
 
 ## 2. Forward propagation
 
-Consider a tiny network:
+Consider a t\\iny network:
 
 $$
-x ightarrow z_1 ightarrow h ightarrow z_2 ightarrow hat y.
+x ightarrow z_1 ightarrow h ightarrow z_2 ightarrow \\hat{y}.
 $$
 
 Let
@@ -55,7 +55,7 @@ $$
 and
 
 $$
-h=sigma(z_1).
+h=\\sigma(z_1).
 $$
 
 Then
@@ -64,10 +64,10 @@ $$
 z_2=W_2h+b_2
 $$
 
-and for binary classification,
+and for b\\inary classification,
 
 $$
-hat y=sigma(z_2).
+\\hat{y}=\\sigma(z_2).
 $$
 
 The forward pass is simply function composition.
@@ -75,7 +75,7 @@ The forward pass is simply function composition.
 For a concrete scalar example, suppose
 
 $$
-x=2,quad W_1=1.5,quad b_1=-1,
+x=2,\\quad W_1=1.5,\\quad b_1=-1,
 $$
 
 so
@@ -84,16 +84,16 @@ $$
 z_1=1.5(2)-1=2.
 $$
 
-Using the sigmoid,
+Us\\ing the sigmoid,
 
 $$
-h=rac{1}{1+e^{-2}}approx0.881.
+h=\\\\frac{1}{1+e^{-2}}approx0.881.
 $$
 
 Suppose
 
 $$
-W_2=2,quad b_2=-1,
+W_2=2,\\quad b_2=-1,
 $$
 
 then
@@ -105,12 +105,12 @@ $$
 and
 
 $$
-hat yapprox0.682.
+\\hat{y}approx0.682.
 $$
 
-A neural network is therefore not mysterious during inference. It is a sequence of ordinary mathematical operations.
+A neural network is therefore not mysterious dur\\ing \\inference. It is a sequence of ord\\inary mathematical operations.
 
-## 3. Why nonlinear activation matters
+## 3. Why nonl\\inear activation matters
 
 If
 
@@ -121,18 +121,18 @@ $$
 and
 
 $$
-hat y=W_2h+b_2,
+\\hat{y}=W_2h+b_2,
 $$
 
 then:
 
 $$
-hat y=W_2W_1x+W_2b_1+b_2.
+\\hat{y}=W_2W_1x+W_2b_1+b_2.
 $$
 
-The entire network is still one linear function.
+The entire network is still one l\\inear function.
 
-A nonlinear activation such as sigmoid, tanh, or ReLU prevents this collapse.
+A nonl\\inear activation such as sigmoid, tanh, or ReLU prevents this collapse.
 
 For ReLU:
 
@@ -140,16 +140,16 @@ $$
 operatorname{ReLU}(x)=max(0,x).
 $$
 
-Its simplicity is one reason it became so useful in deep networks.
+Its simplicity is one reason it became so useful \\in deep networks.
 
-## 4. Loss turns prediction into an optimization problem
+## 4. Loss turns prediction \\into an optimization problem
 
-Suppose the target is $y=1$ and the model predicts $hat y=0.682$.
+Suppose the tar\\get is $y=1$ and the model predicts $\\hat{y}=0.682$.
 
-For binary cross-entropy:
+For b\\inary cross-entropy:
 
 $$
-L=-[yloghat y+(1-y)log(1-hat y)].
+L=-[ylog\\hat{y}+(1-y)log(1-\\hat{y})].
 $$
 
 Because $y=1$,
@@ -160,53 +160,53 @@ $$
 
 Now we have a scalar quantity that tells us how undesirable the prediction was.
 
-Training asks:
+Tra\\in\\ing asks:
 
 $$
-min_	heta L(	heta)
+m\\in_\\th\\eta L(\\th\\eta)
 $$
 
-where $	heta$ represents every trainable parameter.
+where $\\th\\eta$ represents every tra\\inable parameter.
 
-## 5. The chain rule is the engine of backpropagation
+## 5. The cha\\in rule is the eng\\ine of backpropagation
 
 Consider:
 
 $$
-L ightarrow hat y ightarrow z_2 ightarrow h ightarrow z_1 ightarrow W_1.
+L ightarrow \\hat{y} ightarrow z_2 ightarrow h ightarrow z_1 ightarrow W_1.
 $$
 
-The effect of $W_1$ on the final loss is obtained with the chain rule:
+The effect of $W_1$ on the f\\inal loss is obta\\ined with the cha\\in rule:
 
 $$
-rac{partial L}{partial W_1}
+\\\\frac{\\partial L}{\\partial W_1}
 =
-rac{partial L}{partial hat y}
-rac{partial hat y}{partial z_2}
-rac{partial z_2}{partial h}
-rac{partial h}{partial z_1}
-rac{partial z_1}{partial W_1}.
+\\\\frac{\\partial L}{\\partial \\hat{y}}
+\\\\frac{\\partial \\hat{y}}{\\partial z_2}
+\\\\frac{\\partial z_2}{\\partial h}
+\\\\frac{\\partial h}{\\partial z_1}
+\\\\frac{\\partial z_1}{\\partial W_1}.
 $$
 
 This is backpropagation.
 
-It is not a separate kind of mathematics. It is an efficient organization of repeated applications of the chain rule.
+It is not a separate k\\ind of mathematics. It is an efficient organization of repeated applications of the cha\\in rule.
 
 ## 6. A useful mental model: credit assignment
 
-Imagine the final prediction is wrong.
+Imag\\ine the f\\inal prediction is wrong.
 
 Which parameter deserves blame?
 
-Backpropagation sends information about the error backward through the computation graph.
+Backpropagation sends \\information about the error backward through the computation graph.
 
-Parameters that had a stronger effect on the loss receive larger gradients.
+Parameters that had a stron\\ger effect on the loss receive lar\\ger gradients.
 
 So:
 
 > **Backpropagation is a credit-assignment mechanism for differentiable computation.**
 
-That perspective remains useful for Transformers, diffusion models, and multimodal networks.
+That perspective rema\\ins useful for Transformers, diffusion models, and multimodal networks.
 
 ## 7. Gradient descent
 
@@ -214,179 +214,188 @@ Once we have a gradient,
 
 $$
 
-abla_	heta L,
+abla_\\th\\eta L,
 $$
 
 we update:
 
 $$
-	heta_{new}=	heta_{old}-eta
-abla_	heta L.
+\\th\\eta_{new}=\\th\\eta_{old}-\\eta
+abla_\\th\\eta L.
 $$
 
 The negative sign moves us approximately downhill.
 
-If $eta$ is too small, learning can be painfully slow.
+If $\\eta$ is too small, learn\\ing can be pa\\infully slow.
 
-If it is too large, updates can overshoot or become unstable.
+If it is too lar\\ge, updates can overshoot or become unstable.
 
 This gives us the first major optimization experiment.
 
-## 8. Batch training changes the estimate
+## 8. Batch tra\\in\\ing chan\\ges the estimate
 
-A single example gives a noisy gradient.
+A s\\ingle example gives a noisy gradient.
 
-For a mini-batch $B$:
+For a m\\ini-batch $B$:
 
 $$
 
-abla_	heta L_B=
-rac{1}{|B|}
-sum_{iin B}
-abla_	heta L_i.
+abla_\\th\\eta L_B=
+\\\\frac{1}{|B|}
+sum_{i\\in B}
+abla_\\th\\eta L_i.
 $$
 
-Increasing batch size often makes the gradient estimate less noisy, but it changes memory requirements and optimization behavior.
+Increas\\ing batch size often makes the gradient estimate less noisy, but it chan\\ges memory requirements and optimization behavior.
 
 There is no universally best batch size.
 
 The right question is:
 
-> What batch size gives the desired optimization behavior under the available memory and throughput budget?
+> What batch size gives the desired optimization behavior under the available memory and throughput bud\\get?
 
-## 9. Memorization versus generalization
+## 9. Memorization versus \\generalization
 
-A model can drive training error almost to zero and still fail on unseen data.
+A model can drive tra\\in\\ing error almost to zero and still fail on unseen data.
 
 Consider three experiments:
 
-1. train on the original labels;
-2. train on shuffled labels;
+1. tra\\in on the orig\\inal labels;
+2. tra\\in on shuffled labels;
 3. evaluate on held-out examples.
 
-If a sufficiently large network can memorize shuffled labels, that demonstrates something important:
+If a sufficiently lar\\ge network can memorize shuffled labels, that demonstrates someth\\ing important:
 
-> **Low training loss does not prove that the model discovered the structure we care about.**
+> **Low tra\\in\\ing loss does not prove that the model discovered the structure we care about.**
 
 Generalization is therefore an empirical property, not a guarantee from optimization.
 
-## 10. Worked debugging example
+## 10. Worked debugg\\ing example
 
 Suppose:
 
-| Run | Train accuracy | Validation accuracy |
+| Run | Tra\\in accuracy | Validation accuracy |
 |---|---:|---:|
 | small model | 91% | 89% |
-| large model | 100% | 88% |
+| lar\\ge model | 100% | 88% |
 
-The large model optimized the training set better but generalized worse.
+The lar\\ge model optimized the tra\\in\\ing set better but \\generalized worse.
 
-Possible explanations include:
+Possible explanations \\include:
 
-- overfitting;
-- insufficient data;
+- overfitt\\ing;
+- \\insufficient data;
 - optimization differences;
 - distribution mismatch;
-- leakage in the evaluation design.
+- leaka\\ge \\in the evaluation design.
 
-Do not automatically label it “overfitting.” Run an experiment that distinguishes the hypotheses.
+Do not automatically label it “overfitt\\ing.” Run an experiment that dist\\inguishes the hypotheses.
 
 ## 11. Real-world connection
 
-Feedforward networks are used when the input can be represented as a fixed or structured feature vector:
+Feedforward networks are used when the \\input can be represented as a fixed or structured feature vector:
 
 - tabular prediction;
-- risk scoring;
+- risk scor\\ing;
 - anomaly detection;
 - sensor classification;
-- learned embeddings and projection heads.
+- learned embedd\\ings and projection heads.
 
-They also provide the conceptual building blocks of deeper architectures.
+They also provide the conceptual build\\ing blocks of deeper architectures.
 
-CNNs add spatial structure. RNNs add recurrent state. Transformers add learned interactions across positions.
+CNNs add spatial structure. RNNs add recurrent state. Transformers add learned \\interactions across positions.
 
 ## 12. Laboratory
 
-Before running the notebook, predict:
+Before runn\\ing the notebook, predict:
 
-- how the loss should change when the learning rate increases;
+- how the loss should chan\\ge when the learn\\ing rate \\increases;
 - what happens when the labels are shuffled;
 - how depth affects parameter count;
-- whether normalization changes optimization stability.
+- whether normalization chan\\ges optimization stability.
 
 Then:
 
 1. implement a two-layer network from scratch;
 2. verify your gradients numerically;
-3. train the same task with autograd;
+3. tra\\in the same task with autograd;
 4. compare optimizers;
-5. perform a width/depth intervention;
+5. perform a width/depth \\intervention;
 6. run a shuffled-label control;
-7. inspect individual errors.
+7. \\inspect \\individual errors.
 
 ### Numerical gradient check
 
-For parameter $	heta$:
+For parameter $\\th\\eta$:
 
 $$
-rac{partial L}{partial	heta}
+\\\\frac{\\partial L}{\\partial\\th\\eta}
 approx
-rac{L(	heta+epsilon)-L(	heta-epsilon)}{2epsilon}.
+\\\\frac{L(\\th\\eta+epsilon)-L(\\th\\eta-epsilon)}{2epsilon}.
 $$
 
-Compare this finite-difference estimate with the analytic gradient.
+Compare this f\\inite-difference estimate with the analytic gradient.
 
-This is one of the most useful debugging techniques in deep-learning implementation.
+This is one of the most useful debugg\\ing techniques \\in deep-learn\\ing implementation.
 
 ## 13. Common misconceptions
 
 **“Backpropagation updates the weights.”**  
 Not exactly. Backpropagation computes gradients. The optimizer uses those gradients to update parameters.
 
-**“A bigger model is always better.”**  
-A bigger model increases capacity but can also increase cost, instability, or memorization.
+**“A big\\ger model is always better.”**  
+A big\\ger model \\increases capacity but can also \\increase cost, \\instability, or memorization.
 
-**“Training accuracy proves learning.”**  
-It proves the model can fit the training examples. Generalization requires held-out evidence.
+**“Tra\\in\\ing accuracy proves learn\\ing.”**  
+It proves the model can fit the tra\\in\\ing examples. Generalization requires held-out evidence.
 
-**“The learning rate is just a tuning detail.”**  
-It determines the scale of parameter updates and can completely change whether optimization succeeds.
+**“The learn\\ing rate is just a tun\\ing d\\etail.”**  
+It determ\\ines the scale of parameter updates and can completely chan\\ge whether optimization succeeds.
 
 ## 14. Research extension
 
 Choose one:
 
-- width at fixed parameter budget;
-- depth at fixed parameter budget;
+- width at fixed parameter bud\\get;
+- depth at fixed parameter bud\\get;
 - optimizer at fixed compute;
-- batch size at fixed token/example budget;
-- initialization under controlled seeds;
+- batch size at fixed token/example bud\\get;
+- \\initialization under controlled seeds;
 - regularization under fixed architecture.
 
-State a hypothesis **before** running the experiment.
+State a hypothesis **before** runn\\ing the experiment.
 
 ## Mastery questions
 
-1. Why do we need nonlinear activations?
-2. What does the chain rule have to do with backpropagation?
+1. Why do we need nonl\\inear activations?
+2. What does the cha\\in rule have to do with backpropagation?
 3. What does a gradient tell an optimizer?
 4. Why can a model memorize shuffled labels?
-5. Why must training and validation data be separated?
+5. Why must tra\\in\\ing and validation data be separated?
 6. What does a numerical gradient check test?
 
 ### Answers
 
-1. Without them, stacked linear layers collapse into one linear transformation.
-2. Backpropagation efficiently applies the chain rule through the computation graph.
-3. The local direction and magnitude in which the loss changes with respect to parameters.
-4. A sufficiently expressive model can memorize arbitrary training associations.
+1. Without them, stacked l\\inear layers collapse \\into one l\\inear transformation.
+2. Backpropagation efficiently applies the cha\\in rule through the computation graph.
+3. The local direction and magnitude \\in which the loss chan\\ges with respect to parameters.
+4. A sufficiently expressive model can memorize arbitrary tra\\in\\ing associations.
 5. Otherwise we cannot reliably estimate performance on unseen data.
-6. Whether the implemented analytic gradient agrees with an independent numerical approximation.
+6. Whether the implemented analytic gradient agrees with an \\independent numerical approximation.
 
 ---
 
+
+
+
+## Laboratory — run this experiment end to end
+
+**[Open the executable lab notebook](./lab.ipynb)**
+
+The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → change one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+
 <div align="center">
 
-[← Chapter 1](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next: Competitive Learning + SOM →](../03_competitive_learning_and_som/lecture.md)
+[← Previous](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next →](../03_competitive_learning_and_som/lecture.md)
 
 </div>
