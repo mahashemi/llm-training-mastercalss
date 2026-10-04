@@ -68,3 +68,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 06 — Data Sources and Dataset Construction](../13_data_sources_and_dataset_construction/lecture.md) · [Next: Lecture 08 — Pretraining Systems →](../11_training_system_design/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: data filtering, deduplication and synthetic data](https://www.youtube.com/results?search_query=LLM+data+filtering+deduplication+synthetic+data+lecture)
+
+## Navigation
+
+[← Previous](../13_data_sources_and_dataset_construction/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../15_mid_and_post_training_sft_and_rlhf/lecture.md)
