@@ -163,10 +163,10 @@ Now we have a scalar quantity that tells us how undesirable the prediction was.
 Training asks:
 
 $$
-min_\th\eta L(\th\eta)
+min_\theta\eta L(\theta\eta)
 $$
 
-where $\th\eta$ represents every trainable parameter.
+where $\theta\eta$ represents every trainable parameter.
 
 ## 5. The chain rule is the engine of backpropagation
 
@@ -214,14 +214,14 @@ Once we have a gradient,
 
 $$
 
-abla_\th\eta L,
+abla_\theta\eta L,
 $$
 
 we update:
 
 $$
-\th\eta_{new}=\th\eta_{old}-\eta
-abla_\th\eta L.
+\theta\eta_{new}=\theta\eta_{old}-\eta
+abla_\theta\eta L.
 $$
 
 The negative sign moves us approximately downhill.
@@ -240,10 +240,10 @@ For a mini-batch $B$:
 
 $$
 
-abla_\th\eta L_B=
+abla_\theta\eta L_B=
 \\frac{1}{|B|}
 sum_{iin B}
-abla_\th\eta L_i.
+abla_\theta\eta L_i.
 $$
 
 Increasing batch size often makes the gradient estimate less noisy, but it changes memory requirements and optimization behavior.
@@ -326,12 +326,12 @@ Then:
 
 ### Numerical gradient check
 
-For parameter $\th\eta$:
+For parameter $\theta\eta$:
 
 $$
-\\frac{\partial L}{\partial\th\eta}
+\\frac{\partial L}{\partial\theta\eta}
 approx
-\\frac{L(\th\eta+epsilon)-L(\th\eta-epsilon)}{2epsilon}.
+\\frac{L(\theta\eta+epsilon)-L(\theta\eta-epsilon)}{2epsilon}.
 $$
 
 Compare this finite-difference estimate with the analytic gradient.
