@@ -220,3 +220,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [Next: Lecture 02 — Tokenization →](../02_tokenization/lecture.md)
 
 </div>
+## Video companions
+
+[Let's build GPT: from scratch, in code, spelled out.](https://www.youtube.com/watch?v=kCc8FmEb1nY)
+
+## Navigation
+
+[← Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../02_tokenization/lecture.md)
