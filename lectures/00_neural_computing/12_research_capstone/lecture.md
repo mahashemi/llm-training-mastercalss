@@ -11,7 +11,7 @@ A defensible question identifies an independent variable and measurable outcome:
 
 $$
 \text{intervention}
-\r\rightarrow
+\rightarrow
 \text{measurable outcome}.
 $$
 
@@ -139,3 +139,11 @@ A learner is ready for Course 2 when they can:
 **derive → implement → measure → break → explain → decide → reproduce.**
 
 [← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
+
+## Video companions
+
+[Video companions: research methods for deep learning](https://www.youtube.com/results?search_query=deep+learning+research+experiment+lecture)
+
+## Navigation
+
+[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
