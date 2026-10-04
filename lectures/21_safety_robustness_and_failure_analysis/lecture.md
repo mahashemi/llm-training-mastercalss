@@ -172,3 +172,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 20 — Multimodality](../17_multimodality/lecture.md) · [Next: Lecture 22 — API vs RAG vs Tools vs Training →](../22_api_vs_rag_vs_tools_vs_training/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: LLM safety, robustness and red teaming](https://www.youtube.com/results?search_query=LLM+safety+robustness+red+teaming+lecture)
+
+## Navigation
+
+[← Previous](../20_preference_optimization_and_distillation/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../22_api_vs_rag_vs_tools_vs_training/lecture.md)
