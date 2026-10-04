@@ -18,18 +18,18 @@ A standalone deep-learning course covering the mechanisms that make modern neura
 
 | # | Course 1 chapter | Main practical outcome |
 |---|---|---|
-| 1 | Neural computation | Build and reason about a perceptron/Adaline |
+| 1 | [Neural computation](lectures/00_neural_computing/01_neural_computing_foundations/lecture.md) · [Lab](lectures/00_neural_computing/01_neural_computing_foundations/lab.ipynb) | Build and reason about a perceptron/Adaline |
 | 2 | Feedforward networks + backpropagation | Derive gradients and train an MLP |
 | 3 | Competitive learning + SOM | Analyze unsupervised topology |
 | 4 | CNNs + residual/dense networks | Understand spatial inductive bias and depth |
-| 5 | Autoencoders | Learn and probe latent representations |
+| 5 | [Autoencoders](lectures/00_neural_computing/05_autoencoders/lecture.md) · [Lab](lectures/00_neural_computing/05_autoencoders/lab.ipynb) | Learn and probe latent representations |
 | 6 | VAE, GANs + diffusion | Understand and compare generative learning |
 | 7 | RNNs, LSTM + GRU | Understand neural sequence memory |
 | 8 | Recurrent architectures + forecasting | Build and correctly evaluate sequence predictors |
 | 9 | Boltzmann machines + DBNs | Understand energy-based representation learning |
 | 10 | Attention + Transformer bridge | Understand why attention changed sequence modeling |
-| 11 | Deep reinforcement learning | Learn from actions and delayed rewards |
-| 12 | Research capstone | Reproduce, intervene, ablate, and communicate evidence |
+| 11 | [Deep reinforcement learning](lectures/00_neural_computing/11_deep_reinforcement_learning/lecture.md) · [Lab](lectures/00_neural_computing/11_deep_reinforcement_learning/lab.ipynb) | Learn from actions and delayed rewards |
+| 12 | [Research capstone](lectures/00_neural_computing/12_research_capstone/lecture.md) · [Lab](lectures/00_neural_computing/12_research_capstone/lab.ipynb) | Reproduce, intervene, ablate, and communicate evidence |
 
 ### Course 2 — LLM Engineering & Training Masterclass
 
