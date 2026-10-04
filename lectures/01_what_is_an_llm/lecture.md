@@ -226,4 +226,4 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 
 ## Navigation
 
-[← Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../02_tokenization/lecture.md)
+[← Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../02_tokenization/lecture.md)
