@@ -102,3 +102,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 01 — What Is an LLM](../01_what_is_an_llm/lecture.md) · [Next: Lecture 03 — PyTorch and Resource Accounting →](../03_pytorch_and_resource_accounting/lecture.md)
 
 </div>
+## Video companions
+
+[Let's build the GPT Tokenizer](https://www.youtube.com/watch?v=zduSFxRajkE)
+
+## Navigation
+
+[← Previous](../01_what_is_an_llm/lecture.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../03_pytorch_and_resource_accounting/lecture.md)
