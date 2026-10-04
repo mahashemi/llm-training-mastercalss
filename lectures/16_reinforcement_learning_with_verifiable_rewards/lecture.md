@@ -103,6 +103,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 15 — Mid and Post Training: SFT and RLHF](../15_mid_and_post_training_sft_and_rlhf/lecture.md) · [Next lecture: Lecture 17 — Multimodality →](../17_multimodality/lecture.md)
+[← Previous: Lecture 18 — Preference Optimization and Distillation](../20_preference_optimization_and_distillation/lecture.md) · [Next: Lecture 20 — Multimodality →](../17_multimodality/lecture.md)
 
 </div>
