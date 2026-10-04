@@ -213,7 +213,7 @@ Adaline trains this continuous score rather than immediately converting it to 0 
 For $N$ training examples, define the mean squared error:
 
 $$
-L=\\frac{1}{N}\sum_{i=1}^{N}(y_i-z_i)^2.
+L=\frac{1}{N}\sum_{i=1}^{N}(y_i-z_i)^2.
 $$
 
 Before worrying about the formula, read it in English:
@@ -269,7 +269,7 @@ If you change one parameter slightly, does the loss go up or down? And how stron
 For a weight $w_j$, the derivative
 
 $$
-\\frac{\partial L}{\partial w_j}
+\frac{\partial L}{\partial w_j}
 $$
 
 answers:
@@ -352,7 +352,7 @@ Suppose
 $$
 w_{\text{old}}=2,
 \qquad
-\\frac{dL}{dw}=3,
+\frac{dL}{dw}=3,
 \qquad
 \eta=0.1.
 $$
