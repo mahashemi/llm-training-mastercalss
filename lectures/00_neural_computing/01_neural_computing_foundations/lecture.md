@@ -283,7 +283,7 @@ The symbol $\nabla$ (“nabla”) is simply a compact way to collect these parti
 For the vector of weights $w$,
 
 $$
-\n\nabla_w L
+\nabla_w L
 $$
 
 means:
@@ -299,7 +299,7 @@ $$
 Differentiating with respect to the weight vector gives
 
 $$
-\n\nabla_w L
+\nabla_w L
 =
 2(w^\top x+b-y)x.
 $$
@@ -334,7 +334,7 @@ w_{\text{new}}
 =
 w_{\text{old}}
 -
-\eta\n\nabla_w L.
+\eta\nabla_w L.
 $$
 
 Read every symbol in plain English:
@@ -413,10 +413,10 @@ For example:
 
 $$
 w
-\r\rightarrow z
-\r\rightarrow h
-\r\rightarrow \hat y
-\r\rightarrow L.
+\rightarrow z
+\rightarrow h
+\rightarrow \hat y
+\rightarrow L.
 $$
 
 Backpropagation walks through this chain in reverse and combines the local slopes.
@@ -540,6 +540,10 @@ This notebook is part of the chapter, not optional homework. Follow:
 
 **predict → baseline → controlled change → measure → inspect failure → explain → propose next experiment.**
 
+## Video companions
+
+[Gradient descent, how neural networks learn](https://www.youtube.com/watch?v=IHZwWFHWa-w)
+
 ## Navigation
 
-[← Previous](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next →](../03_competitive_learning_and_som/lecture.md)
+[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
