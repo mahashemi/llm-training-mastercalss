@@ -16,13 +16,13 @@ The lab emphasizes measurable quality, diversity, and compute rather than attrac
 A classifier learns a mapping
 
 $$
-x \r\rightarrow y.
+x \rightarrow y.
 $$
 
 A generative model instead tries to learn enough about the data distribution to produce new samples:
 
 $$
-z \r\rightarrow x.
+z \rightarrow x.
 $$
 
 The central question is: **what does it mean for a generated example to be plausible?**
@@ -167,6 +167,10 @@ This notebook is part of the chapter, not optional homework. Follow the same sci
 
 The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
 
+## Video companions
+
+[Video companions: VAE / GAN / diffusion](https://www.youtube.com/results?search_query=VAE+GAN+diffusion+deep+learning)
+
 ## Navigation
 
-[← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
+[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
