@@ -82,3 +82,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 08 — Pretraining Systems](../11_training_system_design/lecture.md) · [Next: Lecture 10 — GPUs and Kernels →](../06_gpus_and_kernels/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: scaling laws for language models](https://www.youtube.com/results?search_query=scaling+laws+language+models+lecture)
+
+## Navigation
+
+[← Previous](../08_distributed_training/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../10_inference_systems/lecture.md)
