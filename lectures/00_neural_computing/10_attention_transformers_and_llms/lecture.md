@@ -50,7 +50,7 @@ This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bri
 2. Build the smallest defensible baseline.
 3. Implement the central mechanism once from first principles.
 4. Run the framework implementation.
-5. Keep the primary bud\get fixed while changing one factor.
+5. Keep the primary budget fixed while changing one factor.
 6. Measure quality, compute, memory, and failure modes.
 7. Repeat with seeds when feasible and report uncertainty.
 8. Inspect qualitative examples—not only aggregate metrics.
@@ -62,7 +62,7 @@ This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bri
 The lab must end with a research question. A good question has a measurable independent variable, a defined outcome, a baseline, and a reason the result would matter. Examples include:
 
 - Does the mechanism improve accuracy at the same parameter count?
-- Does it improve sample efficiency at the same training bud\get?
+- Does it improve sample efficiency at the same training budget?
 - Does it improve robustness under distribution shift?
 - Does it reduce inference memory or latency?
 - Which failure mode becomes more or less common?
