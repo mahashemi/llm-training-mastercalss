@@ -88,6 +88,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 10 — Inference Systems](../10_inference_systems/lecture.md) · [Next lecture: Lecture 12 — Evaluation That Can Block a Bad Model →](../12_evaluation/lecture.md)
+[← Previous: Lecture 07 — Filtering, Deduplication, Mixing, and Synthetic Data](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Next: Lecture 09 — Scaling Laws →](../09_scaling_laws/lecture.md)
 
 </div>
