@@ -48,18 +48,6 @@ Increasing visual tokens can affect:
 
 The “resolution setting” is therefore not purely a quality parameter.
 
-## Laboratory
-
-Build a small model-flow map and vary visual token count.
-
-Record:
-
-| Visual tokens | total context | estimated attention memory | observed runtime |
-|---:|---:|---:|---:|
-| low | measure | measure | measure |
-| medium | measure | measure | measure |
-| high | measure | measure | measure |
-
 ## Break it
 
 Use an input whose image encoding consumes most of the context window.
@@ -89,14 +77,14 @@ Read one modern vision-language model architecture and identify the encoder, ali
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 19 — RL with Verifiable Rewards](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Next: Lecture 21 — Safety, Robustness, and Failure Analysis →](../21_safety_robustness_and_failure_analysis/lecture.md)
+[← Previous: Lecture 19 — RL with Verifiable Rewards](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Next: Lecture 21 — Safety, Robustness and Failure Analysis →](../21_safety_robustness_and_failure_analysis/lecture.md)
 
 </div>
