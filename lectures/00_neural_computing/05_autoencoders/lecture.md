@@ -19,7 +19,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Begin with compression. Suppose an ima\ge has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns
+Begin with compression. Suppose an image has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns
 z = f_θ(x),  x̂ = g_φ(z)
 and minimizes a reconstruction loss such as
 L = ||x-x̂||².
@@ -29,7 +29,7 @@ The encoder is forced to preserve information useful for reconstruction; the bot
 Work through a tiny 4-dimensional example compressed to 2 dimensions. Explain why a linear autoencoder is closely related to principal-component analysis, while nonlinear activations let the learned representation bend around nonlinear structure.
 
 Then distinguish variants:
-- sparse: encoura\ge only a small number of latent activations;
+- sparse: encourage only a small number of latent activations;
 - denoising: reconstruct clean x from corrupted x̃;
 - contractive: penalize sensitivity to small input changes;
 - stacked: compose multiple encoder/decoder layers.
@@ -38,9 +38,57 @@ Real connection: anomaly detection, representation learning, dimensionality redu
 
 Failure experiment: make the bottleneck too wide. Reconstruction may become excellent while the latent representation becomes less useful. Then corrupt the input and compare ordinary and denoising autoencoders.
 
+## Build the intuition before the notation
+
+Think about packing a large suitcase into a tiny box.
+
+You cannot preserve everything. You must decide what information is worth keeping.
+
+The encoder is the packing process. The latent vector is the small box. The decoder is the unpacking process.
+
+The reconstruction loss tells the model whether the unpacked result still resembles the original.
+
+### Why the bottleneck is the interesting part
+
+If the latent vector is almost as large as the input and the network is powerful enough, the task can become easy copying.
+
+If the latent vector is tiny, the model must discover regularities.
+
+So the most informative experiment is not simply “train an autoencoder.”
+
+It is:
+
+**change the information bottleneck while keeping the rest of the protocol controlled.**
+
+### Reconstruction versus representation
+
+Suppose two models have:
+
+- Model A: MSE = 0.010, linear-probe accuracy = 82%;
+- Model B: MSE = 0.015, linear-probe accuracy = 94%.
+
+Model B reconstructs worse but may provide a better representation for classification.
+
+This is why a research report should never equate reconstruction quality with representation quality without measuring the downstream objective.
+
+### Denoising as an inductive bias
+
+When the input is corrupted but the target remains clean, the model is rewarded for recovering stable structure.
+
+That changes the question from:
+
+> “How do I copy this exact input?”
+
+to:
+
+> “What structure survives plausible corruption?”
+
+This idea will later reappear in many forms of self-supervised learning.
+
+
 ## Core concepts
 
-This unit covers **basic, regularized, sparse, denoising, stacked denoising, contractive objectives**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **basic, regularized, sparse, denoising, stacked denoising, contractive objectives**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -67,7 +115,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
