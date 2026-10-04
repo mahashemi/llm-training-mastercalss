@@ -19,15 +19,15 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Start with the ima\ge problem: a detector for an ed\ge should not need a completely different parameter for every pixel location. Convolution introduces a useful inductive bias: the same local detector can be reused across positions.
+Start with the image problem: a detector for an edge should not need a completely different parameter for every pixel location. Convolution introduces a useful inductive bias: the same local detector can be reused across positions.
 
 For a 1-D illustration,
 y_i = Σ_k w_k x_{i+k}.
 In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
 
-Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 ima\ge and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
+Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 image and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
 
-Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks chan\ge the optimization problem by learning a residual:
+Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks change the optimization problem by learning a residual:
 y = F(x) + x.
 The shortcut gives information and gradients a direct path.
 
@@ -38,9 +38,76 @@ Real connection: CNNs power visual inspection, medical imaging, OCR, satellite i
 
 Failure experiment: compare a CNN with and without augmentation under a controlled background shift. Ask whether the model learned the object or a shortcut.
 
+## Build the intuition before the notation
+
+Imagine looking for the same type of edge everywhere in a photograph. A dense layer could learn a separate detector for every location. A convolution says something more sensible:
+
+> “If this pattern matters here, it may matter somewhere else too.”
+
+That is **translation-aware parameter sharing**.
+
+The kernel is therefore not merely a smaller matrix. It is a statement about what kinds of relationships the model expects to find useful.
+
+### A concrete parameter-count exercise
+
+For a $28\times28$ grayscale image, compare:
+
+- dense layer: $784\rightarrow64$;
+- convolution: 16 filters of size $3\times3$.
+
+The dense layer has:
+
+$
+784\times64+64=50,240
+$
+
+parameters.
+
+The convolution has:
+
+$
+16(3\times3+1)=160.
+$
+
+The dramatic difference comes from two assumptions:
+
+1. each filter looks locally;
+2. the same filter is reused at every location.
+
+Neither assumption is universally correct. That is why controlled experiments matter.
+
+### Receptive field thought experiment
+
+A single $3\times3$ convolution sees a $3\times3$ neighborhood.
+
+Two stride-1 $3\times3$ layers can combine information from a larger region. Stacking local operations therefore gradually builds a wider effective context.
+
+This gives a useful mental progression:
+
+**local pixels → local patterns → combinations of patterns → larger structures.**
+
+### Why residual connections matter mathematically
+
+If a block learns $F(x)$, ordinary learning asks it to produce the entire transformed representation.
+
+A residual block asks it to produce a correction:
+
+$
+F(x)=y-x.
+$
+
+If the best transformation is close to identity, the desired correction is small.
+
+The shortcut therefore changes what the block must learn, not merely how many parameters it contains.
+
+### Research habit
+
+Whenever comparing CNN architectures, report parameter count and training budget. Otherwise “Model B is better” may simply mean Model B was given more capacity or more optimization.
+
+
 ## Core concepts
 
-This unit covers **convolution, pooling, receptive fields, CNN extensions, residual and dense networks**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **convolution, pooling, receptive fields, CNN extensions, residual and dense networks**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -67,7 +134,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
