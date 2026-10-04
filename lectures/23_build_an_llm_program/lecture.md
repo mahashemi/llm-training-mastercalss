@@ -199,14 +199,14 @@ This converts a one-time funding request into a sequence of evidence gates.
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 22 — API vs RAG vs Tools vs Training](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Next: Lecture 24 — From Experiment to Fundable Model →](../24_from_experiment_to_fundable_model/lecture.md)
+[← Previous: Lecture 22 — API vs RAG vs Tools vs Training](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Next: Lecture 24 — From Experiment to a Fundable Model →](../24_from_experiment_to_fundable_model/lecture.md)
 
 </div>
