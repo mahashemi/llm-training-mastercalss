@@ -86,6 +86,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 11 — Training System Design and Instrumentation](../11_training_system_design/lecture.md) · [Next lecture: Lecture 13 — Data Sources and Dataset Construction →](../13_data_sources_and_dataset_construction/lecture.md)
+[← Previous: Lecture 12 — Distributed Training](../08_distributed_training/lecture.md) · [Next: Lecture 14 — Inference Systems →](../10_inference_systems/lecture.md)
 
 </div>
