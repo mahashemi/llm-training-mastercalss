@@ -84,7 +84,7 @@ $$
 The sigmoid is
 
 $$
-\sigma(a)=\\frac{1}{1+e^{-a}}.
+\sigma(a)=\frac{1}{1+e^{-a}}.
 $$
 
 It turns any real number into a value between 0 and 1, which we can interpret as a probability-like score.
@@ -106,7 +106,7 @@ $$
 Therefore
 
 $$
-h=\\frac{1}{1+e^{-2}}\approx0.881.
+h=\frac{1}{1+e^{-2}}\approx0.881.
 $$
 
 Now let
@@ -124,7 +124,7 @@ $$
 Finally,
 
 $$
-\hat y=\\frac{1}{1+e^{-0.762}}\approx0.682.
+\hat y=\frac{1}{1+e^{-0.762}}\approx0.682.
 $$
 
 We have just performed a complete forward pass with ordinary arithmetic.
@@ -164,7 +164,7 @@ So stacking linear layers without nonlinearities does not give us the expressive
 A common activation is ReLU:
 
 $$
-\\operatorname{ReLU}(a)=\max(0,a).
+\operatorname{ReLU}(a)=\max(0,a).
 $$
 
 It keeps positive values and changes negative values to zero.
@@ -246,13 +246,13 @@ $$
 The chain rule says that the total effect of changing $W_1$ can be found by multiplying the local effects along the path:
 
 $$
-\\frac{\partial L}{\partial W_1}
+\frac{\partial L}{\partial W_1}
 =
-\\frac{\partial L}{\partial\hat y}
-\\frac{\partial\hat y}{\partial z_2}
-\\frac{\partial z_2}{\partial h}
-\\frac{\partial h}{\partial z_1}
-\\frac{\partial z_1}{\partial W_1}.
+\frac{\partial L}{\partial\hat y}
+\frac{\partial\hat y}{\partial z_2}
+\frac{\partial z_2}{\partial h}
+\frac{\partial h}{\partial z_1}
+\frac{\partial z_1}{\partial W_1}.
 $$
 
 ### Read the equation in English
@@ -286,7 +286,7 @@ $$
 the derivative with respect to $W_1$ is
 
 $$
-\\frac{\partial z_1}{\partial W_1}=x.
+\frac{\partial z_1}{\partial W_1}=x.
 $$
 
 Why?
@@ -319,7 +319,7 @@ $$
 \theta_{\text{old}}
 -
 \eta
-\\frac{\partial L}{\partial\theta}.
+\frac{\partial L}{\partial\theta}.
 $$
 
 Here:
@@ -348,7 +348,7 @@ Suppose
 $$
 \theta_{\text{old}}=2,
 \qquad
-\\frac{\partial L}{\partial\theta}=3,
+\frac{\partial L}{\partial\theta}=3,
 \qquad
 \eta=0.1.
 $$
@@ -397,7 +397,7 @@ For a mini-batch $B$, the average loss can be written as
 
 $$
 L_B=
-\\frac{1}{|B|}
+\frac{1}{|B|}
 \sum_{i\in B}L_i.
 $$
 
@@ -406,7 +406,7 @@ The corresponding gradient is the average of the example gradients:
 $$
 \n\nabla_\theta L_B
 =
-\\frac{1}{|B|}
+\frac{1}{|B|}
 \sum_{i\in B}
 \n\nabla_\theta L_i.
 $$
@@ -443,9 +443,9 @@ One of the best debugging tools in deep learning is to compare two independent c
 For a parameter $\theta$, approximate the derivative using a tiny perturbation $\epsilon$:
 
 $$
-\\frac{\partial L}{\partial\theta}
+\frac{\partial L}{\partial\theta}
 \approx
-\\frac{
+\frac{
 L(\theta+\epsilon)-L(\theta-\epsilon)
 }{
 2\epsilon
