@@ -41,17 +41,6 @@ Compare:
 | human | richer validity | expensive |
 | hybrid | scale + audit | more infrastructure |
 
-## Laboratory
-
-Build a small scorecard.
-
-The notebook should compute at least:
-
-- aggregate score;
-- per-slice score;
-- failure count;
-- confidence interval or bootstrap interval where appropriate.
-
 ## Break it
 
 Create a benchmark with one easy slice dominating 80% of samples.
@@ -78,9 +67,9 @@ Connect your benchmark protocol to the evaluation chapters and preserve the exac
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
