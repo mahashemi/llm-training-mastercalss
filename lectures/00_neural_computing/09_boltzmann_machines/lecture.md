@@ -151,7 +151,4 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Navigation
 
-[← Previous](../08_sequence_architectures_and_forecasting/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
-
-</div>
-
+[← Previous](../08_sequence_architectures_and_forecasting/lecture.md) · [Course 1 home](../README.md) · [Next →](../10_attention_transformers_and_llms/lecture.md)
