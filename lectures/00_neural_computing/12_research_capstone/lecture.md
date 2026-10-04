@@ -1,4 +1,4 @@
-# Neural Computing 12 — Research Capstone: From Experiment to Paper
+# Course 1 · Chapter — Research Capstone: From Observation to Evidence
 
 **Lab:** [Open the publication capstone](./lab.ipynb)
 
