@@ -54,25 +54,6 @@ The crucial lesson:
 
 > “Total parameters” and “active parameters per token” are different quantities.
 
-## Laboratory
-
-Vary:
-
-- number of KV heads;
-- sequence length;
-- number of experts;
-- top-k.
-
-Measure:
-
-| Configuration | KV memory | attention time | routing load | throughput |
-|---|---:|---:|---:|---:|
-| MHA | measure | measure | — | measure |
-| GQA | measure | measure | — | measure |
-| MQA | measure | measure | — | measure |
-
-For MoE, deliberately create imbalanced routing and inspect expert utilization.
-
 ## Break it
 
 Force one expert to receive most tokens.
@@ -105,14 +86,14 @@ Read original GQA/MQA/MoE papers and compare active computation with total param
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 04 — Transformer Architectures](../04_transformer_architectures/lecture.md) · [Next: Lecture 06 — Data Sources and Construction →](../13_data_sources_and_dataset_construction/lecture.md)
+[← Previous: Lecture 04 — Transformer Architectures](../04_transformer_architectures/lecture.md) · [Next: Lecture 06 — Data Sources and Dataset Construction →](../13_data_sources_and_dataset_construction/lecture.md)
 
 </div>
