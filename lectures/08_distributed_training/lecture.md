@@ -113,6 +113,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 07 — Efficient Attention, FlashAttention, and Triton](../07_efficient_attention_and_triton/lecture.md) · [Next lecture: Lecture 09 — Scaling Laws →](../09_scaling_laws/lecture.md)
+[← Previous: Lecture 11 — Efficient Attention and Triton](../07_efficient_attention_and_triton/lecture.md) · [Next: Lecture 13 — Evaluation →](../12_evaluation/lecture.md)
 
 </div>
