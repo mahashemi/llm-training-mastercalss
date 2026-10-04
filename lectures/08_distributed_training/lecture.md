@@ -64,21 +64,6 @@ $E_k = \frac{T_k}{kT_1}$
 
 where T is throughput.
 
-## Laboratory
-
-Measure or simulate:
-
-1, 2, 4, 8 GPUs.
-
-Record:
-
-- tokens/sec;
-- scaling efficiency;
-- communication fraction;
-- memory.
-
-Then deliberately lower the compute per step and see efficiency fall.
-
 ## H100 bridge
 
 The H100's value in a cluster depends on:
@@ -102,6 +87,77 @@ Answer:
 
 Read a current PyTorch FSDP guide and compare its abstractions with the simulated state partitioning.
 
+
+
+## A worked example: why eight GPUs need not be eight times faster
+
+Suppose one GPU processes 1000 tokens/s. An ideal eight-GPU system would process 8000 tokens/s.
+
+Define scaling efficiency:
+
+$$
+E_8=\frac{T_8}{8T_1}.
+$$
+
+If measured throughput is 6400 tokens/s,
+
+$$
+E_8=\frac{6400}{8\times1000}=0.8.
+$$
+
+The system achieved 80% scaling efficiency. The missing 20% can come from communication, synchronization, input stalls, load imbalance, or framework overhead.
+
+## DDP from first principles
+
+Suppose two workers receive different mini-batches.
+
+**worker 0: model copy + batch A → gradients g₀**  
+**worker 1: model copy + batch B → gradients g₁**  
+**g₀ and g₁ → all-reduce → synchronized update**
+
+The important limitation is that each worker still needs the model and training state. DDP improves aggregate data processing but does not make a model that cannot fit suddenly fit.
+
+## Sharding changes the question
+
+With sharding, model states are partitioned across workers. A simplified memory view is
+
+$$
+M_{\text{per GPU}}\approx\frac{M_{\text{states}}}{K}+M_{\text{local overhead}}
+$$
+
+where K is the number of participating GPUs.
+
+This can make a previously impossible model fit, but introduces communication and coordination.
+
+## Real-world connection: choosing a parallelism strategy
+
+| Problem | First strategy to investigate |
+|---|---|
+| model fits, want throughput | data parallelism |
+| model states do not fit | FSDP/ZeRO-style sharding |
+| individual layers are too large | tensor/model parallelism |
+| very deep model | pipeline parallelism |
+| sparse MoE | expert parallelism |
+
+These strategies are often combined.
+
+## Failure analysis
+
+Distributed runs commonly fail in ways that look like “the GPUs are slow” but are actually:
+
+- network bandwidth limits;
+- collective synchronization;
+- uneven batch sizes;
+- slow data loading;
+- checkpoint I/O;
+- stragglers;
+- poor topology.
+
+Measure the timeline before changing the cluster.
+
+## Research extension
+
+Run one scaling experiment with fixed global batch size and another with fixed per-GPU batch size. Explain how the two experiments answer different questions about scaling.
 
 ## Lab — run it here
 
