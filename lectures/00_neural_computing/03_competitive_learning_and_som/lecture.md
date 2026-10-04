@@ -23,7 +23,7 @@ w_j ← w_j + η h(j,j*,t)(x-w_j).
 
 The important intuition is that learning is simultaneously doing two things: fitting prototypes to data and organizing nearby prototypes to represent nearby regions of the input space.
 
-Worked example: place four 2-D prototypes on the corners of a square and feed points from two clusters. Calculate the winner for one point and move the winner. Then activate its neighbors and observe how the map chan\\\\ges.
+Worked example: place four 2-D prototypes on the corners of a square and feed points from two clusters. Calculate the winner for one point and move the winner. Then activate its neighbors and observe how the map chan\ges.
 
 Real connection: SOMs are useful for exploratory visualization, sensor regimes, customer segmentation, and inspecting high-dimensional structure. They are not magic clustering algorithms; topology preservation and neighborhood choices matter.
 
@@ -31,7 +31,7 @@ Failure experiment: create two clusters with very different densities. Ask wheth
 
 ## Core concepts
 
-This unit covers **winner-take-all, SOM topology, Evolving SOM, representation discovery**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\\\\ge from a lar\\\\ger parameter count or better optimization.
+This unit covers **winner-take-all, SOM topology, Evolving SOM, representation discovery**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a lar\ger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -39,11 +39,11 @@ This unit covers **winner-take-all, SOM topology, Evolving SOM, representation d
 2. Build the smallest defensible baseline.
 3. Implement the central mechanism once from first principles.
 4. Run the framework implementation.
-5. Keep the primary bud\\\\get fixed while changing one factor.
+5. Keep the primary bud\get fixed while changing one factor.
 6. Measure quality, compute, memory, and failure modes.
 7. Repeat with seeds when feasible and report uncertainty.
 8. Inspect qualitative examples—not only aggregate metrics.
-9. Write a short interpr\\\\etation that separates observation from explanation.
+9. Write a short interpr\etation that separates observation from explanation.
 10. Propose the next falsifiable experiment.
 
 ## Research exercise
@@ -51,14 +51,14 @@ This unit covers **winner-take-all, SOM topology, Evolving SOM, representation d
 The lab must end with a research question. A good question has a measurable independent variable, a defined outcome, a baseline, and a reason the result would matter. Examples include:
 
 - Does the mechanism improve accuracy at the same parameter count?
-- Does it improve sample efficiency at the same training bud\\\\get?
+- Does it improve sample efficiency at the same training bud\get?
 - Does it improve robustness under distribution shift?
 - Does it reduce inference memory or latency?
 - Which failure mode becomes more or less common?
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\\\\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
@@ -80,7 +80,7 @@ The notebook is intentionally part of this lecture. It uses a real dataset and r
 
 **[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
 
 ## Laboratory — run this experiment end to end
 
