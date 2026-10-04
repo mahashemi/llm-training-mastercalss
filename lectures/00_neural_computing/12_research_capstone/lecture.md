@@ -11,7 +11,7 @@ A defensible question identifies an independent variable and measurable outcome:
 
 $$
 \text{intervention}
-\rightarrow
+\r\rightarrow
 \text{measurable outcome}.
 $$
 
