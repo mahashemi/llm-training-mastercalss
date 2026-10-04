@@ -179,3 +179,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 02 — Tokenization](../02_tokenization/lecture.md) · [Next: Lecture 04 — Transformer Architectures →](../04_transformer_architectures/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: PyTorch tensors, autograd, FLOPs and GPU memory](https://www.youtube.com/results?search_query=PyTorch+autograd+GPU+memory+FLOPs+lecture)
+
+## Navigation
+
+[← Previous](../02_tokenization/lecture.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../04_transformer_architectures/lecture.md)
