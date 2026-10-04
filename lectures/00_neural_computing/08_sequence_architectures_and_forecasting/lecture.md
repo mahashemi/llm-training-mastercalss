@@ -1,4 +1,4 @@
-# Neural Computing 08 — Recurrent Architectures and Time-Series Prediction
+# Course 1 · Chapter — Recurrent Architectures + Forecasting
 
 **Track:** Neural Computing Foundation  
 **Topics:** Elman, Jordan, fully recurrent networks, forecasting protocol, leakage  
@@ -8,9 +8,27 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Forecasting exposes a critical distinction between fitting a sequence and evaluating a future prediction system.
+
+In an Elman-style network, the hidden state summarizes previous observations. Jordan-style recurrence feeds previous outputs into the state. A fully recurrent architecture can allow richer recurrent connectivity but increases optimization complexity.
+
+For forecasting, suppose we observe
+x_1,...,x_t
+and predict
+x_{t+1}.
+For a multi-step forecast we may recursively feed predictions back into the model:
+x̂_{t+1} → x̂_{t+2} → ... .
+This creates error accumulation.
+
+Work through a three-step forecast with a simple autoregressive baseline before using a neural network. Explain why a chronological split is mandatory for time series: random splitting can place future information in the training set.
+
+Real connection: electricity demand, traffic, sensors, finance, and operations.
+
+Failure experiment: intentionally randomize the train/test split and compare the apparently excellent result with a proper chronological evaluation. This demonstrates leakage more effectively than a warning paragraph.
 
 ## Core concepts
 
