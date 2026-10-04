@@ -46,22 +46,6 @@ You should distinguish:
 
 from ordinary supervised labels.
 
-## Laboratory
-
-Run a toy task with a deterministic verifier.
-
-Measure:
-
-- reward;
-- accuracy;
-- invalid outputs;
-- verifier rejection rate.
-
-Then compare two reward functions:
-
-1. exact correctness;
-2. a flawed heuristic that rewards formatting.
-
 ## Break it: reward hacking
 
 Construct a response that satisfies the heuristic but not the real objective.
@@ -95,9 +79,9 @@ Compare the toy verifier with a real mathematical/code verifier and identify whi
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
