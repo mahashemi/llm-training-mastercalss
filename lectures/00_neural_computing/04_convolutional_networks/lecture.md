@@ -1,4 +1,4 @@
-# Neural Computing 04 — Convolutional Networks
+# Course 1 · Chapter — CNNs + Residual/Dense Networks
 
 **Track:** Neural Computing Foundation  
 **Topics:** convolution, pooling, receptive fields, CNN extensions, residual and dense networks  
@@ -8,9 +8,28 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Start with the image problem: a detector for an edge should not need a completely different parameter for every pixel location. Convolution introduces a useful inductive bias: the same local detector can be reused across positions.
+
+For a 1-D illustration,
+y_i = Σ_k w_k x_{i+k}.
+In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
+
+Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 image and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
+
+Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks change the optimization problem by learning a residual:
+y = F(x) + x.
+The shortcut gives information and gradients a direct path.
+
+Dense networks instead concatenate earlier representations:
+x_l = H_l([x_0,...,x_{l-1}]).
+
+Real connection: CNNs power visual inspection, medical imaging, OCR, satellite imagery, and many multimodal encoders.
+
+Failure experiment: compare a CNN with and without augmentation under a controlled background shift. Ask whether the model learned the object or a shortcut.
 
 ## Core concepts
 
