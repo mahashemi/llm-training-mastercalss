@@ -35,11 +35,56 @@ Work through a three-step forecast with a simple autoregressive baseline before 
 
 Real connection: electricity demand, traffic, sensors, finance, and operations.
 
-Failure experiment: intentionally randomize the train/test split and compare the apparently excellent result with a proper chronological evaluation. This demonstrates leaka\ge more effectively than a warning paragraph.
+Failure experiment: intentionally randomize the train/test split and compare the apparently excellent result with a proper chronological evaluation. This demonstrates leakage more effectively than a warning paragraph.
+
+## Build the intuition before the notation
+
+Forecasting is a simulation of deployment.
+
+At 9:00 AM, a system can only use information available by 9:00 AM. It cannot use the 9:05 reading merely because that value exists in the dataset.
+
+That simple observation determines the entire evaluation protocol.
+
+### Why random splitting is dangerous
+
+Suppose consecutive windows are:
+
+- window 100: observations 100–123;
+- window 101: observations 101–124.
+
+These examples overlap heavily.
+
+A random split can put one in training and the other in test.
+
+The model has then effectively seen part of the test period already.
+
+This is why temporal problems require special care with preprocessing, feature engineering, window creation, and splitting—not merely a different line in train_test_split.
+
+### Forecast horizon changes the task
+
+Predicting one step ahead and predicting eight steps ahead are different problems.
+
+As the horizon increases:
+
+- uncertainty generally grows;
+- recursive errors can accumulate;
+- useful context can change;
+- the best model can change.
+
+Therefore always report performance by horizon instead of only one aggregate number.
+
+### Deployment thought experiment
+
+Before accepting a forecasting result, ask:
+
+> “Could I reproduce every input to this prediction if I froze the world at the exact prediction timestamp?”
+
+If the answer is no, there is likely leakage.
+
 
 ## Core concepts
 
-This unit covers **Elman, Jordan, fully recurrent networks, forecasting protocol, leaka\ge**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **Elman, Jordan, fully recurrent networks, forecasting protocol, leakage**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -66,7 +111,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
