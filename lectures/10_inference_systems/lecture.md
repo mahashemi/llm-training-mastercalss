@@ -154,3 +154,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 13 — Evaluation](../12_evaluation/lecture.md) · [Next: Lecture 15 — SFT and Post-Training →](../15_mid_and_post_training_sft_and_rlhf/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: LLM inference, KV cache and serving](https://www.youtube.com/results?search_query=LLM+inference+KV+cache+serving+lecture)
+
+## Navigation
+
+[← Previous](../09_scaling_laws/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../11_training_system_design/lecture.md)
