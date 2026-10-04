@@ -150,3 +150,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 19 — RL with Verifiable Rewards](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Next: Lecture 21 — Safety, Robustness and Failure Analysis →](../21_safety_robustness_and_failure_analysis/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: multimodal language models](https://www.youtube.com/results?search_query=multimodal+language+models+vision+language+lecture)
+
+## Navigation
+
+[← Previous](../16_reinforcement_learning_with_verifiable_rewards/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../18_lora_qlora_and_peft/lecture.md)
