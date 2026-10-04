@@ -1,7 +1,15 @@
-# Course 1 · Chapter 6 — Generative Models: VAE, GANs, and Diffusion
+# Course 1 · Chapter — Generative Models: VAE, GANs, and Diffusion
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+A classifier answers 'which class?'; a generative model asks 'what could a new example look like?' This is the foundation behind synthetic images, speech generation, molecule design, and modern media systems.
+
+VAE, GAN, and diffusion models solve related problems with very different mechanisms. We will build the intuition before comparing their objectives and engineering trade-offs.
+
+The lab emphasizes measurable quality, diversity, and compute rather than attractive sample galleries alone.
 
 ## 1. The problem: learning a distribution, not only a label
 
@@ -146,5 +154,19 @@ State the hypothesis before the intervention and report quality **and** compute.
 2. The generator and discriminator continually move each other's optimization target.
 3. The generator covers only a subset of the data distribution.
 4. Each reverse step performs part of the learned denoising trajectory.
+
+[← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
+
+## Laboratory — run the experiment end to end
+
+**[Open the executable laboratory](./lab.ipynb)**
+
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
 
 [← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
