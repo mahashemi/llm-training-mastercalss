@@ -34,7 +34,7 @@ The central question is: **what does it mean for a generated example to be plaus
 An encoder produces an approximate posterior
 
 $$
-q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\\operatorname{diag}(\sigma_\phi^2(x))\right).
+q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\operatorname{diag}(\sigma_\phi^2(x))\right).
 $$
 
 The reparameterization trick is
