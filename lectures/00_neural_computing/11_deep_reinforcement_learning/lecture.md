@@ -1,4 +1,4 @@
-# Neural Computing 11 — Deep Reinforcement Learning
+# Course 1 · Chapter — Deep Reinforcement Learning
 
 **Lab:** [Open the executable laboratory](./lab.ipynb)
 
