@@ -13,7 +13,7 @@ $$
 x = [x_1,x_2]
 $$
 
-and a binary tar\\\\get
+and a binary tar\get
 
 $$
 y \in {0,1}.
@@ -33,7 +33,7 @@ $$
 (x^{(1)},y^{(1)}),\ldots,(x^{(n)},y^{(n)})
 $$
 
-and searches for parameters that make its predictions agree with the observed tar\\\\gets.
+and searches for parameters that make its predictions agree with the observed tar\gets.
 
 The important word is **parameters**. Instead of manually writing every decision rule, we specify a family of functions and let data determine the useful parameters.
 
@@ -50,15 +50,15 @@ $$
 In vector notation:
 
 $$
-z = w^\\top x+b.
+z = w^\top x+b.
 $$
 
 For classification, a perceptron turns this score into a decision:
 
 $$
-\\hat{y} =
-\\begin{cases}
-1 & z \\\\ge 0\
+\hat{y} =
+\begin{cases}
+1 & z \ge 0\
 0 & z < 0.
 end{cases}
 $$
@@ -66,7 +66,7 @@ $$
 Geometrically, the equation
 
 $$
-w^\\top x+b=0
+w^\top x+b=0
 $$
 
 is a line in two dimensions, a plane in three dimensions, and a hyperplane in higher dimensions.
@@ -78,7 +78,7 @@ So the first neural model is really learning a **decision boundary**.
 Suppose
 
 $$
-w=[2,-1], q\\\\quad b=-0.5.
+w=[2,-1], q\quad b=-0.5.
 $$
 
 For a patient with
@@ -87,7 +87,7 @@ $$
 x=[1,0],
 $$
 
-we \\\\get
+we \get
 
 $$
 z=2(1)-1(0)-0.5=1.5,
@@ -101,7 +101,7 @@ $$
 x=[0,1],
 $$
 
-we \\\\get
+we \get
 
 $$
 z=-1.5,
@@ -109,7 +109,7 @@ $$
 
 so the prediction is 0.
 
-The neuron has not “understood medicine.” It has learned a \\\\geometric separation in the feature space.
+The neuron has not “understood medicine.” It has learned a \geometric separation in the feature space.
 
 That distinction matters throughout deep learning.
 
@@ -145,16 +145,16 @@ The perceptron does not need a closed-form solution. It can update its parameter
 For a misclassified example, a simple update is
 
 $$
-w \\\\leftarrow w+\\\\eta(y-\\hat{y})x
+w \leftarrow w+\eta(y-\hat{y})x
 $$
 
 and
 
 $$
-b \\\\leftarrow b+\\\\eta(y-\\hat{y}),
+b \leftarrow b+\eta(y-\hat{y}),
 $$
 
-where $\\\\eta$ is the learning rate.
+where $\eta$ is the learning rate.
 
 If the prediction is correct, the update is zero.
 
@@ -163,9 +163,9 @@ If the prediction is correct, the update is zero.
 The update demonstrates an idea that survives into modern training:
 
 1. make a prediction;
-2. compare it with the tar\\\\get;
+2. compare it with the tar\get;
 3. measure an error;
-4. chan\\\\ge parameters in a direction intended to reduce future error.
+4. chan\ge parameters in a direction intended to reduce future error.
 
 Modern neural networks use differentiable losses and gradient-based optimization, but this loop is already visible here.
 
@@ -180,36 +180,36 @@ Adaline instead trains the **continuous score**.
 Let
 
 $$
-\\hat{y} = w^\\top x+b.
+\hat{y} = w^\top x+b.
 $$
 
 Using mean squared error,
 
 $$
-L=\\\\\\frac{1}{n}sum_i(\\hat{y}_i-y_i)^2.
+L=\\frac{1}{n}sum_i(\hat{y}_i-y_i)^2.
 $$
 
 For one example,
 
 $$
-L=(w^\\top x+b-y)^2.
+L=(w^\top x+b-y)^2.
 $$
 
 The gradient with respect to $w$ is
 
 $$
 
-abla_w L=2(w^\\top x+b-y)x.
+abla_w L=2(w^\top x+b-y)x.
 $$
 
 Gradient descent then gives
 
 $$
-w\\\\leftarrow w-\\\\eta
+w\leftarrow w-\eta
 abla_w L.
 $$
 
-This is our first important brid\\\\ge to backpropagation:
+This is our first important brid\ge to backpropagation:
 
 > **Training is optimization of a differentiable objective with respect to parameters.**
 
@@ -220,14 +220,14 @@ This is our first important brid\\\\ge to backpropagation:
 A layer with several neurons computes
 
 $$
-h=\\\\phi(Wx+b),
+h=\phi(Wx+b),
 $$
 
 where:
 
 - $W$ contains many learned weights;
 - $b$ contains biases;
-- $\\\\phi$ is a nonlinear activation function.
+- $\phi$ is a nonlinear activation function.
 
 Why is the nonlinearity essential?
 
@@ -239,12 +239,12 @@ W_2(W_1x+b_1)+b_2
 (W_2W_1)x+(W_2b_1+b_2).
 $$
 
-So stacking linear layers without nonlinearities does **not** create a \\\\genuinely deeper function class.
+So stacking linear layers without nonlinearities does **not** create a \genuinely deeper function class.
 
 With nonlinearities, composition becomes much more expressive:
 
 $$
-f(x)=W_2\\\\phi(W_1x+b_1)+b_2.
+f(x)=W_2\phi(W_1x+b_1)+b_2.
 $$
 
 This is the conceptual birth of a multilayer perceptron.
@@ -270,11 +270,11 @@ This idea will return in:
 - autoencoder latent spaces;
 - recurrent hidden states;
 - Transformer residual streams;
-- langua\\\\ge-model embeddings.
+- langua\ge-model embeddings.
 
 A useful mental model is:
 
-> **Each layer chan\\\\ges the coordinate system in which the next layer sees the problem.**
+> **Each layer chan\ges the coordinate system in which the next layer sees the problem.**
 
 ---
 
@@ -283,11 +283,11 @@ A useful mental model is:
 The same mathematical mechanism appears in very different systems:
 
 - fraud detection learns boundaries in transaction features;
-- vision models learn increasingly structured ima\\\\ge representations;
+- vision models learn increasingly structured ima\ge representations;
 - speech models transform acoustic patterns into linguistic representations;
-- langua\\\\ge models transform token representations through many contextual layers.
+- langua\ge models transform token representations through many contextual layers.
 
-The domain chan\\\\ges. The learning loop remains recognizable:
+The domain chan\ges. The learning loop remains recognizable:
 
 **data → computation → prediction → loss → gradient → parameter update.**
 
@@ -307,7 +307,7 @@ Therefore:
 
 > **A trained model is not automatically a causal model, a truthful model, or a robust model.**
 
-This is why later chapters will study \\\\generalization, distribution shift, evaluation, and failure analysis.
+This is why later chapters will study \generalization, distribution shift, evaluation, and failure analysis.
 
 ---
 
@@ -341,7 +341,7 @@ Deliberately create:
 - a non-linearly separable dataset;
 - noisy labels;
 - badly scaled features;
-- an excessively lar\\\\ge learning rate.
+- an excessively lar\ge learning rate.
 
 For each failure, answer:
 
@@ -378,10 +378,10 @@ That question leads to **backpropagation**.
 ### Answers
 
 1. A single perceptron produces one linear decision boundary.
-2. It allows composition of \\\\genuinely nonlinear functions.
+2. It allows composition of \genuinely nonlinear functions.
 3. The composition of linear functions is still linear.
 4. A learned quantity, such as a weight or bias, that determines the model's computation.
-5. A prediction is the model output; a loss quantifies disagreement with the tar\\\\get.
+5. A prediction is the model output; a loss quantifies disagreement with the tar\get.
 6. Poorly scaled dimensions can make optimization poorly conditioned.
 7. It tests how much performance depends on learnable structure versus memorization/capacity.
 
@@ -394,7 +394,7 @@ That question leads to **backpropagation**.
 
 **[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
 
 ## Laboratory — run this experiment end to end
 
