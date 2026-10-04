@@ -97,6 +97,6 @@ This lab is part of this lecture. Do not leave the lecture to find the experimen
 
 <div align="center">
 
-[← Previous lecture: Lecture 05 — Attention Alternatives and MoE](../05_attention_alternatives_and_moe/lecture.md) · [Next lecture: Lecture 07 — Efficient Attention, FlashAttention, and Triton →](../07_efficient_attention_and_triton/lecture.md)
+[← Previous: Lecture 09 — Scaling Laws](../09_scaling_laws/lecture.md) · [Next: Lecture 11 — Efficient Attention and Triton →](../07_efficient_attention_and_triton/lecture.md)
 
 </div>
