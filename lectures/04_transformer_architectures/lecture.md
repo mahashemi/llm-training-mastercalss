@@ -566,10 +566,12 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 03 — PyTorch and Resource Accounting](../03_pytorch_and_resource_accounting/lecture.md) · [Next: Lecture 05 — Attention Alternatives and MoE →](../05_attention_alternatives_and_moe/lecture.md)
 
 </div>
+[**attention**](https://www.youtube.com/watch?v=eMlx5fFNoYc) and [**building a GPT**](https://www.youtube.com/watch?v=kCc8FmEb1nY) provide visual walkthroughs of the central mechanism.
+
 ## Video companions
 
 [Attention in transformers, step-by-step](https://www.youtube.com/watch?v=eMlx5fFNoYc) · [Let's build GPT](https://www.youtube.com/watch?v=kCc8FmEb1nY)
 
 ## Navigation
 
-[← Previous](../03_pytorch_and_resource_accounting/lecture.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../05_attention_alternatives_and_moe/lecture.md)
+[← Previous](../03_pytorch_and_resource_accounting/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../05_attention_alternatives_and_moe/lecture.md)
