@@ -172,3 +172,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 14 — Inference Systems](../10_inference_systems/lecture.md) · [Next: Lecture 16 — LoRA, QLoRA and PEFT →](../18_lora_qlora_and_peft/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: SFT and RLHF](https://www.youtube.com/results?search_query=supervised+fine+tuning+RLHF+lecture)
+
+## Navigation
+
+[← Previous](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../16_reinforcement_learning_with_verifiable_rewards/lecture.md)
