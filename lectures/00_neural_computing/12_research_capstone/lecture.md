@@ -108,11 +108,13 @@ A compact research report follows:
 
 A result does not need to be novel to be useful. A careful reproduction, negative result, benchmark, ablation, or efficiency study can be a legitimate research contribution when the question and evidence are clear.
 
-## 8. Laboratory
+## Laboratory — run the experiment end to end
 
-**[Open the publication capstone](./lab.ipynb).**
+**[Open the executable laboratory](./lab.ipynb)**
 
-The notebook turns a concrete MNIST comparison into a research package: frozen protocol, baseline, nonlinear intervention, shuffled-label control, results table, reproducibility record, bounded conclusion, and next falsifiable experiment.
+This notebook is the chapter's final research artifact, not optional homework. Follow the complete research loop: **state a question → freeze the protocol → establish a baseline → intervene → measure → inspect errors → produce the results table → bound the claim → propose the next falsifiable experiment.**
+
+You will leave with a reproducible mini-study rather than a single model score. The final cells contain the answer key and a research extension.
 
 ## Mastery questions
 
