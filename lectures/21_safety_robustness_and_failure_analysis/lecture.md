@@ -169,6 +169,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 20 — Preference Optimization and Distillation](../20_preference_optimization_and_distillation/lecture.md) · [Next lecture: Lecture 22 — API vs RAG vs Tools vs Training →](../22_api_vs_rag_vs_tools_vs_training/lecture.md)
+[← Previous: Lecture 20 — Multimodality](../17_multimodality/lecture.md) · [Next: Lecture 22 — API vs RAG vs Tools vs Training →](../22_api_vs_rag_vs_tools_vs_training/lecture.md)
 
 </div>
