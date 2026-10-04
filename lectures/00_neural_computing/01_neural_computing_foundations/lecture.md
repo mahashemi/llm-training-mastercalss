@@ -47,6 +47,51 @@ The important word is **parameters**. Instead of manually writing every decision
 
 ---
 
+
+## What is Adaline? — the name is less scary than it sounds
+
+**Adaline** stands for **Adaptive Linear Neuron**. It is one of the earliest trainable neural models and is useful here because it exposes an idea that still appears inside modern machine learning: **make a prediction, measure the error, calculate how each parameter contributed to that error, and move the parameters in the direction that reduces the error.**
+
+Imagine a very simple house-price model. Suppose the inputs are floor area $x_1$ and number of bedrooms $x_2$. A linear model might calculate
+
+$$
+z=w_1x_1+w_2x_2+b.
+$$
+
+The number $z$ is a continuous score. During training, Adaline compares that score with the target value and minimizes a squared-error objective:
+
+$$
+L=\frac{1}{N}\sum_{i=1}^{N}(y_i-z_i)^2.
+$$
+
+That is the important distinction from the perceptron. A perceptron makes a hard decision such as **class 0 or class 1** and updates based on classification mistakes. Adaline learns from the **continuous score before the threshold**. This makes its objective differentiable and gives us a clean introduction to gradient descent.
+
+### Why should a beginner care about a 1950s/1960s model?
+
+Because the vocabulary changes, but the training loop survives:
+
+**parameters → prediction → loss → gradient → update → repeat.**
+
+A modern neural network may contain billions of parameters and use GPUs, but it still follows this fundamental pattern. Learning Adaline carefully means you are learning the smallest useful version of a much larger idea.
+
+### A concrete numerical example
+
+Suppose
+
+$$
+x=(2,3),\qquad w=(0.5,1),\qquad b=0.5.
+$$
+
+Then
+
+$$
+z=(0.5)(2)+(1)(3)+0.5=4.5.
+$$
+
+If the target is $y=5$, the prediction error is small. If the target is $y=10$, the error is much larger, and the gradient will push the parameters more strongly. This is why Adaline is useful for understanding **why the magnitude of an error matters during optimization**.
+
+The notebook then turns this idea into a real experiment on MNIST rather than leaving it as historical terminology.
+
 ## 2. The simplest neuron
 
 A linear neuron computes
