@@ -107,6 +107,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 12 — Evaluation That Can Block a Bad Model](../12_evaluation/lecture.md) · [Next lecture: Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
+[← Previous: Lecture 05 — Attention Alternatives and MoE](../05_attention_alternatives_and_moe/lecture.md) · [Next: Lecture 07 — Filtering, Deduplication, Mixing, and Synthetic Data →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
 
 </div>
