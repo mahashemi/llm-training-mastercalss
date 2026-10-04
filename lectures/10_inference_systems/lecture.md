@@ -67,6 +67,80 @@ Why can throughput rise while user-perceived latency gets worse?
 Compare a small-model local benchmark with a serving runtime such as vLLM and explain which system optimizations target memory, scheduling, or batching.
 
 
+
+## Work through one request
+
+Inference has two different phases.
+
+**Prefill:** process the prompt and build the initial KV cache.
+
+**Decode:** generate one new token at a time while reusing cached keys and values.
+
+This distinction explains why long prompts and long generated answers stress different resources.
+
+If a request has prompt length P and generates G tokens, the system experiences one relatively large prompt-processing phase followed by G sequential decoding steps.
+
+## A simple KV-cache calculation
+
+For a decoder model, a simplified cache size scales with:
+
+$$
+M_{\text{KV}}\propto
+L_{\text{layers}}
+\times L_{\text{context}}
+\times N_{\text{KV heads}}
+\times d_{\text{head}}
+\times \text{bytes per value}.
+$$
+
+The important engineering insight is the linear dependence on context length.
+
+If context length doubles while everything else remains fixed, the KV cache approximately doubles.
+
+This is why MHA, GQA, and MQA matter for serving economics.
+
+## Latency versus throughput
+
+A user asking for one answer cares about latency. A serving fleet cares about aggregate throughput and utilization.
+
+Useful measurements include:
+
+- time to first token;
+- inter-token latency;
+- end-to-end latency;
+- tokens/sec;
+- requests/sec;
+- batch size;
+- peak memory.
+
+Optimizing one can hurt another. Continuous batching, for example, can improve utilization while changing individual-request latency.
+
+## Real-world decision
+
+Suppose two serving configurations produce the same quality:
+
+| Configuration | TTFT | decode speed | memory | operational question |
+|---|---:|---:|---:|---|
+| A | lower | lower | lower | interactive workload |
+| B | higher | higher | higher | batch workload |
+
+There is no universal winner. The correct choice follows the service-level objective.
+
+## Failure analysis
+
+A slow inference system may be limited by:
+
+- prompt processing;
+- decode compute;
+- KV-cache memory;
+- memory bandwidth;
+- batching policy;
+- queueing;
+- network transfer;
+- model loading.
+
+Measure each phase before changing the model.
+
 ## Lab — run it here
 
 **Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
