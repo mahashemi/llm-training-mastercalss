@@ -152,6 +152,3 @@ The notebook uses a real dataset or environment, records quantitative results, a
 ## Navigation
 
 [← Previous](../07_recurrent_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../09_boltzmann_machines/lecture.md)
-
-</div>
-
