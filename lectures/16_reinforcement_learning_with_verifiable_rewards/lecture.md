@@ -153,3 +153,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 18 — Preference Optimization and Distillation](../20_preference_optimization_and_distillation/lecture.md) · [Next: Lecture 20 — Multimodality →](../17_multimodality/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: RL with verifiable rewards / GRPO](https://www.youtube.com/results?search_query=GRPO+reinforcement+learning+language+models+lecture)
+
+## Navigation
+
+[← Previous](../15_mid_and_post_training_sft_and_rlhf/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../17_multimodality/lecture.md)
