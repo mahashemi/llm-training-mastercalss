@@ -97,6 +97,6 @@ This lab is part of this lecture. Do not leave the lecture to find the experimen
 
 <div align="center">
 
-[← Previous lecture: Lecture 03 — PyTorch and Resource Accounting](../03_pytorch_and_resource_accounting/lecture.md) · [Next lecture: Lecture 05 — Attention Alternatives and MoE →](../05_attention_alternatives_and_moe/lecture.md)
+[← Previous: Lecture 03 — PyTorch and Resource Accounting](../03_pytorch_and_resource_accounting/lecture.md) · [Next: Lecture 05 — Attention Alternatives and MoE →](../05_attention_alternatives_and_moe/lecture.md)
 
 </div>
