@@ -75,6 +75,68 @@ Explain why “more image tokens” can simultaneously help quality and hurt lat
 Read one modern vision-language model architecture and identify the encoder, alignment mechanism, language backbone, and training stages.
 
 
+
+## Start with alignment, not “more modalities”
+
+Suppose an image encoder produces
+
+$$
+V\in\mathbb{R}^{N_v\times d_v}
+$$
+
+while a language model expects embeddings of width $d_t$.
+
+A multimodal system needs a mechanism that maps or aligns these representations:
+
+$$
+Z=V W,\qquad W\in\mathbb{R}^{d_v\times d_t}.
+$$
+
+Now image information can enter the language model's representation space.
+
+This tiny equation captures a major engineering issue: different modalities have different information structures, scales, and tokenization schemes.
+
+## Three common design patterns
+
+| Pattern | Main idea | Trade-off |
+|---|---|---|
+| encoder + projector | encode modality, map into LM space | simple, limited interaction |
+| cross-attention | LM attends to modality features | richer interaction, more compute |
+| unified token space | represent multiple modalities as tokens | elegant interface, expensive token budgets |
+
+The architecture should follow the task rather than the desire to call a model “multimodal.”
+
+## A concrete failure case
+
+Ask an image-language model:
+
+> “What is the text on this small sign?”
+
+Failure may come from:
+
+- image resolution;
+- visual encoder capacity;
+- projection/alignment;
+- OCR difficulty;
+- language decoding;
+- insufficient training examples.
+
+The final wrong answer does not identify which subsystem failed.
+
+## Real-world connection
+
+Multimodal systems make the token-budget problem more complicated. A video can contain many frames, each containing many visual tokens.
+
+Therefore a production design must reason about:
+
+**quality → visual/audio tokens → memory → latency → cost**
+
+not merely whether the model can accept an image.
+
+## Research extension
+
+Hold the language model fixed and vary only visual resolution or frame sampling. Measure task quality, token count, latency, and cost. This creates a controlled study of the quality-efficiency frontier.
+
 ## Lab — run it here
 
 **Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
