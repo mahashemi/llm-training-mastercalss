@@ -1,38 +1,139 @@
-# Course 1 · Chapter — Research Capstone: From Observation to Evidence
+# Course 1 · Chapter 12 — Research Capstone: From Observation to Evidence
 
-**Lab:** [Open the publication capstone](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Primary laboratory:** [Open the publication capstone](./lab.ipynb)
 
-Choose one earlier experiment and turn it into a defensible research study.
+## 1. Start with a falsifiable question
 
-## Required sequence
+“Try a bigger model” is not a research question.
 
-1. Choose a narrow question.
-2. State a falsifiable hypothesis.
-3. Freeze the evaluation contract before the intervention.
-4. Reproduce the baseline.
-5. Add one meaningful intervention.
-6. Add at least one ablation.
-7. Repeat seeds where feasible.
-8. Perform error/failure analysis.
-9. Report resource usa\\ge and limitations.
-10. Write a paper-style report and release reproduction artifacts.
+A defensible question identifies an independent variable and measurable outcome:
 
-## Required paper
+$$
+\text{intervention}
+\rightarrow
+\text{measurable outcome}.
+$$
 
-Abstract → Introduction → Related Work → Method → Experimental Setup → Results → Error Analysis → Limitations → Conclusion → Reproducibility.
+Example:
 
-The result does not need to be novel to be valuable. A careful reproduction, negative result, benchmark, ablation or methodological analysis can be a legitimate research contribution when the question and evidence are clear.
+> At approximately equal parameter count, does adding a nonlinear hidden representation improve held-out accuracy?
 
-[Continue to LLM Training →](../../01_what_is_an_llm/lecture.md)
+That can be contradicted by evidence.
 
-## Laboratory — run this experiment end to end
+## 2. Freeze the evaluation contract
 
-**[Open the executable lab notebook](./lab.ipynb)**
+Before changing the model, specify:
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+- dataset and provenance;
+- train/validation/test split;
+- primary metric;
+- baseline;
+- intervention;
+- compute/training budget;
+- seeds;
+- stopping rule.
 
-<div align="center">
+This prevents the evaluation from drifting toward whichever result looks best.
+
+## 3. Observation, explanation, claim
+
+Suppose Model B scores 91% and Model A scores 89%.
+
+**Observation:** B scored higher under the measured protocol.
+
+**Explanation:** perhaps its representation is better, but this is a mechanism hypothesis.
+
+**Claim:** B improves this task under the stated conditions.
+
+Do not silently jump from the first statement to the third.
+
+## 4. Intervention and ablation
+
+A useful experiment has a baseline
+
+$$
+B
+$$
+
+and a controlled intervention
+
+$$
+B+\Delta.
+$$
+
+An ablation removes the proposed mechanism while preserving as much else as possible.
+
+If the effect disappears under the ablation, the evidence that the mechanism mattered becomes stronger.
+
+## 5. Uncertainty
+
+For repeated measurements $x_1,\ldots,x_n$, report the mean
+
+$$
+\bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+$$
+
+and sample standard deviation
+
+$$
+s=
+\sqrt{
+\frac{1}{n-1}
+\sum_{i=1}^{n}(x_i-\bar{x})^2
+}.
+$$
+
+A table containing only the best seed hides important uncertainty.
+
+## 6. Error analysis
+
+Aggregate metrics hide mechanisms.
+
+Inspect:
+
+- false positives and false negatives;
+- difficult examples;
+- distribution-shift failures;
+- confidence/calibration;
+- resource regressions.
+
+An error table should classify failures by mechanism rather than merely listing examples.
+
+## 7. Paper-ready structure
+
+A compact research report follows:
+
+**Abstract → Introduction → Related Work → Method → Experimental Setup → Results → Error Analysis → Limitations → Conclusion → Reproducibility.**
+
+A result does not need to be novel to be useful. A careful reproduction, negative result, benchmark, ablation, or efficiency study can be a legitimate research contribution when the question and evidence are clear.
+
+## 8. Laboratory
+
+**[Open the publication capstone](./lab.ipynb).**
+
+The notebook turns a concrete MNIST comparison into a research package: frozen protocol, baseline, nonlinear intervention, shuffled-label control, results table, reproducibility record, bounded conclusion, and next falsifiable experiment.
+
+## Mastery questions
+
+1. What makes a research question falsifiable?
+2. Why freeze the evaluation contract?
+3. What is the difference between observation and explanation?
+4. Why are ablations valuable?
+5. Why report uncertainty?
+
+### Answers
+
+1. A plausible outcome can be contradicted by a defined measurement.
+2. Otherwise the evaluation can drift toward the result that looks best.
+3. Observation is what happened; explanation is a proposed mechanism for why.
+4. Ablations test whether the proposed mechanism contributes to the observed effect.
+5. To distinguish systematic effects from stochastic variation.
+
+## Final Course 1 standard
+
+A learner is ready for Course 2 when they can:
+
+**derive → implement → measure → break → explain → decide → reproduce.**
 
 [← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
-
-</div>
