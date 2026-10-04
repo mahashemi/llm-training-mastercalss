@@ -88,6 +88,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 06 — GPUs and Kernels](../06_gpus_and_kernels/lecture.md) · [Next lecture: Lecture 08 — Distributed Training →](../08_distributed_training/lecture.md)
+[← Previous: Lecture 10 — GPUs and Kernels](../06_gpus_and_kernels/lecture.md) · [Next: Lecture 12 — Distributed Training →](../08_distributed_training/lecture.md)
 
 </div>
