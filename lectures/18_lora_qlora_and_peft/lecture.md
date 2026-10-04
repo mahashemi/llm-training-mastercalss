@@ -165,6 +165,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 17 — Multimodality](../17_multimodality/lecture.md) · [Next lecture: Lecture 19 — Full Fine-Tuning and Continued Pretraining →](../19_full_fine_tuning_and_continued_pretraining/lecture.md)
+[← Previous: Lecture 15 — SFT and Post-Training](../15_mid_and_post_training_sft_and_rlhf/lecture.md) · [Next: Lecture 17 — Continued Pretraining and Full Fine-Tuning →](../19_full_fine_tuning_and_continued_pretraining/lecture.md)
 
 </div>
