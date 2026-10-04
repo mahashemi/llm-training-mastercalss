@@ -1,7 +1,15 @@
-# Course 1 · Chapter 1 — Neural Computation: What Does It Mean to Learn?
+# Course 1 · Chapter — Neural Computation: What Does It Mean to Learn?
 
 **Course:** Deep Learning & Neural Computing Foundations  
-**Lab:** [Executable laboratory](./lab.ipynb)
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+A fresher-friendly starting point: what a model is, what learning means, and why a single neuron is useful but limited.
+
+In a real system, think of a spam filter, a medical risk screen, or a quality-control camera. The model receives measurements and must turn them into a useful decision.
+
+By the end, you should be able to explain a perceptron, Adaline, activation, loss, and gradient without treating any of them as magic words.
 
 ## 1. Start with a problem, not a neural network
 
@@ -390,20 +398,22 @@ That question leads to **backpropagation**.
 
 
 
-## Laboratory — run this experiment end to end
 
-**[Open the executable lab notebook](./lab.ipynb)**
-
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
-
-## Laboratory — run this experiment end to end
-
-**[Open the executable lab notebook](./lab.ipynb)**
-
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
-
-<div align="center">
 
 [← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../02_feedforward_and_backprop/lecture.md)
 
 </div>
+
+## Laboratory — run the experiment end to end
+
+**[Open the executable laboratory](./lab.ipynb)**
+
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
+
+[Course 1 home](../README.md) · [Next →](../02_feedforward_and_backprop/lecture.md)
