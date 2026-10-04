@@ -32,7 +32,7 @@ $$
 The reparameterization trick is
 
 $$
-z=\mu_\phi(x)+\sigma_\phi(x)\odot\epsilon,
+z=\mu_\phi(x)+\sigma_\phi(x)odot\epsilon,
 \qquad
 \epsilon\sim\mathcal N(0,I).
 $$
