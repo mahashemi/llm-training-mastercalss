@@ -169,6 +169,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 14 — Filtering, Deduplication, Mixing, and Synthetic Data](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md) · [Next lecture: Lecture 16 — Reinforcement Learning with Verifiable Rewards →](../16_reinforcement_learning_with_verifiable_rewards/lecture.md)
+[← Previous: Lecture 14 — Inference Systems](../10_inference_systems/lecture.md) · [Next: Lecture 16 — LoRA, QLoRA, and PEFT →](../18_lora_qlora_and_peft/lecture.md)
 
 </div>
