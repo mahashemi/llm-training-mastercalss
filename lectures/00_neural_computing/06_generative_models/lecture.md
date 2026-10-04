@@ -1,4 +1,4 @@
-# Neural Computing 06 — Generative Models
+# Course 1 · Chapter — VAE, GANs + Diffusion
 
 **Lab:** [Open the executable laboratory](./lab.ipynb)
 
