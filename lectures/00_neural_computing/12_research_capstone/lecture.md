@@ -108,6 +108,101 @@ A compact research report follows:
 
 A result does not need to be novel to be useful. A careful reproduction, negative result, benchmark, ablation, or efficiency study can be a legitimate research contribution when the question and evidence are clear.
 
+## Build the intuition before the notation
+
+A research project is a chain of decisions.
+
+You start with:
+
+**question → hypothesis → experiment → evidence → interpretation → next question.**
+
+The final model is only one part of the project.
+
+### The hypothesis must be falsifiable
+
+Weak:
+
+> “CNNs are better.”
+
+Strong:
+
+> “At matched parameter count and training budget, a local convolutional inductive bias will improve MNIST accuracy relative to a dense baseline.”
+
+The second statement can lose.
+
+That is good.
+
+### The evaluation contract
+
+Write the evaluation contract **before** looking at the final result:
+
+- exact dataset;
+- preprocessing;
+- split;
+- metric;
+- baseline;
+- intervention;
+- budget;
+- seeds;
+- stopping rule.
+
+This prevents accidental researcher degrees of freedom from turning into hidden cherry-picking.
+
+### Results are evidence, not explanations
+
+Suppose the intervention improves accuracy.
+
+The result supports:
+
+> “The intervention improved accuracy under this protocol.”
+
+It does not automatically prove:
+
+> “The proposed mechanism caused the improvement.”
+
+That second statement requires stronger controls.
+
+### The capstone report
+
+Your final Course 1 artifact should contain:
+
+1. research question;
+2. hypothesis;
+3. dataset/provenance;
+4. baseline;
+5. intervention;
+6. experimental controls;
+7. results table;
+8. uncertainty;
+9. qualitative/error analysis;
+10. limitations;
+11. reproducibility details;
+12. next experiment.
+
+### Course 2 readiness
+
+Before moving to LLM engineering, you should be comfortable answering:
+
+- What exactly is the model optimizing?
+- What is the baseline?
+- What changed between experiments?
+- What does the metric actually measure?
+- What evidence would falsify your explanation?
+- Can another researcher reproduce the experiment?
+
+If you can answer those questions, you have learned the most transferable part of Course 1.
+
+## Final research exercise
+
+Take one experiment from Course 1 and rewrite it as a one-page research proposal.
+
+Include:
+
+**Hypothesis → Dataset → Baseline → Intervention → Metric → Budget → Expected outcome → Failure criterion → Reproducibility plan.**
+
+This becomes the bridge from learning algorithms to doing research on LLMs.
+
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
@@ -146,4 +241,4 @@ A learner is ready for Course 2 when they can:
 
 ## Navigation
 
-[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
+[← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../01_what_is_an_llm/lecture.md)
