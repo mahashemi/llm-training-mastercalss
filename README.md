@@ -78,6 +78,8 @@ The repository is organized so that a learner follows one course at a time. Supp
 
 ### The new lecture standard
 
+**[Read the full Lecture Authoring Standard](docs/LECTURE_AUTHORING_STANDARD.md)**
+
 A lecture is not a list of topics.
 
 Every chapter must contain:
