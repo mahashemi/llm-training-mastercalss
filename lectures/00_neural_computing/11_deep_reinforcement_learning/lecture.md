@@ -103,6 +103,76 @@ For each condition measure:
 | Failure episodes | Safety/robustness |
 | Runtime | Engineering cost |
 
+## Build the intuition before the notation
+
+Imagine learning to play a game without being told the correct action at every frame.
+
+You try something. You receive a reward later. Then you must decide which earlier actions deserve credit for that reward.
+
+That is the core reinforcement-learning problem.
+
+### Why the Bellman equation is powerful
+
+The return can be split into:
+
+**reward now + discounted value of what comes next.**
+
+That gives the Bellman idea:
+
+$
+Q^*(s,a)=\mathbb E[r+\gamma\max_{a'}Q^*(s',a')].
+$
+
+The equation says:
+
+> “A good action is one that gives a good immediate outcome and leads to states from which good future actions are possible.”
+
+### Why DQN is more delicate than ordinary supervised learning
+
+In supervised learning, the target is usually supplied by the dataset.
+
+In DQN, the target itself is partly predicted by another neural network.
+
+That creates a moving-target problem.
+
+Experience replay helps by breaking strong temporal correlations.
+
+The target network helps by slowing the movement of the bootstrap target.
+
+These are not arbitrary tricks. They address identifiable sources of instability.
+
+## Controlled failure experiment
+
+Run:
+
+1. full DQN;
+2. remove replay;
+3. remove the target network;
+4. remove both.
+
+Keep the environment, seed set, evaluation episodes, and interaction budget fixed.
+
+Then ask:
+
+- Does learning become less stable?
+- Does variance increase?
+- Does the agent reach the target return less often?
+- Does one lucky run distort the conclusion?
+
+## Research exercise
+
+Use at least three seeds.
+
+| Condition | Mean return | Std. | Threshold reached? | Environment steps |
+|---|---:|---:|---|---:|
+| Full DQN | | | | |
+| No replay | | | | |
+| No target | | | | |
+| Neither | | | | |
+
+The correct conclusion is not “target networks always work.” It is the narrower claim supported by your experiment.
+
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
@@ -143,4 +213,4 @@ Predefine the threshold, seeds, evaluation episodes, and stopping rule.
 
 ## Navigation
 
-[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
+[← Previous](../10_attention_transformers_and_llms/lecture.md) · [Course 1 home](../README.md) · [Next →](../12_research_capstone/lecture.md)
