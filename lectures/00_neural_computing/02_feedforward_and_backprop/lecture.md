@@ -1,59 +1,392 @@
-# Neural Computing 02 — Feedforward Networks and Backpropagation
+# Course 1 · Chapter 2 — Feedforward Networks and Backpropagation
 
-**Track:** Neural Computing Foundation  
-**Topics:** MLPs, memorization/generalization, backpropagation, optimization, time-series framing  
-**Primary lab:** [Open the executable laboratory](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Lab:** [Executable laboratory](./lab.ipynb)
 
-## Learning objective
+## 1. The problem: one neuron is not enough
 
-By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
+Chapter 1 showed that a single neuron can learn a linear boundary. Real problems are rarely that simple.
 
-## Why this belongs before LLM training
+Suppose we want to learn XOR:
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+| $x_1$ | $x_2$ | $y$ |
+|---:|---:|---:|
+| 0 | 0 | 0 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
 
-## Core concepts
+No single line can solve it.
 
-This unit covers **MLPs, memorization/generalization, backpropagation, optimization, time-series framing**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
+A multilayer network can:
 
-## Required practical workflow
+$$
+h=phi(W_1x+b_1)
+$$
 
-1. Load the real dataset in the lab and record its provenance, split, schema, license/access basis, and revision/date.
-2. Build the smallest defensible baseline.
-3. Implement the central mechanism once from first principles.
-4. Run the framework implementation.
-5. Keep the primary budget fixed while changing one factor.
-6. Measure quality, compute, memory, and failure modes.
-7. Repeat with seeds when feasible and report uncertainty.
-8. Inspect qualitative examples—not only aggregate metrics.
-9. Write a short interpretation that separates observation from explanation.
-10. Propose the next falsifiable experiment.
+followed by
 
-## Research exercise
+$$
+hat y=g(W_2h+b_2).
+$$
 
-The lab must end with a research question. A good question has a measurable independent variable, a defined outcome, a baseline, and a reason the result would matter. Examples include:
+The hidden layer creates an intermediate representation. The output layer reads that representation.
 
-- Does the mechanism improve accuracy at the same parameter count?
-- Does it improve sample efficiency at the same training budget?
-- Does it improve robustness under distribution shift?
-- Does it reduce inference memory or latency?
-- Which failure mode becomes more or less common?
+The key question of this chapter is:
 
-## Paper-ready deliverable
+> **If the final error depends on thousands or millions of parameters, how do we know how to change each parameter?**
 
-Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+That is the backpropagation problem.
 
-## Exit questions
+## 2. Forward propagation
 
-1. What problem does the method solve?
-2. What inductive bias does it introduce?
-3. Which tensor operations implement it?
-4. What is the simplest credible baseline?
-5. Which metric and split answer the research question?
-6. What failure would falsify your hypothesis?
+Consider a tiny network:
 
-## Laboratory
+$$
+x ightarrow z_1 ightarrow h ightarrow z_2 ightarrow hat y.
+$$
 
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
+Let
 
-<div align="center">[← Previous](../01_neural_computing/01_neural_computing_foundations/lecture.md) · [Next →](../03_neural_computing/03_competitive_learning_and_som/lecture.md)</div>
+$$
+z_1=W_1x+b_1
+$$
+
+and
+
+$$
+h=sigma(z_1).
+$$
+
+Then
+
+$$
+z_2=W_2h+b_2
+$$
+
+and for binary classification,
+
+$$
+hat y=sigma(z_2).
+$$
+
+The forward pass is simply function composition.
+
+For a concrete scalar example, suppose
+
+$$
+x=2,quad W_1=1.5,quad b_1=-1,
+$$
+
+so
+
+$$
+z_1=1.5(2)-1=2.
+$$
+
+Using the sigmoid,
+
+$$
+h=rac{1}{1+e^{-2}}approx0.881.
+$$
+
+Suppose
+
+$$
+W_2=2,quad b_2=-1,
+$$
+
+then
+
+$$
+z_2=2(0.881)-1=0.762.
+$$
+
+and
+
+$$
+hat yapprox0.682.
+$$
+
+A neural network is therefore not mysterious during inference. It is a sequence of ordinary mathematical operations.
+
+## 3. Why nonlinear activation matters
+
+If
+
+$$
+h=W_1x+b_1
+$$
+
+and
+
+$$
+hat y=W_2h+b_2,
+$$
+
+then:
+
+$$
+hat y=W_2W_1x+W_2b_1+b_2.
+$$
+
+The entire network is still one linear function.
+
+A nonlinear activation such as sigmoid, tanh, or ReLU prevents this collapse.
+
+For ReLU:
+
+$$
+operatorname{ReLU}(x)=max(0,x).
+$$
+
+Its simplicity is one reason it became so useful in deep networks.
+
+## 4. Loss turns prediction into an optimization problem
+
+Suppose the target is $y=1$ and the model predicts $hat y=0.682$.
+
+For binary cross-entropy:
+
+$$
+L=-[yloghat y+(1-y)log(1-hat y)].
+$$
+
+Because $y=1$,
+
+$$
+L=-log(0.682)approx0.383.
+$$
+
+Now we have a scalar quantity that tells us how undesirable the prediction was.
+
+Training asks:
+
+$$
+min_	heta L(	heta)
+$$
+
+where $	heta$ represents every trainable parameter.
+
+## 5. The chain rule is the engine of backpropagation
+
+Consider:
+
+$$
+L ightarrow hat y ightarrow z_2 ightarrow h ightarrow z_1 ightarrow W_1.
+$$
+
+The effect of $W_1$ on the final loss is obtained with the chain rule:
+
+$$
+rac{partial L}{partial W_1}
+=
+rac{partial L}{partial hat y}
+rac{partial hat y}{partial z_2}
+rac{partial z_2}{partial h}
+rac{partial h}{partial z_1}
+rac{partial z_1}{partial W_1}.
+$$
+
+This is backpropagation.
+
+It is not a separate kind of mathematics. It is an efficient organization of repeated applications of the chain rule.
+
+## 6. A useful mental model: credit assignment
+
+Imagine the final prediction is wrong.
+
+Which parameter deserves blame?
+
+Backpropagation sends information about the error backward through the computation graph.
+
+Parameters that had a stronger effect on the loss receive larger gradients.
+
+So:
+
+> **Backpropagation is a credit-assignment mechanism for differentiable computation.**
+
+That perspective remains useful for Transformers, diffusion models, and multimodal networks.
+
+## 7. Gradient descent
+
+Once we have a gradient,
+
+$$
+
+abla_	heta L,
+$$
+
+we update:
+
+$$
+	heta_{new}=	heta_{old}-eta
+abla_	heta L.
+$$
+
+The negative sign moves us approximately downhill.
+
+If $eta$ is too small, learning can be painfully slow.
+
+If it is too large, updates can overshoot or become unstable.
+
+This gives us the first major optimization experiment.
+
+## 8. Batch training changes the estimate
+
+A single example gives a noisy gradient.
+
+For a mini-batch $B$:
+
+$$
+
+abla_	heta L_B=
+rac{1}{|B|}
+sum_{iin B}
+abla_	heta L_i.
+$$
+
+Increasing batch size often makes the gradient estimate less noisy, but it changes memory requirements and optimization behavior.
+
+There is no universally best batch size.
+
+The right question is:
+
+> What batch size gives the desired optimization behavior under the available memory and throughput budget?
+
+## 9. Memorization versus generalization
+
+A model can drive training error almost to zero and still fail on unseen data.
+
+Consider three experiments:
+
+1. train on the original labels;
+2. train on shuffled labels;
+3. evaluate on held-out examples.
+
+If a sufficiently large network can memorize shuffled labels, that demonstrates something important:
+
+> **Low training loss does not prove that the model discovered the structure we care about.**
+
+Generalization is therefore an empirical property, not a guarantee from optimization.
+
+## 10. Worked debugging example
+
+Suppose:
+
+| Run | Train accuracy | Validation accuracy |
+|---|---:|---:|
+| small model | 91% | 89% |
+| large model | 100% | 88% |
+
+The large model optimized the training set better but generalized worse.
+
+Possible explanations include:
+
+- overfitting;
+- insufficient data;
+- optimization differences;
+- distribution mismatch;
+- leakage in the evaluation design.
+
+Do not automatically label it “overfitting.” Run an experiment that distinguishes the hypotheses.
+
+## 11. Real-world connection
+
+Feedforward networks are used when the input can be represented as a fixed or structured feature vector:
+
+- tabular prediction;
+- risk scoring;
+- anomaly detection;
+- sensor classification;
+- learned embeddings and projection heads.
+
+They also provide the conceptual building blocks of deeper architectures.
+
+CNNs add spatial structure. RNNs add recurrent state. Transformers add learned interactions across positions.
+
+## 12. Laboratory
+
+Before running the notebook, predict:
+
+- how the loss should change when the learning rate increases;
+- what happens when the labels are shuffled;
+- how depth affects parameter count;
+- whether normalization changes optimization stability.
+
+Then:
+
+1. implement a two-layer network from scratch;
+2. verify your gradients numerically;
+3. train the same task with autograd;
+4. compare optimizers;
+5. perform a width/depth intervention;
+6. run a shuffled-label control;
+7. inspect individual errors.
+
+### Numerical gradient check
+
+For parameter $	heta$:
+
+$$
+rac{partial L}{partial	heta}
+approx
+rac{L(	heta+epsilon)-L(	heta-epsilon)}{2epsilon}.
+$$
+
+Compare this finite-difference estimate with the analytic gradient.
+
+This is one of the most useful debugging techniques in deep-learning implementation.
+
+## 13. Common misconceptions
+
+**“Backpropagation updates the weights.”**  
+Not exactly. Backpropagation computes gradients. The optimizer uses those gradients to update parameters.
+
+**“A bigger model is always better.”**  
+A bigger model increases capacity but can also increase cost, instability, or memorization.
+
+**“Training accuracy proves learning.”**  
+It proves the model can fit the training examples. Generalization requires held-out evidence.
+
+**“The learning rate is just a tuning detail.”**  
+It determines the scale of parameter updates and can completely change whether optimization succeeds.
+
+## 14. Research extension
+
+Choose one:
+
+- width at fixed parameter budget;
+- depth at fixed parameter budget;
+- optimizer at fixed compute;
+- batch size at fixed token/example budget;
+- initialization under controlled seeds;
+- regularization under fixed architecture.
+
+State a hypothesis **before** running the experiment.
+
+## Mastery questions
+
+1. Why do we need nonlinear activations?
+2. What does the chain rule have to do with backpropagation?
+3. What does a gradient tell an optimizer?
+4. Why can a model memorize shuffled labels?
+5. Why must training and validation data be separated?
+6. What does a numerical gradient check test?
+
+### Answers
+
+1. Without them, stacked linear layers collapse into one linear transformation.
+2. Backpropagation efficiently applies the chain rule through the computation graph.
+3. The local direction and magnitude in which the loss changes with respect to parameters.
+4. A sufficiently expressive model can memorize arbitrary training associations.
+5. Otherwise we cannot reliably estimate performance on unseen data.
+6. Whether the implemented analytic gradient agrees with an independent numerical approximation.
+
+---
+
+<div align="center">
+
+[← Chapter 1](../01_neural_computing_foundations/lecture.md) · [Course 1 home](../README.md) · [Next: Competitive Learning + SOM →](../03_competitive_learning_and_som/lecture.md)
+
+</div>
