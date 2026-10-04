@@ -36,20 +36,6 @@ Example:
 
 The learner must be able to explain every reduction.
 
-## Laboratory
-
-Build a mini dataset pipeline and calculate survival rates after each stage.
-
-Produce:
-
-| Stage | Docs | Tokens | Survival |
-|---|---:|---:|---:|
-| raw | measure | measure | 100% |
-| parsed | measure | measure | measure |
-| filtered | measure | measure | measure |
-| deduped | measure | measure | measure |
-| final | measure | measure | measure |
-
 ## Break it
 
 Introduce a filter that removes one target language disproportionately.
@@ -99,14 +85,14 @@ Produce:
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 05 — Attention Alternatives and MoE](../05_attention_alternatives_and_moe/lecture.md) · [Next: Lecture 07 — Filtering, Deduplication, Mixing, and Synthetic Data →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
+[← Previous: Lecture 05 — Attention Alternatives and MoE](../05_attention_alternatives_and_moe/lecture.md) · [Next: Lecture 07 — Filtering, Deduplication, Mixing and Synthetic Data →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
 
 </div>
