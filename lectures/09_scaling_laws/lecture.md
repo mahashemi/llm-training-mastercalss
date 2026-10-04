@@ -91,6 +91,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 08 — Distributed Training](../08_distributed_training/lecture.md) · [Next lecture: Lecture 10 — Inference Systems →](../10_inference_systems/lecture.md)
+[← Previous: Lecture 08 — Pretraining Systems](../11_training_system_design/lecture.md) · [Next: Lecture 10 — GPUs and Kernels →](../06_gpus_and_kernels/lecture.md)
 
 </div>
