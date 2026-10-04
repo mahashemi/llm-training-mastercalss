@@ -1,4 +1,4 @@
-# Neural Computing 07 — Recurrent Networks
+# Course 1 · Chapter — RNNs, LSTM + GRU
 
 **Track:** Neural Computing Foundation  
 **Topics:** SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing  
@@ -8,9 +8,27 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Start with a sequence whose interpretation depends on earlier context. A recurrent model maintains a state:
+h_t = φ(W_x x_t + W_h h_{t-1}+b).
+The same parameters are reused at every time step.
+
+Unroll the recurrence for three tokens and calculate the hidden state symbolically. This makes an important fact visible: the gradient from a later time step passes through repeated transformations.
+
+Explain vanishing and exploding gradients. If the relevant Jacobian repeatedly shrinks, early information becomes difficult to learn; if it grows, optimization can become unstable.
+
+LSTM introduces gates to control information flow:
+i_t = σ(...), f_t = σ(...), o_t = σ(...).
+Its cell state provides a more controlled path for long-range information.
+
+GRU simplifies the gating structure while retaining explicit control over updates.
+
+Real connection: speech, forecasting, event streams, and historical sequence models. Transformers later replace recurrence with direct content-based interactions across positions.
+
+Failure experiment: train RNN/LSTM/GRU on a task requiring long-range dependency and measure performance as the dependency length increases.
 
 ## Core concepts
 
