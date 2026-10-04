@@ -152,6 +152,3 @@ The notebook uses a real dataset or environment, records quantitative results, a
 ## Navigation
 
 [← Previous](../02_feedforward_and_backprop/lecture.md) · [Course 1 home](../README.md) · [Next →](../04_convolutional_networks/lecture.md)
-
-</div>
-
