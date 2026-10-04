@@ -213,7 +213,7 @@ Adaline trains this continuous score rather than immediately converting it to 0 
 For $N$ training examples, define the mean squared error:
 
 $$
-L=\frac{1}{N}\sum_{i=1}^{N}(y_i-z_i)^2.
+L=\\frac{1}{N}\sum_{i=1}^{N}(y_i-z_i)^2.
 $$
 
 Before worrying about the formula, read it in English:
@@ -269,7 +269,7 @@ If you change one parameter slightly, does the loss go up or down? And how stron
 For a weight $w_j$, the derivative
 
 $$
-\frac{\partial L}{\partial w_j}
+\\frac{\partial L}{\partial w_j}
 $$
 
 answers:
@@ -283,7 +283,7 @@ The symbol $\nabla$ (“nabla”) is simply a compact way to collect these parti
 For the vector of weights $w$,
 
 $$
-\nabla_w L
+\n\nabla_w L
 $$
 
 means:
@@ -299,7 +299,7 @@ $$
 Differentiating with respect to the weight vector gives
 
 $$
-\nabla_w L
+\n\nabla_w L
 =
 2(w^\top x+b-y)x.
 $$
@@ -334,7 +334,7 @@ w_{\text{new}}
 =
 w_{\text{old}}
 -
-\eta\nabla_w L.
+\eta\n\nabla_w L.
 $$
 
 Read every symbol in plain English:
@@ -352,7 +352,7 @@ Suppose
 $$
 w_{\text{old}}=2,
 \qquad
-\frac{dL}{dw}=3,
+\\frac{dL}{dw}=3,
 \qquad
 \eta=0.1.
 $$
@@ -413,10 +413,10 @@ For example:
 
 $$
 w
-\rightarrow z
-\rightarrow h
-\rightarrow \hat y
-\rightarrow L.
+\r\rightarrow z
+\r\rightarrow h
+\r\rightarrow \hat y
+\r\rightarrow L.
 $$
 
 Backpropagation walks through this chain in reverse and combines the local slopes.
