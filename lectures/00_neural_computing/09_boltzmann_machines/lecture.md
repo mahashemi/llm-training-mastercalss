@@ -1,4 +1,4 @@
-# Neural Computing 09 — Boltzmann Machines and Deep Belief Networks
+# Course 1 · Chapter — Boltzmann Machines + RBMs + DBNs
 
 **Track:** Neural Computing Foundation  
 **Topics:** energy-based learning, RBM, contrastive divergence, DBN intuition  
@@ -8,9 +8,27 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Begin with an energy function rather than a neural-network layer. An energy-based model assigns lower energy to configurations it considers more compatible.
+
+For a restricted Boltzmann machine with visible v and hidden h:
+E(v,h) = -aᵀv - bᵀh - vᵀWh.
+The probability is proportional to exp(-E).
+
+The restriction—no visible-visible or hidden-hidden edges—makes conditional sampling tractable:
+P(h_j=1|v)=σ(b_j+W_jv).
+Similarly for visible units.
+
+Explain contrastive divergence: start from observed data, sample hidden states, reconstruct visible states, sample again, and use the difference between data and reconstruction statistics as an approximate learning signal.
+
+Deep belief networks stack RBM-like representations.
+
+Real connection: these models are historically important because they illustrate latent-variable learning, energy-based modeling, and pre-deep-learning representation learning.
+
+Failure experiment: compare reconstruction statistics after different numbers of Gibbs steps and observe why approximate sampling can bias learning.
 
 ## Core concepts
 
