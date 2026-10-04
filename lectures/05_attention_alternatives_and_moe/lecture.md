@@ -103,4 +103,4 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 
 ## Navigation
 
-[← Previous](../04_transformer_architectures/lecture.md) · [Course 2 home](../courses/02_llm_engineering_and_training/README.md) · [Next →](../06_gpus_and_kernels/lecture.md)
+[← Previous](../04_transformer_architectures/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../06_gpus_and_kernels/lecture.md)
