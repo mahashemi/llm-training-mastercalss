@@ -36,9 +36,55 @@ Real connection: SOMs are useful for exploratory visualization, sensor regimes, 
 
 Failure experiment: create two clusters with very different densities. Ask whether the map represents density faithfully or spreads prototypes according to its training dynamics.
 
+## Build the intuition before the notation
+
+Imagine putting several magnets on a table and dropping a point onto the table. The closest magnet is responsible for that point. If we move the winning magnet slightly toward the point, repeated observations gradually place magnets in useful regions.
+
+That is the whole competitive-learning story.
+
+The notation only names the pieces:
+
+- $x$ = today's observation;
+- $w_j$ = prototype $j$;
+- $\arg\min$ = choose the closest prototype;
+- $\eta$ = how far the winner moves;
+- $h$ = how strongly neighboring SOM units participate.
+
+### Why this is different from k-means
+
+Competitive learning and k-means look related because both use prototypes. But their training procedures and objectives are not identical.
+
+K-means repeatedly alternates between assignment and centroid recomputation. Online competitive learning updates a winner incrementally. A SOM additionally cares about the geometry of the prototype grid.
+
+So do not say “SOM is just k-means with a picture.” The neighborhood update creates a different inductive bias.
+
+### Experiment prediction
+
+Before opening the notebook, write down three predictions:
+
+1. prototype learning should lower quantization error;
+2. changing neighborhood width should change the geometry of the map;
+3. using labels during training would turn this into a different, supervised problem.
+
+Then run the notebook and mark each prediction **supported / contradicted / inconclusive**. This makes the lab an experiment rather than a code-reading exercise.
+
+## A researcher's checklist
+
+When an unsupervised visualization looks compelling, ask:
+
+- Does the result survive a new random seed?
+- Does changing map size change the story?
+- Does standardization change the story?
+- Is the metric consistent with the visual interpretation?
+- Would another clustering method produce the same structure?
+- Are we interpreting labels after the fact?
+
+A good unsupervised result survives several of these questions.
+
+
 ## Core concepts
 
-This unit covers **winner-take-all, SOM topology, Evolving SOM, representation discovery**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **winner-take-all, SOM topology, Evolving SOM, representation discovery**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -65,7 +111,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
