@@ -170,3 +170,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 16 — LoRA, QLoRA and PEFT](../18_lora_qlora_and_peft/lecture.md) · [Next: Lecture 18 — Preference Optimization and Distillation →](../20_preference_optimization_and_distillation/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: full fine-tuning and continued pretraining](https://www.youtube.com/results?search_query=LLM+continued+pretraining+full+fine+tuning+lecture)
+
+## Navigation
+
+[← Previous](../18_lora_qlora_and_peft/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../20_preference_optimization_and_distillation/lecture.md)
