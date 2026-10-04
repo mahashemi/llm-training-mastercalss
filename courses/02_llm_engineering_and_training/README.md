@@ -82,3 +82,14 @@ Each concept should be taught through both:
 That is how the learner moves from “I know the definition” to “I can use this in a production system.”
 
 ← Course 1 — Deep Learning & Neural Computing Foundations
+
+
+## What “deep” means here
+
+A chapter is incomplete if it only says what a technique is.
+
+For example, “attention lets tokens attend to other tokens” is an introduction, not a lesson. The chapter must continue until the learner can take a concrete sequence, construct $Q$, $K$, and $V$, calculate attention scores, apply the causal mask, explain the resulting weighted sum, implement it, and observe what changes when a component is removed.
+
+Likewise, “deduplication improves data” is not sufficient. The learner must measure duplicates, construct controlled mixtures, keep the token budget comparable, train/evaluate the variants, and determine whether the observed difference is attributable to deduplication.
+
+The course therefore treats **examples, derivations, implementation, experiments, and engineering consequences as part of the lecture itself**.
