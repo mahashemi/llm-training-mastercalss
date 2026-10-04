@@ -21,20 +21,20 @@ No single line can solve it.
 A multilayer network can:
 
 $$
-h=\\\\phi(W_1x+b_1)
+h=\phi(W_1x+b_1)
 $$
 
 followed by
 
 $$
-\\hat{y}=g(W_2h+b_2).
+\hat{y}=g(W_2h+b_2).
 $$
 
 The hidden layer creates an intermediate representation. The output layer reads that representation.
 
 The key question of this chapter is:
 
-> **If the final error depends on thousands or millions of parameters, how do we know how to chan\\\\ge each parameter?**
+> **If the final error depends on thousands or millions of parameters, how do we know how to chan\ge each parameter?**
 
 That is the backpropagation problem.
 
@@ -43,7 +43,7 @@ That is the backpropagation problem.
 Consider a tiny network:
 
 $$
-x ightarrow z_1 ightarrow h ightarrow z_2 ightarrow \\hat{y}.
+x ightarrow z_1 ightarrow h ightarrow z_2 ightarrow \hat{y}.
 $$
 
 Let
@@ -55,7 +55,7 @@ $$
 and
 
 $$
-h=\\\\sigma(z_1).
+h=\sigma(z_1).
 $$
 
 Then
@@ -67,7 +67,7 @@ $$
 and for binary classification,
 
 $$
-\\hat{y}=\\\\sigma(z_2).
+\hat{y}=\sigma(z_2).
 $$
 
 The forward pass is simply function composition.
@@ -75,7 +75,7 @@ The forward pass is simply function composition.
 For a concrete scalar example, suppose
 
 $$
-x=2,\\\\quad W_1=1.5,\\\\quad b_1=-1,
+x=2,\quad W_1=1.5,\quad b_1=-1,
 $$
 
 so
@@ -87,13 +87,13 @@ $$
 Using the sigmoid,
 
 $$
-h=\\\\\\frac{1}{1+e^{-2}}approx0.881.
+h=\\frac{1}{1+e^{-2}}approx0.881.
 $$
 
 Suppose
 
 $$
-W_2=2,\\\\quad b_2=-1,
+W_2=2,\quad b_2=-1,
 $$
 
 then
@@ -105,7 +105,7 @@ $$
 and
 
 $$
-\\hat{y}approx0.682.
+\hat{y}approx0.682.
 $$
 
 A neural network is therefore not mysterious during inference. It is a sequence of ordinary mathematical operations.
@@ -121,13 +121,13 @@ $$
 and
 
 $$
-\\hat{y}=W_2h+b_2,
+\hat{y}=W_2h+b_2,
 $$
 
 then:
 
 $$
-\\hat{y}=W_2W_1x+W_2b_1+b_2.
+\hat{y}=W_2W_1x+W_2b_1+b_2.
 $$
 
 The entire network is still one linear function.
@@ -144,12 +144,12 @@ Its simplicity is one reason it became so useful in deep networks.
 
 ## 4. Loss turns prediction into an optimization problem
 
-Suppose the tar\\\\get is $y=1$ and the model predicts $\\hat{y}=0.682$.
+Suppose the tar\get is $y=1$ and the model predicts $\hat{y}=0.682$.
 
 For binary cross-entropy:
 
 $$
-L=-[ylog\\hat{y}+(1-y)log(1-\\hat{y})].
+L=-[ylog\hat{y}+(1-y)log(1-\hat{y})].
 $$
 
 Because $y=1$,
@@ -163,29 +163,29 @@ Now we have a scalar quantity that tells us how undesirable the prediction was.
 Training asks:
 
 $$
-min_\\th\\\\eta L(\\th\\\\eta)
+min_\th\eta L(\th\eta)
 $$
 
-where $\\th\\\\eta$ represents every trainable parameter.
+where $\th\eta$ represents every trainable parameter.
 
 ## 5. The chain rule is the engine of backpropagation
 
 Consider:
 
 $$
-L ightarrow \\hat{y} ightarrow z_2 ightarrow h ightarrow z_1 ightarrow W_1.
+L ightarrow \hat{y} ightarrow z_2 ightarrow h ightarrow z_1 ightarrow W_1.
 $$
 
 The effect of $W_1$ on the final loss is obtained with the chain rule:
 
 $$
-\\\\\\frac{\\\\partial L}{\\\\partial W_1}
+\\frac{\partial L}{\partial W_1}
 =
-\\\\\\frac{\\\\partial L}{\\\\partial \\hat{y}}
-\\\\\\frac{\\\\partial \\hat{y}}{\\\\partial z_2}
-\\\\\\frac{\\\\partial z_2}{\\\\partial h}
-\\\\\\frac{\\\\partial h}{\\\\partial z_1}
-\\\\\\frac{\\\\partial z_1}{\\\\partial W_1}.
+\\frac{\partial L}{\partial \hat{y}}
+\\frac{\partial \hat{y}}{\partial z_2}
+\\frac{\partial z_2}{\partial h}
+\\frac{\partial h}{\partial z_1}
+\\frac{\partial z_1}{\partial W_1}.
 $$
 
 This is backpropagation.
@@ -200,7 +200,7 @@ Which parameter deserves blame?
 
 Backpropagation sends information about the error backward through the computation graph.
 
-Parameters that had a stron\\\\ger effect on the loss receive lar\\\\ger gradients.
+Parameters that had a stron\ger effect on the loss receive lar\ger gradients.
 
 So:
 
@@ -214,25 +214,25 @@ Once we have a gradient,
 
 $$
 
-abla_\\th\\\\eta L,
+abla_\th\eta L,
 $$
 
 we update:
 
 $$
-\\th\\\\eta_{new}=\\th\\\\eta_{old}-\\\\eta
-abla_\\th\\\\eta L.
+\th\eta_{new}=\th\eta_{old}-\eta
+abla_\th\eta L.
 $$
 
 The negative sign moves us approximately downhill.
 
-If $\\\\eta$ is too small, learning can be painfully slow.
+If $\eta$ is too small, learning can be painfully slow.
 
-If it is too lar\\\\ge, updates can overshoot or become unstable.
+If it is too lar\ge, updates can overshoot or become unstable.
 
 This gives us the first major optimization experiment.
 
-## 8. Batch training chan\\\\ges the estimate
+## 8. Batch training chan\ges the estimate
 
 A single example gives a noisy gradient.
 
@@ -240,21 +240,21 @@ For a mini-batch $B$:
 
 $$
 
-abla_\\th\\\\eta L_B=
-\\\\\\frac{1}{|B|}
+abla_\th\eta L_B=
+\\frac{1}{|B|}
 sum_{iin B}
-abla_\\th\\\\eta L_i.
+abla_\th\eta L_i.
 $$
 
-Increasing batch size often makes the gradient estimate less noisy, but it chan\\\\ges memory requirements and optimization behavior.
+Increasing batch size often makes the gradient estimate less noisy, but it chan\ges memory requirements and optimization behavior.
 
 There is no universally best batch size.
 
 The right question is:
 
-> What batch size gives the desired optimization behavior under the available memory and throughput bud\\\\get?
+> What batch size gives the desired optimization behavior under the available memory and throughput bud\get?
 
-## 9. Memorization versus \\\\generalization
+## 9. Memorization versus \generalization
 
 A model can drive training error almost to zero and still fail on unseen data.
 
@@ -264,7 +264,7 @@ Consider three experiments:
 2. train on shuffled labels;
 3. evaluate on held-out examples.
 
-If a sufficiently lar\\\\ge network can memorize shuffled labels, that demonstrates something important:
+If a sufficiently lar\ge network can memorize shuffled labels, that demonstrates something important:
 
 > **Low training loss does not prove that the model discovered the structure we care about.**
 
@@ -277,9 +277,9 @@ Suppose:
 | Run | Train accuracy | Validation accuracy |
 |---|---:|---:|
 | small model | 91% | 89% |
-| lar\\\\ge model | 100% | 88% |
+| lar\ge model | 100% | 88% |
 
-The lar\\\\ge model optimized the training set better but \\\\generalized worse.
+The lar\ge model optimized the training set better but \generalized worse.
 
 Possible explanations include:
 
@@ -287,7 +287,7 @@ Possible explanations include:
 - insufficient data;
 - optimization differences;
 - distribution mismatch;
-- leaka\\\\ge in the evaluation design.
+- leaka\ge in the evaluation design.
 
 Do not automatically label it “overfitting.” Run an experiment that distinguishes the hypotheses.
 
@@ -309,10 +309,10 @@ CNNs add spatial structure. RNNs add recurrent state. Transformers add learned i
 
 Before running the notebook, predict:
 
-- how the loss should chan\\\\ge when the learning rate increases;
+- how the loss should chan\ge when the learning rate increases;
 - what happens when the labels are shuffled;
 - how depth affects parameter count;
-- whether normalization chan\\\\ges optimization stability.
+- whether normalization chan\ges optimization stability.
 
 Then:
 
@@ -326,12 +326,12 @@ Then:
 
 ### Numerical gradient check
 
-For parameter $\\th\\\\eta$:
+For parameter $\th\eta$:
 
 $$
-\\\\\\frac{\\\\partial L}{\\\\partial\\th\\\\eta}
+\\frac{\partial L}{\partial\th\eta}
 approx
-\\\\\\frac{L(\\th\\\\eta+epsilon)-L(\\th\\\\eta-epsilon)}{2epsilon}.
+\\frac{L(\th\eta+epsilon)-L(\th\eta-epsilon)}{2epsilon}.
 $$
 
 Compare this finite-difference estimate with the analytic gradient.
@@ -343,23 +343,23 @@ This is one of the most useful debugging techniques in deep-learning implementat
 **“Backpropagation updates the weights.”**  
 Not exactly. Backpropagation computes gradients. The optimizer uses those gradients to update parameters.
 
-**“A big\\\\ger model is always better.”**  
-A big\\\\ger model increases capacity but can also increase cost, instability, or memorization.
+**“A big\ger model is always better.”**  
+A big\ger model increases capacity but can also increase cost, instability, or memorization.
 
 **“Training accuracy proves learning.”**  
 It proves the model can fit the training examples. Generalization requires held-out evidence.
 
-**“The learning rate is just a tuning d\\\\etail.”**  
-It determines the scale of parameter updates and can completely chan\\\\ge whether optimization succeeds.
+**“The learning rate is just a tuning d\etail.”**  
+It determines the scale of parameter updates and can completely chan\ge whether optimization succeeds.
 
 ## 14. Research extension
 
 Choose one:
 
-- width at fixed parameter bud\\\\get;
-- depth at fixed parameter bud\\\\get;
+- width at fixed parameter bud\get;
+- depth at fixed parameter bud\get;
 - optimizer at fixed compute;
-- batch size at fixed token/example bud\\\\get;
+- batch size at fixed token/example bud\get;
 - initialization under controlled seeds;
 - regularization under fixed architecture.
 
@@ -378,7 +378,7 @@ State a hypothesis **before** running the experiment.
 
 1. Without them, stacked linear layers collapse into one linear transformation.
 2. Backpropagation efficiently applies the chain rule through the computation graph.
-3. The local direction and magnitude in which the loss chan\\\\ges with respect to parameters.
+3. The local direction and magnitude in which the loss chan\ges with respect to parameters.
 4. A sufficiently expressive model can memorize arbitrary training associations.
 5. Otherwise we cannot reliably estimate performance on unseen data.
 6. Whether the implemented analytic gradient agrees with an independent numerical approximation.
@@ -392,7 +392,7 @@ State a hypothesis **before** running the experiment.
 
 **[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
 
 ## Laboratory — run this experiment end to end
 
