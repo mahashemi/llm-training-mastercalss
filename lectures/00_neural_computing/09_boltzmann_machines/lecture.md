@@ -37,9 +37,54 @@ Real connection: these models are historically important because they illustrate
 
 Failure experiment: compare reconstruction statistics after different numbers of Gibbs steps and observe why approximate sampling can bias learning.
 
+## Build the intuition before the notation
+
+Imagine a landscape where every possible configuration of variables sits at a different height.
+
+The model wants familiar configurations to sit in **valleys** and implausible configurations to sit at **higher energy**.
+
+Learning then changes the landscape so that real data becomes easier for the model to generate.
+
+That is the intuition behind an energy-based model.
+
+### Why sampling appears
+
+For a discriminative classifier, we can often compute a prediction directly.
+
+For an energy-based generative model, we care about a distribution over many possible configurations.
+
+That means we need a way to explore the landscape.
+
+Gibbs sampling is one such exploration process.
+
+### Why contrastive divergence is clever—and imperfect
+
+Starting the chain at real data gives us a useful reference point.
+
+Rather than waiting for the Markov chain to mix perfectly, contrastive divergence takes only a short journey and uses the resulting sample to approximate the negative phase.
+
+This makes training much cheaper.
+
+It also means the learning rule is approximate.
+
+That is a recurring machine-learning engineering trade-off:
+
+**more accurate computation ↔ more compute ↔ potentially better statistical approximation.**
+
+### Research question
+
+The most educational experiment is not “which RBM gets the lowest reconstruction error?”
+
+It is:
+
+> “At a fixed wall-clock budget, how much does additional negative-phase sampling improve the learned model?”
+
+That question connects statistical approximation directly to systems cost.
+
+
 ## Core concepts
 
-This unit covers **energy-based learning, RBM, contrastive divergence, DBN intuition**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **energy-based learning, RBM, contrastive divergence, DBN intuition**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -66,7 +111,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
