@@ -183,6 +183,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 19 — Full Fine-Tuning and Continued Pretraining](../19_full_fine_tuning_and_continued_pretraining/lecture.md) · [Next lecture: Lecture 21 — Safety, Robustness, and Failure Analysis →](../21_safety_robustness_and_failure_analysis/lecture.md)
+[← Previous: Lecture 17 — Continued Pretraining and Full Fine-Tuning](../19_full_fine_tuning_and_continued_pretraining/lecture.md) · [Next: Lecture 19 — RL with Verifiable Rewards →](../16_reinforcement_learning_with_verifiable_rewards/lecture.md)
 
 </div>
