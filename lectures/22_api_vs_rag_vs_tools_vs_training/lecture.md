@@ -200,14 +200,14 @@ Only escalate to weight updates when the simpler system layer cannot explain or 
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-The experiment is part of this lecture. Record a baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
 <div align="center">
 
-[← Previous: Lecture 21 — Safety, Robustness, and Failure Analysis](../21_safety_robustness_and_failure_analysis/lecture.md) · [Next: Lecture 23 — Build an LLM Program →](../23_build_an_llm_program/lecture.md)
+[← Previous: Lecture 21 — Safety, Robustness and Failure Analysis](../21_safety_robustness_and_failure_analysis/lecture.md) · [Next: Lecture 23 — Build an LLM Program →](../23_build_an_llm_program/lecture.md)
 
 </div>
