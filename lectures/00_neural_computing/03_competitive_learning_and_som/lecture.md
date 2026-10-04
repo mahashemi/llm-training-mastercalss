@@ -1,4 +1,4 @@
-# Neural Computing 03 — Competitive Learning and Self-Organizing Maps
+# Course 1 · Chapter — Competitive Learning + SOM
 
 **Track:** Neural Computing Foundation  
 **Topics:** winner-take-all, SOM topology, Evolving SOM, representation discovery  
@@ -8,9 +8,26 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Start with a clustering problem where labels do not exist. Competitive learning asks which prototype is closest to an input and lets that prototype move toward the example. For SOM, the winner is not alone: nearby units move too, creating a topology-preserving map.
+
+For an input x and prototype w_j, choose
+j* = argmin_j ||x-w_j||².
+Then update the winner:
+w_j* ← w_j* + η(x-w_j*).
+SOM extends this with a neighborhood h(j,j*,t):
+w_j ← w_j + η h(j,j*,t)(x-w_j).
+
+The important intuition is that learning is simultaneously doing two things: fitting prototypes to data and organizing nearby prototypes to represent nearby regions of the input space.
+
+Worked example: place four 2-D prototypes on the corners of a square and feed points from two clusters. Calculate the winner for one point and move the winner. Then activate its neighbors and observe how the map changes.
+
+Real connection: SOMs are useful for exploratory visualization, sensor regimes, customer segmentation, and inspecting high-dimensional structure. They are not magic clustering algorithms; topology preservation and neighborhood choices matter.
+
+Failure experiment: create two clusters with very different densities. Ask whether the map represents density faithfully or spreads prototypes according to its training dynamics.
 
 ## Core concepts
 
