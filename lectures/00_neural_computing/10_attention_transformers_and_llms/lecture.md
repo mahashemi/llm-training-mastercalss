@@ -30,7 +30,7 @@ Suppose we want the representation of “published” to use information about �
 Given queries Q, keys K, and values V:
 Attention(Q,K,V)=softmax(QKᵀ/√d_k)V.
 
-Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token t cannot use future tokens during autoregressive langua\ge modeling.
+Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token t cannot use future tokens during autoregressive language modeling.
 
 Explain the roles separately:
 - Q: what this position is looking for;
@@ -43,13 +43,84 @@ The Transformer combines attention with positional information, residual connect
 
 Real connection: machine translation, BERT-style encoders, GPT-style decoders, retrieval, multimodal models.
 
-Failure experiment: remove the causal mask in a next-token training task. The model may appear to learn extraordinarily well because it can see the answer. This is data leaka\ge inside the architecture.
+Failure experiment: remove the causal mask in a next-token training task. The model may appear to learn extraordinarily well because it can see the answer. This is data leakage inside the architecture.
 
-The next course uses this brid\ge to derive decoder-only LLMs in much greater detail.
+The next course uses this bridge to derive decoder-only LLMs in much greater detail.
+
+## Build the intuition before the notation
+
+Imagine a classroom where every student can ask:
+
+> “Which other student has information useful for my current question?”
+
+The query is the question.
+
+The key is the description of what each student knows.
+
+The value is the information actually retrieved.
+
+Attention performs this matching computationally.
+
+### A three-token mental model
+
+Suppose three tokens have already produced queries, keys, and values.
+
+For one query:
+
+1. compare it with all keys;
+2. turn those scores into weights;
+3. use those weights to mix the values.
+
+If the weights are $[0.7,0.2,0.1]$, the output is simply:
+
+$
+0.7v_1+0.2v_2+0.1v_3.
+$
+
+So attention is not magic memory. It is **content-dependent weighted information retrieval inside the sequence**.
+
+### Why the causal mask changes the problem
+
+Without a mask, position 3 can use positions 4, 5, and beyond.
+
+For next-token training, that would expose information that the model is supposed to predict.
+
+With a causal mask, the attention matrix becomes triangular:
+
+$
+\begin{bmatrix}
+\times&0&0\\
+\times&\times&0\\
+\times&\times&\times
+\end{bmatrix}.
+$
+
+The zeros mean “future information is unavailable.”
+
+### From attention to LLMs
+
+The conceptual chain is:
+
+**sequence context → attention → Transformer block → stacked decoder blocks → next-token prediction → pretrained language model → LLM engineering.**
+
+Course 2 begins exactly where this chapter ends.
+
+### Research comparison
+
+Compare full attention with a local-window alternative.
+
+For sequence length $n$, full attention creates roughly $n^2$ pairwise interactions.
+
+That quadratic relationship is one reason efficient-attention research matters.
+
+The important question is not merely “which is faster?” but:
+
+> **What information do we lose when we stop allowing every position to interact with every other position?**
+
 
 ## Core concepts
 
-This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, brid\ge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advanta\ge from a larger parameter count or better optimization.
+This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bridge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
 
 ## Required practical workflow
 
@@ -76,7 +147,7 @@ The lab must end with a research question. A good question has a measurable inde
 
 ## Paper-ready deliverable
 
-Every learner produces a **mini research packa\ge**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
+Every learner produces a **mini research package**: hypothesis, related-work note, dataset card, method description, experiment matrix, baseline, results table, one figure, error analysis, limitations, reproducibility block, and next-work proposal. These artifacts accumulate toward the final publication capstone.
 
 ## Exit questions
 
@@ -96,7 +167,7 @@ The notebook is intentionally part of this lecture. It uses a real dataset and r
 
 
 
-[← Previous](../undefined/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
+[← Previous](../09_boltzmann_machines/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
 
 </div>
 
