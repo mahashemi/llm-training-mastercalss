@@ -110,6 +110,6 @@ This lab is part of this lecture. Do not leave the lecture to find the experimen
 
 <div align="center">
 
-[← Previous lecture: Lecture 02 — Tokenization](../02_tokenization/lecture.md) · [Next lecture: Lecture 04 — Transformer Architectures →](../04_transformer_architectures/lecture.md)
+[← Previous: Lecture 02 — Tokenization](../02_tokenization/lecture.md) · [Next: Lecture 04 — Transformer Architectures →](../04_transformer_architectures/lecture.md)
 
 </div>
