@@ -187,7 +187,4 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Navigation
 
-[← Previous](../undefined/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
-
-</div>
-
+[← Previous](../09_boltzmann_machines/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
