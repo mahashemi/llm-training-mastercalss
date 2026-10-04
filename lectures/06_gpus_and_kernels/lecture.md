@@ -180,3 +180,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 09 — Scaling Laws](../09_scaling_laws/lecture.md) · [Next: Lecture 11 — Efficient Attention and Triton →](../07_efficient_attention_and_triton/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: GPU architecture, CUDA kernels and performance](https://www.youtube.com/results?search_query=GPU+CUDA+kernels+deep+learning+lecture)
+
+## Navigation
+
+[← Previous](../05_attention_alternatives_and_moe/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../07_efficient_attention_and_triton/lecture.md)
