@@ -96,3 +96,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 05 — Attention Alternatives and MoE](../05_attention_alternatives_and_moe/lecture.md) · [Next: Lecture 07 — Filtering, Deduplication, Mixing and Synthetic Data →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: LLM dataset construction](https://www.youtube.com/results?search_query=LLM+dataset+construction+data+curation+lecture)
+
+## Navigation
+
+[← Previous](../12_evaluation/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../14_filtering_deduplication_mixing_and_synthetic_data/lecture.md)
