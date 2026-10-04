@@ -217,6 +217,6 @@ This lab is part of this lecture. Do not leave the lecture to find the experimen
 
 <div align="center">
 
-[Next lecture: Lecture 02 — Tokenization →](../02_tokenization/lecture.md)
+[Next: Lecture 02 — Tokenization →](../02_tokenization/lecture.md)
 
 </div>
