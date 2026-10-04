@@ -1,4 +1,4 @@
-# Neural Computing 10 — Attention, Transformers, BERT and GPT
+# Course 1 · Chapter — Attention + Transformer Bridge
 
 **Track:** Neural Computing Foundation  
 **Topics:** attention types, Transformer, encoder/decoder, BERT, GPT, bridge to LLM training  
@@ -8,9 +8,37 @@
 
 By the end of this unit, the learner should be able to explain the mechanism mathematically, implement a minimal version without a high-level abstraction, use a modern library implementation, and design a controlled experiment showing when the method helps or fails.
 
-## Why this belongs before LLM training
 
-Modern language models did not appear in isolation. Their foundations include optimization, representation learning, convolutional/recurrent sequence models, generative learning, attention, and experimental methodology. This track makes those dependencies explicit before the existing LLM sequence.
+
+## Teaching walkthrough
+
+Begin with a sentence containing a long dependency:
+
+“The scientist who had worked in Tehran for ten years finally published the paper.”
+
+Suppose we want the representation of “published” to use information about “scientist.” A recurrent model can carry that information through many steps. Attention asks a different question:
+
+> Which positions should this position directly use right now?
+
+Given queries Q, keys K, and values V:
+Attention(Q,K,V)=softmax(QKᵀ/√d_k)V.
+
+Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token t cannot use future tokens during autoregressive language modeling.
+
+Explain the roles separately:
+- Q: what this position is looking for;
+- K: what each position offers for matching;
+- V: what information is retrieved after matching.
+
+Then introduce multi-head attention as several learned projections that can specialize in different relationships.
+
+The Transformer combines attention with positional information, residual connections, normalization, and feed-forward transformations.
+
+Real connection: machine translation, BERT-style encoders, GPT-style decoders, retrieval, multimodal models.
+
+Failure experiment: remove the causal mask in a next-token training task. The model may appear to learn extraordinarily well because it can see the answer. This is data leakage inside the architecture.
+
+The next course uses this bridge to derive decoder-only LLMs in much greater detail.
 
 ## Core concepts
 
