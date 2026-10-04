@@ -185,3 +185,72 @@ By Course 2, every major concept should eventually connect to:
 The goal is not merely to know how an algorithm works.
 
 The goal is to know **when and why to use it**.
+
+
+## Mathematical notation quality gate
+
+Mathematics must be both **renderable and teachable**.
+
+### Renderability rules
+
+- Use GitHub-compatible LaTeX inside `$...$` for inline mathematics and `$$...$$` for display mathematics.
+- Every LaTeX command must begin with its backslash: `\nabla`, `\frac`, `\theta`, `\eta`, `\partial`, `\sigma`, `\sum`, `\rightarrow`, etc.
+- Never allow corrupted forms such as `abla`, `frac`, `theta`, `eta`, `ightarrow`, or `\frac` when a single LaTeX command is intended.
+- Never put unexplained LaTeX-like text into equations.
+- After editing, inspect rendered Markdown rather than relying only on source appearance.
+
+### Beginner-first notation rules
+
+A mathematical symbol is not an explanation.
+
+Before using a new symbol, explain it in plain English. For example, do not write
+
+$$
+w_{new}=w_{old}-\eta\nabla_w L
+$$
+
+and move on.
+
+First explain:
+
+- **$w$** — the weight(s) we are learning;
+- **$L$** — the loss, a number saying how wrong the model is;
+- **$\partial L/\partial w$** — how the loss changes when this weight changes;
+- **$\nabla_w L$** — all of those individual slopes collected together;
+- **$\eta$** — the learning rate, which controls how large a step we take;
+- **the minus sign** — move opposite the direction in which the loss increases.
+
+Then show the equation and a numerical example.
+
+### The “read the equation in English” test
+
+For every important equation, a beginner should be able to answer:
+
+1. What does every symbol mean?
+2. What are the shapes of the objects, when applicable?
+3. What operation is being performed?
+4. Why are we performing it?
+5. What would happen if one term became larger or smaller?
+6. How does this equation connect to the previous computation?
+
+If those questions cannot be answered from the chapter, the equation is not yet sufficiently taught.
+
+### Derivative and gradient vocabulary
+
+Use the following conceptual progression:
+
+**change → slope → derivative → partial derivative → gradient → update**
+
+Explain that:
+
+- a derivative is a local slope/sensitivity;
+- a partial derivative asks about one variable while holding the others fixed;
+- a gradient collects partial derivatives;
+- an optimizer uses gradients to change parameters.
+
+Do not introduce “nabla” as vocabulary without explaining that it is simply notation for the vector of these slopes.
+
+### Equation-to-code consistency
+
+Whenever an equation appears, the surrounding code should use the same names where practical. If the mathematics says $\theta$, explain what concrete object in the code corresponds to $\theta$.
+
