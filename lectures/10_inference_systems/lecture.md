@@ -93,6 +93,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 09 — Scaling Laws](../09_scaling_laws/lecture.md) · [Next lecture: Lecture 11 — Training System Design and Instrumentation →](../11_training_system_design/lecture.md)
+[← Previous: Lecture 13 — Evaluation](../12_evaluation/lecture.md) · [Next: Lecture 15 — SFT and Post-Training →](../15_mid_and_post_training_sft_and_rlhf/lecture.md)
 
 </div>
