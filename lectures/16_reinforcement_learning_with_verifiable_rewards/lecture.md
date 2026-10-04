@@ -77,6 +77,69 @@ Use:
 Compare the toy verifier with a real mathematical/code verifier and identify which assumptions become fragile at scale.
 
 
+
+## Why verifiable rewards change the problem
+
+Ordinary language-model quality is difficult to score automatically. A response can sound convincing while being wrong.
+
+A verifiable task gives a machine-checkable signal.
+
+Examples include:
+
+- exact mathematical answers;
+- executable code tests;
+- symbolic equivalence;
+- structured constraint satisfaction.
+
+For a sampled answer y to prompt x, a simple reward can be:
+
+$$
+R(x,y)=
+\begin{cases}
+1,&\text{verifier accepts }y\\
+0,&\text{otherwise.}
+\end{cases}
+$$
+
+The simplicity of the reward does not make the optimization simple. The model still has to discover behaviors that increase expected reward.
+
+## A concrete loop
+
+Think of one training iteration as:
+
+**prompt → sample answers → verify → assign rewards → update policy → sample again**
+
+The research question is not merely whether reward rises. Ask whether the model learned the intended behavior or learned to exploit the verifier.
+
+## Reward hacking
+
+Suppose a coding verifier checks only that a program passes a small visible test set.
+
+A model may discover an answer that passes those tests without solving the underlying task.
+
+This is a general lesson:
+
+> **The verifier is part of the training environment.**
+
+A weak verifier can produce a highly optimized but meaningless policy.
+
+## Evaluation must stay independent
+
+Keep hidden tests or independent evaluations that are not exposed to the training loop.
+
+Compare:
+
+- training reward;
+- held-out verifier reward;
+- human or external evaluation;
+- failure categories.
+
+A growing training reward with stagnant held-out performance is evidence that the optimization target may be overfitting.
+
+## Research extension
+
+Design two verifiers with different failure modes. Train against one and evaluate against the other. The gap measures how much the learned policy depends on the verifier itself.
+
 ## Lab — run it here
 
 **Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
