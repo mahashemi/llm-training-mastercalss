@@ -1,6 +1,6 @@
-# Neural Computing Foundation
+# Course 1 — Deep Learning & Neural Computing Foundations
 
-A 12-unit foundation added before the existing LLM sequence. It covers the requested neural-computing syllabus while preserving the current LLM Trainer Masterclass.
+A standalone 12-chapter deep-learning course. It teaches neural computation as a coherent subject and can be taken independently. It also serves as recommended preparation for Course 2 — LLM Engineering & Training.
 
 ## Units
 
@@ -17,13 +17,13 @@ A 12-unit foundation added before the existing LLM sequence. It covers the reque
 11. Deep Reinforcement Learning — RL foundations and DQN.
 12. Research Capstone — reproduce, intervene, ablate and write.
 
-Every unit follows **intuition → mathematics → from-scratch implementation → framework implementation → real data → baseline → intervention → ablation → error analysis → reproducibility → research question**.
+Every chapter follows **problem → intuition → worked example → mathematics → from-scratch implementation → framework implementation → real data → baseline → intervention → failure analysis → engineering decision → research question**. See the [Lecture Authoring Standard](../../docs/LECTURE_AUTHORING_STANDARD.md).
 
 ## Real-data anchors
 
 Labs use real Hugging Face datasets including ylecun/mnist, farish07/banknote-authentication-dataset, Beothuk/uci-har-federated, tulipa762/electricity_load_diagrams, and stanfordnlp/imdb.
 
-## Research outcome
+## Course outcome
 
 A motivated learner accumulates methods, baselines, ablations, figures, error analyses, resource measurements and reproducibility records throughout the course. Completing the course does not guarantee publication; it teaches a defensible workflow for producing evidence strong enough to evaluate for publication.
 
