@@ -175,6 +175,3 @@ The notebook uses a real dataset or environment, records quantitative results, a
 ## Navigation
 
 [← Previous](../03_competitive_learning_and_som/lecture.md) · [Course 1 home](../README.md) · [Next →](../05_autoencoders/lecture.md)
-
-</div>
-
