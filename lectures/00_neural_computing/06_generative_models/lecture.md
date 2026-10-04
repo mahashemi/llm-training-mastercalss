@@ -157,6 +157,88 @@ State the hypothesis before the intervention and report quality **and** compute.
 
 [← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
 
+## Build the intuition before the notation
+
+Generative modeling is easiest to understand by asking a simple question:
+
+> **If I only show you examples from a distribution, can you learn to produce new examples that belong to that distribution?**
+
+A classifier learns a decision boundary or conditional prediction. A generator tries to model the structure of the examples themselves.
+
+### VAE: compress, regularize, reconstruct
+
+A VAE does not simply choose one latent vector. It learns a distribution over plausible latent explanations.
+
+The encoder produces $\mu$ and $\sigma$, we sample with
+
+$
+z=\mu+\sigma\odot\epsilon,
+\qquad \epsilon\sim\mathcal N(0,I),
+$
+
+and decode $z$.
+
+The KL term prevents every input from inventing an unrelated private latent space.
+
+### GAN: learn through a game
+
+The discriminator asks:
+
+> “Does this look real?”
+
+The generator asks:
+
+> “Can I produce something the discriminator accepts?”
+
+The difficulty is that both objectives move during training. A generator can also discover an easy subset of the distribution and repeatedly produce similar examples: **mode collapse**.
+
+### Diffusion: learn to reverse corruption
+
+Diffusion takes a different route.
+
+Instead of asking a network to generate a clean sample in one jump, it trains a denoiser to reverse a controlled corruption process.
+
+The conceptual loop is:
+
+**clean data → add noise → learn to remove noise → repeat many times during generation.**
+
+### Fair comparison
+
+Do not compare a VAE, GAN, and diffusion model using only the prettiest generated image.
+
+A serious comparison asks:
+
+- quality;
+- diversity;
+- coverage;
+- conditioning/control;
+- inference latency;
+- memory;
+- training cost.
+
+Different applications optimize different points on this trade-off surface.
+
+## Research exercise
+
+Choose one controlled variable and make a prediction before running the lab.
+
+| Model | Intervention | Primary measurement |
+|---|---|---|
+| VAE | latent size / KL weight | reconstruction + latent quality |
+| GAN | update ratio | stability + diversity |
+| Diffusion | denoising steps | quality + sampling time |
+
+Report both **what changed** and **what did not change**.
+
+## Exit questions
+
+1. What makes a model generative rather than merely predictive?
+2. Why does a VAE use a latent distribution?
+3. Why can GAN training collapse to a few modes?
+4. Why does diffusion require repeated denoising?
+5. Why should quality and compute be reported together?
+
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
@@ -173,4 +255,4 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Navigation
 
-[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../01_neural_computing_foundations/lecture.md)
+[← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
