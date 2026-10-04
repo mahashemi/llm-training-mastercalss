@@ -1,8 +1,15 @@
-# Course 1 · Chapter — RNNs, LSTM + GRU
+# Course 1 · Chapter — RNNs, LSTM, and GRU: Learning from Sequences
 
-**Track:** Neural Computing Foundation  
-**Topics:** SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing  
-**Primary lab:** [Open the executable laboratory](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+Language, sensor streams, transactions, and speech arrive as sequences. A recurrent model carries information from earlier steps into later decisions.
+
+A vanilla RNN repeatedly applies the same transition. LSTM and GRU introduce gates that learn what to keep, forget, and expose, addressing long-range gradient problems.
+
+You will see the failure before learning why the gates were invented.
 
 ## Learning objective
 
@@ -77,19 +84,23 @@ The notebook is intentionally part of this lecture. It uses a real dataset and r
 
 
 
-## Laboratory — run this experiment end to end
 
-**[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+[← Previous](../06_generative_models/lecture.md) · [Course 1 home](../README.md) · [Next →](../08_sequence_architectures_and_forecasting/lecture.md)
 
-## Laboratory — run this experiment end to end
+</div>
 
-**[Open the executable lab notebook](./lab.ipynb)**
+## Laboratory — run the experiment end to end
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+**[Open the executable laboratory](./lab.ipynb)**
 
-<div align="center">
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
 
 [← Previous](../06_generative_models/lecture.md) · [Course 1 home](../README.md) · [Next →](../08_sequence_architectures_and_forecasting/lecture.md)
 
