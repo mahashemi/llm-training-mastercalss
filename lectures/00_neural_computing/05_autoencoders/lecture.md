@@ -1,8 +1,15 @@
-# Course 1 · Chapter — Autoencoders
+# Course 1 · Chapter — Autoencoders: Learning Useful Representations
 
-**Track:** Neural Computing Foundation  
-**Topics:** basic, regularized, sparse, denoising, stacked denoising, contractive objectives  
-**Primary lab:** [Open the executable laboratory](./lab.ipynb)
+**Course:** Deep Learning & Neural Computing Foundations  
+**Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
+
+## Why this chapter exists
+
+Suppose we remove the label and simply ask a model to compress an image and reconstruct it. What information does it decide to keep?
+
+An autoencoder learns an encoder $z=f_\phi(x)$ and decoder $\hat{x}=g_\theta(z)$. The bottleneck forces the model to represent the input economically.
+
+We then deliberately make the bottleneck too small, add noise, and inspect what the representation loses.
 
 ## Learning objective
 
@@ -78,19 +85,23 @@ The notebook is intentionally part of this lecture. It uses a real dataset and r
 
 
 
-## Laboratory — run this experiment end to end
 
-**[Open the executable lab notebook](./lab.ipynb)**
 
-The notebook is part of this chapter, not optional homework. Work through it in order: **predict → establish baseline → run → chan\ge one factor → measure → inspect failures → produce the results table → write the conclusion**. The final cells include an answer key and a research extension.
+[← Previous](../04_convolutional_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../06_generative_models/lecture.md)
 
-## Laboratory — run this experiment end to end
+</div>
 
-**[Open the executable lab notebook](./lab.ipynb)**
+## Laboratory — run the experiment end to end
 
-Work through the notebook in order: **predict → baseline → run → change one factor → measure → inspect failures → produce the results table → conclude**. The final cells include the answer key and a research extension.
+**[Open the executable laboratory](./lab.ipynb)**
 
-<div align="center">
+This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+
+**predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
+
+The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
+
+## Navigation
 
 [← Previous](../04_convolutional_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../06_generative_models/lecture.md)
 
