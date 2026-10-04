@@ -82,6 +82,6 @@ The experiment is part of this lecture. Record a baseline, controlled interventi
 
 <div align="center">
 
-[← Previous lecture: Lecture 13 — Data Sources and Dataset Construction](../13_data_sources_and_dataset_construction/lecture.md) · [Next lecture: Lecture 15 — Mid and Post Training: SFT and RLHF →](../15_mid_and_post_training_sft_and_rlhf/lecture.md)
+[← Previous: Lecture 06 — Data Sources and Construction](../13_data_sources_and_dataset_construction/lecture.md) · [Next: Lecture 08 — Pretraining Systems →](../11_training_system_design/lecture.md)
 
 </div>
