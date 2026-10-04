@@ -210,3 +210,10 @@ Run the notebook as part of this chapter: establish the baseline, change one con
 [← Previous: Lecture 22 — API vs RAG vs Tools vs Training](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Next: Lecture 24 — From Experiment to a Fundable Model →](../24_from_experiment_to_fundable_model/lecture.md)
 
 </div>
+## Video companions
+
+[Video companions: building an LLM training program](https://www.youtube.com/results?search_query=LLM+training+program+project+planning+lecture)
+
+## Navigation
+
+[← Previous](../22_api_vs_rag_vs_tools_vs_training/lecture.md) · [Course 2 home](../../courses/02_llm_engineering_and_training/README.md) · [Next →](../24_from_experiment_to_fundable_model/lecture.md)
