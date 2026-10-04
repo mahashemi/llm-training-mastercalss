@@ -58,27 +58,6 @@ That can affect:
 
 You should not leave this lecture thinking vocabulary design is cosmetic.
 
-## Laboratory
-
-Open the tokenizer notebook.
-
-Before running it, predict:
-
-1. which language will have highest fertility;
-2. which tokenizer will produce longer sequences;
-3. whether vocabulary size alone predicts fertility.
-
-Measure:
-
-| Metric | Result |
-|---|---|
-| tokens | measure |
-| tokens/character | measure |
-| mean sequence length | measure |
-| p95 sequence length | measure |
-| vocabulary utilization | measure |
-| per-language fertility | measure |
-
 ## Break it
 
 Use a corpus distribution that is mostly English while evaluating a low-resource target language.
@@ -112,9 +91,9 @@ Compare your measured result with a published tokenizer claim and identify what 
 
 ## Lab — run it here
 
-**Primary laboratory:** [Open the lab notebook](./lab.ipynb)
+**Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
 
-This lab is part of this lecture. Do not leave the lecture to find the experiment: run the notebook, record the baseline, controlled intervention, quantitative result, failure/edge case, resource measurement, interpretation, and next experiment.
+Run the notebook as part of this chapter: establish the baseline, change one controlled variable, measure the result, inspect a failure or edge case, record the quantitative evidence, explain the result, and propose the next experiment.
 
 ---
 
