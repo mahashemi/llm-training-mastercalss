@@ -65,6 +65,66 @@ Write the minimum information needed for someone else to reproduce your reported
 Connect your benchmark protocol to the evaluation chapters and preserve the exact evaluation code/configuration alongside results.
 
 
+
+## A worked evaluation example
+
+Suppose a model answers 100 factual questions and gets 82 correct.
+
+That gives 82% accuracy, but it does not tell us whether the model is safe, calibrated, robust, or useful in the target application.
+
+A stronger evaluation separates dimensions:
+
+| Dimension | Example question |
+|---|---|
+| correctness | Is the answer supported by the reference? |
+| instruction following | Did it satisfy the requested format? |
+| robustness | Does a harmless wording change break it? |
+| calibration | Does confidence track correctness? |
+| safety | Does it avoid unsafe behavior? |
+| efficiency | What quality is achieved per unit cost? |
+
+The evaluator must therefore be designed from the intended use, not selected only because it produces a convenient score.
+
+## Baselines and controls
+
+A meaningful evaluation usually compares more than one model.
+
+For example:
+
+**baseline model → intervention model → stronger reference model**
+
+Then add a control when possible. If a training intervention claims to improve reasoning, test a control intervention that changes compute or formatting without changing the proposed mechanism.
+
+The goal is to distinguish:
+
+> “The score changed”
+
+from
+
+> “The proposed intervention caused the change.”
+
+## Error analysis
+
+After computing a score, inspect failures.
+
+Create categories such as:
+
+- knowledge gap;
+- reasoning error;
+- retrieval failure;
+- instruction-following error;
+- formatting error;
+- ambiguity;
+- evaluator disagreement.
+
+Then report representative examples and category counts.
+
+A 90% score with 10% catastrophic failures can be worse for a high-stakes application than a lower score with predictable, detectable errors.
+
+## Research extension
+
+Pre-register the primary metric and evaluation set before running the final comparison. Then add an error taxonomy after seeing failures without changing the primary claim.
+
 ## Lab — run it here
 
 **Primary laboratory:** [Open the executable lab notebook](./lab.ipynb)
