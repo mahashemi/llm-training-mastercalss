@@ -23,9 +23,7 @@ Start with a clustering problem where labels do not exist. Competitive learning 
 
 For an input vector $x$ and prototype $w_j$, first find the **best-matching unit (BMU)**: the prototype with the smallest squared Euclidean distance to the input.
 
-$
-j^* = \arg\min_j \|x-w_j\|_2^2.
-$
+$$ j^* = \arg\min_j \|x-w_j\|_2^2. $$
 
 The notebook sometimes reports ordinary Euclidean distance $\|x-w_j\|_2$ instead. That does not change which prototype wins: squaring is a strictly increasing operation on nonnegative distances. It does change the numerical value of the reported error, so compare runs only when they use the same convention.
 
@@ -51,28 +49,19 @@ The important intuition is that learning is simultaneously doing two things: fit
 
 Place four prototypes at the corners of a square:
 
-$
-w_1=(0,0),\quad w_2=(2,0),\quad w_3=(0,2),\quad w_4=(2,2).
-$
+$$ w_1=(0,0),\quad w_2=(2,0),\quad w_3=(0,2),\quad w_4=(2,2). $$
 
 For the input $x=(1.2,0.4)$, the squared distances to the first two prototypes are
 
-$
-\|x-w_1\|_2^2=1.2^2+0.4^2=1.60,\qquad
-\|x-w_2\|_2^2=(-0.8)^2+0.4^2=0.80.
-$
+$$ \|x-w_1\|_2^2=1.2^2+0.4^2=1.60,\qquad \|x-w_2\|_2^2=(-0.8)^2+0.4^2=0.80. $$
 
 The other two prototypes have larger squared distances, so $w_2$ wins. With learning rate $\eta=0.25$, the competitive-learning update is
 
-$
-w_2^{\mathrm{new}}=(2,0)+0.25((1.2,0.4)-(2,0))=(1.8,0.1).
-$
+$$ w_2^{\mathrm{new}}=(2,0)+0.25((1.2,0.4)-(2,0))=(1.8,0.1). $$
 
 In a SOM, a nearby prototype may also move. If $w_1$ has neighborhood strength $h=0.5$, its effective step size is $\eta h=0.125$, giving
 
-$
-w_1^{\mathrm{new}}=(0,0)+0.125(1.2,0.4)=(0.15,0.05).
-$
+$$ w_1^{\mathrm{new}}=(0,0)+0.125(1.2,0.4)=(0.15,0.05). $$
 
 The winner moves farther than this neighbor. That is the neighborhood idea in numbers: nearby map units cooperate, but not equally.
 
