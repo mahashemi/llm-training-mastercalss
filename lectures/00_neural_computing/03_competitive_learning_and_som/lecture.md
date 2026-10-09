@@ -110,27 +110,47 @@ A good unsupervised result survives several of these questions.
 
 ## Work a winner-take-all update by hand
 
-Let the input be \(x=(0.2,0.8)\), and suppose two map units have prototypes \(w_1=(0,1)\) and \(w_2=(1,0)\). A simple SOM first finds the **best-matching unit (BMU)** by Euclidean distance.
+Let the input be $x=(0.2,0.8)$, and suppose two map units have prototypes $w_1=(0,1)$ and $w_2=(1,0)$. A simple SOM first finds the **best-matching unit (BMU)** by Euclidean distance.
 
-\[
+$$
 d(x,w_1)=\sqrt{(0.2-0)^2+(0.8-1)^2}\approx0.283,
-\]
-\[
+$$
+$$
 d(x,w_2)=\sqrt{(0.2-1)^2+(0.8-0)^2}\approx1.131.
-\]
+$$
 
 Unit 1 wins because its prototype is closer to the example. A basic competitive update moves the winner toward the input:
 
-\[
+$$
 w_1'=w_1+\eta(x-w_1).
-\]
+$$
 
-With learning rate \(\eta=0.5\), \(w_1'=(0.1,0.9)\). A SOM also moves neighboring map units, but by a smaller amount determined by their distance from the BMU on the map grid. That neighborhood update is what distinguishes a SOM from winner-take-all clustering.
+With learning rate $\eta=0.5$, $w_1'=(0.1,0.9)$. A SOM also moves neighboring map units, but by a smaller amount determined by their distance from the BMU on the map grid. That neighborhood update is what distinguishes a SOM from winner-take-all clustering.
 
 The learning rate and neighborhood radius usually shrink over training. Early updates organize broad structure; later updates refine local placement. But a visually attractive map does not prove that its topology is meaningful. Inspect quantization error and a neighborhood-preservation measure, and compare against a simple baseline.
 
 **Check yourself:** if both prototypes were equally distant from the input, what tie-breaking rule would your implementation use? Why should that choice be deterministic for reproducible experiments?
 
+
+A neighboring unit does not usually move as far as the winner. For example, with input $x=(0.2,0.8)$, neighbor prototype $w_2=(1,0)$, learning rate $\eta=0.5$, and neighborhood strength $h=0.25$, its update is
+
+$
+w_2'=w_2+\eta h(x-w_2)
+=(1,0)+0.125(-0.8,0.8)
+=(0.9,0.1).
+$
+
+The neighbor moved toward the same input, but only one quarter as strongly as the winner would under this learning rate. This illustrates the map's topological bias: nearby grid units are encouraged to represent nearby regions of input space.
+
+### How to measure what the map learned
+
+A simple metric is **quantization error**: the average distance from each observation to its best-matching prototype. For observations $x^{(1)},\ldots,x^{(N)}$ and BMU index $j^*(i)$,
+
+$
+Q=\frac{1}{N}\sum_{i=1}^{N}\left\|x^{(i)}-w_{j^*(i)}\right\|_2.
+$
+
+A lower value means prototypes sit closer to the observations. It does **not** prove that nearby points stay nearby on the grid, that discovered groups match meaningful classes, or that one model is better at the same capacity. Pair it with a neighborhood-preservation measure, a baseline such as k-means, and qualitative inspection. If features use different units, fit standardization on the training set only; otherwise a high-range feature can dominate Euclidean distance.
 
 ## Core concepts
 
@@ -171,6 +191,15 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 4. What is the simplest credible baseline?
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
+
+### Answers
+
+1. Competitive learning chooses a closest prototype and updates it toward the observation; SOM also updates grid neighbors.
+2. The best-matching unit is the prototype with minimum distance to the input.
+3. The learning rate controls update size; the neighborhood function controls how strongly each grid unit participates.
+4. Quantization error measures average input-to-BMU distance, but not topology preservation or semantic usefulness.
+5. Compare with a declared baseline under the same preprocessing, data, and evaluation protocol; repeat across seeds where feasible.
+6. Labels used to guide updates would make the procedure supervised rather than unsupervised.
 
 ## Visual intuition
 
