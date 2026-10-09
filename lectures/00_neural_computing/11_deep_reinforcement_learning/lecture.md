@@ -256,7 +256,9 @@ Predefine the threshold, seeds, evaluation episodes, and stopping rule.
 
 ## Video companions
 
-[Video companions: deep reinforcement learning](https://www.youtube.com/results?search_query=deep+reinforcement+learning+lecture)
+**Recommended starting point:** [Deep Q-Networks — hands-on reinforcement learning](https://www.youtube.com/watch?v=KySQ0WoXsPo)
+
+For a second perspective, [compare DQN, experience replay, and target networks](https://www.youtube.com/results?search_query=DQN+experience+replay+target+network+explained).
 
 ## Navigation
 
