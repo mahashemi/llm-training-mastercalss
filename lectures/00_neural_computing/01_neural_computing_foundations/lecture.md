@@ -532,7 +532,13 @@ The next chapters build on the same ideas while changing the structure of the co
 6. Backpropagation calculates gradients; gradient descent uses those gradients to change parameters.
 7. Without nonlinearities, stacked linear layers collapse into one linear transformation.
 
-## Visual intuition — from input to decision
+## Visual intuition
+
+![From inputs to a learned decision](../../../visuals/course1/01-neural-computation.svg)
+
+*Figure: A neuron combines evidence, then an activation turns it into a response.*
+
+— from input to decision
 
 A neuron is a small computational pipeline. The weights decide how strongly each input matters; the bias shifts the threshold; the activation turns the score into an output.
 
