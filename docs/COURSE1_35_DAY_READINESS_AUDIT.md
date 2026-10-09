@@ -50,7 +50,7 @@ Before marking Course 1 instructor-ready, verify each item against the actual ch
 
 - All 12 lab notebooks passed clean-kernel execution in the recorded workflow run.
 - Every lecture has a chapter-specific static SVG and a Mermaid mechanism diagram.
-- A follow-up pass improved equation formatting and beginner-first explanations in CNNs, autoencoders, RNNs, forecasting, RBMs, and attention; focused video companions were added where appropriate in [PR #22](https://github.com/mahashemi/llm-training-mastercalss/pull/22). The next teaching pass added full LSTM/GRU equations with a numerical cell-state trace and introduced policy-gradient notation alongside DQN.
+- A follow-up pass improved equation formatting and beginner-first explanations in CNNs, autoencoders, RNNs, forecasting, RBMs, and attention; focused video companions were added where appropriate in [PR #22](https://github.com/mahashemi/llm-training-mastercalss/pull/22). The next teaching pass added full LSTM/GRU equations with a numerical cell-state trace, clarified Evolving SOM variant-specific mechanics, and introduced policy-gradient notation alongside DQN.
 - Duplicate navigation footers and the incorrect Course 2 link in the capstone were corrected in this follow-up.
 
 ## Completion policy
