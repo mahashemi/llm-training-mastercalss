@@ -21,12 +21,27 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Start with a clustering problem where labels do not exist. Competitive learning asks which prototype is closest to an input and lets that prototype move toward the example. For SOM, the winner is not alone: nearby units move too, creating a topology-preserving map.
 
-For an input x and prototype w_j, choose
-j* = argmin_j ||x-w_j||².
-Then update the winner:
-w_j* ← w_j* + η(x-w_j*).
-SOM extends this with a neighborhood h(j,j*,t):
-w_j ← w_j + η h(j,j*,t)(x-w_j).
+For an input vector $x$ and prototype $w_j$, first find the **best-matching unit (BMU)**: the prototype with the smallest squared Euclidean distance to the input.
+
+$$
+j^* = \arg\min_j \|x-w_j\|_2^2.
+$$
+
+The winner then moves a fraction of the way toward the input:
+
+$$
+w_{j^*}^{\text{new}} = w_{j^*}^{\text{old}} + \eta\left(x-w_{j^*}^{\text{old}}\right).
+$$
+
+Here, $x-w_{j^*}$ is the direction from the winning prototype to the example, and the learning rate $\eta$ controls how far the prototype moves. If $\eta=0$, it does not move; if $\eta=1$, it jumps directly to the example for this update.
+
+A self-organizing map (SOM) also moves nearby grid units. Let $h(j,j^*,t)$ be the neighborhood strength for unit $j$ around the winner at training step $t$:
+
+$$
+w_j^{\text{new}} = w_j^{\text{old}} + \eta\,h(j,j^*,t)\left(x-w_j^{\text{old}}\right).
+$$
+
+The winner usually has neighborhood strength near 1, while farther units receive smaller values (often 0). The neighborhood radius typically shrinks over training.
 
 The important intuition is that learning is simultaneously doing two things: fitting prototypes to data and organizing nearby prototypes to represent nearby regions of the input space.
 
