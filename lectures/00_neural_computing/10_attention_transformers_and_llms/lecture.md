@@ -158,7 +158,11 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — attention is content-dependent routing
+## Visual intuition
+
+![Attention routes information between tokens](../../../visuals/course1/10-attention.svg)
+
+— attention is content-dependent routing
 
 Each token produces a query, key, and value. Query-key similarity determines how much each token reads from the others; the weighted sum of values becomes the output. A causal mask prevents a token from reading future positions during next-token prediction.
 
