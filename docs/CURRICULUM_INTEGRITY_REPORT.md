@@ -151,3 +151,12 @@ The invariant remains:
 - The lab's Gibbs intervention now alternates actual hidden and visible sampling, compares sampled hidden-visible association statistics with data statistics, and records environment-specific sampling time. It no longer labels distance from the starting image as a reconstruction-quality measure.
 - Notebook code changed; fresh clean-kernel execution is required after merge. Repeated seeds and stronger distributional evaluation remain open evidence-quality work.
 
+## Course 1 math-rendering and execution audit — 2026-10-09
+
+- Re-audited all 12 lecture sources after the focused fixes. Every chapter has the expected numbered top-level heading; no math expressions remain in headings; no standalone single-dollar display delimiters, unmatched display-math blocks, or odd-count inline-dollar lines were detected by the source audit.
+- Chapter 1's middle and lower sections were specifically rechecked: the gradient-vector display, Adaline gradient, gradient-descent update, mastery question, and answer key are intact and correctly delimited.
+- The updated autoencoder linear-probe lab passed full clean-kernel execution in [run #37915707503](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915707503). The full run completed successfully before the subsequent forecasting leakage and RBM Gibbs-lab changes.
+- The corrected forecasting notebook passed structural validation in [run #37916464554](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916464554); fresh full-suite execution is pending in [run #37916489042](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916489042).
+- The RBM lab passed structural validation in [run #37916621548](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916621548); full-suite execution including the corrected Gibbs chain is pending in [run #37916681821](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916681821).
+- Keep execution and pedagogical completeness as separate gates. Structural validation checks notebook structure; clean-kernel execution checks runtime behavior; neither alone establishes statistical robustness or full instructor readiness.
+
