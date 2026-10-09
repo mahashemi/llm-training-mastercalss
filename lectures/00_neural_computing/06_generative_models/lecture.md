@@ -218,6 +218,37 @@ A serious comparison asks:
 
 Different applications optimize different points on this trade-off surface.
 
+## Work through the objectives of three generative models
+
+The models in this chapter all generate examples, but their losses do not mean the same thing.
+
+### VAE: reconstruction plus a latent penalty
+
+A common VAE objective minimizes
+
+\[
+\mathcal{L}_{\mathrm{VAE}}=\mathcal{L}_{\mathrm{recon}}+\beta D_{\mathrm{KL}}\big(q_\phi(z\mid x)\,\|\,p(z)\big).
+\]
+
+Suppose one example has reconstruction loss 10 and KL penalty 2. With \(\beta=0.5\), the total objective is \(10+0.5(2)=11\). Increasing \(\beta\) strengthens pressure for the latent distribution to match the prior, but may reduce reconstruction fidelity. The terms are a trade-off, not two independent accuracy scores.
+
+### GAN: a two-player game
+
+The generator creates a sample; the discriminator learns to distinguish real from generated examples. The generator's learning signal depends on the discriminator, so a discriminator that becomes too strong or too weak can make training unstable. A low discriminator loss alone is not evidence that generated samples are good.
+
+### Diffusion: learn to reverse corruption
+
+A common forward-noising expression is
+
+\[
+x_t=\sqrt{\bar{\alpha}_t}x_0+\sqrt{1-\bar{\alpha}_t}\epsilon,\qquad \epsilon\sim\mathcal{N}(0,I).
+\]
+
+For a toy scalar example, choose \(\bar{\alpha}_t=0.64\), clean value \(x_0=1\), and sampled noise \(\epsilon=-0.5\). Then \(x_t=0.8(1)+0.6(-0.5)=0.5\). The model learns to predict the noise or an equivalent denoising target; generation starts from noise and repeatedly applies the learned reverse process.
+
+**Check yourself:** why is it invalid to compare a VAE's reconstruction loss directly with a GAN's discriminator loss and declare the lower one the better generator? Name a sample-quality or distributional evaluation you would add.
+
+
 ## Research exercise
 
 Choose one controlled variable and make a prediction before running the lab.

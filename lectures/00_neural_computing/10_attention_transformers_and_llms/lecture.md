@@ -118,6 +118,41 @@ The important question is not merely “which is faster?” but:
 > **What information do we lose when we stop allowing every position to interact with every other position?**
 
 
+## Work a tiny attention calculation by hand
+
+Suppose one query is \(q=[1,0]\), and two keys are \(k_1=[1,0]\) and \(k_2=[0,1]\). With key dimension \(d_k=2\), scaled dot-product attention gives scores
+
+\[
+s_i=\frac{q^\top k_i}{\sqrt{d_k}}
+\quad\Rightarrow\quad
+s_1=\frac1{\sqrt2}\approx0.707,\qquad s_2=0.
+\]
+
+Softmax converts scores to weights:
+
+\[
+\alpha_i=\frac{e^{s_i}}{\sum_j e^{s_j}}
+\quad\Rightarrow\quad
+(\alpha_1,\alpha_2)\approx(0.67,0.33).
+\]
+
+Let the corresponding values be \(v_1=[10,0]\) and \(v_2=[0,10]\). The output is their weighted average:
+
+\[
+o=0.67v_1+0.33v_2\approx[6.7,3.3].
+\]
+
+The output mostly carries the first value because its key matched the query more strongly. In a Transformer, queries, keys, and values are learned projections of token representations, not hand-written vectors.
+
+### What the causal mask changes
+
+When predicting the next token, position \(t\) must not read positions after \(t\). A causal mask replaces forbidden future scores with a very negative number before softmax, making their weights effectively zero. Without the mask, training can leak the answer token into its own prediction.
+
+Attention weights show how a particular head mixes value vectors; they are not automatically faithful explanations of a model's decision.
+
+**Check yourself:** if both scores are equal and neither is masked, what are the two attention weights? What should happen to the weight of a masked future token?
+
+
 ## Core concepts
 
 This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bridge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.

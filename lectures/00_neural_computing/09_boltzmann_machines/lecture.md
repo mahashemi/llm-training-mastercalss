@@ -82,6 +82,32 @@ It is:
 That question connects statistical approximation directly to systems cost.
 
 
+## Work a tiny energy calculation by hand
+
+For a restricted Boltzmann machine, one common energy function is
+
+\[
+E(v,h)=-a^\top v-b^\top h-v^\top Wh,
+\]
+
+where \(v\) is the visible vector, \(h\) the hidden vector, \(a,b\) are biases, and \(W\) connects visible to hidden units. Lower energy means the model regards that joint configuration as more compatible.
+
+For a one-visible, one-hidden toy model, set both biases to zero and \(W=1\). Then:
+
+- \(E(1,1)=-1\), because the active visible and hidden units agree through the positive weight;
+- \(E(1,0)=0\), because the interaction term is zero.
+
+The unnormalized probability is proportional to \(e^{-E(v,h)}\), so the first configuration receives weight \(e^1\), while the second receives weight \(e^0=1\). This illustrates how the interaction changes relative preference. It is not a full probability calculation over every possible configuration.
+
+### Why contrastive divergence has two phases
+
+The positive phase uses real data to increase compatibility between observed patterns and their likely hidden causes. The negative phase uses model-generated samples to reduce the model's tendency to assign excessive probability to those samples. Contrastive divergence approximates this second phase with a short Gibbs chain; it is computationally convenient but biased.
+
+A falling reconstruction error is useful diagnostic evidence, not proof that the learned distribution is good. Also inspect generated samples, diversity, and stability across random seeds.
+
+**Check yourself:** if the positive and negative phases were identical, what would the expected parameter update be? Explain why the model needs to compare data-driven and model-driven statistics.
+
+
 ## Core concepts
 
 This unit covers **energy-based learning, RBM, contrastive divergence, DBN intuition**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
