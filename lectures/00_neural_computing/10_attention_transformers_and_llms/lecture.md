@@ -19,7 +19,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Begin with a sentence containing a long dependency:
+Consider a sentence containing a long dependency:
 
 “The scientist who had worked in Tehran for ten years finally published the paper.”
 
@@ -36,14 +36,29 @@ $$
 
 Conceptually, $QK^\top$ scores how strongly each token's query matches each token's key. Dividing by $\sqrt{d_k}$ controls the scale of those scores as the key dimension grows. Softmax turns each row of scores into nonnegative weights that sum to 1. Multiplying those weights by $V$ produces a weighted mixture of the information carried by the tokens.
 
-Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token $t$ cannot use future tokens during autoregressive language modeling.
+### Worked three-token attention example
 
-Explain the roles separately:
+Take one query $q=(1,0)$, keys $k_1=(1,0)$, $k_2=(0,1)$, $k_3=(1,1)$, scalar values $v_1=10$, $v_2=0$, $v_3=20$, and key dimension $d_k=2$. The scaled scores are
+
+$$
+\left[\frac{q\cdot k_1}{\sqrt2},\frac{q\cdot k_2}{\sqrt2},\frac{q\cdot k_3}{\sqrt2}\right]
+\approx[0.707,0,0.707].
+$$
+
+Softmax gives weights approximately $[0.401,0.198,0.401]$, so the retrieved value is
+
+$$
+0.401(10)+0.198(0)+0.401(20)\approx12.03.
+$$
+
+If this query belongs to the second token, causal masking forbids access to the third key. The weights become approximately $[0.670,0.330,0]$, and the output is about $6.70$. Without the mask, the future value $20$ influences the result: this is the information leak an autoregressive model must avoid.
+
+The three roles are distinct:
 - Q: what this position is looking for;
 - K: what each position offers for matching;
 - V: what information is retrieved after matching.
 
-Then introduce multi-head attention as several learned projections that can specialize in different relationships.
+Multi-head attention uses several learned query/key/value projections in parallel, allowing different heads to specialize in different relationships.
 
 The Transformer combines attention with positional information, residual connections, normalization, and feed-forward transformations.
 
