@@ -159,6 +159,38 @@ Attention weights show how a particular head mixes value vectors; they are not a
 **Check yourself:** if both scores are equal and neither is masked, what are the two attention weights? What should happen to the weight of a masked future token?
 
 
+## BERT-style masked prediction versus GPT-style next-token prediction
+
+Attention is a mechanism; the training objective determines what the model is asked to learn. Consider the token sequence:
+
+**The · cat · sat · down**
+
+A BERT-style masked-language-model example might present:
+
+**The · [MASK] · sat · down**
+
+The model predicts the missing word *cat* using context on both sides. During training, the loss is applied to selected masked positions:
+
+\[
+\mathcal L_{\mathrm{MLM}}
+=-\sum_{i\in M}\log p_\theta(x_i\mid x_{\setminus M}),
+\]
+
+where \(M\) is the set of masked positions, \(x_i\) is the original token at position \(i\), and \(x_{\setminus M}\) denotes the corrupted input with those positions masked. The model can use context to the left and right of a masked token.
+
+A GPT-style autoregressive model instead learns to predict the next token from the preceding tokens. For this same sequence, it learns examples such as **The → cat**, **The cat → sat**, and **The cat sat → down**:
+
+\[
+\mathcal L_{\mathrm{next}}
+=-\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t}).
+\]
+
+Here \(x_{<t}\) means all tokens before position \(t\). The causal attention mask enforces that restriction: the representation at position \(t\) cannot read future tokens.
+
+The key distinction is not that one model “uses attention” and the other does not. Both can use Transformer attention. The difference is **which tokens are visible to each prediction and which targets receive loss**. Masked prediction is useful for learning bidirectional representations; causal next-token prediction directly matches left-to-right text generation. These objectives create different training behavior and should not be treated as interchangeable.
+
+**Check yourself:** If the target is *sat*, what context is available to a GPT-style model? What extra information can a BERT-style masked model use when *cat* is masked in the middle of the sentence?
+
 ## Core concepts
 
 This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bridge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
