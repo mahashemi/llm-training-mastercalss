@@ -100,3 +100,10 @@ The invariant remains:
 - The notebook records per-epoch training loss, final held-out loss/accuracy, and seed variability, with plots for optimization curves and final accuracy.
 - This experiment is intentionally modest; a fresh clean-kernel run is required after merge, and it does not yet constitute a full DenseNet-versus-ResNet benchmark.
 
+## Course 1 generative objective and metric pass — 2026-10-09
+
+- Chapter 6 now works through a numeric GAN discriminator loss and non-saturating generator loss, emphasizing that neither is a direct sample-quality or mode-coverage score.
+- The GAN lab reports generated spread, fractions near each mode in its two-mode toy distribution, an explicit two-mode coverage fraction, update count, and environment-specific training time.
+- The VAE and diffusion sections already include worked numeric objective/noising examples; the readiness audit now distinguishes those from the remaining need for a defensible sample-fidelity evaluation.
+- Notebook code changed in this pass; a fresh clean-kernel run is required before treating these new metrics as execution-verified.
+
