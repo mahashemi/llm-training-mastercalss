@@ -25,6 +25,8 @@ jobs:
           python-version: "3.11"
       - name: Install notebook validator
         run: python -m pip install --upgrade nbformat
+      - name: Validate Course 1 lecture math delimiters
+        run: python scripts/check_course1_math.py
       - name: Validate notebook structure and Python syntax
         run: |
           python - <<'PY'
