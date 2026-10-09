@@ -181,7 +181,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: competitive learning and self-organizing maps](https://www.youtube.com/results?search_query=self+organizing+maps+competitive+learning+lecture)
+**Recommended starting point:** [Self-Organizing Maps — lecture, examples, and implementation](https://www.youtube.com/watch?v=OJT_57s0SHo)
+
+For a broader selection, [browse more Self-Organizing Maps videos](https://www.youtube.com/results?search_query=Self-Organizing+Maps).
 
 ## Navigation
 
