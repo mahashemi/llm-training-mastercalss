@@ -117,11 +117,11 @@ $$ \hat y = W_2(W_1x+b_1)+b_2. $$
 
 Rearranging gives
 
-$ \hat y=(W_2W_1)x+(W_2b_1+b_2). $
+$$ \hat y=(W_2W_1)x+(W_2b_1+b_2). $$
 
 To see why, define a new combined weight $W=W_2W_1$ and a new combined bias $b=W_2b_1+b_2$. Then the whole network is just
 
-$ \hat y=Wx+b. $
+$$ \hat y=Wx+b. $$
 
 It has exactly the form of a single affine layer. The dimensions must match: if $x$ has $d$ features, the hidden layer has $m$ units, and the output has $k$ units, then $W_1$ is $m\times d$, $W_2$ is $k\times m$, and $W=W_2W_1$ is $k\times d$. The two layers may have more parameters internally, but without a nonlinear activation their composition still reduces to one affine transformation.
 
@@ -129,7 +129,7 @@ So stacking affine layers without nonlinearities still produces only an affine f
 
 A common activation is the **rectified linear unit (ReLU)**. To avoid renderer-specific operator macros, we write its name as ordinary upright text:
 
-$ \mathrm{ReLU}(a)=\max(0,a). $
+$$ \mathrm{ReLU}(a)=\max(0,a). $$
 
 This means: if $a$ is positive, keep it; if $a$ is negative, output zero. For example, $\mathrm{ReLU}(3)=3$ and $\mathrm{ReLU}(-2)=0$. At exactly zero, implementations use a chosen derivative convention (commonly zero); this single point does not change the function's overall purpose.
 
