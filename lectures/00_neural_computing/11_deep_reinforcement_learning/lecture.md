@@ -173,6 +173,23 @@ Use at least three seeds.
 The correct conclusion is not “target networks always work.” It is the narrower claim supported by your experiment.
 
 
+## Visual intuition — the agent learns from consequences
+
+Unlike supervised learning, reinforcement learning does not receive the correct action for every state. It observes a state, chooses an action, receives a reward, and sees a new state. The return combines immediate and future rewards.
+
+```mermaid
+flowchart LR
+    S["State sₜ"] --> A["Agent / policy chooses aₜ"]
+    A --> E["Environment"]
+    E --> R["Reward rₜ₊₁"]
+    E --> SN["Next state sₜ₊₁"]
+    R --> U["Update value / policy estimate"]
+    SN --> U
+    U -. "improve future decisions" .-> A
+```
+
+For DQN, replay and a target network are engineering stabilizers: replay reuses decorrelated transitions, while the target network slows changes to the bootstrap target. Their benefit should be measured across seeds, not inferred from a single reward curve.
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
