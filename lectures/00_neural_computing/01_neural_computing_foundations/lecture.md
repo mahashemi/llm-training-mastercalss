@@ -4,6 +4,42 @@
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
 
+## Welcome: your 35-day journey
+
+This is not a course where you wait until the final week to “do a project.” From today, you are learning how to become a researcher: first understand a mechanism, then ask a question, test it carefully, and explain what the evidence does—and does not—show.
+
+![Course roadmap](../../../visuals/course1/course-roadmap.svg)
+
+![Assessment breakdown](../../../visuals/course1/assessment-breakdown.svg)
+
+### The calendar in one minute
+
+- **Days 1–7 — Get started:** learn the first learning mechanisms, explore the project catalogue, begin a study report, and submit a project proposal.
+- **Days 8–17 — Build foundations:** SOMs, CNNs, autoencoders and generative-model foundations; make your project question measurable.
+- **Day 18 — Midterm:** individual assessment of the foundations covered in Days 1–14.
+- **Days 19–28 — Expand your toolkit:** sequence models, attention/Transformers, a historical look at Boltzmann machines, and reinforcement learning.
+- **Days 29–34 — Research sprint:** freeze your evaluation, run a controlled experiment, analyze failures, write, present, and submit.
+- **Day 35 — Final examination:** demonstrate individual understanding and research judgment.
+
+### How your grade is earned
+
+| Component | Weight |
+|---|---:|
+| Assignments and project work | 40% |
+| Critical study report | 15% |
+| Midterm (Day 18) | 15% |
+| Final exam (Day 35) | 30% |
+
+The [full milestone calendar and rubric](../../../docs/ASSESSMENT_AND_MASTERY.md) explains exactly what is due and when.
+
+### Your first research challenge
+
+Before leaving this lecture, write down one thing about learning systems that genuinely puzzles you. It can be small: *Why does a model memorize? When does a representation help? What makes a comparison fair?* By Day 3, turn that curiosity into a candidate research question using the [project catalogue](../../../projects/06_student_research_project_catalog.md). You are not expected to have a groundbreaking idea today; you are expected to learn how to make a question precise.
+
+You will also start writing in LaTeX early. The [LaTeX and publication guide](../../../docs/COURSE1_LATEX_AND_PUBLICATION_GUIDE.md) provides a starter template and explains how to prepare a reproducible paper draft and evaluate whether a preprint or venue submission is appropriate.
+
+---
+
 ## Why this chapter exists
 
 A fresher-friendly starting point: what a model is, what learning means, and why a single neuron is useful but limited.
