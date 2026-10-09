@@ -191,6 +191,67 @@ The key distinction is not that one model “uses attention” and the other doe
 
 **Check yourself:** If the target is *sat*, what context is available to a GPT-style model? What extra information can a BERT-style masked model use when *cat* is masked in the middle of the sentence?
 
+## Multi-head attention: a complete tensor-shape example
+
+The single-head example used one query/key/value space. A Transformer usually runs several attention heads in parallel so that different learned projections can represent different relationships. Let us track every dimension without needing a large model.
+
+Choose these small dimensions:
+
+- batch size \(B=2\): two examples processed together;
+- sequence length \(T=3\): three tokens per example;
+- model width \(d_{\text{model}}=4\): four numbers represent each token;
+- number of heads \(H=2\): two attention calculations in parallel;
+- head width \(d_k=d_v=2\): each head uses two-dimensional queries, keys, and values.
+
+The input tensor is
+
+$
+X\in\mathbb R^{B\times T\times d_{\text{model}}}
+=\mathbb R^{2\times3\times4}.
+$
+
+First, learned projection matrices turn each token representation into queries, keys, and values. For this example, each projection maps four features to four features:
+
+$
+W_Q,W_K,W_V\in\mathbb R^{4\times4},
+\qquad
+Q=XW_Q,\ K=XW_K,\ V=XW_V.
+$
+
+Therefore \(Q\), \(K\), and \(V\) each have shape \((2,3,4)\). The model then splits the final dimension of four into two heads of width two and moves the head dimension next to the batch dimension:
+
+$
+(B,T,4)\rightarrow(B,T,H,d_k)\rightarrow(B,H,T,d_k).
+$
+
+After splitting, each of \(Q\), \(K\), and \(V\) has shape \((2,2,3,2)\). Within each head, the key matrix is transposed across its final two dimensions. The score calculation is
+
+$
+QK^\top:
+(2,2,3,2)\times(2,2,2,3)
+\rightarrow(2,2,3,3).
+$
+
+Each head now has a \(3\times3\) score matrix for every example: each of the three query tokens scores all three key positions. Scale the scores by \(\sqrt{d_k}=\sqrt2\), apply softmax over the last axis, and multiply by that head's values:
+
+$
+\operatorname{softmax}\left(\frac{QK^\top}{\sqrt2}\right)V
+\rightarrow(2,2,3,2).
+$
+
+Finally, move the head dimension back next to the feature dimension, concatenate the two heads, and apply the output projection:
+
+$
+(2,2,3,2)\rightarrow(2,3,2,2)
+\rightarrow(2,3,4)\rightarrow(2,3,4).
+$
+
+The last projection changes the combined representation using learned weights; it does not change the tensor shape in this example.
+
+**Shape sanity check:** the sequence length stays three throughout attention. The two heads each return two features, so concatenating them restores the model width of four. If your implementation produces a final feature width of two here, you probably forgot to concatenate the heads; if it produces a sequence length of two, check the reshape or transpose.
+
+Multiple heads do not automatically mean that each head learns a different useful relationship. They are separate learned subspaces that *can* specialize; whether they do so usefully is an empirical question.
+
 ## Core concepts
 
 This unit covers **attention types, Transformer, encoder/decoder, BERT, GPT, bridge to LLM training**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
