@@ -252,8 +252,6 @@ Predefine the threshold, seeds, evaluation episodes, and stopping rule.
 4. It reduces temporal correlation and improves sample reuse.
 5. RL is stochastic; one trajectory can be lucky.
 
-[← Previous](../10_attention_transformers_and_llms/lecture.md) · [Course 1 home](../README.md) · [Next →](../12_research_capstone/lecture.md)
-
 ## Video companions
 
 **Recommended starting point:** [Deep Q-Networks — hands-on reinforcement learning](https://www.youtube.com/watch?v=KySQ0WoXsPo)
