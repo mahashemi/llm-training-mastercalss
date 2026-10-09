@@ -172,7 +172,7 @@ $$
 b\leftarrow b+\eta(y-\hat y).
 $$
 
-### What is $\eta$?
+### What is eta (the learning rate)?
 
 Do not treat $\eta$ as mysterious notation.
 
@@ -268,9 +268,9 @@ If you change one parameter slightly, does the loss go up or down? And how stron
 
 For a weight $w_j$, the derivative
 
-$$
+$
 \frac{\partial L}{\partial w_j}
-$$
+$
 
 answers:
 
@@ -282,9 +282,15 @@ The symbol $\nabla$ (“nabla”) is simply a compact way to collect these parti
 
 For the vector of weights $w$,
 
-$$
-\nabla_w L
-$$
+$
+\nabla_w L =
+\begin{bmatrix}
+\frac{\partial L}{\partial w_1}\\
+\frac{\partial L}{\partial w_2}\\
+\vdots\\
+\frac{\partial L}{\partial w_d}
+\end{bmatrix}
+$
 
 means:
 
@@ -298,11 +304,9 @@ $$
 
 Differentiating with respect to the weight vector gives
 
-$$
-\nabla_w L
-=
-2(w^\top x+b-y)x.
-$$
+$
+\nabla_w L = 2(w^\top x+b-y)x.
+$
 
 You do not need to memorize this yet. Read it as a recipe:
 
@@ -329,13 +333,9 @@ So we should move the weight in the opposite direction.
 
 The update is
 
-$$
-w_{\text{new}}
-=
-w_{\text{old}}
--
-\eta\nabla_w L.
-$$
+$
+w_{\text{new}} = w_{\text{old}} - \eta\nabla_w L.
+$
 
 Read every symbol in plain English:
 
@@ -349,23 +349,15 @@ Read every symbol in plain English:
 
 Suppose
 
-$$
-w_{\text{old}}=2,
-\qquad
-\frac{dL}{dw}=3,
-\qquad
-\eta=0.1.
-$$
+$
+w_{\text{old}}=2,\qquad \frac{dL}{dw}=3,\qquad \eta=0.1.
+$
 
 Then
 
-$$
-w_{\text{new}}
-=
-2-(0.1)(3)
-=
-1.7.
-$$
+$
+w_{\text{new}} = 2-(0.1)(3)=1.7.
+$
 
 Why did the weight decrease?
 
@@ -373,19 +365,15 @@ Because the positive slope told us that increasing $w$ would increase the loss. 
 
 Now suppose the gradient were $-3$:
 
-$$
-w_{\text{new}}
-=
-2-(0.1)(-3)
-=
-2.3.
-$$
+$
+w_{\text{new}} = 2-(0.1)(-3)=2.3.
+$
 
 The negative gradient tells us that increasing $w$ would locally reduce the loss, so gradient descent increases the weight.
 
 This is the entire intuition behind the update.
 
-### What happens if $\eta$ is wrong?
+### What happens if the learning rate is wrong?
 
 If $\eta$ is extremely small, learning can take many steps.
 
@@ -411,13 +399,9 @@ The chain rule says that if a quantity changes through several intermediate step
 
 For example:
 
-$$
-w
-\rightarrow z
-\rightarrow h
-\rightarrow \hat y
-\rightarrow L.
-$$
+$
+w \rightarrow z \rightarrow h \rightarrow \hat y \rightarrow L.
+$
 
 Backpropagation walks through this chain in reverse and combines the local slopes.
 
@@ -433,9 +417,9 @@ They are related, but they are not the same thing.
 
 A layer with several neurons computes
 
-$$
-h=\phi(Wx+b).
-$$
+$
+h = \phi(Wx+b).
+$
 
 Here:
 
@@ -580,4 +564,4 @@ This notebook is part of the chapter, not optional homework. Follow:
 
 ## Navigation
 
-[← Course 1 home](../README.md) · [Course 1 home](../README.md) · [Next →](../02_feedforward_and_backprop/lecture.md)
+[← Course 1 home](../README.md) · [Next →](../02_feedforward_and_backprop/lecture.md)
