@@ -86,6 +86,35 @@ $$
 
 A table containing only the best seed hides important uncertainty.
 
+### Worked uncertainty example
+
+Suppose three independent training seeds produce evaluation scores $89,91,90$ (for example, percentage accuracy). Their mean is
+
+$
+\bar x=\frac{89+91+90}{3}=90.
+$
+
+The sample standard deviation is
+
+$
+s=\sqrt{\frac{(89-90)^2+(91-90)^2+(90-90)^2}{3-1}}=1.
+$
+
+Report this as $90\pm1$ percentage point **with the number of seeds and protocol stated**. Three seeds are a small sample, so this is descriptive evidence, not a guarantee that the true performance lies within one point. The seeds should repeat the relevant sources of randomness; three checkpoints from the same training run are not three independent runs.
+
+### A compact evidence table
+
+| Item | Example entry | Why the reader needs it |
+|---|---|---|
+| Question | Does convolution help at matched parameter count? | Defines the claim being tested |
+| Baseline | Dense classifier, 50k parameters | Gives a reference point |
+| Intervention | Local convolutional model, similar parameter budget | Isolates the proposed change |
+| Primary metric | Test accuracy on a frozen split | Prevents metric switching |
+| Repeats | 3 seeds; mean and standard deviation | Shows variability |
+| Limitation | MNIST does not establish robustness on natural images | Bounds generalization |
+
+A paper-ready result should make it possible for another person to reconstruct the comparison and identify what evidence would change the conclusion.
+
 ## 6. Error analysis
 
 Aggregate metrics hide mechanisms.
@@ -99,6 +128,14 @@ Inspect:
 - resource regressions.
 
 An error table should classify failures by mechanism rather than merely listing examples.
+
+## Failure analysis: common research-design mistakes
+
+- **Changing several things at once:** the result cannot identify which change mattered. Return to one primary intervention or use a factorial design with enough runs.
+- **Tuning on the test set:** the test set has become part of model selection. Freeze a fresh test set or obtain a new evaluation set.
+- **Reporting only the best seed:** selection favors noise. Report the predeclared aggregate across runs and the full protocol.
+- **Claiming a mechanism from a metric alone:** the observation may support several explanations. Add ablations or diagnostics that distinguish them.
+- **Using a metric that does not match the claim:** reconstruction error does not prove semantic usefulness; average accuracy may hide minority-group or long-horizon failures.
 
 ## 7. Paper-ready structure
 
