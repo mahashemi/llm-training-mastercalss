@@ -74,5 +74,5 @@ The invariant remains:
 
 - Chapter 3's lab now fits feature scaling on the training partition, evaluates prototype/SOM quantization on held-out examples, and includes an explicit growing 1-D SOM-family demonstration with a capacity-vs-error comparison.
 - The growing-map example is clearly labeled educational and variant-specific; it is not presented as a canonical implementation of every Evolving SOM algorithm.
-- Because notebook code changed, this branch requires a fresh clean-kernel execution check before merge. The prior 12/12 execution run does not validate this new version.
+- The updated notebook was merged in [PR #25](https://github.com/mahashemi/llm-training-mastercalss/pull/25). A new workflow run for the resulting commit was not available through the connected workflow-run listing, so this changed notebook is **not yet execution-verified**. The earlier 12/12 result predates the growing-map and held-out-split changes; do not count it as validation of the current version. Run the notebook from a clean kernel before marking this lab verified.
 
