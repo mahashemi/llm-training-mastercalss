@@ -37,9 +37,67 @@ An LSTM introduces gates—learned values between 0 and 1—that regulate inform
 i_t=\sigma(\cdots),\qquad f_t=\sigma(\cdots),\qquad o_t=\sigma(\cdots).
 \]
 
-The input gate \(i_t\) controls what new information may enter the memory, the forget gate \(f_t\) controls what old memory to retain, and the output gate \(o_t\) controls what part of the memory is exposed as the hidden state. The sigmoid \(\sigma\) maps each gate value into the interval \((0,1)\). The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations are introduced in the worked example below.
+The input gate \(i_t\) controls what new information may enter the memory, the forget gate \(f_t\) controls what old memory to retain, and the output gate \(o_t\) controls what part of the memory is exposed as the hidden state. The sigmoid \(\sigma\) maps each gate value into the interval \((0,1)\). The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations and a numerical cell-state trace follow below.
 
-GRU simplifies the gating structure while retaining explicit control over updates.
+### Full LSTM equations: what the gates actually compute
+
+The ellipses above hide learned weighted sums. In one common LSTM convention, the gates and candidate memory are
+
+\[
+\begin{aligned}
+i_t &= \sigma(W_i x_t+U_i h_{t-1}+b_i),\\
+f_t &= \sigma(W_f x_t+U_f h_{t-1}+b_f),\\
+o_t &= \sigma(W_o x_t+U_o h_{t-1}+b_o),\\
+g_t &= \tanh(W_g x_t+U_g h_{t-1}+b_g).
+\end{aligned}
+\]
+
+Here \(x_t\) is the current input, \(h_{t-1}\) is the previous exposed hidden state, each \(W\) and \(U\) is a learned weight matrix, and each \(b\) is a bias. The sigmoid makes each gate a value between 0 and 1; \(\tanh\) makes candidate content lie between -1 and 1.
+
+The cell memory and hidden state are then updated:
+
+\[
+c_t=f_t\odot c_{t-1}+i_t\odot g_t,
+\qquad
+h_t=o_t\odot\tanh(c_t).
+\]
+
+The symbol \(\odot\) means element-by-element multiplication. Read the cell update as **keep some old memory + write some candidate memory**. The output gate decides how much of the updated cell to expose as \(h_t\). Implementations differ in details and gate ordering, but this is a standard formulation.
+
+#### Trace one cell update by hand
+
+For one memory component, suppose the previous cell value is \(c_{t-1}=0.5\), the forget gate is \(f_t=0.8\), the input gate is \(i_t=0.25\), and the candidate is \(g_t=0.4\). Then
+
+\[
+c_t=(0.8)(0.5)+(0.25)(0.4)=0.4+0.1=0.5.
+\]
+
+The old memory contributes 0.4 and the new candidate contributes 0.1. If \(o_t=0.9\), the exposed state is
+
+\[
+h_t=0.9\tanh(0.5)\approx0.416.
+\]
+
+This is the point of the gates: the model learns separate controls for retaining memory, writing candidate content, and exposing information.
+
+### GRU equations and how they differ
+
+A common GRU formulation uses an update gate \(z_t\), reset gate \(r_t\), and candidate state \(\tilde h_t\):
+
+\[
+\begin{aligned}
+z_t &= \sigma(W_zx_t+U_zh_{t-1}+b_z),\\
+r_t &= \sigma(W_rx_t+U_rh_{t-1}+b_r),\\
+\tilde h_t &= \tanh\!\left(W_hx_t+U_h(r_t\odot h_{t-1})+b_h\right),\\
+h_t &= (1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t.
+\end{aligned}
+\]
+
+In this convention, \(z_t\) mixes the previous state with the candidate state, while \(r_t\) controls how much previous state contributes when forming the candidate. Some libraries use the complementary update-gate convention, so always check the implementation's definition before comparing equations.
+
+A GRU has no separate cell state \(c_t\) or output gate. This can make it simpler, but fewer gates do not guarantee better performance. Compare RNN, LSTM, and GRU with the same data split, parameter/training budget, and repeated seeds.
+
+
 
 Real connection: speech, forecasting, event streams, and historical sequence models. Transformers later replace recurrence with direct content-based interactions across positions.
 
