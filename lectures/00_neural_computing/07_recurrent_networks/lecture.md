@@ -1,4 +1,4 @@
-# Course 1 · Chapter — RNNs, LSTM, and GRU: Learning from Sequences
+# Course 1 · Chapter 7 — RNNs, LSTM, and GRU: Learning from Sequences
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
