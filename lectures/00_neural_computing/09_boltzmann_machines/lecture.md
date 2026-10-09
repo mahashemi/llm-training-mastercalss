@@ -183,7 +183,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: Boltzmann machines and energy-based models](https://www.youtube.com/results?search_query=Boltzmann+machines+energy+based+models+lecture)
+**Recommended starting point:** [Boltzmann machines and energy-based learning](https://www.youtube.com/watch?v=_bqa_I5hNAo)
+
+For the training approximation used in RBMs, [explore contrastive divergence and Gibbs sampling](https://www.youtube.com/results?search_query=restricted+Boltzmann+machine+contrastive+divergence+Gibbs+sampling).
 
 ## Navigation
 
