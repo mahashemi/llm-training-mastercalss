@@ -2,6 +2,8 @@
 
 **Purpose:** teach the ideas, mathematics, architectures, training dynamics, and experimental habits that make modern deep learning understandable rather than mysterious.
 
+**Instructor-led delivery:** [35-day teaching plan (70 contact hours)](./35_DAY_TEACHING_PLAN.md)
+
 This is a **standalone course**. It is not a 12-item prerequisite checklist for the LLM course.
 
 ## What this course teaches
@@ -72,5 +74,3 @@ The course repeatedly uses real datasets rather than isolated toy examples. The 
 **Course 2:** use that understanding to build, train, evaluate, optimize, serve, and manage LLMs.
 
 → [Course 2 — LLM Engineering & Training Masterclass](../02_llm_engineering_and_training/README.md)
-
-[← Back to Masterclass](../../README.md)
