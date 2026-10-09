@@ -417,9 +417,9 @@ They are related, but they are not the same thing.
 
 A layer with several neurons first calculates weighted sums, then applies an activation function:
 
-$
+$$
 h = \phi(Wx+b).
-$
+$$
 
 Read this from the inside out:
 
@@ -434,32 +434,32 @@ Here, $x$ is the input vector, $W$ is the weight matrix, $b$ is the bias vector,
 
 First, imagine stacking two layers **without** an activation between them. The first layer gives
 
-$
+$$
 h_1=W_1x+b_1,
-$
+$$
 
 and the second gives
 
-$
+$$
 h_2=W_2h_1+b_2.
-$
+$$
 
 Substitute the first equation into the second:
 
-$
+$$
 \begin{aligned}
 h_2 &= W_2(W_1x+b_1)+b_2\\
 &= (W_2W_1)x+(W_2b_1+b_2).
 \end{aligned}
-$
+$$
 
 The result is still just one affine transformation of $x$: a new matrix $(W_2W_1)$ and a new bias $(W_2b_1+b_2)$. So, stacking linear layers without nonlinearities does not give the model a more expressive class of functions.
 
 Now put a nonlinear activation between the layers:
 
-$
+$$
 h_2=W_2\,\phi(W_1x+b_1)+b_2.
-$
+$$
 
 In general, this expression **cannot** be rewritten as one affine transformation $Ax+c$, because the nonlinear function changes the input-dependent shape of the mapping. That extra expressive power is why hidden-layer activations matter. (Special parameter choices can still make a particular network behave linearly; the point is that it is no longer forced to be linear.)
 
