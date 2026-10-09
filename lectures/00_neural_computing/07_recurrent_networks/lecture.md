@@ -19,17 +19,25 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Start with a sequence whose interpretation depends on earlier context. A recurrent model maintains a state:
-h_t = φ(W_x x_t + W_h h_{t-1}+b).
-The same parameters are reused at every time step.
+Start with a sequence whose interpretation depends on earlier context. A recurrent model maintains a hidden state:
+
+\[
+h_t=\phi(W_xx_t+W_hh_{t-1}+b).
+\]
+
+Read this from right to left as a recipe: combine the current input \(x_t\) with the previous memory \(h_{t-1}\), apply learned weights \(W_x\) and \(W_h\), add bias \(b\), then pass the result through activation \(\phi\) to obtain the new state \(h_t\). The same weights are reused at every time step.
 
 Unroll the recurrence for three tokens and calculate the hidden state symbolically. This makes an important fact visible: the gradient from a later time step passes through repeated transformations.
 
 Explain vanishing and exploding gradients. If the relevant Jacobian repeatedly shrinks, early information becomes difficult to learn; if it grows, optimization can become unstable.
 
-LSTM introduces gates to control information flow:
-i_t = σ(...), f_t = σ(...), o_t = σ(...).
-Its cell state provides a more controlled path for long-range information.
+An LSTM introduces gates—learned values between 0 and 1—that regulate information flow. A simplified view is
+
+\[
+i_t=\sigma(\cdots),\qquad f_t=\sigma(\cdots),\qquad o_t=\sigma(\cdots).
+\]
+
+The input gate \(i_t\) controls what new information may enter the memory, the forget gate \(f_t\) controls what old memory to retain, and the output gate \(o_t\) controls what part of the memory is exposed as the hidden state. The sigmoid \(\sigma\) maps each gate value into the interval \((0,1)\). The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations are introduced in the worked example below.
 
 GRU simplifies the gating structure while retaining explicit control over updates.
 
