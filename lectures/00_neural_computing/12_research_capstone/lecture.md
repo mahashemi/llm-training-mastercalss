@@ -302,4 +302,4 @@ Use these as methodological companions rather than substitutes for running the e
 
 ## Navigation
 
-[← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
+[← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../01_what_is_an_llm/lecture.md)
