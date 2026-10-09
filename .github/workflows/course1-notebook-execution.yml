@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/course1-notebook-execution.yml"
+      - "lectures/00_neural_computing/**/lab.ipynb"
 
 permissions:
   contents: read
