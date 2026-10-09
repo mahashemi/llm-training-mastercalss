@@ -171,10 +171,10 @@ A VAE does not simply choose one latent vector. It learns a distribution over pl
 
 The encoder produces $\mu$ and $\sigma$, we sample with
 
-$
+$$
 z=\mu+\sigma\odot\epsilon,
 \qquad \epsilon\sim\mathcal N(0,I),
-$
+$$
 
 and decode $z$.
 
