@@ -116,6 +116,57 @@ A falling reconstruction error is useful diagnostic evidence, not proof that the
 **Check yourself:** if the positive and negative phases were identical, what would the expected parameter update be? Explain why the model needs to compare data-driven and model-driven statistics.
 
 
+## Enumerate a one-visible, one-hidden RBM completely
+
+Let \(v,h\in\{0,1\}\), set both biases to zero, and let \(W=1\). The energy is \(E(v,h)=-vh\). We can list every possible joint configuration—there are only four:
+
+| Visible \(v\) | Hidden \(h\) | Energy \(E(v,h)\) | Unnormalized weight \(e^{-E(v,h)}\) |
+|---:|---:|---:|---:|
+| 0 | 0 | 0 | 1 |
+| 0 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 |
+| 1 | 1 | -1 | \(e\approx2.718\) |
+
+The partition function is the sum of these weights:
+
+\[
+Z=1+1+1+e\approx5.718.
+\]
+
+So the joint probability of \((v=1,h=1)\) is \(e/Z\approx0.475\); each of the other three configurations has probability \(1/Z\approx0.175\). The positive weight makes the jointly active configuration more probable, but it does not make it certain.
+
+The conditional probability gives the sampling rule. With zero hidden bias,
+
+\[
+P(h=1\mid v)=\sigma(Wv).
+\]
+
+If \(v=0\), the probability is \(\sigma(0)=0.5\). If \(v=1\), it is \(\sigma(1)\approx0.731\). To perform a Gibbs transition, sample \(h\) from \(P(h\mid v)\), then sample \(v\) from \(P(v\mid h)\), and repeat. Each transition alternates between the two conditionals.
+
+## Contrastive divergence as a difference of statistics
+
+For this tiny model, the positive-phase statistic for the weight is the data expectation \(\mathbb E_{\text{data}}[vh]\); the negative-phase statistic is the corresponding expectation under reconstructed/model samples. A schematic update is
+
+\[
+\Delta W\propto
+\underbrace{\mathbb E_{\text{data}}[vh]}_{\text{positive phase}}
+-
+\underbrace{\mathbb E_{\text{model}}[vh]}_{\text{negative phase}}.
+\]
+
+CD-\(k\) starts its negative-phase chain at observed examples and performs \(k\) Gibbs transitions. CD-1 is cheap but uses a short, generally biased approximation; increasing \(k\) spends more compute on the chain but does not guarantee a monotonic improvement in every finite training run.
+
+## How RBM layer-wise pretraining builds a DBN
+
+A classic greedy layer-wise procedure is:
+
+1. Train the first RBM on the input vectors; use its hidden activations as the representation for the next layer.
+2. Train a second RBM on those first-layer representations.
+3. Repeat to build additional layers.
+4. Use the stacked representation in the downstream model; in classic deep-belief-network training, the top two layers form an undirected associative memory while lower connections are treated as directed generative connections.
+
+This pretraining procedure is historically important, but it is not the same as simply stacking several RBMs and declaring the whole stack one RBM. Layer-wise training changes the distribution presented to each subsequent layer, and the exact DBN generative interpretation depends on the chosen architecture and training procedure.
+
 ## Core concepts
 
 This unit covers **energy-based learning, RBM, contrastive divergence, DBN intuition**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
