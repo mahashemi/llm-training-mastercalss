@@ -82,7 +82,7 @@ For a perceptron, the score becomes a hard decision:
 $$
 \hat y=
 \begin{cases}
-1,&zge 0,\\
+1,&z\\ge 0,\\
 0,&z<0.
 \end{cases}
 $$
@@ -115,7 +115,7 @@ $$
 z=2(1)-1(0)-0.5=1.5.
 $$
 
-Because $1.5ge0$, the prediction is 1.
+Because $1.5\\ge 0$, the prediction is 1.
 
 For
 
