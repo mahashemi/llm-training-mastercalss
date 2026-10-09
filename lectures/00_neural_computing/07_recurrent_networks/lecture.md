@@ -96,6 +96,37 @@ Do not compare RNN, LSTM, and GRU using different hidden sizes or different trai
 Keep the important variables fixed, vary the recurrent cell, and repeat across seeds.
 
 
+## Work a recurrent update by hand
+
+A simple RNN updates its hidden state using the current input and previous state:
+
+[
+h_t=\tanh(0.5x_t+0.8h_{t-1}).
+]
+
+Let (h_0=0) and feed (x_1=1, x_2=0, x_3=1).
+
+- Step 1: (h_1=\tanh(0.5)\approx0.462).
+- Step 2: (h_2=\tanh(0+0.8\times0.462)\approx0.354).
+- Step 3: (h_3=\tanh(0.5+0.8\times0.354)\approx0.654).
+
+The second input is zero, but the state remains nonzero because it carries information from the first step. This is useful memory, but it is also a path through which gradients must travel.
+
+### Why long-range learning is hard
+
+If a simplified gradient multiplier is (0.8) at each step, after 10 repeated steps its contribution is (0.8^{10}\approx0.107); after 50 steps it is (0.8^{50}\approx1.43\times10^{-5}). If the multiplier is (1.2), then (1.2^{50}\approx9,100). Repeated shrinkage makes early events hard to learn; repeated growth can destabilize updates. Real RNN gradients involve matrix Jacobians, so these scalar examples illustrate the mechanism rather than model every case.
+
+LSTM introduces a cell-state path:
+
+[
+c_t=f_t\odot c_{t-1}+i_t\odot\tilde{c}_t.
+]
+
+The forget gate (f_t) controls retained memory; the input gate (i_t) controls new content. When (f_t\) is near 1, information can persist without being repeatedly overwritten. GRU uses a simpler gating design with related goals.
+
+**Check yourself:** if the same input sequence is processed twice from different initial states, should the hidden states necessarily match? Explain which condition would make them match and why this matters when resetting state between independent sequences.
+
+
 ## Core concepts
 
 This unit covers **SRU-style recurrence, LSTM, GRU, sequence modeling and teacher forcing**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
