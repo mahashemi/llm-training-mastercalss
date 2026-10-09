@@ -122,6 +122,70 @@ A complex model that cannot beat this simple baseline has not demonstrated value
 **Check yourself:** why is it acceptable for the first test window to contain observations from the training period, but not acceptable for a training label to depend on a future observation beyond the forecast cutoff? Answer in terms of what is known at prediction time.
 
 
+## Three recurrent layouts, calculated with the same tiny sequence
+
+Use a scalar toy sequence \(x_1=1,\;x_2=2\), a scalar hidden state, and deliberately simple weights. These numbers are chosen for hand calculation; they are not trained parameters.
+
+### Elman recurrence: previous hidden state returns
+
+\[
+h_t=\tanh(w_xx_t+w_hh_{t-1}),\qquad y_t=w_yh_t.
+\]
+
+Let \(w_x=0.5,\;w_h=0.25,\;w_y=2\), with \(h_0=0\). At the first step,
+
+\[
+h_1=\tanh(0.5(1)+0.25(0))=\tanh(0.5)\approx0.462,
+\quad y_1\approx0.924.
+\]
+
+At the second step, the previous hidden state contributes:
+
+\[
+h_2=\tanh(0.5(2)+0.25(0.462))
+=\tanh(1.1155)\approx0.806,
+\quad y_2\approx1.612.
+\]
+
+The hidden state is a learned summary of past inputs. It is not the past observation itself.
+
+### Jordan recurrence: previous output returns
+
+A simple Jordan-style layout feeds the previous output back:
+
+\[
+h_t=\tanh(w_xx_t+w_yy_{t-1}),\qquad y_t=w_oh_t.
+\]
+
+Let \(w_x=0.5,\;w_y=0.25,\;w_o=2\), and initialize \(y_0=0\). Then
+
+\[
+h_1=\tanh(0.5(1)+0.25(0))\approx0.462,\quad y_1\approx0.924,
+\]
+
+\[
+h_2=\tanh(0.5(2)+0.25(0.924))
+=\tanh(1.231)\approx0.843,\quad y_2\approx1.686.
+\]
+
+The two outputs differ because the feedback signal differs: Elman uses \(h_{t-1}\); Jordan uses \(y_{t-1}\). Textbooks vary in notation and in whether the output feedback is transformed, so always draw the actual recurrence being implemented.
+
+### Fully recurrent networks: more than one feedback path
+
+In a fully recurrent network, units can connect recurrently to other units—not just through one designated hidden-state vector or output-feedback path. That richer connectivity can represent more interactions, but it also makes the recurrent computation graph and its gradients harder to reason about. The term describes a family of connectivity patterns, not one universally fixed equation. Before implementing one, specify which recurrent edges exist, whether self-connections are allowed, and how the state is updated.
+
+## Preprocessing boundaries are part of the model
+
+For a chronological cutoff \(c\), divide examples by **target timestamp**: training targets satisfy \(t_{\text{target}}\le c\); validation/test targets are later. Then:
+
+1. Fit scalers, imputers, feature selection, and learned encoders using training data only.
+2. Apply the fitted transformations to validation/test data without refitting.
+3. Build each feature window only from observations available at its forecast origin.
+4. If labels or rolling statistics use future values, shift or recompute them so they cannot cross the forecast origin.
+5. For repeated evaluation over time, use rolling-origin or expanding-window splits rather than random folds.
+
+A test window may legitimately contain historical observations that were part of the training period: those values would be known at deployment. What must not cross the boundary is information from the target's future or a transformation fitted using the held-out period.
+
 ## Core concepts
 
 This unit covers **Elman, Jordan, fully recurrent networks, forecasting protocol, leakage**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
