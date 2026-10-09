@@ -122,7 +122,13 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — architecture is only half the problem
+## Visual intuition —
+
+![Forecasting must respect time](../../../visuals/course1/08-forecasting.svg)
+
+*Figure: A valid evaluation never lets the future leak into the training examples.*
+
+architecture is only half the problem
 
 Sequence models differ in how state is passed through time. Forecasting also depends on whether the evaluation mimics deployment: a future prediction must not use information that would only be available later.
 
