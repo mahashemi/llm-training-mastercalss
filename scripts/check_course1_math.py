@@ -15,7 +15,7 @@ ROOT = Path("lectures/00_neural_computing")
 EXPECTED_CHAPTERS = 12
 INLINE_DOLLAR = re.compile(r"(?<!\\)\$(?!\$)")
 DISPLAY_DOLLAR = re.compile(r"(?<!\\)\$\$")
-LEGACY_DELIMITERS = re.compile(r"\\[([]")
+LEGACY_DELIMITERS = (r"\\(", r"\\)", r"\\[", r"\\]")
 
 
 def strip_inline_code(line: str) -> str:
@@ -53,7 +53,7 @@ def check_file(path: Path) -> list[str]:
         if in_display:
             continue
 
-        if LEGACY_DELIMITERS.search(line):
+        if any(token in line for token in LEGACY_DELIMITERS):
             errors.append(
                 f"{path}:{line_number}: use $...$ / $$...$$ instead of "
                 r"\(...\) or \[...\]"
