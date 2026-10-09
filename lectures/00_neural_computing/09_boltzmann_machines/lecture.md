@@ -147,17 +147,17 @@ If $v=0$, the probability is $\sigma(0)=0.5$. If $v=1$, it is $\sigma(1)\approx0
 
 To turn unnormalized weights into probabilities, the model needs the partition function
 
-$
+$$
 Z=\sum_{v\in\{0,1\}^{n_v}}\sum_{h\in\{0,1\}^{n_h}}e^{-E(v,h)}.
-$
+$$
 
 It sums over every possible visible/hidden configuration. With $n_v$ binary visible units and $n_h$ binary hidden units, there are $2^{n_v+n_h}$ joint configurations. The four-row toy example is easy to enumerate; a realistic RBM may have millions of configurations, making exact summation impractical. Sampling approximates the expectations needed for learning without explicitly enumerating the whole state space.
 
 The visible conditional mirrors the hidden conditional:
 
-$
+$$
 P(v_i=1\mid h)=\sigma\left(a_i+\sum_j W_{ij}h_j\right).
-$
+$$
 
 A Gibbs step samples hidden units given the current visible vector, then samples visible units given the new hidden vector. Repeating those two steps creates a Markov chain whose samples are used to approximate model statistics.
 
