@@ -125,7 +125,7 @@ $ \hat y=Wx+b. $
 
 It has exactly the form of a single affine layer. The dimensions must match: if $x$ has $d$ features, the hidden layer has $m$ units, and the output has $k$ units, then $W_1$ is $m\times d$, $W_2$ is $k\times m$, and $W=W_2W_1$ is $k\times d$. The two layers may have more parameters internally, but without a nonlinear activation their composition still reduces to one affine transformation.
 
-So stacking linear layers without nonlinearities does not give us the expressive power we want.
+So stacking affine layers without nonlinearities still produces only an affine function. It does not give us the expressive power we want from a multilayer network.
 
 A common activation is the **rectified linear unit (ReLU)**. To avoid renderer-specific operator macros, we write its name as ordinary upright text:
 
