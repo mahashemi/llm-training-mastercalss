@@ -33,17 +33,13 @@ Here $x_{i+k}$ is an input value in the local window, $w_k$ is the learned weigh
 
 For one spatial dimension, the output size is
 
-$
-N_{\mathrm{out}}=\left\lfloor\frac{N_{\mathrm{in}}+2P-K}{S}\right\rfloor+1,
-$
+$$ N_{\mathrm{out}}=\left\lfloor\frac{N_{\mathrm{in}}+2P-K}{S}\right\rfloor+1, $$
 
 where $N_{\mathrm{in}}$ is the input width (or height), $K$ is kernel size, $P$ is padding on each side, and $S$ is stride. The floor means “round down to the nearest whole number,” because a kernel cannot start at a fractional pixel position.
 
 For a $28\times28$ image with a $3\times3$ kernel, stride $S=1$, and padding $P=1$,
 
-$
-N_{\mathrm{out}}=\left\lfloor\frac{28+2(1)-3}{1}\right\rfloor+1=28.
-$
+$$ N_{\mathrm{out}}=\left\lfloor\frac{28+2(1)-3}{1}\right\rfloor+1=28. $$
 
 So the feature map remains $28\times28$. If a $2\times2$ max-pooling layer then uses stride 2 with no padding, the spatial size becomes $14\times14$. Track height, width, and channels separately: a convolution with 16 filters produces 16 output channels.
 
