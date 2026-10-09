@@ -125,6 +125,45 @@ For centered data, a linear autoencoder trained with squared reconstruction erro
 **Check yourself:** if the latent dimension grows from 2 to 64 while the input has 64 values, what failure mode becomes easier? Name one metric beyond reconstruction MSE that could test whether the representation is useful.
 
 
+## Sparse and contractive objectives: two different kinds of pressure
+
+A bottleneck limits the *size* of the code. Regularization can also change *what kind* of code the encoder prefers.
+
+### Sparse autoencoder: prefer fewer active latent values
+
+One common objective adds an \(L_1\) penalty on the latent code:
+
+\[
+\mathcal L_{\mathrm{sparse}}
+=\mathcal L_{\mathrm{recon}}+\lambda\|z\|_1.
+\]
+
+The term \(\|z\|_1\) is the sum of the absolute values of the latent activations. The coefficient \(\lambda\) controls how strongly the model is encouraged to keep activations small. It does not literally force every code to have a fixed number of zeros, but it often encourages sparse representations.
+
+**Tiny calculation:** suppose the reconstruction loss is \(0.012\), the latent code has \(\|z\|_1=2.4\), and \(\lambda=0.01\). Then
+
+\[
+\mathcal L_{\mathrm{sparse}}=0.012+0.01(2.4)=0.036.
+\]
+
+If \(\lambda\) increases, the model pays a larger price for large latent activations and may accept worse reconstruction in exchange for a sparser code.
+
+### Contractive autoencoder: prefer less sensitivity to input changes
+
+A contractive objective penalizes the encoder's Jacobian:
+
+\[
+\mathcal L_{\mathrm{contractive}}
+=\mathcal L_{\mathrm{recon}}
++\lambda\left\|\frac{\partial f_\phi(x)}{\partial x}\right\|_F^2.
+\]
+
+The Jacobian records how each latent coordinate changes when each input coordinate changes. The squared Frobenius norm adds the squares of those derivatives. Penalizing it discourages the code from changing sharply in response to small input perturbations.
+
+**Tiny calculation:** if reconstruction loss is \(0.012\), the squared Jacobian norm is \(0.5\), and \(\lambda=0.02\), the total objective is \(0.012+0.02(0.5)=0.022\).
+
+The penalties encode different preferences: sparsity asks for fewer large activations; contraction asks for a locally less sensitive encoder. Neither automatically produces better downstream features. Compare them using a declared reconstruction protocol **and** a separate representation test, such as a linear classifier trained on frozen encoder outputs.
+
 ## Core concepts
 
 This unit covers **basic, regularized, sparse, denoising, stacked denoising, contractive objectives**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
