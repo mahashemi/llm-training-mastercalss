@@ -145,7 +145,13 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — local filters, shared weights, and skip paths
+## Visual intuition
+
+![CNNs build features across space](../../../visuals/course1/04-convolutional-networks.svg)
+
+*Figure: Local filters detect patterns; deeper layers combine them into larger structures.*
+
+— local filters, shared weights, and skip paths
 
 A convolutional filter looks at a small patch and reuses the same weights at many image locations. This encodes the assumption that a useful local pattern—such as an edge—may matter wherever it appears.
 

@@ -203,7 +203,11 @@ Include:
 This becomes the bridge from learning algorithms to doing research on LLMs.
 
 
-## Visual intuition — from question to defensible claim
+## Visual intuition
+
+![A research claim needs a controlled test](../../../visuals/course1/12-research-cycle.svg)
+
+— from question to defensible claim
 
 A research result is not just a metric. The claim must follow from the question, the evaluation contract, the controlled comparison, and the uncertainty in the evidence.
 

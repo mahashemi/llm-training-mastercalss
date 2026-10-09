@@ -541,7 +541,13 @@ State the hypothesis before running the experiment.
 6. Greater capacity can fit training-specific patterns without improving generalization.
 7. It compares an independent finite-difference estimate with the analytic/backpropagated gradient.
 
-## Visual intuition — how a multilayer network learns
+## Visual intuition
+
+![Backpropagation: credit assignment](../../../visuals/course1/02-backpropagation.svg)
+
+*Figure: Forward pass measures the mistake; backward pass assigns responsibility.*
+
+— how a multilayer network learns
 
 The forward pass carries information from input to prediction. Backpropagation sends information about the error in the opposite direction, using the chain rule to calculate how each parameter affected the loss. Gradient descent then uses those gradients to update parameters.
 

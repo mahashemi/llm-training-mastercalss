@@ -122,7 +122,13 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — prototypes and the map neighborhood
+## Visual intuition
+
+![A self-organizing map learns neighborhoods](../../../visuals/course1/03-self-organizing-map.svg)
+
+*Figure: The best-matching unit wins; nearby map units move toward the same example.*
+
+— prototypes and the map neighborhood
 
 Competitive learning asks which prototype is closest to the current example; only the winner moves. A self-organizing map (SOM) also moves neighboring units, with the winner moving most and distant map cells moving less. The grid is a neighborhood structure, not a label map supplied by a teacher.
 

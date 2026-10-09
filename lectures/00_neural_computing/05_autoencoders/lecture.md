@@ -126,7 +126,13 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — compression and reconstruction
+## Visual intuition
+
+![An autoencoder compresses and reconstructs](../../../visuals/course1/05-autoencoder.svg)
+
+*Figure: A bottleneck forces the model to represent what is useful for reconstruction.*
+
+— compression and reconstruction
 
 An autoencoder is trained to reproduce its input after passing through a latent representation. The bottleneck forces the model to compress; denoising changes the task so the input is corrupted but the target remains clean.
 

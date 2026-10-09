@@ -173,7 +173,11 @@ Use at least three seeds.
 The correct conclusion is not “target networks always work.” It is the narrower claim supported by your experiment.
 
 
-## Visual intuition — the agent learns from consequences
+## Visual intuition
+
+![The reinforcement-learning feedback loop](../../../visuals/course1/11-deep-reinforcement-learning.svg)
+
+— the agent learns from consequences
 
 Unlike supervised learning, reinforcement learning does not receive the correct action for every state. It observes a state, chooses an action, receives a reward, and sees a new state. The return combines immediate and future rewards.
 
