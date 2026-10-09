@@ -146,19 +146,6 @@ flowchart LR
 
 A random split can place highly related neighboring windows in both train and test sets, making a model appear better than it will be when forecasting genuinely unseen future periods. For time series, preserve chronological order unless the real deployment problem justifies another protocol.
 
-## Laboratory
-
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
-
-
-
-
-
-
-[← Previous](../07_recurrent_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../09_boltzmann_machines/lecture.md)
-
-</div>
-
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**

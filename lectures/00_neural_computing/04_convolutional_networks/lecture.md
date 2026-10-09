@@ -185,19 +185,6 @@ flowchart TB
     end
 ```
 
-## Laboratory
-
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
-
-
-
-
-
-
-[← Previous](../03_competitive_learning_and_som/lecture.md) · [Course 1 home](../README.md) · [Next →](../05_autoencoders/lecture.md)
-
-</div>
-
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**

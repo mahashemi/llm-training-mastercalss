@@ -168,19 +168,6 @@ flowchart TB
 
 The gates are learned, not manually programmed rules. A fair comparison tests whether the extra gating helps on the chosen sequence task under a comparable data and training budget.
 
-## Laboratory
-
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
-
-
-
-
-
-
-[← Previous](../06_generative_models/lecture.md) · [Course 1 home](../README.md) · [Next →](../08_sequence_architectures_and_forecasting/lecture.md)
-
-</div>
-
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**

@@ -151,19 +151,6 @@ flowchart LR
 
 **Important distinction:** a small reconstruction error means the input can be reconstructed under this setup. It does not automatically mean the latent code is useful for classification, retrieval, or generation. Those claims need separate tests.
 
-## Laboratory
-
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
-
-
-
-
-
-
-[← Previous](../04_convolutional_networks/lecture.md) · [Course 1 home](../README.md) · [Next →](../06_generative_models/lecture.md)
-
-</div>
-
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**

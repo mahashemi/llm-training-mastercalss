@@ -182,19 +182,6 @@ flowchart LR
 
 Attention weights are not automatically explanations of model reasoning. They show the routing weights used in this operation; interpretation requires care and additional evidence.
 
-## Laboratory
-
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
-
-
-
-
-
-
-[← Previous](../09_boltzmann_machines/lecture.md) · [Course 1 home](../README.md) · [Next →](../11_deep_reinforcement_learning/lecture.md)
-
-</div>
-
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
