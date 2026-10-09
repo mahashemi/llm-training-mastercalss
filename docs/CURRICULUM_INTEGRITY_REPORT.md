@@ -167,3 +167,10 @@ The invariant remains:
 - The new experiment is a single-seed teaching comparison, not an optimizer leaderboard. The readiness audit requires repeated seeds and validation-only hyperparameter tuning.
 - Notebook code changed; fresh clean-kernel execution is required after merge.
 
+## Course 1 CNN connectivity comparison — 2026-10-09
+
+- The CNN lab now compares plain, residual, and dense-style blocks. The dense-style block concatenates earlier features, unlike the residual block's element-wise identity addition.
+- Its growth rate is selected to keep trainable parameter counts within 2% across variants. Each variant runs for three seeds with the same split, optimizer, epoch budget, and minibatch order per seed.
+- The lab plots training loss and final held-out accuracy with seed variability. It explicitly notes that identical random seeds do not imply identical initial tensors when architecture shapes differ.
+- Notebook code changed; require fresh clean-kernel execution after merge. This is a small matched-budget teaching comparison, not a deep ResNet/DenseNet benchmark.
+
