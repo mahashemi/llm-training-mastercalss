@@ -1,0 +1,77 @@
+% Course 1 research-paper starter.
+% This is a generic teaching template, NOT a CVPR or NeurIPS submission template.
+% Switch to the official venue template only after checking current instructions.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage[numbers]{natbib}
+
+\title{A Precise, Evidence-Based Research Question}
+\author{Student Author(s)\\
+\small Course 1: Deep Learning and Neural Computing Foundations}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+State the question, method, principal evidence, and bounded conclusion.
+Write this section after the results are stable. Do not include invented
+or placeholder results in a submitted manuscript.
+\end{abstract}
+
+\section{Introduction}
+What problem are we studying, why does it matter, and what precise question
+will this paper answer?
+
+\section{Related Work}
+Summarize relevant work critically. Explain what is known and what remains
+uncertain. Cite original sources and verify every reference.
+
+\section{Research Question and Hypothesis}
+State the hypothesis in a form that could be contradicted by evidence.
+
+\section{Method}
+Describe the model, data provenance, preprocessing, split, baseline,
+intervention, controls, metrics, seeds, and compute budget.
+
+\section{Experimental Setup}
+Give enough detail for another researcher to reproduce the experiment.
+Explain any deviations from the planned protocol.
+
+\section{Results}
+Report all relevant runs, appropriate uncertainty, and clearly labeled
+figures and tables. Do not report only the best run.
+
+\begin{table}[ht]
+  \centering
+  \caption{Replace this placeholder with measured results before submission.}
+  \label{tab:results}
+  \begin{tabular}{lcc}
+    \toprule
+    Method & Metric (higher/lower is better) & Compute cost \\
+    \midrule
+    Baseline & -- & -- \\
+    Intervention & -- & -- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Error Analysis and Discussion}
+What fails, for whom, and under what conditions? Distinguish observations
+from explanations and causal claims.
+
+\section{Limitations and Responsible Use}
+Describe what the experiment cannot establish, data and compute limits,
+potential harms, and relevant licensing or privacy constraints.
+
+\section{Conclusion}
+Summarize only what the evidence supports and name the next falsifiable test.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}
