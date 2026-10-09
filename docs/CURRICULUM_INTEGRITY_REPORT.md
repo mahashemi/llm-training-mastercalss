@@ -128,3 +128,11 @@ The invariant remains:
 
 - The new frozen-encoder linear-probe notebook cell passed clean-kernel execution in [run #37915707503](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915707503).
 - That 12-job run is still in progress, so this records the individual autoencoder job as successful, not the entire latest suite as complete.
+
+
+## Course 1 recurrent architecture and leakage pass — 2026-10-09
+
+- Chapter 8 now works through two timesteps numerically for Elman-style hidden-state recurrence and Jordan-style output feedback, using explicitly stated toy weights and initial states.
+- It distinguishes these layouts from the broader family of fully recurrent connectivity patterns without implying one universal equation.
+- The forecasting protocol now states preprocessing-fit boundaries, target-time cutoff rules, permissible historical context in test windows, and rolling-origin evaluation.
+- This lecture-only change does not require notebook execution; the remaining practical gate is an executable leakage demonstration and controlled recurrence comparison.
