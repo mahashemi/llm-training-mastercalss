@@ -37,7 +37,7 @@ An LSTM introduces gates—learned values between 0 and 1—that regulate inform
 i_t=\sigma(\cdots),\qquad f_t=\sigma(\cdots),\qquad o_t=\sigma(\cdots).
 \]
 
-The input gate \(i_t\) controls what new information may enter the memory, the forget gate \(f_t\) controls what old memory to retain, and the output gate \(o_t\) controls what part of the memory is exposed as the hidden state. The sigmoid \(\sigma\) maps each gate value into the interval \((0,1)\). The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations are introduced in the worked example below.
+The input gate \(i_t\) controls what new information may enter the memory, the forget gate \(f_t\) controls what old memory to retain, and the output gate \(o_t\) controls what part of the memory is exposed as the hidden state. The sigmoid \(\sigma\) maps each gate value into the interval \((0,1)\). The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations and a numerical cell-state trace follow below.
 
 ### Full LSTM equations: what the gates actually compute
 
