@@ -22,6 +22,16 @@ $$
 
 The central difficulty is **credit assignment through delayed consequences**.
 
+### Calculate a discounted return
+
+Suppose the rewards after an action are $r_{t+1}=1$, $r_{t+2}=0$, and $r_{t+3}=2$, with discount factor $\gamma=0.9$. The return from time $t$ is
+
+$
+G_t=1+0.9(0)+0.9^2(2)=1+0+1.62=2.62.
+$
+
+The later reward still matters, but it contributes less than an equally sized immediate reward. The discount factor expresses how the task values delayed outcomes; it is not simply a tuning knob for making the score look good.
+
 ## 2. Value functions
 
 The action-value function is
@@ -64,6 +74,10 @@ L(\theta)
 \right].
 $$
 
+### Read the DQN target carefully
+
+The terminal indicator $d$ is 1 when the transition ends the episode and 0 otherwise. Thus $r+\gamma(1-d)\max_{a'}Q_{\theta^-}(s',a')$ includes the estimated future value only for nonterminal transitions. For a terminal transition, the target is just the observed reward. During the gradient step, the target is treated as fixed (stop-gradient); gradients update $Q_\theta(s,a)$, not the target network's output for that same step.
+
 ## 3. Why DQN needs stabilizers
 
 A neural network approximates $Q_\theta(s,a)$.
@@ -82,26 +96,26 @@ This can make apparently reasonable gradient updates unstable.
 
 ## 3A. Value-based learning versus policy gradients
 
-DQN is **value-based**: it estimates \(Q(s,a)\), then chooses actions using those values (often with occasional exploration). Policy-gradient methods instead learn a policy directly: \(\pi_\theta(a\mid s)\) is the probability that the policy chooses action \(a\) in state \(s\).
+DQN is **value-based**: it estimates $Q(s,a)$, then chooses actions using those values (often with occasional exploration). Policy-gradient methods instead learn a policy directly: $\pi_\theta(a\mid s)$ is the probability that the policy chooses action $a$ in state $s$.
 
 A simplified objective is expected discounted return:
 
-\[
+$$
 J(\theta)=\mathbb E_{\tau\sim\pi_\theta}
 \left[\sum_{t=0}^{T}\gamma^t r_{t+1}\right],
-\]
+$$
 
-where \(\tau\) denotes a trajectory of states, actions, and rewards. A common policy-gradient estimator has the form
+where $\tau$ denotes a trajectory of states, actions, and rewards. A common policy-gradient estimator has the form
 
-\[
+$$
 \nabla_\theta J(\theta)
 \approx
 \mathbb E\left[
 \sum_t \gamma^t\nabla_\theta\log\pi_\theta(a_t\mid s_t)\,G_t
 \right].
-\]
+$$
 
-Here \(G_t\) is the return following the action. The log-probability gradient indicates how to change the policy parameters to make that action more or less likely. A positive return gives that sampled action positive reinforcement; a poor return pushes in the opposite direction. In practice, baselines or advantages are often used to reduce estimator variance.
+Here $G_t$ is the return following the action. The log-probability gradient indicates how to change the policy parameters to make that action more or less likely. A positive return gives that sampled action positive reinforcement; a poor return pushes in the opposite direction. In practice, baselines or advantages are often used to reduce estimator variance.
 
 **Do not confuse the methods:** DQN learns action values and derives a policy from them; REINFORCE-style policy gradients adjust the policy's action probabilities directly. Actor-critic methods combine a learned policy (actor) with a value estimator (critic). They have different stability, exploration, and variance trade-offs; neither dominates in every environment.
 
@@ -117,26 +131,26 @@ A reward may arrive many steps after the action that helped preserve balance. Th
 
 The Bellman optimality target for a one-step Q-learning update is
 
-\[
+$$
 y=r+\gamma\max_{a'}Q(s',a').
-\]
+$$
 
-Suppose the immediate reward is \(r=1\), the discount factor is \(\gamma=0.9\), and the largest estimated next-state action value is 2. The target is
+Suppose the immediate reward is $r=1$, the discount factor is $\gamma=0.9$, and the largest estimated next-state action value is 2. The target is
 
-\[
+$$
 y=1+0.9(2)=2.8.
-\]
+$$
 
-If the current estimate is \(Q(s,a)=2.0\) and the learning rate is \(\alpha=0.1\), the update becomes
+If the current estimate is $Q(s,a)=2.0$ and the learning rate is $\alpha=0.1$, the update becomes
 
-\[
+$$
 Q_{\mathrm{new}}(s,a)=Q(s,a)+\alpha[y-Q(s,a)]
 =2.0+0.1(0.8)=2.08.
-\]
+$$
 
-The update moves the estimate toward the target; it does not jump all the way there. In deep Q-learning, a neural network approximates \(Q(s,a)\), and the same target idea is combined with replay and a target network to reduce instability.
+The update moves the estimate toward the target; it does not jump all the way there. In deep Q-learning, a neural network approximates $Q(s,a)$, and the same target idea is combined with replay and a target network to reduce instability.
 
-**Check yourself:** if \(\gamma=0\), which part of the target disappears and what kind of task would that describe? Why can a high training return still coexist with poor held-out performance?
+**Check yourself:** if $\gamma=0$, which part of the target disappears and what kind of task would that describe? Why can a high training return still coexist with poor held-out performance?
 
 
 ## 5. Engineering evaluation
@@ -224,6 +238,14 @@ Use at least three seeds.
 The correct conclusion is not “target networks always work.” It is the narrower claim supported by your experiment.
 
 
+## Failure analysis: why a DQN score can mislead
+
+- **One run reaches a high return:** stochastic exploration can produce a lucky trajectory. Evaluate the frozen policy over multiple fresh episodes and seeds.
+- **Training return rises but evaluation return does not:** the agent may overfit to the training trajectories, or the training/evaluation exploration settings may differ. State both protocols explicitly.
+- **Removing replay or the target network causes instability:** quantify variance and threshold-reaching probability over repeated runs; do not conclude from one noisy curve.
+- **The Bellman target is wrong on terminal steps:** verify that terminal transitions do not bootstrap from the next-state value.
+- **A reward threshold is reached only with many more environment steps:** report sample efficiency as well as final return.
+
 ## Visual intuition
 
 ![The reinforcement-learning feedback loop](../../../visuals/course1/11-deep-reinforcement-learning.svg)
@@ -276,6 +298,9 @@ Predefine the threshold, seeds, evaluation episodes, and stopping rule.
 3. It reduces the rate at which the bootstrap target moves.
 4. It reduces temporal correlation and improves sample reuse.
 5. RL is stochastic; one trajectory can be lucky.
+
+6. **What happens when $\gamma=0$?** The target keeps only the immediate reward, so the agent is not valuing future consequences. This is appropriate only when the task's objective is genuinely immediate or when future reward is intentionally excluded.
+7. **Why can training return be high while held-out return is poor?** Training may reflect lucky trajectories, a different exploration policy, or overfitting to the experiences used during learning; evaluate on fresh episodes under a declared protocol.
 
 ## Video companions
 
