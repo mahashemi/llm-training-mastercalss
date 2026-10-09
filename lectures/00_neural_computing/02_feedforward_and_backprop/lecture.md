@@ -31,15 +31,11 @@ No single straight line can separate the two classes.
 
 A multilayer network can create intermediate features:
 
-$$
-h=\phi(W_1x+b_1)
-$$
+$$ h=\phi(W_1x+b_1) $$
 
 and then use them:
 
-$$
-\hat y=g(W_2h+b_2).
-$$
+$$ \hat y=g(W_2h+b_2). $$
 
 Before reading the equations, understand the story:
 
@@ -51,41 +47,29 @@ The hidden representation $h$ is simply a new set of numbers computed from the o
 
 Consider one tiny network:
 
-$$
-x\rightarrow z_1\rightarrow h\rightarrow z_2\rightarrow\hat y.
-$$
+$$ x\rightarrow z_1\rightarrow h\rightarrow z_2\rightarrow\hat y. $$
 
 The arrow means “the output of one computation becomes the input to the next.”
 
 Let
 
-$$
-z_1=W_1x+b_1.
-$$
+$$ z_1=W_1x+b_1. $$
 
 Then apply an activation:
 
-$$
-h=\sigma(z_1).
-$$
+$$ h=\sigma(z_1). $$
 
 Then another linear computation:
 
-$$
-z_2=W_2h+b_2.
-$$
+$$ z_2=W_2h+b_2. $$
 
 For binary classification, use a sigmoid at the output:
 
-$$
-\hat y=\sigma(z_2).
-$$
+$$ \hat y=\sigma(z_2). $$
 
 The sigmoid is
 
-$$
-\sigma(a)=\frac{1}{1+e^{-a}}.
-$$
+$$ \sigma(a)=\frac{1}{1+e^{-a}}. $$
 
 It turns any real number into a value between 0 and 1, which we can interpret as a probability-like score.
 
@@ -93,39 +77,27 @@ It turns any real number into a value between 0 and 1, which we can interpret as
 
 Suppose
 
-$$
-x=2,\quad W_1=1.5,\quad b_1=-1.
-$$
+$$ x=2,\quad W_1=1.5,\quad b_1=-1. $$
 
 Then
 
-$$
-z_1=(1.5)(2)-1=2.
-$$
+$$ z_1=(1.5)(2)-1=2. $$
 
 Therefore
 
-$$
-h=\frac{1}{1+e^{-2}}\approx0.881.
-$$
+$$ h=\frac{1}{1+e^{-2}}\approx0.881. $$
 
 Now let
 
-$$
-W_2=2,\quad b_2=-1.
-$$
+$$ W_2=2,\quad b_2=-1. $$
 
 Then
 
-$$
-z_2=(2)(0.881)-1=0.762.
-$$
+$$ z_2=(2)(0.881)-1=0.762. $$
 
 Finally,
 
-$$
-\hat y=\frac{1}{1+e^{-0.762}}\approx0.682.
-$$
+$$ \hat y=\frac{1}{1+e^{-0.762}}\approx0.682. $$
 
 We have just performed a complete forward pass with ordinary arithmetic.
 
@@ -133,72 +105,51 @@ We have just performed a complete forward pass with ordinary arithmetic.
 
 Suppose there were no activation:
 
-$$
-h=W_1x+b_1
-$$
+$$ h=W_1x+b_1 $$
 
 and
 
-$$
-\hat y=W_2h+b_2.
-$$
+$$ \hat y=W_2h+b_2. $$
 
 Substitute the first equation into the second:
 
-$$
-\hat y
-=
-W_2(W_1x+b_1)+b_2.
-$$
+$$ \hat y = W_2(W_1x+b_1)+b_2. $$
 
 Rearranging gives
 
-$$
-\hat y=(W_2W_1)x+(W_2b_1+b_2).
-$$
+$$ \hat y=(W_2W_1)x+(W_2b_1+b_2). $$
 
-That is still a linear function of $x$.
+To see why, define a new combined weight $W=W_2W_1$ and a new combined bias $b=W_2b_1+b_2$. Then the whole network is just
 
-So stacking linear layers without nonlinearities does not give us the expressive power we want.
+$$ \hat y=Wx+b. $$
 
-A common activation is ReLU:
+It has exactly the form of a single affine layer. The dimensions must match: if $x$ has $d$ features, the hidden layer has $m$ units, and the output has $k$ units, then $W_1$ is $m\times d$, $W_2$ is $k\times m$, and $W=W_2W_1$ is $k\times d$. The two layers may have more parameters internally, but without a nonlinear activation their composition still reduces to one affine transformation.
 
-$$
-\operatorname{ReLU}(a)=\max(0,a).
-$$
+So stacking affine layers without nonlinearities still produces only an affine function. It does not give us the expressive power we want from a multilayer network.
 
-It keeps positive values and changes negative values to zero.
+A common activation is the **rectified linear unit (ReLU)**. To avoid renderer-specific operator macros, we write its name as ordinary upright text:
+
+$$ \mathrm{ReLU}(a)=\max(0,a). $$
+
+This means: if $a$ is positive, keep it; if $a$ is negative, output zero. For example, $\mathrm{ReLU}(3)=3$ and $\mathrm{ReLU}(-2)=0$. At exactly zero, implementations use a chosen derivative convention (commonly zero); this single point does not change the function's overall purpose.
 
 ## 4. Loss: turning a prediction into a number we can optimize
 
 Suppose the correct target is
 
-$$
-y=1
-$$
+$$ y=1 $$
 
 and the model predicted
 
-$$
-\hat y=0.682.
-$$
+$$ \hat y=0.682. $$
 
 Binary cross-entropy is
 
-$$
-L=
--\left[
-y\log(\hat y)
-+
-(1-y)\log(1-\hat y)
-\right].
-$$
+$$ L= -\left[ y\log(\hat y) + (1-y)\log(1-\hat y) \right]. $$
 
 For $y=1$, this becomes
 
-$$
-L=-\log(0.682)\approx0.383.
-$$
+$$ L=-\log(0.682)\approx0.383. $$
 
 The important conceptual step is:
 
@@ -212,9 +163,7 @@ A parameter is simply a number the model is allowed to learn.
 
 For this network, examples are:
 
-$$
-W_1,\quad b_1,\quad W_2,\quad b_2.
-$$
+$$ W_1,\quad b_1,\quad W_2,\quad b_2. $$
 
 The model starts with some values, usually chosen by an initialization procedure.
 
@@ -234,28 +183,13 @@ Suppose the loss depends on the prediction, the prediction depends on $z_2$, $z_
 
 The dependency chain is:
 
-$$
-W_1
-\rightarrow z_1
-\rightarrow h
-\rightarrow z_2
-\rightarrow \hat y
-\rightarrow L.
-$$
+$$ W_1 \rightarrow z_1 \rightarrow h \rightarrow z_2 \rightarrow \hat y \rightarrow L. $$
 
-For a **single scalar path** through the network, the chain rule can be written as a product of local derivatives:
+For our one-input, one-hidden-unit, one-output example, each quantity on this path is a scalar, so the chain rule can be written as a product of local derivatives:
 
-$$
-\frac{dL}{dW_1}
-=
-\frac{dL}{d\hat y}
-\frac{d\hat y}{dz_2}
-\frac{dz_2}{dh}
-\frac{dh}{dz_1}
-\frac{dz_1}{dW_1}.
-$$
+$$ \frac{dL}{dW_1} = \frac{dL}{d\hat y} \frac{d\hat y}{dz_2} \frac{dz_2}{dh} \frac{dh}{dz_1} \frac{dz_1}{dW_1}. $$
 
-This product is exact for the scalar example we will calculate below. In a real network, weights, activations, and gradients are usually vectors or matrices. The same chain rule still applies, but the local derivatives become Jacobians and the products become dimensionally valid matrix/vector products. Automatic differentiation computes the needed products efficiently without usually constructing a giant Jacobian explicitly.
+This product is exact for the scalar example we calculate below. In a real network, a weight matrix contains many parameters and the hidden activation contains many values. The chain rule still applies, but the derivatives must respect those shapes: backpropagation combines vector-Jacobian products rather than multiplying scalar fractions blindly. Automatic differentiation computes the required products efficiently without usually constructing a giant Jacobian explicitly.
 
 ### Read the equation in English
 
@@ -281,29 +215,21 @@ That is the heart of backpropagation.
 
 For
 
-$$
-z_1=W_1x+b_1,
-$$
+$$ z_1=W_1x+b_1, $$
 
 the derivative with respect to $W_1$ is
 
-$$
-\frac{\partial z_1}{\partial W_1}=x.
-$$
+$$ \frac{\partial z_1}{\partial W_1}=x. $$
 
 Why?
 
 Because if
 
-$$
-z_1=W_1x+b_1,
-$$
+$$ z_1=W_1x+b_1, $$
 
 then changing $W_1$ by a small amount $\Delta W_1$ changes $z_1$ by approximately
 
-$$
-\Delta z_1\approx x\,\Delta W_1.
-$$
+$$ \Delta z_1\approx x\,\Delta W_1. $$
 
 So $x$ tells us how sensitive this computation is to the weight.
 
@@ -313,67 +239,41 @@ This is what a derivative means: **local sensitivity**.
 
 Use the same numbers as the forward pass:
 
-$$
-x=2,\quad W_1=1.5,\quad b_1=-1,\quad W_2=2,\quad b_2=-1,\quad y=1.
-$$
+$$ x=2,\quad W_1=1.5,\quad b_1=-1,\quad W_2=2,\quad b_2=-1,\quad y=1. $$
 
 We already calculated $z_1=2$, $h=\sigma(2)\approx0.8808$, $z_2\approx0.7616$, and $\hat y=\sigma(z_2)\approx0.6817$. For a positive target, binary cross-entropy is $L=-\log(\hat y)\approx0.3832$.
 
 For sigmoid output plus binary cross-entropy, the derivative of the loss with respect to the output **logit** simplifies to
 
-$$
-\frac{dL}{dz_2}=\hat y-y\approx0.6817-1=-0.3183.
-$$
+$$ \frac{dL}{dz_2}=\hat y-y\approx0.6817-1=-0.3183. $$
 
 This compact result comes from applying the chain rule to both sigmoid and cross-entropy. It is also why libraries provide a numerically stable combined loss such as BCEWithLogitsLoss.
 
 Now propagate that error backward through the second linear layer:
 
-$$
-\frac{dL}{dW_2}=\frac{dL}{dz_2}h
-\approx(-0.3183)(0.8808)=-0.2804,
-\qquad
-\frac{dL}{db_2}=\frac{dL}{dz_2}\approx-0.3183.
-$$
+$$ \frac{dL}{dW_2}=\frac{dL}{dz_2}h \approx(-0.3183)(0.8808)=-0.2804, \qquad \frac{dL}{db_2}=\frac{dL}{dz_2}\approx-0.3183. $$
 
 The gradient with respect to the hidden activation is
 
-$$
-\frac{dL}{dh}=\frac{dL}{dz_2}W_2
-\approx(-0.3183)(2)=-0.6366.
-$$
+$$ \frac{dL}{dh}=\frac{dL}{dz_2}W_2 \approx(-0.3183)(2)=-0.6366. $$
 
 For sigmoid, $\sigma'(a)=\sigma(a)(1-\sigma(a))$. Therefore
 
-$$
-\frac{dh}{dz_1}=h(1-h)\approx(0.8808)(0.1192)=0.1050.
-$$
+$$ \frac{dh}{dz_1}=h(1-h)\approx(0.8808)(0.1192)=0.1050. $$
 
 The error signal at the hidden unit is consequently
 
-$$
-\frac{dL}{dz_1}=\frac{dL}{dh}\frac{dh}{dz_1}
-\approx(-0.6366)(0.1050)=-0.0668.
-$$
+$$ \frac{dL}{dz_1}=\frac{dL}{dh}\frac{dh}{dz_1} \approx(-0.6366)(0.1050)=-0.0668. $$
 
 Finally, because $z_1=W_1x+b_1$,
 
-$$
-\frac{dL}{dW_1}=\frac{dL}{dz_1}x
-\approx(-0.0668)(2)=-0.1337,
-\qquad
-\frac{dL}{db_1}=\frac{dL}{dz_1}\approx-0.0668.
-$$
+$$ \frac{dL}{dW_1}=\frac{dL}{dz_1}x \approx(-0.0668)(2)=-0.1337, \qquad \frac{dL}{db_1}=\frac{dL}{dz_1}\approx-0.0668. $$
 
 **What should you notice?** The output error is not copied unchanged into every parameter. Each layer scales it by its own local sensitivity. The hidden sigmoid's derivative is about $0.105$, so the signal reaching the first layer is smaller. This is a tiny example of how gradients can shrink as they travel through many layers.
 
 With learning rate $\eta=0.1$, gradient descent would increase both weights in this example because both weight gradients are negative:
 
-$$
-W_2^{\mathrm{new}}=2-0.1(-0.2804)\approx2.0280,
-\qquad
-W_1^{\mathrm{new}}=1.5-0.1(-0.1337)\approx1.5134.
-$$
+$$ W_2^{\mathrm{new}}=2-0.1(-0.2804)\approx2.0280, \qquad W_1^{\mathrm{new}}=1.5-0.1(-0.1337)\approx1.5134. $$
 
 This update is only one step on one example; it does not guarantee the loss will decrease for an arbitrarily large learning rate or for the whole dataset.
 
@@ -383,14 +283,7 @@ Once backpropagation has calculated a gradient, an optimizer can use it.
 
 For one parameter $\theta$:
 
-$$
-\theta_{\text{new}}
-=
-\theta_{\text{old}}
--
-\eta
-\frac{\partial L}{\partial\theta}.
-$$
+$$ \theta_{\text{new}} = \theta_{\text{old}} - \eta \frac{\partial L}{\partial\theta}. $$
 
 Here:
 
@@ -401,13 +294,7 @@ Here:
 
 For many parameters, we write the same idea compactly as
 
-$$
-\theta_{\text{new}}
-=
-\theta_{\text{old}}
--
-\eta\nabla_\theta L.
-$$
+$$ \theta_{\text{new}} = \theta_{\text{old}} - \eta\nabla_\theta L. $$
 
 Here $\nabla_\theta L$ is just a vector containing all those individual partial derivatives.
 
@@ -415,33 +302,15 @@ Here $\nabla_\theta L$ is just a vector containing all those individual partial 
 
 Suppose
 
-$$
-\theta_{\text{old}}=2,
-\qquad
-\frac{\partial L}{\partial\theta}=3,
-\qquad
-\eta=0.1.
-$$
+$$ \theta_{\text{old}}=2, \qquad \frac{\partial L}{\partial\theta}=3, \qquad \eta=0.1. $$
 
 Then
 
-$$
-\theta_{\text{new}}
-=
-2-(0.1)(3)
-=
-1.7.
-$$
+$$ \theta_{\text{new}} = 2-(0.1)(3) = 1.7. $$
 
 If the gradient were $-3$ instead:
 
-$$
-\theta_{\text{new}}
-=
-2-(0.1)(-3)
-=
-2.3.
-$$
+$$ \theta_{\text{new}} = 2-(0.1)(-3) = 2.3. $$
 
 The gradient tells us the direction; the learning rate tells us how far to move.
 
@@ -465,21 +334,11 @@ A single example can give a noisy estimate of the direction that reduces loss.
 
 For a mini-batch $B$, the average loss can be written as
 
-$$
-L_B=
-\frac{1}{|B|}
-\sum_{i\in B}L_i.
-$$
+$$ L_B= \frac{1}{|B|} \sum_{i\in B}L_i. $$
 
 The corresponding gradient is the average of the example gradients:
 
-$$
-\nabla_\theta L_B
-=
-\frac{1}{|B|}
-\sum_{i\in B}
-\nabla_\theta L_i.
-$$
+$$ \nabla_\theta L_B = \frac{1}{|B|} \sum_{i\in B} \nabla_\theta L_i. $$
 
 Larger batches often make this estimate less noisy, but they also require more memory and can change optimization behavior.
 
@@ -526,9 +385,7 @@ These methods differ in their update rule—not in the loss they are trying to m
 
 Feature scaling changes the numerical units seen by the optimizer. If one feature ranges from 0 to 1 and another ranges from 0 to 100,000, their contributions can create badly conditioned optimization. Standardization uses
 
-$$
-x'=\frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}.
-$$
+$$ x'=\frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}. $$
 
 The mean and standard deviation must be estimated from training data only, then reused unchanged for validation and test data. Fitting the scaler on all examples leaks information from the held-out set.
 
@@ -538,9 +395,7 @@ Batch normalization instead normalizes intermediate activations using batch stat
 
 Weight decay adds a penalty for large weights, commonly written
 
-$$
-\mathcal L_{\mathrm{total}}=\mathcal L_{\mathrm{data}}+\lambda\|w\|_2^2.
-$$
+$$ \mathcal L_{\mathrm{total}}=\mathcal L_{\mathrm{data}}+\lambda\|w\|_2^2. $$
 
 The coefficient $\lambda$ controls the trade-off: a stronger penalty may reduce overfitting but can also underfit. Dropout randomly masks some activations during training, discouraging the network from depending too heavily on one path. Neither technique is guaranteed to help; choose its strength using validation data, not the final test set.
 
@@ -552,15 +407,7 @@ One of the best debugging tools in deep learning is to compare two independent c
 
 For a parameter $\theta$, approximate the derivative using a tiny perturbation $\epsilon$:
 
-$$
-\frac{\partial L}{\partial\theta}
-\approx
-\frac{
-L(\theta+\epsilon)-L(\theta-\epsilon)
-}{
-2\epsilon
-}.
-$$
+$$ \frac{\partial L}{\partial\theta} \approx \frac{ L(\theta+\epsilon)-L(\theta-\epsilon) }{ 2\epsilon }. $$
 
 Conceptually:
 
