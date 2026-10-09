@@ -126,9 +126,9 @@ A complex model that cannot beat this simple baseline has not demonstrated value
 
 For the four windows above, a persistence baseline predicts the final value in each input window. Its predictions are therefore $11,15,14,18$, while the targets are $15,14,18,17$. The squared errors are $16,1,16,1$, so
 
-$
+$$
 \mathrm{MSE}=\frac{16+1+16+1}{4}=8.5.
-$
+$$
 
 This number is meaningful only relative to the same target values and evaluation protocol. A neural model should be compared on exactly the same future targets. For real forecasting, also report MAE when robustness to large errors matters, and report metrics by forecast horizon rather than hiding long-horizon failures inside one average.
 
