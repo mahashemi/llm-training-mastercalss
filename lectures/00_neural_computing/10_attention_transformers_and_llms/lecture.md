@@ -27,16 +27,16 @@ Suppose we want the representation of “published” to use information about �
 
 > Which positions should this position directly use right now?
 
-Given queries \(Q\), keys \(K\), and values \(V\), scaled dot-product attention is
+Given queries $Q$, keys $K$, and values $V$, scaled dot-product attention is
 
-\[
+$$
 \operatorname{Attention}(Q,K,V)=
 \operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
-\]
+$$
 
-Conceptually, \(QK^\top\) scores how strongly each token's query matches each token's key. Dividing by \(\sqrt{d_k}\) controls the scale of those scores as the key dimension grows. Softmax turns each row of scores into nonnegative weights that sum to 1. Multiplying those weights by \(V\) produces a weighted mixture of the information carried by the tokens.
+Conceptually, $QK^\top$ scores how strongly each token's query matches each token's key. Dividing by $\sqrt{d_k}$ controls the scale of those scores as the key dimension grows. Softmax turns each row of scores into nonnegative weights that sum to 1. Multiplying those weights by $V$ produces a weighted mixture of the information carried by the tokens.
 
-Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token \(t\) cannot use future tokens during autoregressive language modeling.
+Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token $t$ cannot use future tokens during autoregressive language modeling.
 
 Explain the roles separately:
 - Q: what this position is looking for;
@@ -126,33 +126,33 @@ The important question is not merely “which is faster?” but:
 
 ## Work a tiny attention calculation by hand
 
-Suppose one query is \(q=[1,0]\), and two keys are \(k_1=[1,0]\) and \(k_2=[0,1]\). With key dimension \(d_k=2\), scaled dot-product attention gives scores
+Suppose one query is $q=[1,0]$, and two keys are $k_1=[1,0]$ and $k_2=[0,1]$. With key dimension $d_k=2$, scaled dot-product attention gives scores
 
-\[
+$$
 s_i=\frac{q^\top k_i}{\sqrt{d_k}}
 \quad\Rightarrow\quad
 s_1=\frac1{\sqrt2}\approx0.707,\qquad s_2=0.
-\]
+$$
 
 Softmax converts scores to weights:
 
-\[
+$$
 \alpha_i=\frac{e^{s_i}}{\sum_j e^{s_j}}
 \quad\Rightarrow\quad
 (\alpha_1,\alpha_2)\approx(0.67,0.33).
-\]
+$$
 
-Let the corresponding values be \(v_1=[10,0]\) and \(v_2=[0,10]\). The output is their weighted average:
+Let the corresponding values be $v_1=[10,0]$ and $v_2=[0,10]$. The output is their weighted average:
 
-\[
+$$
 o=0.67v_1+0.33v_2\approx[6.7,3.3].
-\]
+$$
 
 The output mostly carries the first value because its key matched the query more strongly. In a Transformer, queries, keys, and values are learned projections of token representations, not hand-written vectors.
 
 ### What the causal mask changes
 
-When predicting the next token, position \(t\) must not read positions after \(t\). A causal mask replaces forbidden future scores with a very negative number before softmax, making their weights effectively zero. Without the mask, training can leak the answer token into its own prediction.
+When predicting the next token, position $t$ must not read positions after $t$. A causal mask replaces forbidden future scores with a very negative number before softmax, making their weights effectively zero. Without the mask, training can leak the answer token into its own prediction.
 
 Attention weights show how a particular head mixes value vectors; they are not automatically faithful explanations of a model's decision.
 
@@ -171,21 +171,21 @@ A BERT-style masked-language-model example might present:
 
 The model predicts the missing word *cat* using context on both sides. During training, the loss is applied to selected masked positions:
 
-\[
+$$
 \mathcal L_{\mathrm{MLM}}
 =-\sum_{i\in M}\log p_\theta(x_i\mid x_{\setminus M}),
-\]
+$$
 
-where \(M\) is the set of masked positions, \(x_i\) is the original token at position \(i\), and \(x_{\setminus M}\) denotes the corrupted input with those positions masked. The model can use context to the left and right of a masked token.
+where $M$ is the set of masked positions, $x_i$ is the original token at position $i$, and $x_{\setminus M}$ denotes the corrupted input with those positions masked. The model can use context to the left and right of a masked token.
 
 A GPT-style autoregressive model instead learns to predict the next token from the preceding tokens. For this same sequence, it learns examples such as **The → cat**, **The cat → sat**, and **The cat sat → down**:
 
-\[
+$$
 \mathcal L_{\mathrm{next}}
 =-\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t}).
-\]
+$$
 
-Here \(x_{<t}\) means all tokens before position \(t\). The causal attention mask enforces that restriction: the representation at position \(t\) cannot read future tokens.
+Here $x_{<t}$ means all tokens before position $t$. The causal attention mask enforces that restriction: the representation at position $t$ cannot read future tokens.
 
 The key distinction is not that one model “uses attention” and the other does not. Both can use Transformer attention. The difference is **which tokens are visible to each prediction and which targets receive loss**. Masked prediction is useful for learning bidirectional representations; causal next-token prediction directly matches left-to-right text generation. These objectives create different training behavior and should not be treated as interchangeable.
 
@@ -197,11 +197,11 @@ The single-head example used one query/key/value space. A Transformer usually ru
 
 Choose these small dimensions:
 
-- batch size \(B=2\): two examples processed together;
-- sequence length \(T=3\): three tokens per example;
-- model width \(d_{\text{model}}=4\): four numbers represent each token;
-- number of heads \(H=2\): two attention calculations in parallel;
-- head width \(d_k=d_v=2\): each head uses two-dimensional queries, keys, and values.
+- batch size $B=2$: two examples processed together;
+- sequence length $T=3$: three tokens per example;
+- model width $d_{\text{model}}=4$: four numbers represent each token;
+- number of heads $H=2$: two attention calculations in parallel;
+- head width $d_k=d_v=2$: each head uses two-dimensional queries, keys, and values.
 
 The input tensor is
 
@@ -218,13 +218,13 @@ W_Q,W_K,W_V\in\mathbb R^{4\times4},
 Q=XW_Q,\ K=XW_K,\ V=XW_V.
 $$
 
-Therefore \(Q\), \(K\), and \(V\) each have shape \((2,3,4)\). The model then splits the final dimension of four into two heads of width two and moves the head dimension next to the batch dimension:
+Therefore $Q$, $K$, and $V$ each have shape $(2,3,4)$. The model then splits the final dimension of four into two heads of width two and moves the head dimension next to the batch dimension:
 
 $$
 (B,T,4)\rightarrow(B,T,H,d_k)\rightarrow(B,H,T,d_k).
 $$
 
-After splitting, each of \(Q\), \(K\), and \(V\) has shape \((2,2,3,2)\). Within each head, the key matrix is transposed across its final two dimensions. The score calculation is
+After splitting, each of $Q$, $K$, and $V$ has shape $(2,2,3,2)$. Within each head, the key matrix is transposed across its final two dimensions. The score calculation is
 
 $$
 QK^\top:
@@ -232,7 +232,7 @@ QK^\top:
 \rightarrow(2,2,3,3).
 $$
 
-Each head now has a \(3\times3\) score matrix for every example: each of the three query tokens scores all three key positions. Scale the scores by \(\sqrt{d_k}=\sqrt2\), apply softmax over the last axis, and multiply by that head's values:
+Each head now has a $3\times3$ score matrix for every example: each of the three query tokens scores all three key positions. Scale the scores by $\sqrt{d_k}=\sqrt2$, apply softmax over the last axis, and multiply by that head's values:
 
 $$
 \operatorname{softmax}\left(\frac{QK^\top}{\sqrt2}\right)V
@@ -251,6 +251,14 @@ The last projection changes the combined representation using learned weights; i
 **Shape sanity check:** the sequence length stays three throughout attention. The two heads each return two features, so concatenating them restores the model width of four. If your implementation produces a final feature width of two here, you probably forgot to concatenate the heads; if it produces a sequence length of two, check the reshape or transpose.
 
 Multiple heads do not automatically mean that each head learns a different useful relationship. They are separate learned subspaces that *can* specialize; whether they do so usefully is an empirical question.
+
+## Failure analysis: when attention gives a misleading result
+
+- **Suspiciously perfect next-token training:** verify that future positions are masked before softmax and that labels are shifted correctly. A causal mask must prevent position $t$ from using any key position greater than $t$.
+- **NaNs or unstable scores:** check tensor shapes, dtype, and score scaling by $\sqrt{d_k}$. Softmax on very large unscaled dot products can become extremely peaked.
+- **Output shape is wrong:** for $H$ heads of width $d_k$, the concatenated feature width is $H d_k$; the output projection maps that width back to $d_{\mathrm{model}}$ when the design uses that convention.
+- **A local-attention model is faster but weaker:** examine which long-range dependencies were removed. Faster execution is a trade-off, not proof of equivalent context use.
+- **Attention weights are interpreted as explanations:** weights describe this operation's value mixing, but alone they do not establish why the full model made a decision.
 
 ## Core concepts
 
@@ -291,6 +299,16 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 4. What is the simplest credible baseline?
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
+
+### Answers
+
+1. Attention lets each query retrieve a weighted combination of value vectors based on query-key compatibility.
+2. If two unmasked scores are equal, softmax assigns weights $0.5$ and $0.5$.
+3. A masked future position must receive effectively zero attention weight after softmax.
+4. BERT-style masked prediction can use context on both sides of a masked token; GPT-style causal prediction uses only preceding tokens for each target.
+5. With $B=2$, $T=3$, $d_{\mathrm{model}}=4$, and $H=2$ heads of width 2, the attention score tensor is $(2,2,3,3)$ and the combined output shape is $(2,3,4)$.
+6. Full attention has $T^2$ pairwise token interactions per head; local attention reduces interactions but restricts direct access to distant positions.
+7. A causal-mask or target-shift error can leak the answer into the input and produce unrealistically good training scores.
 
 ## Visual intuition
 
