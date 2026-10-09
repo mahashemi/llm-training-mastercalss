@@ -53,6 +53,17 @@ SFT learns from:
 
 **input → desired response**
 
+### What receives the loss?
+
+The stored example and the supervised tokens are not the same thing. A conversational record contains user/system context and one or more assistant messages, but a common assistant-tuning setup computes next-token loss on the assistant target while masking context tokens from the loss.
+
+For example, the user question is needed as context so the model can answer it; it usually is not the answer we want the assistant to imitate. If the loss is accidentally applied to the entire serialized conversation, the model is also trained to reproduce user text and system instructions. That can be intentional for some language-modeling objectives, but it is not the default goal of assistant-response SFT.
+
+The lab therefore uses a structured `messages` record and `assistant_only_loss=True` with Qwen3's supported chat-template handling. Always inspect the trainer/template behavior for your model family: a JSON field called `messages` does not by itself guarantee the right loss mask.
+
+For prompt-completion data, the equivalent distinction is whether loss is computed on the completion only or on the full sequence. See the [TRL SFTTrainer documentation](https://huggingface.co/docs/trl/main/sft_trainer).
+
+
 Show a bad dataset:
 
 - repetitive prompts;
