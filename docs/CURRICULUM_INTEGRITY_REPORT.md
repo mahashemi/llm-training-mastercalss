@@ -174,3 +174,9 @@ The invariant remains:
 - The lab plots training loss and final held-out accuracy with seed variability. It explicitly notes that identical random seeds do not imply identical initial tensors when architecture shapes differ.
 - Notebook code changed; require fresh clean-kernel execution after merge. This is a small matched-budget teaching comparison, not a deep ResNet/DenseNet benchmark.
 
+## Course 1 toy generative fidelity metric — 2026-10-09
+
+- The GAN lab now computes empirical Wasserstein-1 distance between the real and generated samples from its one-dimensional two-mode toy distribution, in addition to per-mode coverage, spread, and training compute.
+- The metric is explicitly scoped to this 1-D toy setting; it is not presented as an image-quality score. Image-domain evaluation remains a separate gate.
+- Notebook code changed; fresh clean-kernel execution is required after merge.
+
