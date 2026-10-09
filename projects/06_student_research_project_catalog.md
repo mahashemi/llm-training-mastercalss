@@ -978,3 +978,26 @@ Ask:
 A new project should connect to an existing lecture, use a real dataset or clearly justified controlled environment, expose a measurable phenomenon, and have a credible path from reproduction to deeper research.
 
 This keeps the catalogue from becoming a giant list while allowing it to grow for years.
+
+
+# Course 1 quick-start: choose a project in the first week
+
+The full catalogue spans both Course 1 (neural computing) and Course 2 (LLM engineering). For Course 1, begin with one of these **four recommended project families**; the instructor can approve another project if its scope fits the 35-day schedule and available compute.
+
+| Starter | Best for | First deliverable by Day 7 | A sensible extension |
+|---|---|---|---|
+| **P01 · Learning and generalization** | Understanding what changes as width, depth, data or regularization changes | Matched baseline and a falsifiable hypothesis | Shuffled-label memorization, regularization or multi-seed study |
+| **P02 · What makes optimization work?** | Connecting gradients and optimizer behavior to measured convergence | Manual/autograd sanity check and controlled optimizer question | Initialization, learning rate, batch size or gradient instability |
+| **P03 · Do representations preserve structure?** | Comparing features and latent representations | A representation metric plus a baseline | Linear probes, neighborhood preservation or nuisance sensitivity |
+| **P04 · Does a CNN learn the object or its background?** | Investigating inductive bias and robustness | A data-slice plan and a controlled baseline | Background/texture shifts, augmentation or corruption robustness |
+
+### Scope rules for a 35-day project
+
+1. Choose a question answerable with CPU/Colab or the course's documented resources; a large model is not a prerequisite.
+2. Define one primary outcome and one primary intervention before running the final experiment.
+3. Establish a baseline before claiming an improvement.
+4. Record seeds, versions, data provenance, splits, compute, and known limitations.
+5. Include failure analysis. If the hypothesis is not supported, report that honestly.
+6. Start a LaTeX paper draft early, but do not confuse a paper-shaped document with a publishable contribution.
+
+The broader 48-project catalogue remains available for independent learners and Course 2. The instructor should explicitly approve projects outside P01–P04 for this short Course 1 cycle.
