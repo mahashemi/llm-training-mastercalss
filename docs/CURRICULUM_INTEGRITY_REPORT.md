@@ -107,3 +107,10 @@ The invariant remains:
 - The VAE and diffusion sections already include worked numeric objective/noising examples; the readiness audit now distinguishes those from the remaining need for a defensible sample-fidelity evaluation.
 - Notebook code changed in this pass; a fresh clean-kernel run is required before treating these new metrics as execution-verified.
 
+## Course 1 autoencoder regularization and representation pass — 2026-10-09
+
+- Chapter 5 now defines sparse and contractive autoencoder objectives and works a numeric example for each penalty.
+- The lab now freezes a trained encoder and evaluates latent vectors with a logistic-regression linear probe. It compares the trained encoder with raw pixels and an untrained random encoder using the same train/test examples.
+- The lab uses a fixed seed for the baseline autoencoder and fits feature scaling only within each probe's training data via a pipeline.
+- This notebook code change requires a fresh clean-kernel run after merge. The linear-probe comparison is diagnostic and still needs repeated-seed uncertainty analysis.
+
