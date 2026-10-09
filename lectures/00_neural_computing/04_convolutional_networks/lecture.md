@@ -29,7 +29,27 @@ $$
 
 Here $x_{i+k}$ is an input value in the local window, $w_k$ is the learned weight applied to it, and the sum combines those weighted values into one output. In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
 
-Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 image and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
+### Work out a convolution's output size
+
+For one spatial dimension, the output size is
+
+$
+N_{\mathrm{out}}=\left\lfloor\frac{N_{\mathrm{in}}+2P-K}{S}\right\rfloor+1,
+$
+
+where $N_{\mathrm{in}}$ is the input width (or height), $K$ is kernel size, $P$ is padding on each side, and $S$ is stride. The floor means “round down to the nearest whole number,” because a kernel cannot start at a fractional pixel position.
+
+For a $28\times28$ image with a $3\times3$ kernel, stride $S=1$, and padding $P=1$,
+
+$
+N_{\mathrm{out}}=\left\lfloor\frac{28+2(1)-3}{1}\right\rfloor+1=28.
+$
+
+So the feature map remains $28\times28$. If a $2\times2$ max-pooling layer then uses stride 2 with no padding, the spatial size becomes $14\times14$. Track height, width, and channels separately: a convolution with 16 filters produces 16 output channels.
+
+### Count parameters rather than guessing
+
+For a dense layer from 784 inputs to 64 units, there are $784\times64$ weights plus 64 biases, or 50,240 trainable parameters. A convolution with 16 filters, each of size $3\times3$ and one input channel, has $16(3\times3+1)=160$ trainable parameters. The kernel weights are reused at every image location; the number of locations affects computation, not the number of shared parameters.
 
 Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks change the optimization problem by learning a residual:
 
@@ -37,7 +57,7 @@ $$
 y=F(x)+x.
 $$
 
-Here $x$ is the incoming representation, $F(x)$ is the learned correction, and $y$ is the output. The shortcut carries $x$ directly to the addition, giving information and gradients a direct path.
+Here $x$ is the incoming representation, $F(x)$ is the learned correction, and $y$ is the output. The shortcut carries $x$ directly to the addition, giving information and gradients a direct path. This identity addition requires $F(x)$ and $x$ to have the same shape. If channels or spatial dimensions differ, a projection shortcut (often a $1\times1$ convolution with a suitable stride) can map $x$ to the required shape.
 
 Dense networks instead concatenate earlier representations:
 
