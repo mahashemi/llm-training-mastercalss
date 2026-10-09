@@ -15,7 +15,7 @@ ROOT = Path("lectures/00_neural_computing")
 EXPECTED_CHAPTERS = 12
 INLINE_DOLLAR = re.compile(r"(?<!\\)\$(?!\$)")
 DISPLAY_DOLLAR = re.compile(r"(?<!\\)\$\$")
-LEGACY_DELIMITERS = (r"\\(", r"\\)", r"\\[", r"\\]")
+LEGACY_DELIMITERS = (r"\(", r"\)", r"\[", r"\]")
 
 
 def strip_inline_code(line: str) -> str:
