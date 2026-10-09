@@ -5,314 +5,210 @@
 
 ## Why this chapter exists
 
-A classifier answers 'which class?'; a generative model asks 'what could a new example look like?' This is the foundation behind synthetic images, speech generation, molecule design, and modern media systems.
+A classifier predicts a label or target for an input. A generative model tries to learn enough about the structure of examples to produce new ones. This underlies image synthesis, speech generation, molecule design, simulation, and many modern media systems.
 
-VAE, GAN, and diffusion models solve related problems with very different mechanisms. We will build the intuition before comparing their objectives and engineering trade-offs.
+Variational autoencoders (VAEs), generative adversarial networks (GANs), and diffusion models all generate samples, but their learning signals are fundamentally different. By the end of this chapter, you should be able to explain each objective in plain language, calculate a tiny example, identify a characteristic failure, and choose evaluation metrics that do not confuse model loss with sample quality.
 
-The lab emphasizes measurable quality, diversity, and compute rather than attractive sample galleries alone.
+## 1. What does it mean to model data?
 
-## 1. The problem: learning a distribution, not only a label
+Let $x$ be an example, such as an image of a handwritten digit. A classifier might learn a conditional prediction $p(y\mid x)$. A generative model instead tries to represent aspects of the data distribution $p_{\mathrm{data}}(x)$ so that it can produce a new plausible example.
 
-A classifier learns a mapping
+The phrase **plausible example** has several meanings. A sample can look realistic but represent only one narrow kind of example. It can be diverse but low fidelity. It can be high quality but take too long to generate. So “best” always depends on the application.
 
-$$
-x \rightarrow y.
-$$
+A useful comparison keeps at least three questions separate:
 
-A generative model instead tries to learn enough about the data distribution to produce new samples:
+- **Fidelity:** do generated samples resemble valid examples?
+- **Coverage / diversity:** does the model represent the important varieties in the data?
+- **Cost:** what training time, memory, and inference latency are required?
 
-$$
-z \rightarrow x.
-$$
+## 2. VAE: learn a latent distribution
 
-The central question is: **what does it mean for a generated example to be plausible?**
-
-## 2. Three different answers
-
-### VAE: structured latent-variable learning
-
-An encoder produces an approximate posterior
+A variational autoencoder has an encoder and decoder, but the encoder predicts a distribution over latent codes rather than just one code. A common Gaussian encoder is
 
 $$
 q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\operatorname{diag}(\sigma_\phi^2(x))\right).
 $$
 
-The reparameterization trick is
+Here $\mu_\phi(x)$ is the predicted mean and $\sigma_\phi(x)$ describes uncertainty in each latent coordinate. To sample while keeping the operation differentiable, use the reparameterization trick:
 
 $$
-z=\mu_\phi(x)+\sigma_\phi(x)\\odot\epsilon,
-\qquad
-\epsilon\sim\mathcal N(0,I).
+z=\mu_\phi(x)+\sigma_\phi(x)\odot\epsilon,
+\qquad \epsilon\sim\mathcal N(0,I).
 $$
 
-The objective is
+The random noise $\epsilon$ is sampled independently of the encoder parameters. The network can therefore learn how to change the mean and scale while the randomness remains an explicit input.
+
+### The VAE objective: why are there two terms?
+
+The evidence lower bound (ELBO) for one example is
 
 $$
-\mathcal L=
+\operatorname{ELBO}
+=
 \mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]
--D_{\mathrm{KL}}(q_\phi(z\mid x)\|p(z)).
+-
+D_{\mathrm{KL}}\left(q_\phi(z\mid x)\|p(z)\right).
 $$
 
-The first term rewards reconstruction; the second regularizes the latent distribution.
+Training can **maximize** this expression. Many implementations instead minimize its negative, which can be written as reconstruction cost plus a latent-distribution penalty:
 
-### GAN: adversarial distribution matching
+$$
+\mathcal L_{\mathrm{VAE}}
+=
+\mathcal L_{\mathrm{recon}}
++
+\beta D_{\mathrm{KL}}\left(q_\phi(z\mid x)\|p(z)\right).
+$$
 
-A discriminator tries to distinguish real data from generated data while the generator tries to fool it:
+For the standard ELBO, $\beta=1$; choosing another $\beta$ changes the trade-off and is often called a beta-VAE objective. The reconstruction term rewards explaining the observed example. The KL divergence penalizes an encoder distribution that strays too far from the prior $p(z)$, commonly a standard normal distribution. The prior makes it possible to sample a latent vector and decode it without first choosing a training example.
+
+**Numerical example.** Suppose the reconstruction cost is 10 and the KL penalty is 2. With $\beta=0.5$, the minimized objective is
+
+$$
+\mathcal L=10+0.5(2)=11.
+$$
+
+If $\beta$ increases, the latent constraint becomes stronger. That may produce a more regular latent space, but reconstruction may worsen. If the latent penalty dominates, the encoder can stop conveying useful information—a failure often called *posterior collapse*. The objective is a trade-off, not a direct image-quality score.
+
+## 3. GAN: learn through an adversarial game
+
+A GAN has two networks:
+
+- the **generator** $G$ maps random noise $z$ to a synthetic example $G(z)$;
+- the **discriminator** $D$ estimates whether an example came from the real data rather than the generator.
+
+The original minimax objective is
 
 $$
 \min_G\max_D
-\mathbb E_{x\sim p_{data}}[\log D(x)]
+\mathbb E_{x\sim p_{\mathrm{data}}}[\log D(x)]
 +
 \mathbb E_{z\sim p(z)}[\log(1-D(G(z)))].
 $$
 
-Because the two players continuously change one another's objective, optimization can be unstable. **Mode collapse** occurs when the generator covers only a narrow part of the data distribution.
+The discriminator wants high scores for real examples and low scores for generated examples. The generator wants generated examples to be accepted. Because each network changes while the other is learning, the optimization target moves throughout training.
 
-### Diffusion: learn iterative denoising
+### Read a GAN loss numerically
 
-A forward process gradually corrupts data:
-
-$$
-q(x_t\mid x_{t-1})
-=
-\mathcal N\left(
-\sqrt{1-\beta_t}x_{t-1},
-\beta_t I
-\right).
-$$
-
-The learned reverse process attempts to remove that corruption step by step.
-
-## 3. Worked comparison
-
-Imagine generating handwritten digits.
-
-A VAE may generate smooth but blurry digits because likelihood and latent regularization favor a broad reconstruction distribution.
-
-A GAN may generate sharp digits but repeatedly produce similar examples.
-
-A diffusion model can generate diverse, high-fidelity examples but usually requires multiple denoising steps at inference.
-
-Therefore there is no universal “best generator.” The application may prioritize fidelity, diversity, controllability, latency, or compute.
-
-| Method | Main strength | Typical failure | Systems consequence |
-|---|---|---|---|
-| VAE | Structured latent space | Blurry reconstruction / posterior collapse | Relatively simple sampling |
-| GAN | Sharp samples | Instability / mode collapse | Adversarial training |
-| Diffusion | Fidelity and diversity | Sampling cost | Iterative generation |
-
-## 4. What to measure
-
-Do not rely only on a visual gallery.
-
-Measure:
-
-- reconstruction error for a VAE;
-- diversity and mode coverage for a GAN;
-- denoising error for diffusion;
-- sampling time;
-- parameter count;
-- memory usage.
-
-A model that improves a quality metric by 1% but multiplies inference cost by 20× may be the wrong engineering choice.
-
-## 5. Failure analysis
-
-If a VAE reconstructs poorly, distinguish insufficient capacity from excessive KL regularization.
-
-If a GAN loses modes, inspect diversity rather than only generator/discriminator losses.
-
-If diffusion remains noisy, distinguish a weak denoiser from an unsuitable noise schedule.
-
-## 6. Laboratory
-
-**[Open the executable laboratory](./lab.ipynb).**
-
-Predict first. Then run the VAE, inspect the diffusion corruption process, and study GAN instability on a toy distribution. The notebook produces quantitative tables and an answer key.
-
-## 7. Research extension
-
-Choose one variable:
-
-- VAE latent dimension;
-- VAE KL weight;
-- GAN discriminator/generator update ratio;
-- diffusion number of steps.
-
-State the hypothesis before the intervention and report quality **and** compute.
-
-## Mastery questions
-
-1. Why does a VAE need the KL term?
-2. Why can GAN training become unstable?
-3. What is mode collapse?
-4. Why does diffusion trade sampling speed for iterative denoising?
-
-### Answers
-
-1. It regularizes the learned latent distribution toward a prior.
-2. The generator and discriminator continually move each other's optimization target.
-3. The generator covers only a subset of the data distribution.
-4. Each reverse step performs part of the learned denoising trajectory.
-
-[← Previous](../05_autoencoders/lecture.md) · [Course 1 home](../README.md) · [Next →](../07_recurrent_networks/lecture.md)
-
-## Build the intuition before the notation
-
-Generative modeling is easiest to understand by asking a simple question:
-
-> **If I only show you examples from a distribution, can you learn to produce new examples that belong to that distribution?**
-
-A classifier learns a decision boundary or conditional prediction. A generator tries to model the structure of the examples themselves.
-
-### VAE: compress, regularize, reconstruct
-
-A VAE does not simply choose one latent vector. It learns a distribution over plausible latent explanations.
-
-The encoder produces $\mu$ and $\sigma$, we sample with
+For one real example and one generated example, the discriminator's binary-cross-entropy loss can be written
 
 $$
-z=\mu+\sigma\odot\epsilon,
-\qquad \epsilon\sim\mathcal N(0,I),
-$$
-
-and decode $z$.
-
-The KL term prevents every input from inventing an unrelated private latent space.
-
-### GAN: learn through a game
-
-The discriminator asks:
-
-> “Does this look real?”
-
-The generator asks:
-
-> “Can I produce something the discriminator accepts?”
-
-The difficulty is that both objectives move during training. A generator can also discover an easy subset of the distribution and repeatedly produce similar examples: **mode collapse**.
-
-#### Read a GAN loss numerically—and why it is not a quality score
-
-For a single real example \(x\) and generated example \(G(z)\), the discriminator's binary-cross-entropy objective can be written
-
-\[
 \mathcal L_D=-\log D(x)-\log(1-D(G(z))).
-\]
+$$
 
-The discriminator wants \(D(x)\) near 1 for real data and \(D(G(z))\) near 0 for generated data. Suppose \(D(x)=0.9\) and \(D(G(z))=0.2\). Then
+Suppose $D(x)=0.9$ and $D(G(z))=0.2$. Then
 
-\[
+$$
 \mathcal L_D=-\log(0.9)-\log(0.8)\approx0.329.
-\]
+$$
 
-If the discriminator instead assigns \(D(G(z))=0.9\), its loss becomes
+If the discriminator instead assigns $D(G(z))=0.9$, the loss becomes
 
-\[
+$$
 -\log(0.9)-\log(0.1)\approx2.408.
-\]
+$$
 
-A common non-saturating generator loss for that generated example is \(\mathcal L_G=-\log D(G(z))\). It is about \(1.609\) when \(D(G(z))=0.2\), and about \(0.105\) when \(D(G(z))=0.9\).
+A commonly used non-saturating generator loss for that generated example is $\mathcal L_G=-\log D(G(z))$. At $D(G(z))=0.2$, it is about $1.609$; at $D(G(z))=0.9$, it is about $0.105$.
 
-These numbers tell us how the current discriminator scores the examples—not whether the generator covers the whole data distribution. A generator can produce a few convincing examples from only one mode and still have poor diversity. Likewise, GAN losses can move in opposite directions because the two networks are learning against one another.
+These calculations explain the current training signal; they do **not** prove that the generator has learned the whole distribution. A generator might produce a few convincing samples repeatedly and ignore other modes. This is **mode collapse**. A low generator loss or a high discriminator score on selected samples is not enough to establish diversity.
 
-#### Evaluate fidelity, coverage, and compute separately
+## 4. Diffusion: learn to reverse a corruption process
 
-For a meaningful generative comparison, report at least three different kinds of evidence:
+Diffusion models gradually add noise to training data, then train a neural network to predict the noise or another equivalent denoising target. Define $\beta_t$ as the noise variance schedule and $\alpha_t=1-\beta_t$. The cumulative product is
 
-- **Fidelity:** do generated examples look or behave like plausible examples from the data distribution?
-- **Diversity / mode coverage:** does the generator represent the important varieties in the real data, or has it collapsed to a narrow subset?
-- **Compute:** how many updates, how much elapsed time, and—when relevant—how much accelerator memory were required?
+$$
+\bar\alpha_t=\prod_{s=1}^{t}\alpha_s.
+$$
 
-In the toy two-mode lab, count how many generated samples fall near each real mode and report the generated spread. This is a transparent teaching metric for that synthetic distribution, not a universal image-quality metric. For image models, choose suitable distributional and human/qualitative evaluations and state their limitations. Never compare a VAE reconstruction loss, a GAN discriminator loss, and a diffusion noise-prediction loss as if they were measurements on the same scale.
+The forward process has a convenient direct expression:
 
-### Diffusion: learn to reverse corruption
+$$
+x_t=\sqrt{\bar\alpha_t}x_0+
+\sqrt{1-\bar\alpha_t}\,\epsilon,
+\qquad \epsilon\sim\mathcal N(0,I).
+$$
 
-Diffusion takes a different route.
+Here $x_0$ is the clean example and $x_t$ is the noisy version at step $t$. A common training objective asks a model $\epsilon_\theta(x_t,t)$ to predict the noise:
 
-Instead of asking a network to generate a clean sample in one jump, it trains a denoiser to reverse a controlled corruption process.
+$$
+\mathcal L_{\mathrm{noise}}
+=
+\mathbb E_{x_0,t,\epsilon}
+\left[
+\left\|\epsilon-\epsilon_\theta(x_t,t)\right\|_2^2
+\right].
+$$
 
-The conceptual loop is:
+**Tiny calculation.** Choose $\bar\alpha_t=0.64$, clean scalar $x_0=1$, and sampled noise $\epsilon=-0.5$. Then
 
-**clean data → add noise → learn to remove noise → repeat many times during generation.**
+$$
+x_t=\sqrt{0.64}(1)+\sqrt{0.36}(-0.5)
+=0.8-0.3=0.5.
+$$
 
-### Fair comparison
+The model learns how to predict the corruption at different noise levels. During generation, it starts from noise and repeatedly applies a learned reverse update. More denoising steps can improve quality in some settings, but generally increase latency; the precise trade-off depends on the sampler, model, and task.
 
-Do not compare a VAE, GAN, and diffusion model using only the prettiest generated image.
+## 5. Compare mechanisms, not just names
 
-A serious comparison asks:
+| Model | Learning signal | Common strength | Characteristic failure or cost |
+|---|---|---|---|
+| VAE | Reconstruction likelihood plus KL regularization | Structured latent representation and straightforward sampling | Blurry outputs in some setups; posterior collapse |
+| GAN | Generator–discriminator adversarial game | Can produce sharp samples | Unstable training and mode collapse |
+| Diffusion | Predict noise or an equivalent denoising target | Strong sample fidelity and diversity in many applications | Iterative sampling can be expensive |
 
-- quality;
-- diversity;
-- coverage;
-- conditioning/control;
-- inference latency;
-- memory;
-- training cost.
+Do not compare a VAE reconstruction loss, a GAN discriminator loss, and a diffusion noise-prediction loss as if they were on one common scale. Each objective measures a different training task. Use task-appropriate sample metrics, diversity or coverage measures, qualitative inspection, and resource measurements.
 
-Different applications optimize different points on this trade-off surface.
+## 6. Evaluation: how do we know generation improved?
 
-## Work through the objectives of three generative models
+Use more than one kind of evidence.
 
-The models in this chapter all generate examples, but their losses do not mean the same thing.
+- **Fidelity:** inspect representative samples and use a metric suitable for the data type.
+- **Coverage:** for a toy two-mode distribution, count how often samples fall near each real mode. For complex images, use suitable distributional measures and explain their limitations.
+- **Reconstruction:** useful for a VAE, but not a substitute for evaluating newly generated samples.
+- **Compute:** record training steps, wall-clock time, peak memory, and sampling latency.
+- **Reproducibility:** repeat across seeds when feasible and report mean and spread, not only the best run.
 
-### VAE: reconstruction plus a latent penalty
+For example, imagine real data has two equally common clusters. If a generator creates 1,000 samples but 995 fall near the first cluster, a handful of beautiful samples can hide severe coverage failure. Counting samples per cluster exposes the issue. This is a valid teaching metric for the toy distribution, not a universal image-quality metric.
 
-A common VAE objective minimizes
+## 7. Failure analysis: diagnose the mechanism
 
-\[
-\mathcal{L}_{\mathrm{VAE}}=\mathcal{L}_{\mathrm{recon}}+\beta D_{\mathrm{KL}}\big(q_\phi(z\mid x)\,\|\,p(z)\big).
-\]
+- **VAE reconstruction is poor:** compare model capacity and reconstruction objective before assuming the latent dimension is the only problem. Check whether the KL term overwhelms the reconstruction signal.
+- **VAE reconstructions are good but generated samples are poor:** evaluate samples drawn from the prior, not only reconstructions of training examples. Those are different paths through the model.
+- **GAN outputs look convincing but repetitive:** measure mode coverage and inspect the distribution of generated features; do not rely on a few hand-picked samples.
+- **GAN losses oscillate:** inspect both networks' losses and sample quality over time. Because the objectives compete, one loss alone can be misleading.
+- **Diffusion samples remain noisy:** distinguish an undertrained denoiser from a poor noise schedule, a sampler issue, or too few reverse steps.
 
-Suppose one example has reconstruction loss 10 and KL penalty 2. With \(\beta=0.5\), the total objective is \(10+0.5(2)=11\). Increasing \(\beta\) strengthens pressure for the latent distribution to match the prior, but may reduce reconstruction fidelity. The terms are a trade-off, not two independent accuracy scores.
+A failure report should state what evidence supports the diagnosis and what alternative explanation remains possible.
 
-### GAN: a two-player game
+## 8. Laboratory and research extension
 
-The generator creates a sample; the discriminator learns to distinguish real from generated examples. The generator's learning signal depends on the discriminator, so a discriminator that becomes too strong or too weak can make training unstable. A low discriminator loss alone is not evidence that generated samples are good.
+**[Open the executable laboratory](./lab.ipynb).** Predict first, then run the VAE experiment, inspect the diffusion corruption process, and study GAN instability on a toy distribution. The notebook should produce quantitative evidence, not only a gallery.
 
-### Diffusion: learn to reverse corruption
+Choose one controlled intervention:
 
-A common forward-noising expression is
-
-\[
-x_t=\sqrt{\bar{\alpha}_t}x_0+\sqrt{1-\bar{\alpha}_t}\epsilon,\qquad \epsilon\sim\mathcal{N}(0,I).
-\]
-
-For a toy scalar example, choose \(\bar{\alpha}_t=0.64\), clean value \(x_0=1\), and sampled noise \(\epsilon=-0.5\). Then \(x_t=0.8(1)+0.6(-0.5)=0.5\). The model learns to predict the noise or an equivalent denoising target; generation starts from noise and repeatedly applies the learned reverse process.
-
-**Check yourself:** why is it invalid to compare a VAE's reconstruction loss directly with a GAN's discriminator loss and declare the lower one the better generator? Name a sample-quality or distributional evaluation you would add.
-
-
-## Research exercise
-
-Choose one controlled variable and make a prediction before running the lab.
-
-| Model | Intervention | Primary measurement |
+| Model | Intervention | Primary measurements |
 |---|---|---|
-| VAE | latent size / KL weight | reconstruction + latent quality |
-| GAN | update ratio | stability + diversity |
-| Diffusion | denoising steps | quality + sampling time |
+| VAE | Latent size or KL weight | Reconstruction, prior-sample quality, latent-use diagnostics |
+| GAN | Generator/discriminator update ratio | Fidelity, mode coverage, stability |
+| Diffusion | Number of denoising steps | Quality, sampling time, memory |
 
-Report both **what changed** and **what did not change**.
+State the hypothesis before running the intervention. Keep the dataset, split, evaluation protocol, and other training settings fixed as far as practical. Report what changed, what did not change, and the limitations of the experiment.
 
-## Exit questions
+## Mastery questions and answers
 
-1. What makes a model generative rather than merely predictive?
-2. Why does a VAE use a latent distribution?
-3. Why can GAN training collapse to a few modes?
-4. Why does diffusion require repeated denoising?
-5. Why should quality and compute be reported together?
-
+1. **What makes a model generative rather than merely predictive?** It learns a way to represent or sample from the structure of the data distribution, rather than only mapping inputs to target labels.
+2. **Why does a VAE use a latent distribution?** It provides a regularized latent space from which new examples can be sampled and decoded.
+3. **What do the two VAE objective terms do?** Reconstruction rewards explaining the example; KL regularization encourages the encoded distribution to stay near the prior.
+4. **Why can GAN training collapse to a few modes?** The generator and discriminator co-adapt, and the generator may find a narrow set of outputs that currently fool the discriminator.
+5. **Why does diffusion require repeated denoising?** It learns a reverse process for gradually removing noise, usually applying multiple learned updates during sampling.
+6. **Why should quality and compute be reported together?** A quality improvement may be too expensive in latency, memory, or training cost for the target application.
+7. **Can we compare the three training losses directly?** No. Their terms and scales differ; use task-appropriate quality, diversity, and resource metrics.
 
 ## Visual intuition
 
 ![Three routes to generating data](../../../visuals/course1/06-generative-models.svg)
 
 *Figure: Different training objectives lead to different ways of sampling new examples.*
-
-— three different generative strategies
-
-These methods all model how data can be generated, but their learning signals differ.
 
 ```mermaid
 flowchart TB
@@ -346,18 +242,16 @@ The VAE balances reconstruction with a latent-distribution constraint; a GAN lea
 
 **[Open the executable laboratory](./lab.ipynb)**
 
-This notebook is part of the chapter, not optional homework. Follow the same scientific loop used in real ML work:
+Follow:
 
 **predict → establish a baseline → run → change one factor → measure → inspect failures → produce the results table → conclude → propose the next experiment.**
-
-The notebook uses a real dataset or environment, records quantitative results, and ends with an answer key and a research extension.
 
 ## Video companions
 
 **Start with the VAE:** [Understanding Variational Autoencoders (VAEs)](https://www.youtube.com/watch?v=HBYQvKlaE0A)
 
-These are different mechanisms, so use focused companions rather than assuming one video teaches all three:
-- [GANs: original paper and practical explanations](https://www.youtube.com/results?search_query=GAN+generative+adversarial+network+explained)
+Use focused companions for the other mechanisms:
+- [GANs: explanations and implementations](https://www.youtube.com/results?search_query=GAN+generative+adversarial+network+explained)
 - [Diffusion models: denoising and reverse sampling](https://www.youtube.com/results?search_query=diffusion+models+denoising+reverse+process+explained)
 
 ## Navigation
