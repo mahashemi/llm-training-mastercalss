@@ -86,6 +86,36 @@ to:
 This idea will later reappear in many forms of self-supervised learning.
 
 
+## Work a small example by hand
+
+Take a clean four-value signal \(x=[1,0,1,0]\). Imagine an encoder that averages the two even-position values and the two odd-position values:
+
+\[
+z_1=\tfrac12x_1+\tfrac12x_3=1,
+\qquad
+z_2=\tfrac12x_2+\tfrac12x_4=0.
+\]
+
+The latent code is \(z=[1,0]\): four values have been reduced to two. A matching decoder can reconstruct the repeated pattern \([1,0,1,0]\). This example is deliberately simple; a trained network must learn useful compression from many examples rather than being handed the right mapping.
+
+Now consider denoising. Let the clean target be \(x=[1,0,1,0]\), but the corrupted input be \(\tilde{x}=[1,0.1,0.9,0]\). If a model reconstructs \(\hat{x}=[1,0.05,0.95,0]\), its mean squared error against the clean target is
+
+\[
+\mathrm{MSE}=\frac{(1-1)^2+(0-0.05)^2+(1-0.95)^2+(0-0)^2}{4}
+=0.00125.
+\]
+
+Notice the target: the model is scored against the **clean** signal, not the corrupted input. Otherwise, copying the noise could be rewarded.
+
+### What does the bottleneck actually guarantee?
+
+Nothing magical. A narrow latent space limits the number of values passed through, but a high-capacity decoder can still learn shortcuts, and reconstruction quality does not guarantee useful semantic features. Test representation quality separately—for example, freeze the encoder and train a small linear classifier on its latent vectors.
+
+For centered data, a linear autoencoder trained with squared reconstruction error can recover the same principal subspace as PCA under standard conditions. Nonlinear encoders can model more complex structure, but their latent coordinates are not automatically interpretable.
+
+**Check yourself:** if the latent dimension grows from 2 to 64 while the input has 64 values, what failure mode becomes easier? Name one metric beyond reconstruction MSE that could test whether the representation is useful.
+
+
 ## Core concepts
 
 This unit covers **basic, regularized, sparse, denoising, stacked denoising, contractive objectives**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.

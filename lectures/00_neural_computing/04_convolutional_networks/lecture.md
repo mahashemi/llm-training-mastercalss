@@ -105,6 +105,51 @@ The shortcut therefore changes what the block must learn, not merely how many pa
 Whenever comparing CNN architectures, report parameter count and training budget. Otherwise “Model B is better” may simply mean Model B was given more capacity or more optimization.
 
 
+## Work a small example by hand
+
+Consider this \(3\times3\) input and a \(2\times2\) filter. For clarity, we use **cross-correlation** (the operation most deep-learning libraries call convolution): slide the filter without flipping it.
+
+\[
+X=\begin{bmatrix}1&2&0\\0&1&3\\2&1&0\end{bmatrix},
+\qquad
+K=\begin{bmatrix}1&0\\0&-1\end{bmatrix}.
+\]
+
+At the upper-left position, multiply matching entries and add:
+
+\[
+1(1)+2(0)+0(0)+1(-1)=0.
+\]
+
+Move the filter one column right:
+
+\[
+2(1)+0(0)+1(0)+3(-1)=-1.
+\]
+
+Repeat for the bottom row. The output feature map is
+
+\[
+Y=\begin{bmatrix}0&-1\\-1&1\end{bmatrix}.
+\]
+
+Every output cell is a local weighted measurement. The same four filter weights are reused at all four positions. This is the heart of parameter sharing.
+
+### Predict the output shape before running code
+
+For input height \(H\), kernel size \(K\), padding \(P\), and stride \(S\), the output height is
+
+\[
+H_{\text{out}}=\left\lfloor\frac{H+2P-K}{S}\right\rfloor+1.
+\]
+
+For a \(28\times28\) image, a \(3\times3\) kernel, stride 1, and padding 1, the output stays \(28\times28\). Sixteen filters produce 16 output channels.
+
+A residual block makes a different numerical move: if \(x=2.0\) and the learned correction \(F(x)=0.2\), then \(y=x+F(x)=2.2\). The block can preserve the original representation while learning a correction. A dense block instead concatenates features, so feature dimensions grow as earlier maps are reused.
+
+**Check yourself:** what would happen to the output size if the stride changed from 1 to 2? Before coding, calculate it using the formula and explain why rounding down is needed.
+
+
 ## Core concepts
 
 This unit covers **convolution, pooling, receptive fields, CNN extensions, residual and dense networks**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
