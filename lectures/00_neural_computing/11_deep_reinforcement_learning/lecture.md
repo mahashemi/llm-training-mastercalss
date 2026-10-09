@@ -80,6 +80,31 @@ The failure loop is:
 
 This can make apparently reasonable gradient updates unstable.
 
+## 3A. Value-based learning versus policy gradients
+
+DQN is **value-based**: it estimates \(Q(s,a)\), then chooses actions using those values (often with occasional exploration). Policy-gradient methods instead learn a policy directly: \(\pi_\theta(a\mid s)\) is the probability that the policy chooses action \(a\) in state \(s\).
+
+A simplified objective is expected discounted return:
+
+\[
+J(\theta)=\mathbb E_{\tau\sim\pi_\theta}
+\left[\sum_{t=0}^{T}\gamma^t r_{t+1}\right],
+\]
+
+where \(\tau\) denotes a trajectory of states, actions, and rewards. A common policy-gradient estimator has the form
+
+\[
+\nabla_\theta J(\theta)
+\approx
+\mathbb E\left[
+\sum_t \nabla_\theta\log\pi_\theta(a_t\mid s_t)\,G_t
+\right].
+\]
+
+Here \(G_t\) is the return following the action. The log-probability gradient indicates how to change the policy parameters to make that action more or less likely. A positive return gives that sampled action positive reinforcement; a poor return pushes in the opposite direction. In practice, baselines or advantages are often used to reduce estimator variance.
+
+**Do not confuse the methods:** DQN learns action values and derives a policy from them; REINFORCE-style policy gradients adjust the policy's action probabilities directly. Actor-critic methods combine a learned policy (actor) with a value estimator (critic). They have different stability, exploration, and variance trade-offs; neither dominates in every environment.
+
 ## 4. Worked CartPole example
 
 CartPole exposes four continuous state variables: position, velocity, pole angle, and angular velocity.
