@@ -436,6 +436,46 @@ Possible explanations include overfitting, insufficient data, distribution misma
 
 Do not choose the explanation first. Design an experiment that distinguishes them.
 
+## Training dynamics: initialization, optimizer, normalization, and regularization
+
+A gradient tells us which direction locally increases the loss. An optimizer decides how to use that information over many updates. It cannot rescue every bad setup, and a single run cannot tell us which choice is universally best.
+
+### Initialization: where learning begins
+
+At the start, the network's weights need initial values. If every neuron in a layer starts with exactly the same weights, they receive the same gradient and can learn the same feature; this is the symmetry problem. Random initialization breaks that symmetry. The scale matters too: weights that are too large can push activations into saturated regions or make gradients unstable; weights that are too small can shrink signals as they pass through layers. Xavier/Glorot and He initialization choose scales based on layer width and activation family.
+
+### SGD, momentum, and Adam
+
+- **SGD:** \(w\leftarrow w-\eta g_t\). It moves opposite the current gradient \(g_t\), scaled by learning rate \(\eta\).
+- **Momentum:** keeps a running direction so consistent gradients accumulate and noisy reversals are damped. A common form is \(m_t=\beta m_{t-1}+g_t\), then \(w\leftarrow w-\eta m_t\).
+- **Adam:** tracks moving averages of gradients and squared gradients, then scales each parameter's update using both. This can make optimization less sensitive to different gradient magnitudes across parameters, but it still needs sensible learning rates and validation.
+
+These methods differ in their update rule—not in the loss they are trying to minimize. Compare them with the same architecture, initialization, data order, training budget, and evaluation split. A faster decrease in training loss does not automatically mean better held-out performance.
+
+### Normalization: make the scale of inputs manageable
+
+Feature scaling changes the numerical units seen by the optimizer. If one feature ranges from 0 to 1 and another ranges from 0 to 100,000, their contributions can create badly conditioned optimization. Standardization uses
+
+\[
+x'=\frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}.
+\]
+
+The mean and standard deviation must be estimated from training data only, then reused unchanged for validation and test data. Fitting the scaler on all examples leaks information from the held-out set.
+
+Batch normalization instead normalizes intermediate activations using batch statistics during training and tracked statistics at inference. It is a model-layer technique, not a replacement for a leakage-safe data split.
+
+### Regularization: discourage fitting accidental details
+
+Weight decay adds a penalty for large weights, commonly written
+
+\[
+\mathcal L_{\mathrm{total}}=\mathcal L_{\mathrm{data}}+\lambda\|w\|_2^2.
+\]
+
+The coefficient \(\lambda\) controls the trade-off: a stronger penalty may reduce overfitting but can also underfit. Dropout randomly masks some activations during training, discouraging the network from depending too heavily on one path. Neither technique is guaranteed to help; choose its strength using validation data, not the final test set.
+
+**Controlled experiment rule:** first compare SGD with Adam while holding everything else fixed. Then, in a separate experiment, compare weight decay off versus on with the optimizer fixed. If you change optimizer, regularization, width, and epochs simultaneously, you will not know which change caused the result.
+
 ## 12. Numerical gradient checking
 
 One of the best debugging tools in deep learning is to compare two independent calculations.
