@@ -94,3 +94,9 @@ The invariant remains:
 - The attention lab now isolates BERT-style bidirectional versus GPT-style causal information access using a shared illustrative score matrix, with assertions checking that the causal row assigns zero probability to future positions.
 - The attention lab change requires fresh clean-kernel validation after merge. The prior successful 12/12 run validates the merged SOM changes, not this newer attention-lab addition.
 
+## Course 1 controlled CNN experiment — 2026-10-09
+
+- Chapter 4's lab now compares plain and residual convolutional blocks with the same learned layers and parameter count. For each of three seeds, both variants use the same initialization and minibatch order.
+- The notebook records per-epoch training loss, final held-out loss/accuracy, and seed variability, with plots for optimization curves and final accuracy.
+- This experiment is intentionally modest; a fresh clean-kernel run is required after merge, and it does not yet constitute a full DenseNet-versus-ResNet benchmark.
+
