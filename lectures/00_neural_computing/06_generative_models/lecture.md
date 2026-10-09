@@ -26,7 +26,7 @@ A useful comparison keeps at least three questions separate:
 A variational autoencoder has an encoder and decoder, but the encoder predicts a distribution over latent codes rather than just one code. A common Gaussian encoder is
 
 $$
-q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\operatorname{diag}(\sigma_\phi^2(x))\right).
+q_\phi(z\mid x)=\mathcal N\left(\mu_\phi(x),\mathrm{diag}(\sigma_\phi^2(x))\right).
 $$
 
 Here $\mu_\phi(x)$ is the predicted mean and $\sigma_\phi(x)$ describes uncertainty in each latent coordinate. To sample while keeping the operation differentiable, use the reparameterization trick:
@@ -43,7 +43,7 @@ The random noise $\epsilon$ is sampled independently of the encoder parameters. 
 The evidence lower bound (ELBO) for one example is
 
 $$
-\operatorname{ELBO}
+\mathrm{ELBO}
 =
 \mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]
 -
