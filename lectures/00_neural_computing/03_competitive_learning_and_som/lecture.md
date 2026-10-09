@@ -58,6 +58,17 @@ K-means repeatedly alternates between assignment and centroid recomputation. Onl
 
 So do not say “SOM is just k-means with a picture.” The neighborhood update creates a different inductive bias.
 
+### What an Evolving SOM adds
+
+A fixed-size SOM starts with a predefined grid. An **Evolving SOM (ESOM)** family allows the representation structure to adapt as data arrive. Depending on the specific algorithm, it may add units in regions with persistent quantization error, adjust connections, or remove units that contribute little. There is no single universal ESOM update rule, so an experiment must name the variant and state its growth/pruning rule rather than treating “evolving” as one standardized algorithm.
+
+A practical comparison should hold the data preprocessing and evaluation protocol fixed, then compare:
+- fixed-size SOM with a declared grid size;
+- the named evolving variant with its growth/pruning thresholds;
+- a simple baseline such as k-means when clustering quality is the question.
+
+Report quantization error and resource use, inspect the map, and check sensitivity to initialization. An evolving map may fit changing structure better, but it can also grow unnecessarily, overreact to noise, or make comparisons unfair if allowed much more capacity.
+
 ### Experiment prediction
 
 Before opening the notebook, write down three predictions:
