@@ -203,6 +203,23 @@ Include:
 This becomes the bridge from learning algorithms to doing research on LLMs.
 
 
+## Visual intuition — from question to defensible claim
+
+A research result is not just a metric. The claim must follow from the question, the evaluation contract, the controlled comparison, and the uncertainty in the evidence.
+
+```mermaid
+flowchart TD
+    Q["Specific research question"] --> H["Falsifiable hypothesis"]
+    H --> C["Evaluation contract: data, split, metric"]
+    C --> B["Baseline"]
+    B --> I["One controlled intervention"]
+    I --> M["Measure across runs / inspect errors"]
+    M --> R["Report uncertainty and limitations"]
+    R --> CL["Claim no stronger than the evidence"]
+```
+
+A good figure should make the evidence easier to inspect, not decorate the conclusion. Plot the actual observations, label the metric and units, include uncertainty when available, and disclose the experiment conditions.
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
