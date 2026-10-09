@@ -415,29 +415,53 @@ They are related, but they are not the same thing.
 
 ## 9. From one neuron to a network
 
-A layer with several neurons computes
+A layer with several neurons first calculates weighted sums, then applies an activation function:
 
 $$
 h = \phi(Wx+b).
 $$
 
-Here:
+Read this from the inside out:
 
-- $x$ is the input vector;
-- $W$ contains the weights;
-- $b$ contains the biases;
-- $\phi$ is an activation function;
-- $h$ is the output of the layer.
+1. $Wx$ combines the input features using learned weights;
+2. $Wx+b$ adds a learned offset to each neuron's score;
+3. $\phi(\cdot)$ applies the activation to those scores;
+4. $h$ is the resulting vector of outputs, which can feed the next layer.
 
-Without a nonlinear activation, two linear layers collapse into one:
+Here, $x$ is the input vector, $W$ is the weight matrix, $b$ is the bias vector, and $\phi$ is applied element by element. Common nonlinear choices include ReLU, $\phi(z)=\max(0,z)$, and sigmoid, $\phi(z)=1/(1+e^{-z})$.
+
+### Why the activation matters mathematically
+
+First, imagine stacking two layers **without** an activation between them. The first layer gives
 
 $$
-W_2(W_1x+b_1)+b_2
-=
-(W_2W_1)x+(W_2b_1+b_2).
+h_1=W_1x+b_1,
 $$
 
-A nonlinear activation prevents this collapse and lets the network build more expressive functions.
+and the second gives
+
+$$
+h_2=W_2h_1+b_2.
+$$
+
+Substitute the first equation into the second:
+
+$$
+\begin{aligned}
+h_2 &= W_2(W_1x+b_1)+b_2\\
+&= (W_2W_1)x+(W_2b_1+b_2).
+\end{aligned}
+$$
+
+The result is still just one affine transformation of $x$: a new matrix $(W_2W_1)$ and a new bias $(W_2b_1+b_2)$. So, stacking linear layers without nonlinearities does not give the model a more expressive class of functions.
+
+Now put a nonlinear activation between the layers:
+
+$$
+h_2=W_2\,\phi(W_1x+b_1)+b_2.
+$$
+
+In general, this expression **cannot** be rewritten as one affine transformation $Ax+c$, because the nonlinear function changes the input-dependent shape of the mapping. That extra expressive power is why hidden-layer activations matter. (Special parameter choices can still make a particular network behave linearly; the point is that it is no longer forced to be linear.)
 
 ---
 
