@@ -122,6 +122,24 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — architecture is only half the problem
+
+Sequence models differ in how state is passed through time. Forecasting also depends on whether the evaluation mimics deployment: a future prediction must not use information that would only be available later.
+
+```mermaid
+flowchart LR
+    subgraph TRAIN["Training period"]
+      T1["Earlier observations"] --> M["Fit preprocessing + model"]
+    end
+    subgraph TEST["Future test period"]
+      T2["Later observations"] --> P["Predict without future leakage"]
+      M --> P
+      P --> E["Compare to held-out future"]
+    end
+```
+
+A random split can place highly related neighboring windows in both train and test sets, making a model appear better than it will be when forecasting genuinely unseen future periods. For time series, preserve chronological order unless the real deployment problem justifies another protocol.
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
