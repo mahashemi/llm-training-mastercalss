@@ -60,7 +60,7 @@ $$
 \beta D_{\mathrm{KL}}\left(q_\phi(z\mid x)\|p(z)\right).
 $$
 
-For the standard ELBO, $\beta=1$; choosing another $\beta$ changes the trade-off and is often called a beta-VAE objective. The reconstruction term rewards explaining the observed example. The KL divergence penalizes an encoder distribution that strays too far from the prior $p(z)$, commonly a standard normal distribution. The prior makes it possible to sample a latent vector and decode it without first choosing a training example.
+For the standard ELBO, $\beta=1$; choosing another $\beta$ changes the trade-off and is often called a beta-VAE objective. The reconstruction term rewards explaining the observed example. More precisely, for the likelihood-based ELBO, the minimized reconstruction cost is $\mathcal L_{\mathrm{recon}}=-\mathbb E_{q_\phi(z\mid x)}[\log p_\theta(x\mid z)]$; pixel MSE or binary cross-entropy is used when it matches the chosen observation model. The KL divergence penalizes an encoder distribution that strays too far from the prior $p(z)$, commonly a standard normal distribution. The prior makes it possible to sample a latent vector and decode it without first choosing a training example.
 
 **Numerical example.** Suppose the reconstruction cost is 10 and the KL penalty is 2. With $\beta=0.5$, the minimized objective is
 
