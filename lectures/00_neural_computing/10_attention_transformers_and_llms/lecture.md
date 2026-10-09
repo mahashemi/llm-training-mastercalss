@@ -205,46 +205,46 @@ Choose these small dimensions:
 
 The input tensor is
 
-$
+$$
 X\in\mathbb R^{B\times T\times d_{\text{model}}}
 =\mathbb R^{2\times3\times4}.
-$
+$$
 
 First, learned projection matrices turn each token representation into queries, keys, and values. For this example, each projection maps four features to four features:
 
-$
+$$
 W_Q,W_K,W_V\in\mathbb R^{4\times4},
 \qquad
 Q=XW_Q,\ K=XW_K,\ V=XW_V.
-$
+$$
 
 Therefore \(Q\), \(K\), and \(V\) each have shape \((2,3,4)\). The model then splits the final dimension of four into two heads of width two and moves the head dimension next to the batch dimension:
 
-$
+$$
 (B,T,4)\rightarrow(B,T,H,d_k)\rightarrow(B,H,T,d_k).
-$
+$$
 
 After splitting, each of \(Q\), \(K\), and \(V\) has shape \((2,2,3,2)\). Within each head, the key matrix is transposed across its final two dimensions. The score calculation is
 
-$
+$$
 QK^\top:
 (2,2,3,2)\times(2,2,2,3)
 \rightarrow(2,2,3,3).
-$
+$$
 
 Each head now has a \(3\times3\) score matrix for every example: each of the three query tokens scores all three key positions. Scale the scores by \(\sqrt{d_k}=\sqrt2\), apply softmax over the last axis, and multiply by that head's values:
 
-$
+$$
 \operatorname{softmax}\left(\frac{QK^\top}{\sqrt2}\right)V
 \rightarrow(2,2,3,2).
-$
+$$
 
 Finally, move the head dimension back next to the feature dimension, concatenate the two heads, and apply the output projection:
 
-$
+$$
 (2,2,3,2)\rightarrow(2,3,2,2)
 \rightarrow(2,3,4)\rightarrow(2,3,4).
-$
+$$
 
 The last projection changes the combined representation using learned weights; it does not change the tensor shape in this example.
 
