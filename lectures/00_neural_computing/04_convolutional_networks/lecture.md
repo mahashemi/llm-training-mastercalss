@@ -242,7 +242,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: CNNs, residual networks and dense networks](https://www.youtube.com/results?search_query=CNN+ResNet+DenseNet+lecture)
+**Recommended starting point:** [Image classification with CNNs — filters and pooling](https://www.youtube.com/watch?v=HGwBXDKFk9I)
+
+For a broader selection, [browse more CNNs, ResNet, and DenseNet videos](https://www.youtube.com/results?search_query=CNNs%2C+ResNet%2C+and+DenseNet).
 
 ## Navigation
 

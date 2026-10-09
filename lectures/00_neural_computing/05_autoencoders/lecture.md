@@ -193,7 +193,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: autoencoders and representation learning](https://www.youtube.com/results?search_query=autoencoders+representation+learning+lecture)
+**Recommended starting point:** [Variational Autoencoder — from autoencoders to latent-variable generation](https://www.youtube.com/watch?v=geH5HnRapRs)
+
+For a broader selection, [browse more Autoencoders and representation learning videos](https://www.youtube.com/results?search_query=Autoencoders+and+representation+learning).
 
 ## Navigation
 

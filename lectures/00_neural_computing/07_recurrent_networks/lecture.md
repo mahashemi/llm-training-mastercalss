@@ -211,7 +211,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: RNNs, LSTM and GRU](https://www.youtube.com/results?search_query=RNN+LSTM+GRU+lecture)
+**Recommended starting point:** [Long Short-Term Memory (LSTM) — gates and long-range memory](https://www.youtube.com/watch?v=YCzL96nL7j0)
+
+For a broader selection, [browse more RNNs, LSTM, and GRU videos](https://www.youtube.com/results?search_query=RNNs%2C+LSTM%2C+and+GRU).
 
 ## Navigation
 
