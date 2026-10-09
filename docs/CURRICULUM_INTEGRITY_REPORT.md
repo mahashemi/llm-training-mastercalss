@@ -136,3 +136,11 @@ The invariant remains:
 - It distinguishes these layouts from the broader family of fully recurrent connectivity patterns without implying one universal equation.
 - The forecasting protocol now states preprocessing-fit boundaries, target-time cutoff rules, permissible historical context in test windows, and rolling-origin evaluation.
 - This lecture-only change does not require notebook execution; the remaining practical gate is an executable leakage demonstration and controlled recurrence comparison.
+
+## Course 1 forecasting leakage lab correction — 2026-10-09
+
+- A code review found that the forecasting lab standardized the full time series before the chronological split, allowing future-period statistics to influence training. The setup now defines the temporal cutoff first and fits `StandardScaler` on training-period values only.
+- Window targets are assigned explicit timestamps; assertions verify that training targets precede the cutoff and test targets occur after it.
+- The intentionally random overlapping-window split is labeled as an invalid diagnostic, not a deployment-valid estimate. The chronological holdout remains the primary metric.
+- Because notebook code changed, the forecasting lab must pass a fresh clean-kernel execution before this correction is considered verified.
+
