@@ -134,11 +134,11 @@ The learning rate and neighborhood radius usually shrink over training. Early up
 
 A neighboring unit does not usually move as far as the winner. For example, with input $x=(0.2,0.8)$, neighbor prototype $w_2=(1,0)$, learning rate $\eta=0.5$, and neighborhood strength $h=0.25$, its update is
 
-$
+$$
 w_2'=w_2+\eta h(x-w_2)
 =(1,0)+0.125(-0.8,0.8)
 =(0.9,0.1).
-$
+$$
 
 The neighbor moved toward the same input, but only one quarter as strongly as the winner would under this learning rate. This illustrates the map's topological bias: nearby grid units are encouraged to represent nearby regions of input space.
 
@@ -146,9 +146,9 @@ The neighbor moved toward the same input, but only one quarter as strongly as th
 
 A simple metric is **quantization error**: the average distance from each observation to its best-matching prototype. For observations $x^{(1)},\ldots,x^{(N)}$ and BMU index $j^*(i)$,
 
-$
+$$
 Q=\frac{1}{N}\sum_{i=1}^{N}\left\|x^{(i)}-w_{j^*(i)}\right\|_2.
-$
+$$
 
 A lower value means prototypes sit closer to the observations. It does **not** prove that nearby points stay nearby on the grid, that discovered groups match meaningful classes, or that one model is better at the same capacity. Pair it with a neighborhood-preservation measure, a baseline such as k-means, and qualitative inspection. If features use different units, fit standardization on the training set only; otherwise a high-range feature can dominate Euclidean distance.
 
