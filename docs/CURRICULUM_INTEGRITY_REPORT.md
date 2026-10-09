@@ -180,3 +180,10 @@ The invariant remains:
 - The metric is explicitly scoped to this 1-D toy setting; it is not presented as an image-quality score. Image-domain evaluation remains a separate gate.
 - Notebook code changed; fresh clean-kernel execution is required after merge.
 
+## Latest clean-kernel verification — 2026-10-09
+
+- **Forecasting leakage correction:** full 12/12 notebook execution passed in [run #37916489042](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916489042). This validates the train-only scaler and explicit temporal target split.
+- **RBM Gibbs correction:** full 12/12 notebook execution passed in [run #37916681821](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916681821). This validates the corrected alternating Gibbs chain and association-statistic reporting.
+- The later Chapter 2 optimizer/weight-decay experiment, Chapter 4 dense-style comparison, and Chapter 6 Wasserstein metric were merged after those runs. Their combined current-main execution is tracked by [run #37917475479](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37917475479) and must not be marked green until it completes.
+- Current status: no open pull requests. Structural validation passed for the merged Chapter 2, Chapter 4, and Chapter 6 changes; full execution of those newest changes remains pending.
+
