@@ -1,5 +1,5 @@
 
-# Course 1 · Chapter — Neural Computation: What Does It Mean to Learn?
+# Course 1 · Chapter 1 — Neural Computation: What Does It Mean to Learn?
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
