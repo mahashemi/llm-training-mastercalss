@@ -167,19 +167,19 @@ A residual block makes a different numerical move: if $x=2.0$ and the learned co
 
 For a convolution with kernel height $K_h$, kernel width $K_w$, input channels $C_{\mathrm{in}}$, and output channels $C_{\mathrm{out}}$, the number of trainable parameters (including one bias per output channel) is
 
-$
+$$
 P_{\mathrm{conv}}=K_hK_wC_{\mathrm{in}}C_{\mathrm{out}}+C_{\mathrm{out}}.
-$
+$$
 
 The earlier $3\times3$ example assumes one input channel and 16 output filters, so $3\cdot3\cdot1\cdot16+16=160$. With RGB input, the same 16 filters would instead require $3\cdot3\cdot3\cdot16+16=448$ parameters. Each filter spans **all input channels**; it is not a separate 2-D filter per channel that is independently summed afterward.
 
 For height and width separately, the output-size formula is
 
-$
+$$
 H_{\mathrm{out}}=\left\lfloor\frac{H+2P_h-K_h}{S_h}\right\rfloor+1,
 \qquad
 W_{\mathrm{out}}=\left\lfloor\frac{W+2P_w-K_w}{S_w}\right\rfloor+1.
-$
+$$
 
 For example, a $28\times28$ input with a $3\times3$ kernel, stride 2, and padding 1 gives $\lfloor(28+2-3)/2\rfloor+1=14$ positions in each dimension. With 16 filters, the output shape is $14\times14\times16$ (ignoring the batch dimension). The floor is necessary because only complete kernel placements count.
 
