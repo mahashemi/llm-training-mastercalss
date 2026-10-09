@@ -144,3 +144,10 @@ The invariant remains:
 - The intentionally random overlapping-window split is labeled as an invalid diagnostic, not a deployment-valid estimate. The chronological holdout remains the primary metric.
 - Because notebook code changed, the forecasting lab must pass a fresh clean-kernel execution before this correction is considered verified.
 
+## Course 1 RBM probability and Gibbs-sampling pass — 2026-10-09
+
+- Chapter 9 now enumerates all four states of a one-visible/one-hidden RBM, calculates the partition function and normalized joint probabilities, and computes conditional activation probabilities.
+- It explains CD-\(k\) as a positive-minus-negative association-statistic update and outlines classic greedy layer-wise RBM pretraining for a DBN without treating a stacked RBM as one undifferentiated model.
+- The lab's Gibbs intervention now alternates actual hidden and visible sampling, compares sampled hidden-visible association statistics with data statistics, and records environment-specific sampling time. It no longer labels distance from the starting image as a reconstruction-quality measure.
+- Notebook code changed; fresh clean-kernel execution is required after merge. Repeated seeds and stronger distributional evaluation remain open evidence-quality work.
+
