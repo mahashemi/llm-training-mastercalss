@@ -239,7 +239,13 @@ Report both **what changed** and **what did not change**.
 5. Why should quality and compute be reported together?
 
 
-## Visual intuition — three different generative strategies
+## Visual intuition
+
+![Three routes to generating data](../../../visuals/course1/06-generative-models.svg)
+
+*Figure: Different training objectives lead to different ways of sampling new examples.*
+
+— three different generative strategies
 
 These methods all model how data can be generated, but their learning signals differ.
 
