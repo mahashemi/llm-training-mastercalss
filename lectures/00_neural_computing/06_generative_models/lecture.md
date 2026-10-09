@@ -239,6 +239,38 @@ Report both **what changed** and **what did not change**.
 5. Why should quality and compute be reported together?
 
 
+## Visual intuition — three different generative strategies
+
+These methods all model how data can be generated, but their learning signals differ.
+
+```mermaid
+flowchart TB
+    subgraph VAE["Variational autoencoder"]
+      X1["Data x"] --> ENC["Encoder predicts μ, σ"]
+      ENC --> Z1["Sample latent z"]
+      Z1 --> DEC["Decoder"]
+      DEC --> XH["Reconstruction x̂"]
+      X1 -. "reconstruction + KL objective" .-> OBJ1["Optimize ELBO"]
+      XH --> OBJ1
+    end
+    subgraph GAN["Generative adversarial network"]
+      Z2["Random noise z"] --> G["Generator"]
+      G --> FAKE["Fake sample"]
+      REAL["Real sample"] --> D["Discriminator"]
+      FAKE --> D
+      D --> OBJ2["Adversarial feedback"]
+      OBJ2 --> G
+    end
+    subgraph DIFF["Diffusion"]
+      CLEAN["Clean data x₀"] --> NOISE["Gradually add noise"]
+      NOISE --> XT["Noisy xₜ"]
+      XT --> DEN["Learn to predict noise / denoise"]
+      DEN --> SAMPLE["Reverse steps generate samples"]
+    end
+```
+
+The VAE balances reconstruction with a latent-distribution constraint; a GAN learns through a two-player objective; diffusion learns a denoising process that can be run backward to generate samples. Their losses and failure modes should not be compared as if they measured the same thing.
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
