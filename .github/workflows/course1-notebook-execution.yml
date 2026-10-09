@@ -50,3 +50,11 @@ jobs:
             --output executed.ipynb \
             --output-dir "$RUNNER_TEMP" \
             "$NOTEBOOK"
+      - name: Publish executed notebook with figures
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: executed-${{ matrix.notebook }}
+          path: ${{ runner.temp }}/executed.ipynb
+          if-no-files-found: error
+          retention-days: 14
