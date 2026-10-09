@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Attention and the Transformer Bridge
+# Course 1 · Chapter 10 — Attention and the Transformer Bridge
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
