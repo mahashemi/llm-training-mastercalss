@@ -63,3 +63,10 @@ The invariant remains:
 - Removed duplicate chapter 11/12 navigation footers and corrected the capstone's Course 2 destination to the canonical course README.
 - The current status is **execution-verified, pedagogical review ongoing**. The 35-day plan's instructor-readiness gate remains the standard for declaring the course complete.
 
+## Course 1 targeted teaching pass — 2026-10-09
+
+- Chapter 7 now gives full LSTM gate/cell equations, a numerical cell-state calculation, and a standard GRU formulation with a note that gate conventions vary across implementations.
+- Chapter 3 now explains that Evolving SOM is a family of variants and requires each experiment to name its growth/pruning rule and compare against a declared baseline.
+- Chapter 11 now introduces policy-gradient objectives and distinguishes direct policy learning from DQN's value-based approach.
+- These are lecture improvements, not proof that every associated lab covers each concept. The [35-day readiness audit](COURSE1_35_DAY_READINESS_AUDIT.md) records the remaining lab-verification gates.
+
