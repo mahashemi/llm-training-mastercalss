@@ -54,7 +54,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: executed-${{ matrix.notebook }}
+          name: executed-lab-${{ strategy.job-index }}
           path: ${{ runner.temp }}/executed.ipynb
           if-no-files-found: error
           retention-days: 14
