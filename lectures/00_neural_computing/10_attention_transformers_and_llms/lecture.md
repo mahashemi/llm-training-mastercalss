@@ -79,9 +79,9 @@ For one query:
 
 If the weights are $[0.7,0.2,0.1]$, the output is simply:
 
-$
+$$
 0.7v_1+0.2v_2+0.1v_3.
-$
+$$
 
 So attention is not magic memory. It is **content-dependent weighted information retrieval inside the sequence**.
 
@@ -93,13 +93,13 @@ For next-token training, that would expose information that the model is suppose
 
 With a causal mask, the attention matrix becomes triangular:
 
-$
+$$
 \begin{bmatrix}
 \times&0&0\\
 \times&\times&0\\
 \times&\times&\times
 \end{bmatrix}.
-$
+$$
 
 The zeros mean “future information is unavailable.”
 
