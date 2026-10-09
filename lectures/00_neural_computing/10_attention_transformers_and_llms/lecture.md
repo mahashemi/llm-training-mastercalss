@@ -30,8 +30,8 @@ Suppose we want the representation of “published” to use information about �
 Given queries $Q$, keys $K$, and values $V$, scaled dot-product attention is
 
 $$
-\operatorname{Attention}(Q,K,V)=
-\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
+\mathrm{Attention}(Q,K,V)=
+\mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
 $$
 
 Conceptually, $QK^\top$ scores how strongly each token's query matches each token's key. Dividing by $\sqrt{d_k}$ controls the scale of those scores as the key dimension grows. Softmax turns each row of scores into nonnegative weights that sum to 1. Multiplying those weights by $V$ produces a weighted mixture of the information carried by the tokens.
@@ -235,7 +235,7 @@ $$
 Each head now has a $3\times3$ score matrix for every example: each of the three query tokens scores all three key positions. Scale the scores by $\sqrt{d_k}=\sqrt2$, apply softmax over the last axis, and multiply by that head's values:
 
 $$
-\operatorname{softmax}\left(\frac{QK^\top}{\sqrt2}\right)V
+\mathrm{softmax}\left(\frac{QK^\top}{\sqrt2}\right)V
 \rightarrow(2,2,3,2).
 $$
 
