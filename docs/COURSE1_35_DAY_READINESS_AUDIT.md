@@ -6,7 +6,7 @@ Audit date: 2026-10-09
 
 The 35-day plan promises 70 contact hours. This document connects that plan to the 12 existing lecture/lab chapters and records the next substantive teaching improvements. It is an **actionable preliminary content audit**, not a claim that all 35 sessions have already passed instructor-readiness review.
 
-The clean-kernel execution gate is green for all 12 lab notebooks in [workflow run 37882928859](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37882928859). That proves the notebooks execute in the tested environment; it does not prove that every promised concept is explained deeply enough for a beginner or that each comparison is statistically robust.
+The clean-kernel execution gate is green for all 12 lab notebooks in the earlier [workflow run 37882928859](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37882928859) and was repeated after the growing-SOM lab changes in [workflow run 37885701865](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37885701865). Both runs completed successfully. Execution proves the notebooks run in the tested environment; it does not prove that every promised concept is explained deeply enough for a beginner or that each comparison is statistically robust.
 
 ## Priority key
 
@@ -50,6 +50,7 @@ Before marking Course 1 instructor-ready, verify each item against the actual ch
 
 - All 12 lab notebooks passed clean-kernel execution in the recorded workflow run.
 - Every lecture has a chapter-specific static SVG and a Mermaid mechanism diagram.
+- Lecture 1 received a focused math-rendering audit: math-bearing headings were rewritten in plain language, display equations were normalized, the gradient vector was expanded into its partial derivatives, and duplicate navigation was removed.
 - A follow-up pass improved equation formatting and beginner-first explanations in CNNs, autoencoders, RNNs, forecasting, RBMs, and attention; focused video companions were added where appropriate in [PR #22](https://github.com/mahashemi/llm-training-mastercalss/pull/22). The next teaching pass added full LSTM/GRU equations with a numerical cell-state trace, clarified Evolving SOM variant-specific mechanics, and introduced policy-gradient notation alongside DQN.
 - Duplicate navigation footers and the incorrect Course 2 link in the capstone were corrected in this follow-up.
 
