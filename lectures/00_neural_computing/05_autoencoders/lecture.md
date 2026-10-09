@@ -21,17 +21,17 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Begin with compression. Suppose an image has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns an encoder and a decoder:
 
-\[
+$$
 z=f_\phi(x),\qquad \hat{x}=g_\theta(z).
-\]
+$$
 
-Here \(x\) is the input, \(z\) is its compressed latent code, and \(\hat{x}\) is the reconstruction. A common squared-error objective is
+Here $x$ is the input, $z$ is its compressed latent code, and $\hat{x}$ is the reconstruction. A common squared-error objective is
 
-\[
+$$
 \mathcal L_{\mathrm{recon}}=\|x-\hat{x}\|_2^2.
-\]
+$$
 
-The notation \(\|\cdot\|_2^2\) means square each difference between corresponding input and reconstructed values, then add the squares. The model learns by adjusting its weights to make this error smaller.
+The notation $\|\cdot\|_2^2$ means square each difference between corresponding input and reconstructed values, then add the squares. The model learns by adjusting its weights to make this error smaller.
 
 The encoder is forced to preserve information useful for reconstruction; the bottleneck controls how much information can pass.
 
@@ -97,22 +97,22 @@ This idea will later reappear in many forms of self-supervised learning.
 
 ## Work a small example by hand
 
-Take a clean four-value signal \(x=[1,0,1,0]\). Imagine an encoder that averages the two even-position values and the two odd-position values:
+Take a clean four-value signal $x=[1,0,1,0]$. Imagine an encoder that averages the two even-position values and the two odd-position values:
 
-\[
+$$
 z_1=\tfrac12x_1+\tfrac12x_3=1,
 \qquad
 z_2=\tfrac12x_2+\tfrac12x_4=0.
-\]
+$$
 
-The latent code is \(z=[1,0]\): four values have been reduced to two. A matching decoder can reconstruct the repeated pattern \([1,0,1,0]\). This example is deliberately simple; a trained network must learn useful compression from many examples rather than being handed the right mapping.
+The latent code is $z=[1,0]$: four values have been reduced to two. A matching decoder can reconstruct the repeated pattern $[1,0,1,0]$. This example is deliberately simple; a trained network must learn useful compression from many examples rather than being handed the right mapping.
 
-Now consider denoising. Let the clean target be \(x=[1,0,1,0]\), but the corrupted input be \(\tilde{x}=[1,0.1,0.9,0]\). If a model reconstructs \(\hat{x}=[1,0.05,0.95,0]\), its mean squared error against the clean target is
+Now consider denoising. Let the clean target be $x=[1,0,1,0]$, but the corrupted input be $\tilde{x}=[1,0.1,0.9,0]$. If a model reconstructs $\hat{x}=[1,0.05,0.95,0]$, its mean squared error against the clean target is
 
-\[
+$$
 \mathrm{MSE}=\frac{(1-1)^2+(0-0.05)^2+(1-0.95)^2+(0-0)^2}{4}
 =0.00125.
-\]
+$$
 
 Notice the target: the model is scored against the **clean** signal, not the corrupted input. Otherwise, copying the noise could be rewarded.
 
@@ -131,38 +131,48 @@ A bottleneck limits the *size* of the code. Regularization can also change *what
 
 ### Sparse autoencoder: prefer fewer active latent values
 
-One common objective adds an \(L_1\) penalty on the latent code:
+One common objective adds an $L_1$ penalty on the latent code:
 
-\[
+$$
 \mathcal L_{\mathrm{sparse}}
 =\mathcal L_{\mathrm{recon}}+\lambda\|z\|_1.
-\]
+$$
 
-The term \(\|z\|_1\) is the sum of the absolute values of the latent activations. The coefficient \(\lambda\) controls how strongly the model is encouraged to keep activations small. It does not literally force every code to have a fixed number of zeros, but it often encourages sparse representations.
+The term $\|z\|_1$ is the sum of the absolute values of the latent activations. The coefficient $\lambda$ controls how strongly the model is encouraged to keep activations small. It does not literally force every code to have a fixed number of zeros, but it often encourages sparse representations.
 
-**Tiny calculation:** suppose the reconstruction loss is \(0.012\), the latent code has \(\|z\|_1=2.4\), and \(\lambda=0.01\). Then
+**Tiny calculation:** suppose the reconstruction loss is $0.012$, the latent code has $\|z\|_1=2.4$, and $\lambda=0.01$. Then
 
-\[
+$$
 \mathcal L_{\mathrm{sparse}}=0.012+0.01(2.4)=0.036.
-\]
+$$
 
-If \(\lambda\) increases, the model pays a larger price for large latent activations and may accept worse reconstruction in exchange for a sparser code.
+If $\lambda$ increases, the model pays a larger price for large latent activations and may accept worse reconstruction in exchange for a sparser code.
 
 ### Contractive autoencoder: prefer less sensitivity to input changes
 
 A contractive objective penalizes the encoder's Jacobian:
 
-\[
+$$
 \mathcal L_{\mathrm{contractive}}
 =\mathcal L_{\mathrm{recon}}
 +\lambda\left\|\frac{\partial f_\phi(x)}{\partial x}\right\|_F^2.
-\]
+$$
 
 The Jacobian records how each latent coordinate changes when each input coordinate changes. The squared Frobenius norm adds the squares of those derivatives. Penalizing it discourages the code from changing sharply in response to small input perturbations.
 
-**Tiny calculation:** if reconstruction loss is \(0.012\), the squared Jacobian norm is \(0.5\), and \(\lambda=0.02\), the total objective is \(0.012+0.02(0.5)=0.022\).
+**Tiny calculation:** if reconstruction loss is $0.012$, the squared Jacobian norm is $0.5$, and $\lambda=0.02$, the total objective is $0.012+0.02(0.5)=0.022$.
 
 The penalties encode different preferences: sparsity asks for fewer large activations; contraction asks for a locally less sensitive encoder. Neither automatically produces better downstream features. Compare them using a declared reconstruction protocol **and** a separate representation test, such as a linear classifier trained on frozen encoder outputs.
+
+## Failure analysis: what a low reconstruction loss can hide
+
+A tiny reconstruction error does not establish that the encoder learned useful features. Three common explanations need different tests:
+
+- **Copying / identity shortcut:** the code is too wide or the network has a path that bypasses the intended bottleneck. Reduce latent size or remove the bypass and compare parameter counts.
+- **Over-regularization:** the sparse penalty or denoising corruption is so strong that important signal is removed. Sweep one regularization strength while keeping the split and training budget fixed.
+- **Unhelpful representation:** reconstruction is good, but a downstream task is not. Freeze the encoder and evaluate a linear probe or retrieval task; do not fine-tune the encoder for the probe if the goal is to measure the representation as learned.
+
+Report reconstruction error and the downstream metric separately. Use a validation split to select latent size and regularization, then evaluate the final configuration on an untouched test split.
 
 ## Core concepts
 
@@ -203,6 +213,15 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 4. What is the simplest credible baseline?
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
+
+### Answers
+
+1. It learns a compressed representation by training an encoder-decoder pair to reconstruct examples.
+2. A bottleneck limits the information capacity of the code, but does not guarantee semantic usefulness.
+3. A denoising autoencoder receives a corrupted input and is trained against the clean target.
+4. Sparse regularization penalizes large latent activations; contractive regularization penalizes sensitivity of the encoder to input changes.
+5. Reconstruction MSE measures fidelity to the reconstruction target, not downstream usefulness.
+6. Freeze the encoder and test the code on a separate task, such as a linear probe or retrieval evaluation.
 
 ## Visual intuition
 
