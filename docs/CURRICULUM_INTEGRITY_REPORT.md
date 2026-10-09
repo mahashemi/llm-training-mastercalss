@@ -74,5 +74,14 @@ The invariant remains:
 
 - Chapter 3's lab now fits feature scaling on the training partition, evaluates prototype/SOM quantization on held-out examples, and includes an explicit growing 1-D SOM-family demonstration with a capacity-vs-error comparison.
 - The growing-map example is clearly labeled educational and variant-specific; it is not presented as a canonical implementation of every Evolving SOM algorithm.
-- The updated notebook was merged in [PR #25](https://github.com/mahashemi/llm-training-mastercalss/pull/25). A new workflow run for the resulting commit was not available through the connected workflow-run listing, so this changed notebook is **not yet execution-verified**. The earlier 12/12 result predates the growing-map and held-out-split changes; do not count it as validation of the current version. Run the notebook from a clean kernel before marking this lab verified.
+- The updated notebook was merged in [PR #25](https://github.com/mahashemi/llm-training-mastercalss/pull/25), and the later full execution run [#7](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37885701865) completed successfully on the resulting notebook version. All 12 clean-kernel jobs succeeded and all 12 executed-notebook artifacts were published, including the changed SOM lab.
 
+
+
+## Course 1 Lecture 1 math rendering audit — 2026-10-09
+
+- Replaced inline-math expressions in section headings with plain-language labels so headings remain readable in Markdown renderers that do not typeset math inside heading text.
+- Restored consistent display-math delimiters for the gradient vector, gradient-descent updates, the chain-rule dependency path, and the layer-composition equation.
+- Made the gradient vector explicit as the list of partial derivatives for each weight, rather than leaving \(\nabla_w L\) unexplained as a standalone symbol.
+- Corrected the chapter title to identify it as Chapter 1 and removed the duplicate Course 1 home link from its navigation.
+- Audited the edited source for unmatched display-math delimiters, standalone single-dollar display delimiters, and math expressions in headings; no such issues remain in the edited file.
