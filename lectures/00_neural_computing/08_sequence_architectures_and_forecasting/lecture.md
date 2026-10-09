@@ -84,14 +84,14 @@ If the answer is no, there is likely leakage.
 
 ## Work a forecasting split by hand
 
-Suppose the observations are (10,12,11,15,14,18,17), and the task is to predict the next value from the previous three. The windows are:
+Suppose the observations are \(10,12,11,15,14,18,17\), and the task is to predict the next value from the previous three. The windows are:
 
 | Input window | Target |
 |---|---:|
-| (10,12,11) | 15 |
-| (12,11,15) | 14 |
-| (11,15,14) | 18 |
-| (15,14,18) | 17 |
+| \(10,12,11\) | 15 |
+| \(12,11,15\) | 14 |
+| \(11,15,14\) | 18 |
+| \(15,14,18\) | 17 |
 
 The examples overlap because a time-series window reuses recent history. That overlap is not inherently wrong. At a forecast origin, yesterday's observed value is legitimate context for predicting tomorrow. The problem is randomly distributing near-identical windows across train and test, which can make the test set unrealistically similar to the training set.
 
@@ -101,15 +101,15 @@ A safe evaluation protocol defines the forecast cutoff first. Fit using only exa
 
 For many series, the persistence baseline predicts the next value equals the latest observation:
 
-[
+\[
 \hat{y}_{t+1}=y_t.
-]
+\]
 
-Its mean squared error over (N) test targets is
+Its mean squared error over \(N\) test targets is
 
-[
+\[
 \mathrm{MSE}=\frac1N\sum_{i=1}^N(y_i-\hat{y}_i)^2.
-]
+\]
 
 A complex model that cannot beat this simple baseline has not demonstrated value. For multi-step forecasting, recursive prediction feeds each forecast back as an input; early errors can therefore influence later predictions. Plot error by horizon instead of reporting only one averaged score.
 
