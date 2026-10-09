@@ -88,22 +88,22 @@ This idea will later reappear in many forms of self-supervised learning.
 
 ## Work a small example by hand
 
-Take a clean four-value signal (x=[1,0,1,0]). Imagine an encoder that averages the two even-position values and the two odd-position values:
+Take a clean four-value signal \(x=[1,0,1,0]\). Imagine an encoder that averages the two even-position values and the two odd-position values:
 
-[
+\[
 z_1=\tfrac12x_1+\tfrac12x_3=1,
 \qquad
 z_2=\tfrac12x_2+\tfrac12x_4=0.
-]
+\]
 
-The latent code is (z=[1,0]): four values have been reduced to two. A matching decoder can reconstruct the repeated pattern ([1,0,1,0]). This example is deliberately simple; a trained network must learn useful compression from many examples rather than being handed the right mapping.
+The latent code is \(z=[1,0]\): four values have been reduced to two. A matching decoder can reconstruct the repeated pattern \([1,0,1,0]\). This example is deliberately simple; a trained network must learn useful compression from many examples rather than being handed the right mapping.
 
-Now consider denoising. Let the clean target be (x=[1,0,1,0]), but the corrupted input be (	ilde{x}=[1,0.1,0.9,0]). If a model reconstructs (hat{x}=[1,0.05,0.95,0]), its mean squared error against the clean target is
+Now consider denoising. Let the clean target be \(x=[1,0,1,0]\), but the corrupted input be \(\tilde{x}=[1,0.1,0.9,0]\). If a model reconstructs \(\hat{x}=[1,0.05,0.95,0]\), its mean squared error against the clean target is
 
-[
+\[
 \mathrm{MSE}=\frac{(1-1)^2+(0-0.05)^2+(1-0.95)^2+(0-0)^2}{4}
 =0.00125.
-]
+\]
 
 Notice the target: the model is scored against the **clean** signal, not the corrupted input. Otherwise, copying the noise could be rewarded.
 
