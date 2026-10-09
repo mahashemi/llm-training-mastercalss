@@ -54,3 +54,12 @@ This execution result verifies that the labs run in the current Python 3.11 GitH
 The invariant remains:
 
 **predict → explain → implement → measure → break → diagnose → decide → reproduce**
+
+## Course 1 instructor-readiness follow-up — 2026-10-09
+
+- Added [the 35-day instructor-readiness audit](COURSE1_35_DAY_READINESS_AUDIT.md), mapping the day plan to the actual chapters and separating verified execution from remaining pedagogical gaps.
+- The audit identifies full LSTM/GRU equations, Evolving SOM mechanics, multi-head attention and BERT/GPT objective comparisons, policy-gradient coverage, and several controlled comparison protocols as substantive next gates—not as already completed work.
+- The equation-readability and video-companion pass was merged in [PR #22](https://github.com/mahashemi/llm-training-mastercalss/pull/22).
+- Removed duplicate chapter 11/12 navigation footers and corrected the capstone's Course 2 destination to the canonical course README.
+- The current status is **execution-verified, pedagogical review ongoing**. The 35-day plan's instructor-readiness gate remains the standard for declaring the course complete.
+
