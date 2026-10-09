@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Competitive Learning and Self-Organizing Maps
+# Course 1 · Chapter 3 — Competitive Learning and Self-Organizing Maps
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
