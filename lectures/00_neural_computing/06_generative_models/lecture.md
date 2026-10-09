@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Generative Models: VAE, GANs, and Diffusion
+# Course 1 · Chapter 6 — Generative Models: VAE, GANs, and Diffusion
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
