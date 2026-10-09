@@ -97,7 +97,7 @@ where \(\tau\) denotes a trajectory of states, actions, and rewards. A common po
 \nabla_\theta J(\theta)
 \approx
 \mathbb E\left[
-\sum_t \nabla_\theta\log\pi_\theta(a_t\mid s_t)\,G_t
+\sum_t \gamma^t\nabla_\theta\log\pi_\theta(a_t\mid s_t)\,G_t
 \right].
 \]
 
