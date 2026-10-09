@@ -665,7 +665,7 @@ The forward pass carries information from input to prediction. Backpropagation s
 flowchart LR
     X["Input x"] --> L1["Layer 1: z¹ = W¹x + b¹"]
     L1 --> H["Activation h = σ(z¹)"]
-    H --> L2["Layer 2: ŷ = W²h + b²"]
+    H --> L2["Output logit: z² = W²h + b²"]
     L2 --> LOSS["Loss L(ŷ, y)"]
     LOSS -. "chain rule: ∂L/∂ŷ" .-> L2
     L2 -. "∂L/∂h" .-> H
