@@ -185,6 +185,15 @@ A classic greedy layer-wise procedure is:
 
 This pretraining procedure is historically important, but it is not the same as simply stacking several RBMs and declaring the whole stack one RBM. Layer-wise training changes the distribution presented to each subsequent layer, and the exact DBN generative interpretation depends on the chosen architecture and training procedure.
 
+## Failure analysis: what a short Gibbs chain can hide
+
+- **Reconstruction error falls but samples look repetitive:** the model may reproduce local training patterns without representing the full distribution. Inspect multiple generated chains and report diversity, not just reconstruction.
+- **Results change sharply with the number of Gibbs steps:** the negative-phase approximation is materially affecting learning. Compare CD-1, CD-5, and a fixed wall-clock budget; do not assume more steps must win every finite run.
+- **Training is unstable across seeds:** report variability and inspect initialization, learning rate, and visible-unit assumptions before claiming the architecture is unreliable.
+- **The model is evaluated only on toy binary data:** state that the experiment demonstrates the mechanism, not that it establishes competitive modern image generation.
+
+The central distinction is between **sampling mechanics** and **distribution quality**. A correct Gibbs implementation is necessary, but it is not evidence by itself that the learned distribution is useful.
+
 ## Core concepts
 
 This unit covers **energy-based learning, RBM, contrastive divergence, DBN intuition**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
