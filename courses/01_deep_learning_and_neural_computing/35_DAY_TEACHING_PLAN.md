@@ -4,7 +4,7 @@
 **Audience:** 30 learners, from early-stage programmers to engineering students  
 **Purpose:** build deep-learning understanding through intuition, explicit mathematics, implementation, controlled experiments, and research habits.
 
-This is the day-by-day delivery plan for Course 1. It maps the existing 12 chapters into 35 teaching sessions; it does not replace their chapter content or notebook labs. Each session is designed to fit a two-hour class. Longer coding runs, reading, and capstone work happen between sessions.
+This is the day-by-day delivery plan for Course 1. It maps the existing 12 chapters into 35 teaching sessions; it does not replace their chapter content or notebook labs. Research starts on Day 1, the midterm is on Day 18, Boltzmann machines receive one historically contextualized session, and the final week is reserved for controlled experiments, reporting, presentation, and submission. Each session is designed to fit a two-hour class. Longer coding runs, reading, and capstone work happen between sessions.
 
 ## Session design
 
@@ -21,55 +21,67 @@ The schedule is a teaching guide, not a reason to rush. If students cannot expla
 
 ## Day-by-day schedule
 
-| Day | Existing chapter | Two-hour teaching focus | In-class practical / evidence of learning |
+| Day | Focus | Two-hour teaching focus | In-class practical / evidence of learning |
 |---:|---|---|---|
-| 1 | 01 Neural computation | What learning means; examples, features, targets, parameters; linear neuron and decision boundary | Calculate neuron outputs by hand; identify weights, bias, inputs, and output |
-| 2 | 01 Neural computation | Perceptron vs. Adaline; hard decisions vs. continuous scores; loss as a measurable error | Implement perceptron and Adaline updates; compare what each learns from the same examples |
-| 3 | 02 Feedforward + backprop | Why multilayer networks; affine transforms, activations, shapes, XOR, representation learning | Forward-pass a tiny network by hand and in code |
-| 4 | 02 Feedforward + backprop | Derivatives, partial derivatives, gradients, chain rule, backpropagation, gradient descent | Derive and check gradients numerically; explain each term in a parameter update |
-| 5 | 02 Feedforward + backprop | Training dynamics: SGD/minibatches, momentum/Adam, initialization, normalization, regularization, validation and generalization | Run a controlled overfitting experiment; compare train and validation curves |
-| 6 | 03 Competitive learning + SOM | Why unsupervised organization; winner-take-all learning and competitive units | Implement winner selection and weight updates on a small dataset |
-| 7 | 03 Competitive learning + SOM | Self-organizing maps: best matching unit, neighborhood, schedule, topology and interpretation | Train and visualize a SOM; explain what the map preserves and what it does not |
-| 8 | 03 Competitive learning + SOM | Evolving SOMs; growth/pruning intuition, model selection, limits and fair comparisons | Compare a fixed SOM with a growing/evolving map using a documented metric and visual inspection |
-| 9 | 04 CNNs | Images as tensors; convolution/cross-correlation, kernels, channels, stride, padding and output shapes | Calculate output dimensions and a small convolution by hand |
-| 10 | 04 CNNs | Receptive fields, parameter sharing, pooling, translation-related inductive bias, CNN training | Train a small CNN; compare parameter count and behavior with a dense baseline |
-| 11 | 04 CNNs | Residual connections: degradation, identity paths, gradient flow, ResNet blocks | Implement a residual block and test tensor shapes and gradient flow |
-| 12 | 04 CNNs | DenseNet connections, feature reuse, compute/memory trade-offs, controlled architecture comparison | Compare a plain, residual, and dense-style block under a fixed budget; interpret limitations |
-| 13 | 05 Autoencoders | Encoder/decoder, bottleneck, reconstruction objectives, latent representation and baselines | Train a basic autoencoder; inspect original/reconstructed examples |
-| 14 | 05 Autoencoders | Denoising, sparse, and contractive ideas; regularization as a change in what representation is encouraged | Corrupt inputs or alter regularization; compare reconstruction and latent behavior |
-| 15 | 05 Autoencoders | Representation evaluation, latent-space pitfalls, leakage, reconstruction vs. useful features | Evaluate representations without treating low reconstruction error as proof of usefulness |
-| 16 | 06 Generative models | Generative vs. discriminative learning; latent-variable models and probability foundations | Draw the data-generation story and inspect a simple latent-variable model |
-| 17 | 06 Generative models | VAE: encoder distributions, reparameterization, reconstruction term, KL term, ELBO intuition | Trace the VAE objective term by term and run a small training experiment |
-| 18 | 06 Generative models | GANs: generator/discriminator game, alternating updates, instability, mode collapse and evaluation | Inspect losses and samples; diagnose a failure rather than relying on loss alone |
-| 19 | 06 Generative models | Diffusion: forward noising, denoising target, noise schedule, sampling and cost-quality trade-offs | Visualize a noising trajectory and train/inspect a small denoising experiment |
-| 20 | 07 Recurrent networks | Sequences, recurrent state, shared parameters, unrolling, many-to-one and many-to-many tasks | Unroll a tiny recurrent network and trace hidden states across tokens/time steps |
-| 21 | 07 Recurrent networks | Backpropagation through time; vanishing/exploding gradients and truncation | Measure gradient norms over sequence length; deliberately create a failure |
-| 22 | 07 Recurrent networks | LSTM gates and cell state; why gated memory was introduced | Calculate gate effects on a small numeric example and inspect gate activations |
-| 23 | 07 Recurrent networks | GRU mechanics; LSTM/GRU/simple RNN comparison and when extra complexity is justified | Compare models under a controlled parameter/data/training budget |
-| 24 | 08 Sequence architectures + forecasting | Elman, Jordan, and fully recurrent architectures; state feedback and architectural differences | Sketch and implement small recurrence variants; identify information paths |
-| 25 | 08 Sequence architectures + forecasting | Forecast horizons, chronological splits, leakage, scaling, naive baselines and metrics | Build a leakage-safe forecasting pipeline and compare against a naive baseline |
-| 26 | 09 Boltzmann machines | Energy-based models; probability from energy; visible/hidden units and stochastic states | Compute energies for a tiny configuration table and explain relative probabilities |
-| 27 | 09 Boltzmann machines | Restricted Boltzmann machines; conditional independence, contrastive divergence and sampling | Implement a tiny RBM update/sampling loop and inspect reconstruction behavior |
-| 28 | 09 Boltzmann machines | Deep belief networks, layer-wise pretraining, historical context and limitations | Diagram the stack; compare the historical motivation with modern end-to-end training |
-| 29 | 10 Attention + Transformer bridge | From recurrence to attention; queries, keys, values, score scaling and softmax | Calculate attention weights and weighted values for a tiny sequence by hand |
-| 30 | 10 Attention + Transformer bridge | Multi-head attention, positional information, residuals, normalization and feed-forward blocks | Trace tensor shapes through a Transformer block; test causal masking |
-| 31 | 10 Attention + Transformer bridge | Encoder/decoder distinction; BERT-style masked-language modeling vs. GPT-style causal prediction | Compare objectives and information access; run a tiny objective demonstration |
-| 32 | 11 Deep reinforcement learning | Agent/environment, states, actions, rewards, returns, policies, value functions and Bellman equation | Work through a tiny Markov decision process and calculate one value update |
-| 33 | 11 Deep reinforcement learning | Q-learning, DQN, replay buffer, target network, exploration, policy-gradient overview and evaluation variance | Train or inspect a small environment; compare seeded runs and identify instability |
-| 34 | 12 Research capstone | Turn a question into a falsifiable hypothesis; baseline, data split, metric, controls, ablations and reproducibility | Teams submit a one-page experiment contract and run a pilot/baseline |
-| 35 | 12 Research capstone | Results, uncertainty, error analysis, limitations, paper-ready communication and course synthesis | Team presentations; peer review; individual oral/written mastery check |
+| 1 | 01 Neural computation + course launch | What learning means; course roadmap; how a neural model turns examples into parameters; the research journey from curiosity to evidence | Calculate a neuron output; browse the project catalogue; write one question you would genuinely like to investigate |
+| 2 | 01 Neural computation | Perceptron vs. Adaline; hard decisions vs. continuous scores; loss as measurable error | Implement both updates and compare behavior on the same examples |
+| 3 | Research launch | From broad interest to a testable question; tour of the 48-project catalogue; selecting a feasible Course 1 project family | Submit a one-paragraph interest statement and a first candidate question |
+| 4 | 02 Feedforward + backprop | Why multilayer networks; affine transforms, activations, tensor shapes, XOR and learned representations | Forward-pass a tiny network by hand and in code |
+| 5 | 02 Feedforward + backprop | Derivatives, partial derivatives, gradients, chain rule and backpropagation; introduce the study-report assignment | Derive a simple gradient and submit a short study-report topic + 2 starter references |
+| 6 | 02 Feedforward + backprop | Gradient descent, SGD/minibatches, momentum/Adam, initialization and learning-rate behavior | Numerically check a gradient; compare two learning rates under a controlled setup |
+| 7 | Research milestone | Project proposal clinic: question, hypothesis, dataset, baseline, metric, intervention, risks and compute budget | Submit a one-page project proposal; instructor approves or narrows scope |
+| 8 | 03 Competitive learning + SOM | Unsupervised organization, winner-take-all learning, best matching unit and neighborhood updates | Implement winner selection and a numerical neighborhood update |
+| 9 | 03 Competitive learning + SOM | SOM topology, schedules, interpretation, evolving maps and limits of visualizations | Train and visualize a SOM; report what the map preserves and what it does not |
+| 10 | 04 CNNs | Images as tensors; convolution, channels, stride, padding and output shapes | Calculate a convolution and output dimensions by hand |
+| 11 | 04 CNNs | Receptive fields, parameter sharing, pooling and CNN training | Compare a small CNN with a dense baseline; record parameter count and behavior |
+| 12 | 04 CNNs | Residual connections, gradient flow, DenseNet feature reuse and compute/memory trade-offs | Compare plain, residual and dense-style blocks under a declared budget |
+| 13 | 05 Autoencoders | Encoder/decoder, bottleneck, reconstruction objective and latent representations | Train an autoencoder; inspect original and reconstructed examples |
+| 14 | 05 Autoencoders | Denoising/sparse/contractive ideas; representation evaluation, leakage and reconstruction pitfalls | Compare a learned representation against a simple baseline; submit a project baseline plan |
+| 15 | 06 Generative models | Generative vs. discriminative learning; latent-variable models; VAE objective and ELBO intuition | Explain each VAE loss term and run a small experiment |
+| 16 | 06 Generative models | GAN generator/discriminator game, alternating updates, instability and mode collapse | Inspect losses and samples; diagnose a failure rather than relying on loss alone |
+| 17 | 06 Generative models | Diffusion: forward noising, denoising target, schedules, sampling and compute-quality trade-offs | Visualize a noising trajectory; study-report outline and project progress check |
+| 18 | Midterm examination | Individual assessment of foundational understanding and experimental reasoning | Closed-book/controlled-resource exam: concepts, worked calculations, interpretation and short debugging/reasoning tasks |
+| 19 | 07 Recurrent networks | Sequences, recurrent state, shared parameters, unrolling and sequence tasks | Trace hidden states across a tiny sequence |
+| 20 | 07 Recurrent networks | Backpropagation through time; vanishing/exploding gradients and truncation | Measure gradient norms over sequence length and explain a failure |
+| 21 | 07 Recurrent networks | LSTM gates and cell state; why gated memory was introduced | Calculate gate effects in a numerical example |
+| 22 | 07 Recurrent networks | GRU mechanics; compare simple RNN, LSTM and GRU under a controlled budget | Compare models and interpret quality/complexity trade-offs |
+| 23 | 08 Sequence architectures + forecasting | Elman/Jordan/fully recurrent architectures; forecast horizons, chronological splits and leakage | Build a leakage-safe forecasting pipeline with a naive baseline |
+| 24 | 10 Attention + Transformer bridge | From recurrence to attention; queries, keys, values, scaling and softmax | Calculate attention weights and weighted values by hand |
+| 25 | 09 Boltzmann machines — historical lens | Energy-based models, RBMs, contrastive divergence and DBN layer-wise pretraining; why these ideas mattered historically and why they are not the modern default | Compute energies for a tiny model; compare historical motivation with modern end-to-end learning |
+| 26 | 10 Attention + Transformer bridge | Multi-head attention, positional information, residuals, normalization, feed-forward blocks and causal masks | Trace tensor shapes through a Transformer block and test causal visibility |
+| 27 | 10 Attention + Transformer bridge | BERT-style masked prediction vs. GPT-style causal prediction; encoder/decoder distinction | Compare objective and information access; submit a project interim result table |
+| 28 | 11 Deep reinforcement learning | States, actions, rewards, returns, value functions, Bellman equation, Q-learning and DQN overview | Work through a small MDP and calculate a value update |
+| 29 | Research studio | Project clinic: debug the baseline, check data splits, freeze evaluation contract and identify one controlled intervention | Submit baseline evidence and a reproducibility checklist |
+| 30 | Study report workshop | Critical reading: claim, method, evidence, limitations and relation to the student's project | Submit a complete study-report draft with figures/notes and references |
+| 31 | Research studio | Run the main controlled intervention; plan ablations; check seeds, metrics, resource budget and failure slices | Submit a preregistered experiment update and first results table |
+| 32 | Research studio | Error analysis, uncertainty, robustness and paper-ready visualization | Produce one defensible figure and one error-analysis table |
+| 33 | Research communication | Short research talks, peer review, claim calibration and actionable feedback | Each team presents question, method, evidence, limitations and next step |
+| 34 | Submission day | Final project package and study report; reproducibility, citation, licensing and responsible public release | Submit code/configs/results, project report or paper draft, and individual contribution statement |
+| 35 | Final examination + synthesis | Individual final exam spanning course concepts and research judgment; reflect on next research steps | Final exam; students leave with a documented next-step plan for improving or extending the project |
+## Assessment checkpoints and milestone calendar
 
-## Assessment checkpoints
+| When | Milestone | What students submit |
+|---|---|---|
+| Day 1 | Course launch | One research curiosity/question |
+| Day 3 | Project exploration | Interest statement + candidate question |
+| Day 5 | Study report starts | Topic, research question, two starter references |
+| Day 7 | Project proposal | Question, hypothesis, data, baseline, metric, intervention, compute and risk |
+| Day 14 | Baseline plan | Feasible baseline and evaluation protocol |
+| Day 17 | Progress checkpoint | Study-report outline + project baseline status |
+| Day 18 | Midterm | Individual exam |
+| Day 27 | Interim result | First controlled result table and next experiment |
+| Day 29 | Baseline/evaluation gate | Reproducible baseline and frozen evaluation contract |
+| Day 30 | Study report draft | Critical review of a paper or tightly related paper set |
+| Day 31 | Main experiment | Intervention results and ablation plan |
+| Day 32 | Evidence package | Figure, error analysis, uncertainty and limitations |
+| Day 33 | Presentation | Short talk + peer feedback |
+| Day 34 | Final submission | Project package + final study report + contribution statement |
+| Day 35 | Final exam | Individual summative assessment |
 
-- **Days 1–5 — Learning mechanics:** learners can calculate a forward pass, explain loss and gradients, derive a simple update, and distinguish training from generalization.
-- **Days 6–8 — Unsupervised structure:** learners can explain competition, SOM neighborhoods, and the assumptions behind map-based visualizations.
-- **Days 9–12 — Convolutional design:** learners can calculate shapes, explain parameter sharing, and compare skip/dense connectivity with evidence.
-- **Days 13–19 — Representation and generation:** learners can distinguish reconstruction objectives from generative objectives and compare VAE, GAN, and diffusion trade-offs.
-- **Days 20–25 — Sequences:** learners can trace recurrence, explain gated memory, and design a leakage-safe forecasting evaluation.
-- **Days 26–28 — Energy-based learning:** learners can reason about energy, sampling, RBM learning, and the historical role of DBNs.
-- **Days 29–31 — Attention and Transformers:** learners can calculate attention and distinguish BERT-like and GPT-like training objectives.
-- **Days 32–33 — Reinforcement learning:** learners can explain the reward/value distinction and diagnose variance or instability in a small experiment.
-- **Days 34–35 — Research practice:** each team presents a reproducible experiment with a baseline, a controlled intervention, uncertainty/error analysis, and limitations.
+### What belongs before the midterm?
+
+The midterm covers Days 1–14: neuron/perceptron/Adaline, loss and gradient intuition, feedforward networks and backpropagation, optimization and generalization, competitive learning/SOMs, CNNs and residual/dense connections, autoencoders, and experimental reasoning. Students will already have selected a project and should have a proposal and an initial baseline plan. The exam checks individual understanding; the project continues independently of the exam.
+
 
 ## Homework and lab policy
 
