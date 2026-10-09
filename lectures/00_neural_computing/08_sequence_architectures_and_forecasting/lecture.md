@@ -23,13 +23,19 @@ Forecasting exposes a critical distinction between fitting a sequence and evalua
 
 In an Elman-style network, the hidden state summarizes previous observations. Jordan-style recurrence feeds previous outputs into the state. A fully recurrent architecture can allow richer recurrent connectivity but increases optimization complexity.
 
-For forecasting, suppose we observe
-x_1,...,x_t
-and predict
-x_{t+1}.
-For a multi-step forecast we may recursively feed predictions back into the model:
-x̂_{t+1} → x̂_{t+2} → ... .
-This creates error accumulation.
+For forecasting, suppose the observed history is \(x_1,\ldots,x_t\), and we predict the next value:
+
+\[
+(x_1,\ldots,x_t)\longrightarrow \hat{x}_{t+1}.
+\]
+
+For a multi-step forecast, we may feed each prediction back into the model:
+
+\[
+\hat{x}_{t+1}\longrightarrow \hat{x}_{t+2}\longrightarrow\cdots.
+\]
+
+This is called recursive forecasting. If an early prediction is wrong, later predictions use that imperfect value as input, so error can accumulate across the horizon.
 
 Work through a three-step forecast with a simple autoregressive baseline before using a neural network. Explain why a chronological split is mandatory for time series: random splitting can place future information in the training set.
 
@@ -192,7 +198,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: sequence modeling and forecasting](https://www.youtube.com/results?search_query=sequence+modeling+forecasting+deep+learning+lecture)
+**Start here:** [Time-series forecasting — concepts and evaluation](https://www.youtube.com/results?search_query=time+series+forecasting+chronological+split+baseline+explained)
+
+Then compare recurrent sequence models with [RNN, LSTM, and GRU explanations](https://www.youtube.com/results?search_query=RNN+LSTM+GRU+sequence+models+explained). When watching forecasting tutorials, check whether the evaluation uses a chronological split and compares against a simple baseline.
 
 ## Navigation
 
