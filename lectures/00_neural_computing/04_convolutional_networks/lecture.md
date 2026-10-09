@@ -145,6 +145,40 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — local filters, shared weights, and skip paths
+
+A convolutional filter looks at a small patch and reuses the same weights at many image locations. This encodes the assumption that a useful local pattern—such as an edge—may matter wherever it appears.
+
+```mermaid
+flowchart LR
+    I["Image tensor"] --> C["3×3 convolution: local weighted patch"]
+    K["One shared kernel"] --> C
+    C --> F["Feature maps"]
+    F --> P["Activation / pooling"]
+    P --> D["Deeper features"]
+    D --> O["Classifier"]
+```
+
+Residual and dense connections address a different question: how should information move through a deep stack?
+
+```mermaid
+flowchart TB
+    subgraph RES["Residual block"]
+      X1["x"] --> FX["Transform F(x)"]
+      X1 --> ADD["Add"]
+      FX --> ADD
+      ADD --> Y1["y = x + F(x)"]
+    end
+    subgraph DEN["Dense-style connectivity"]
+      A["Feature 1"] --> B["Layer 2"]
+      A --> C["Layer 3 receives earlier features"]
+      B --> C
+      A --> D["Later layer receives all earlier features"]
+      B --> D
+      C --> D
+    end
+```
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.

@@ -122,6 +122,25 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — energy and hidden structure
+
+An RBM assigns an energy to a visible/hidden configuration. Training adjusts weights and biases so observed data configurations become more compatible with the model than configurations produced by its own sampling process.
+
+```mermaid
+flowchart TB
+    V["Visible units v: observed pixels"] <--> H["Hidden units h: latent features"]
+    V --- E["Energy E(v,h)"]
+    H --- E
+    E --> P["Lower energy → higher relative probability"]
+    P --> S["Sample hidden units given visible units"]
+    S --> R["Sample reconstructed visible units"]
+    R --> C["Contrastive divergence: data statistics minus model statistics"]
+    C --> U["Update weights and biases"]
+    U -. "repeat" .-> V
+```
+
+The restricted structure matters: there are no visible-visible or hidden-hidden connections, which makes the conditional distributions easier to sample. Contrastive divergence is an approximation; it is not exact maximum-likelihood training.
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.

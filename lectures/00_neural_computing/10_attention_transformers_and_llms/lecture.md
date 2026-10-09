@@ -158,6 +158,26 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — attention is content-dependent routing
+
+Each token produces a query, key, and value. Query-key similarity determines how much each token reads from the others; the weighted sum of values becomes the output. A causal mask prevents a token from reading future positions during next-token prediction.
+
+```mermaid
+flowchart LR
+    X["Token representations"] --> Q["Queries Q"]
+    X --> K["Keys K"]
+    X --> V["Values V"]
+    Q --> S["Scores QKᵀ / √dₖ"]
+    K --> S
+    S --> M["Optional causal mask"]
+    M --> SM["Softmax weights"]
+    SM --> SUM["Weighted sum of V"]
+    V --> SUM
+    SUM --> O["Context-aware representations"]
+```
+
+Attention weights are not automatically explanations of model reasoning. They show the routing weights used in this operation; interpretation requires care and additional evidence.
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.

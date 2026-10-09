@@ -122,6 +122,23 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — prototypes and the map neighborhood
+
+Competitive learning asks which prototype is closest to the current example; only the winner moves. A self-organizing map (SOM) also moves neighboring units, with the winner moving most and distant map cells moving less. The grid is a neighborhood structure, not a label map supplied by a teacher.
+
+```mermaid
+flowchart TD
+    X["Unlabelled example x"] --> D["Compute distance to every prototype"]
+    D --> W["Choose best matching unit (BMU)"]
+    W --> U["Move winner toward x"]
+    W --> N["Find neighbors on 2-D grid"]
+    N --> V["Move neighbors by smaller amounts"]
+    U --> R["Repeat over examples; shrink learning rate and neighborhood"]
+    V --> R
+```
+
+A useful SOM visualization should show **both** the map and a quantitative measure. Quantization error measures how far examples are from their best matching prototype; it does not, by itself, prove that the map preserves neighborhoods or discovers meaningful classes.
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.

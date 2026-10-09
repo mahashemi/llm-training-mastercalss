@@ -136,6 +136,32 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — recurrent state and gated memory
+
+A recurrent network reuses the same cell at each time step. The hidden state carries information forward. LSTM and GRU add gates that control how much information is retained, overwritten, or exposed.
+
+```mermaid
+flowchart LR
+    X1["Input xₜ₋₁"] --> C1["Recurrent cell"]
+    H0["State hₜ₋₂"] --> C1
+    C1 --> H1["State hₜ₋₁"]
+    X2["Input xₜ"] --> C2["Same cell parameters"]
+    H1 --> C2
+    C2 --> H2["State hₜ"]
+    H2 --> Y["Prediction"]
+```
+
+```mermaid
+flowchart TB
+    X["Current input xₜ"] --> G["Gates"]
+    H["Previous state hₜ₋₁ / cell state cₜ₋₁"] --> G
+    G --> KEEP["Keep useful information"]
+    G --> FORGET["Forget or overwrite stale information"]
+    G --> OUT["Expose state for prediction"]
+```
+
+The gates are learned, not manually programmed rules. A fair comparison tests whether the extra gating helps on the chosen sequence task under a comparable data and training budget.
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.

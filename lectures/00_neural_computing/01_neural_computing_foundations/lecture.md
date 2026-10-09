@@ -532,6 +532,34 @@ The next chapters build on the same ideas while changing the structure of the co
 6. Backpropagation calculates gradients; gradient descent uses those gradients to change parameters.
 7. Without nonlinearities, stacked linear layers collapse into one linear transformation.
 
+## Visual intuition — from input to decision
+
+A neuron is a small computational pipeline. The weights decide how strongly each input matters; the bias shifts the threshold; the activation turns the score into an output.
+
+```mermaid
+flowchart LR
+    X["Input features x₁ … xₙ"] --> Z["Weighted sum: z = wᵀx + b"]
+    W["Learnable weights w"] --> Z
+    B["Learnable bias b"] --> Z
+    Z --> A["Activation / decision"]
+    A --> Y["Prediction ŷ"]
+    Y --> L["Loss compares prediction with target"]
+    L --> G["Learning rule updates w and b"]
+    G -. "repeat on examples" .-> Z
+```
+
+**Perceptron vs. Adaline.** A perceptron makes a hard decision and updates from classification mistakes. Adaline trains its continuous score, so its squared-error loss changes smoothly with the parameters. This is why Adaline's learning rate can make training stable or unstable.
+
+```mermaid
+flowchart TB
+    X["Same input x"] --> P["Linear score z = wᵀx + b"]
+    P --> H["Perceptron: threshold(z)"]
+    P --> C["Adaline: continuous z"]
+    H --> PE["Mistake-based update"]
+    C --> SE["Squared-error loss"]
+    SE --> GD["Gradient-based update"]
+```
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**

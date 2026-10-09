@@ -541,6 +541,24 @@ State the hypothesis before running the experiment.
 6. Greater capacity can fit training-specific patterns without improving generalization.
 7. It compares an independent finite-difference estimate with the analytic/backpropagated gradient.
 
+## Visual intuition — how a multilayer network learns
+
+The forward pass carries information from input to prediction. Backpropagation sends information about the error in the opposite direction, using the chain rule to calculate how each parameter affected the loss. Gradient descent then uses those gradients to update parameters.
+
+```mermaid
+flowchart LR
+    X["Input x"] --> L1["Layer 1: z¹ = W¹x + b¹"]
+    L1 --> H["Activation h = σ(z¹)"]
+    H --> L2["Layer 2: ŷ = W²h + b²"]
+    L2 --> LOSS["Loss L(ŷ, y)"]
+    LOSS -. "chain rule: ∂L/∂ŷ" .-> L2
+    L2 -. "∂L/∂h" .-> H
+    H -. "∂L/∂z¹" .-> L1
+    L1 -. "∂L/∂W¹" .-> X
+```
+
+The backward arrows are **not** the model making a second prediction. They carry derivatives. A derivative answers: *if I changed this quantity by a tiny amount, how would the loss change?* The optimizer applies the update only after these derivatives have been calculated.
+
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
