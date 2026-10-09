@@ -254,8 +254,6 @@ A learner is ready for Course 2 when they can:
 
 **derive → implement → measure → break → explain → decide → reproduce.**
 
-[← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
-
 ## Video companions
 
 Use these as methodological companions rather than substitutes for running the experiment:
@@ -264,4 +262,4 @@ Use these as methodological companions rather than substitutes for running the e
 
 ## Navigation
 
-[← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../01_what_is_an_llm/lecture.md)
+[← Previous](../11_deep_reinforcement_learning/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
