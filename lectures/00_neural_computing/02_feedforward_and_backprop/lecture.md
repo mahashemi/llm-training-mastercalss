@@ -243,17 +243,19 @@ W_1
 \rightarrow L.
 $$
 
-The chain rule says that the total effect of changing $W_1$ can be found by multiplying the local effects along the path:
+For a **single scalar path** through the network, the chain rule can be written as a product of local derivatives:
 
-$$
-\frac{\partial L}{\partial W_1}
+$
+\frac{dL}{dW_1}
 =
-\frac{\partial L}{\partial\hat y}
-\frac{\partial\hat y}{\partial z_2}
-\frac{\partial z_2}{\partial h}
-\frac{\partial h}{\partial z_1}
-\frac{\partial z_1}{\partial W_1}.
-$$
+\frac{dL}{d\hat y}
+\frac{d\hat y}{dz_2}
+\frac{dz_2}{dh}
+\frac{dh}{dz_1}
+\frac{dz_1}{dW_1}.
+$
+
+This product is exact for the scalar example we will calculate below. In a real network, weights, activations, and gradients are usually vectors or matrices. The same chain rule still applies, but the local derivatives become Jacobians and the products become dimensionally valid matrix/vector products. Automatic differentiation computes the needed products efficiently without usually constructing a giant Jacobian explicitly.
 
 ### Read the equation in English
 
@@ -266,12 +268,12 @@ Read it as:
 Start at $W_1$ and ask:
 
 1. If I change $W_1$, how much does $z_1$ change?
-2. If $z_1$ changes, how much does $h$ change?
-3. If $h$ changes, how much does $z_2$ change?
-4. If $z_2$ changes, how much does $\hat y$ change?
-5. If $\hat y$ changes, how much does the loss change?
+2. If $z_1$ changes, how much does the hidden activation $h$ change?
+3. If $h$ changes, how much does the next logit $z_2$ change?
+4. If $z_2$ changes, how much does the predicted probability $\hat y$ change?
+5. If the prediction changes, how much does the loss change?
 
-Multiplying those local sensitivities gives the overall sensitivity.
+Multiplying these local sensitivities along a scalar path gives the overall sensitivity. In a multilayer network, backpropagation combines the corresponding vector/matrix derivatives across all paths that lead to the loss.
 
 That is the heart of backpropagation.
 
@@ -306,6 +308,74 @@ $$
 So $x$ tells us how sensitive this computation is to the weight.
 
 This is what a derivative means: **local sensitivity**.
+
+### Complete worked example: calculate one full backward pass
+
+Use the same numbers as the forward pass:
+
+$
+x=2,\quad W_1=1.5,\quad b_1=-1,\quad W_2=2,\quad b_2=-1,\quad y=1.
+$
+
+We already calculated $z_1=2$, $h=\sigma(2)\approx0.8808$, $z_2\approx0.7616$, and $\hat y=\sigma(z_2)\approx0.6817$. For a positive target, binary cross-entropy is $L=-\log(\hat y)\approx0.3832$.
+
+For sigmoid output plus binary cross-entropy, the derivative of the loss with respect to the output **logit** simplifies to
+
+$
+\frac{dL}{dz_2}=\hat y-y\approx0.6817-1=-0.3183.
+$
+
+This compact result comes from applying the chain rule to both sigmoid and cross-entropy. It is also why libraries provide a numerically stable combined loss such as BCEWithLogitsLoss.
+
+Now propagate that error backward through the second linear layer:
+
+$
+\frac{dL}{dW_2}=\frac{dL}{dz_2}h
+\approx(-0.3183)(0.8808)=-0.2804,
+\qquad
+\frac{dL}{db_2}=\frac{dL}{dz_2}\approx-0.3183.
+$
+
+The gradient with respect to the hidden activation is
+
+$
+\frac{dL}{dh}=\frac{dL}{dz_2}W_2
+\approx(-0.3183)(2)=-0.6366.
+$
+
+For sigmoid, $\sigma'(a)=\sigma(a)(1-\sigma(a))$. Therefore
+
+$
+\frac{dh}{dz_1}=h(1-h)\approx(0.8808)(0.1192)=0.1050.
+$
+
+The error signal at the hidden unit is consequently
+
+$
+\frac{dL}{dz_1}=\frac{dL}{dh}\frac{dh}{dz_1}
+\approx(-0.6366)(0.1050)=-0.0668.
+$
+
+Finally, because $z_1=W_1x+b_1$,
+
+$
+\frac{dL}{dW_1}=\frac{dL}{dz_1}x
+\approx(-0.0668)(2)=-0.1337,
+\qquad
+\frac{dL}{db_1}=\frac{dL}{dz_1}\approx-0.0668.
+$
+
+**What should you notice?** The output error is not copied unchanged into every parameter. Each layer scales it by its own local sensitivity. The hidden sigmoid's derivative is about $0.105$, so the signal reaching the first layer is smaller. This is a tiny example of how gradients can shrink as they travel through many layers.
+
+With learning rate $\eta=0.1$, gradient descent would increase both weights in this example because both weight gradients are negative:
+
+$
+W_2^{\mathrm{new}}=2-0.1(-0.2804)\approx2.0280,
+\qquad
+W_1^{\mathrm{new}}=1.5-0.1(-0.1337)\approx1.5134.
+$
+
+This update is only one step on one example; it does not guarantee the loss will decrease for an arbitrarily large learning rate or for the whole dataset.
 
 ## 8. From gradients to parameter updates
 
