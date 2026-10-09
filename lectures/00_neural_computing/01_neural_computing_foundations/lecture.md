@@ -489,7 +489,7 @@ h_2 &= W_2(W_1x+b_1)+b_2\\
 \end{aligned}
 $$
 
-The result is still just one affine transformation of $x$: a new matrix $(W_2W_1)$ and a new bias $(W_2b_1+b_2)$. So, stacking linear layers without nonlinearities does not give the model a more expressive class of functions.
+The result is still one **affine** transformation of $x$: it has the form $Ax+c$, where $A=W_2W_1$ and $c=W_2b_1+b_2$. (An affine function is a linear transformation plus a constant offset.) Adding more linear/affine layers only changes the effective matrix and bias; it does not create a more expressive kind of input-output function.
 
 Now put a nonlinear activation between the layers:
 
@@ -497,7 +497,7 @@ $$
 h_2=W_2\,\phi(W_1x+b_1)+b_2.
 $$
 
-In general, this expression **cannot** be rewritten as one affine transformation $Ax+c$, because the nonlinear function changes the input-dependent shape of the mapping. That extra expressive power is why hidden-layer activations matter. (Special parameter choices can still make a particular network behave linearly; the point is that it is no longer forced to be linear.)
+In general, this composition cannot be represented by one affine transformation $Ax+c$. For example, ReLU bends the mapping at the point where its input crosses zero: values below zero are mapped to zero, while positive values pass through. That input-dependent bend is something a single affine transformation cannot reproduce over the whole input range. Some particular settings of the weights can still make a nonlinear network behave linearly, but the architecture is no longer restricted to linear/affine behavior.
 
 ---
 
