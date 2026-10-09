@@ -1,5 +1,5 @@
 
-# Course 1 · Chapter — Feedforward Networks and Backpropagation
+# Course 1 · Chapter 2 — Feedforward Networks and Backpropagation
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
