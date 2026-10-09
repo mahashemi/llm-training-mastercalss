@@ -82,6 +82,30 @@ When an unsupervised visualization looks compelling, ask:
 A good unsupervised result survives several of these questions.
 
 
+## Work a winner-take-all update by hand
+
+Let the input be \(x=(0.2,0.8)\), and suppose two map units have prototypes \(w_1=(0,1)\) and \(w_2=(1,0)\). A simple SOM first finds the **best-matching unit (BMU)** by Euclidean distance.
+
+\[
+d(x,w_1)=\sqrt{(0.2-0)^2+(0.8-1)^2}\approx0.283,
+\]
+\[
+d(x,w_2)=\sqrt{(0.2-1)^2+(0.8-0)^2}\approx1.131.
+\]
+
+Unit 1 wins because its prototype is closer to the example. A basic competitive update moves the winner toward the input:
+
+\[
+w_1'=w_1+\eta(x-w_1).
+\]
+
+With learning rate \(\eta=0.5\), \(w_1'=(0.1,0.9)\). A SOM also moves neighboring map units, but by a smaller amount determined by their distance from the BMU on the map grid. That neighborhood update is what distinguishes a SOM from winner-take-all clustering.
+
+The learning rate and neighborhood radius usually shrink over training. Early updates organize broad structure; later updates refine local placement. But a visually attractive map does not prove that its topology is meaningful. Inspect quantization error and a neighborhood-preservation measure, and compare against a simple baseline.
+
+**Check yourself:** if both prototypes were equally distant from the input, what tie-breaking rule would your implementation use? Why should that choice be deterministic for reproducible experiments?
+
+
 ## Core concepts
 
 This unit covers **winner-take-all, SOM topology, Evolving SOM, representation discovery**. Do not memorize the architecture. Derive the computation, identify its inductive bias, and ask what evidence would distinguish its claimed advantage from a larger parameter count or better optimization.
