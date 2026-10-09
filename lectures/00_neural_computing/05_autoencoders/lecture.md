@@ -126,6 +126,25 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
+## Visual intuition — compression and reconstruction
+
+An autoencoder is trained to reproduce its input after passing through a latent representation. The bottleneck forces the model to compress; denoising changes the task so the input is corrupted but the target remains clean.
+
+```mermaid
+flowchart LR
+    X["Input image x"] --> E["Encoder fφ"]
+    E --> Z["Latent code z"]
+    Z --> D["Decoder gθ"]
+    D --> XR["Reconstruction x̂"]
+    X -. "compare with target" .-> L["Reconstruction loss"]
+    XR --> L
+    N["Optional corruption"] --> XC["Noisy input x̃"]
+    X --> XC
+    XC --> E
+```
+
+**Important distinction:** a small reconstruction error means the input can be reconstructed under this setup. It does not automatically mean the latent code is useful for classification, retrieval, or generation. Those claims need separate tests.
+
 ## Laboratory
 
 The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
