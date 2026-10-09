@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Convolutional Networks, Residual Learning, and Dense Connections
+# Course 1 · Chapter 4 — Convolutional Networks, Residual Learning, and Dense Connections
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
