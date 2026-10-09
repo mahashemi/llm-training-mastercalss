@@ -23,23 +23,23 @@ Start with a clustering problem where labels do not exist. Competitive learning 
 
 For an input vector $x$ and prototype $w_j$, first find the **best-matching unit (BMU)**: the prototype with the smallest squared Euclidean distance to the input.
 
-$
+$$
 j^* = \arg\min_j \|x-w_j\|_2^2.
-$
+$$
 
 The winner then moves a fraction of the way toward the input:
 
-$
+$$
 w_{j^*}^{\text{new}} = w_{j^*}^{\text{old}} + \eta\left(x-w_{j^*}^{\text{old}}\right).
-$
+$$
 
 Here, $x-w_{j^*}$ is the direction from the winning prototype to the example, and the learning rate $\eta$ controls how far the prototype moves. If $\eta=0$, it does not move; if $\eta=1$, it jumps directly to the example for this update.
 
 A self-organizing map (SOM) also moves nearby grid units. Let $h(j,j^*,t)$ be the neighborhood strength for unit $j$ around the winner at training step $t$:
 
-$
+$$
 w_j^{\text{new}} = w_j^{\text{old}} + \eta\,h(j,j^*,t)\left(x-w_j^{\text{old}}\right).
-$
+$$
 
 The winner usually has neighborhood strength near 1, while farther units receive smaller values (often 0). The neighborhood radius typically shrinks over training.
 
