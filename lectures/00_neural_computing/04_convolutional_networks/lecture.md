@@ -21,29 +21,29 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Start with the image problem: a detector for an edge should not need a completely different parameter for every pixel location. Convolution introduces a useful inductive bias: the same local detector can be reused across positions.
 
-For a 1-D illustration, the output at position \(i\) is a weighted sum of nearby input values:
+For a 1-D illustration, the output at position $i$ is a weighted sum of nearby input values:
 
-\[
+$$
 y_i=\sum_k w_k x_{i+k}.
-\]
+$$
 
-Here \(x_{i+k}\) is an input value in the local window, \(w_k\) is the learned weight applied to it, and the sum combines those weighted values into one output. In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
+Here $x_{i+k}$ is an input value in the local window, $w_k$ is the learned weight applied to it, and the sum combines those weighted values into one output. In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
 
 Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 image and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
 
 Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks change the optimization problem by learning a residual:
 
-\[
+$$
 y=F(x)+x.
-\]
+$$
 
-Here \(x\) is the incoming representation, \(F(x)\) is the learned correction, and \(y\) is the output. The shortcut carries \(x\) directly to the addition, giving information and gradients a direct path.
+Here $x$ is the incoming representation, $F(x)$ is the learned correction, and $y$ is the output. The shortcut carries $x$ directly to the addition, giving information and gradients a direct path.
 
 Dense networks instead concatenate earlier representations:
 
-\[
+$$
 x_\ell=H_\ell([x_0,\ldots,x_{\ell-1}]).
-\]
+$$
 
 The brackets mean “join these feature tensors along the feature/channel dimension,” not add them.
 
@@ -120,48 +120,72 @@ Whenever comparing CNN architectures, report parameter count and training budget
 
 ## Work a small example by hand
 
-Consider this \(3\times3\) input and a \(2\times2\) filter. For clarity, we use **cross-correlation** (the operation most deep-learning libraries call convolution): slide the filter without flipping it.
+Consider this $3\times3$ input and a $2\times2$ filter. For clarity, we use **cross-correlation** (the operation most deep-learning libraries call convolution): slide the filter without flipping it.
 
-\[
+$$
 X=\begin{bmatrix}1&2&0\\0&1&3\\2&1&0\end{bmatrix},
 \qquad
 K=\begin{bmatrix}1&0\\0&-1\end{bmatrix}.
-\]
+$$
 
 At the upper-left position, multiply matching entries and add:
 
-\[
+$$
 1(1)+2(0)+0(0)+1(-1)=0.
-\]
+$$
 
 Move the filter one column right:
 
-\[
+$$
 2(1)+0(0)+1(0)+3(-1)=-1.
-\]
+$$
 
 Repeat for the bottom row. The output feature map is
 
-\[
+$$
 Y=\begin{bmatrix}0&-1\\-1&1\end{bmatrix}.
-\]
+$$
 
 Every output cell is a local weighted measurement. The same four filter weights are reused at all four positions. This is the heart of parameter sharing.
 
 ### Predict the output shape before running code
 
-For input height \(H\), kernel size \(K\), padding \(P\), and stride \(S\), the output height is
+For input height $H$, kernel size $K$, padding $P$, and stride $S$, the output height is
 
-\[
+$$
 H_{\text{out}}=\left\lfloor\frac{H+2P-K}{S}\right\rfloor+1.
-\]
+$$
 
-For a \(28\times28\) image, a \(3\times3\) kernel, stride 1, and padding 1, the output stays \(28\times28\). Sixteen filters produce 16 output channels.
+For a $28\times28$ image, a $3\times3$ kernel, stride 1, and padding 1, the output stays $28\times28$. Sixteen filters produce 16 output channels.
 
-A residual block makes a different numerical move: if \(x=2.0\) and the learned correction \(F(x)=0.2\), then \(y=x+F(x)=2.2\). The block can preserve the original representation while learning a correction. A dense block instead concatenates features, so feature dimensions grow as earlier maps are reused.
+A residual block makes a different numerical move: if $x=2.0$ and the learned correction $F(x)=0.2$, then $y=x+F(x)=2.2$. The block can preserve the original representation while learning a correction. A dense block instead concatenates features, so feature dimensions grow as earlier maps are reused.
 
 **Check yourself:** what would happen to the output size if the stride changed from 1 to 2? Before coding, calculate it using the formula and explain why rounding down is needed.
 
+
+### Tensor shapes and parameter counts: make the comparison explicit
+
+For a convolution with kernel height $K_h$, kernel width $K_w$, input channels $C_{\mathrm{in}}$, and output channels $C_{\mathrm{out}}$, the number of trainable parameters (including one bias per output channel) is
+
+$
+P_{\mathrm{conv}}=K_hK_wC_{\mathrm{in}}C_{\mathrm{out}}+C_{\mathrm{out}}.
+$
+
+The earlier $3\times3$ example assumes one input channel and 16 output filters, so $3\cdot3\cdot1\cdot16+16=160$. With RGB input, the same 16 filters would instead require $3\cdot3\cdot3\cdot16+16=448$ parameters. Each filter spans **all input channels**; it is not a separate 2-D filter per channel that is independently summed afterward.
+
+For height and width separately, the output-size formula is
+
+$
+H_{\mathrm{out}}=\left\lfloor\frac{H+2P_h-K_h}{S_h}\right\rfloor+1,
+\qquad
+W_{\mathrm{out}}=\left\lfloor\frac{W+2P_w-K_w}{S_w}\right\rfloor+1.
+$
+
+For example, a $28\times28$ input with a $3\times3$ kernel, stride 2, and padding 1 gives $\lfloor(28+2-3)/2\rfloor+1=14$ positions in each dimension. With 16 filters, the output shape is $14\times14\times16$ (ignoring the batch dimension). The floor is necessary because only complete kernel placements count.
+
+### A residual addition has a shape requirement
+
+The expression $y=x+F(x)$ requires $x$ and $F(x)$ to have compatible shapes. If a block changes the number of channels or spatial resolution, a plain identity shortcut cannot be added directly. A common solution is a learned projection on the shortcut, such as a $1\times1$ convolution (possibly with stride), that maps $x$ to the required shape. This projection has parameters and should be included when reporting the model's parameter count.
 
 ## Core concepts
 
@@ -179,6 +203,12 @@ This unit covers **convolution, pooling, receptive fields, CNN extensions, resid
 8. Inspect qualitative examples—not only aggregate metrics.
 9. Write a short interpretation that separates observation from explanation.
 10. Propose the next falsifiable experiment.
+
+## Failure analysis: what did the network actually learn?
+
+A high test score can still hide a shortcut. For example, if every training image of a wolf has snow in the background, a CNN may learn “snow means wolf” rather than robust animal features. Test the hypothesis by evaluating on a background-shifted set or by constructing a controlled background intervention while keeping the object label fixed.
+
+Compare a baseline and an augmentation condition with the same split, architecture, optimizer, epochs, and random seeds where possible. Report overall accuracy **and** performance on the shifted subset. If augmentation helps only on the shifted subset, that supports a robustness interpretation; if it improves all scores, the cause may be broader regularization. If the shifted subset is tiny or differs in multiple ways, say so—the experiment cannot isolate background reliance cleanly.
 
 ## Research exercise
 
@@ -202,6 +232,15 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 4. What is the simplest credible baseline?
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
+
+### Answers
+
+1. Convolution reuses a local kernel across locations, encoding the assumption that the same pattern may matter in different positions.
+2. A $3\times3$ kernel over one input channel with 16 output channels has $3\cdot3\cdot1\cdot16+16=160$ parameters when each filter has a bias.
+3. Receptive field is the region of the original input that can influence a unit; stacked layers generally enlarge it.
+4. A residual block adds a learned correction to its input; addition requires compatible tensor shapes, or a projection shortcut is needed.
+5. A larger model or longer training budget can explain apparent gains, so match parameter count and training protocol when possible.
+6. A background-shift test or controlled intervention can reveal whether performance depends on a spurious visual cue.
 
 ## Visual intuition
 
