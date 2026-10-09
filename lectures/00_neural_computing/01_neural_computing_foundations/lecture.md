@@ -115,7 +115,7 @@ $$
 z=2(1)-1(0)-0.5=1.5.
 $$
 
-Because $1.5\\ge 0$, the prediction is 1.
+Because $1.5\ge 0$, the prediction is 1.
 
 For
 
