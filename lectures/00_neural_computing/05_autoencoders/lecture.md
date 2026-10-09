@@ -19,10 +19,19 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Begin with compression. Suppose an image has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns
-z = f_θ(x),  x̂ = g_φ(z)
-and minimizes a reconstruction loss such as
-L = ||x-x̂||².
+Begin with compression. Suppose an image has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns an encoder and a decoder:
+
+\[
+z=f_\phi(x),\qquad \hat{x}=g_\theta(z).
+\]
+
+Here \(x\) is the input, \(z\) is its compressed latent code, and \(\hat{x}\) is the reconstruction. A common squared-error objective is
+
+\[
+\mathcal L_{\mathrm{recon}}=\|x-\hat{x}\|_2^2.
+\]
+
+The notation \(\|\cdot\|_2^2\) means square each difference between corresponding input and reconstructed values, then add the squares. The model learns by adjusting its weights to make this error smaller.
 
 The encoder is forced to preserve information useful for reconstruction; the bottleneck controls how much information can pass.
 
