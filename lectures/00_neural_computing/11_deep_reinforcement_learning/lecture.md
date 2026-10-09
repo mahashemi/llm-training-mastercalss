@@ -88,6 +88,32 @@ The agent chooses left or right.
 
 A reward may arrive many steps after the action that helped preserve balance. The value function therefore has to connect immediate decisions to delayed outcomes.
 
+## Work one Q-learning update by hand
+
+The Bellman optimality target for a one-step Q-learning update is
+
+\[
+y=r+\gamma\max_{a'}Q(s',a').
+\]
+
+Suppose the immediate reward is \(r=1\), the discount factor is \(\gamma=0.9\), and the largest estimated next-state action value is 2. The target is
+
+\[
+y=1+0.9(2)=2.8.
+\]
+
+If the current estimate is \(Q(s,a)=2.0\) and the learning rate is \(\alpha=0.1\), the update becomes
+
+\[
+Q_{\mathrm{new}}(s,a)=Q(s,a)+\alpha[y-Q(s,a)]
+=2.0+0.1(0.8)=2.08.
+\]
+
+The update moves the estimate toward the target; it does not jump all the way there. In deep Q-learning, a neural network approximates \(Q(s,a)\), and the same target idea is combined with replay and a target network to reduce instability.
+
+**Check yourself:** if \(\gamma=0\), which part of the target disappears and what kind of task would that describe? Why can a high training return still coexist with poor held-out performance?
+
+
 ## 5. Engineering evaluation
 
 A high training return is not enough.
