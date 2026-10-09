@@ -51,15 +51,16 @@ def check_file(path: Path) -> list[str]:
                 display_open_line = line_number
             continue
 
-        if in_display:
-            continue
-
+        # Check renderer-incompatible commands inside and outside display math.
         for macro in UNSUPPORTED_MACROS:
             if macro in line:
                 errors.append(
                     f"{path}:{line_number}: renderer-incompatible math macro {macro}; "
                     "use a supported upright-text form such as \\mathrm{...}"
                 )
+
+        if in_display:
+            continue
 
         if any(token in line for token in LEGACY_DELIMITERS):
             errors.append(
