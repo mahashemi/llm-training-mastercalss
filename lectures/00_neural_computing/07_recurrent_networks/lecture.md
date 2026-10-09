@@ -19,7 +19,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Start with a sequence whose interpretation depends on earlier context. A recurrent model maintains a hidden state:
+A sequence can depend on earlier context, so a recurrent model maintains a hidden state:
 
 $$
 h_t=\phi(W_xx_t+W_hh_{t-1}+b).
@@ -27,9 +27,9 @@ $$
 
 Read this from right to left as a recipe: combine the current input $x_t$ with the previous memory $h_{t-1}$, apply learned weights $W_x$ and $W_h$, add bias $b$, then pass the result through activation $\phi$ to obtain the new state $h_t$. The same weights are reused at every time step.
 
-Unroll the recurrence for three tokens and calculate the hidden state symbolically. This makes an important fact visible: the gradient from a later time step passes through repeated transformations.
+Unrolling three steps makes the dependency explicit: $h_3$ depends on $x_3$ and $h_2$, $h_2$ depends on $x_2$ and $h_1$, and $h_1$ depends on $x_1$. A loss at the third step therefore sends gradients through several repeated transformations.
 
-Explain vanishing and exploding gradients. If the relevant Jacobian repeatedly shrinks, early information becomes difficult to learn; if it grows, optimization can become unstable.
+Repeated Jacobian multiplication explains vanishing and exploding gradients. If the relevant Jacobian repeatedly shrinks, early information becomes difficult to learn; if it grows, optimization can become unstable. The numerical examples below show how even modest per-step scaling compounds over many steps.
 
 An LSTM introduces gates—learned values between 0 and 1—that regulate information flow. A simplified view is
 

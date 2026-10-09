@@ -37,7 +37,7 @@ $$
 
 This is called recursive forecasting. If an early prediction is wrong, later predictions use that imperfect value as input, so error can accumulate across the horizon.
 
-Work through a three-step forecast with a simple autoregressive baseline before using a neural network. Explain why a chronological split is mandatory for time series: random splitting can place future information in the training set.
+A persistence baseline makes the forecast task concrete: predict the next value using the most recent observation. Compare it with a neural model on exactly the same future target points. A chronological split is mandatory because random splitting can place future information in the training set and make the evaluation unrealistically easy.
 
 Real connection: electricity demand, traffic, sensors, finance, and operations.
 
@@ -134,7 +134,7 @@ This number is meaningful only relative to the same target values and evaluation
 
 ## Three recurrent layouts, calculated with the same tiny sequence
 
-Use a scalar toy sequence $x_1=1,\;x_2=2$, a scalar hidden state, and deliberately simple weights. These numbers are chosen for hand calculation; they are not trained parameters.
+The scalar toy sequence $x_1=1,\;x_2=2$ and deliberately simple weights make the recurrence hand-calculable. These are illustrative values, not trained parameters.
 
 ### Elman recurrence: previous hidden state returns
 

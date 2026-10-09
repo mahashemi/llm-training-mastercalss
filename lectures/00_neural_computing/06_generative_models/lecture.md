@@ -160,7 +160,7 @@ Do not compare a VAE reconstruction loss, a GAN discriminator loss, and a diffus
 
 ## 6. Evaluation: how do we know generation improved?
 
-Use more than one kind of evidence.
+A sound generative-model evaluation uses multiple kinds of evidence because reconstruction, likelihood, sample quality, diversity, and downstream utility answer different questions.
 
 - **Fidelity:** inspect representative samples and use a metric suitable for the data type.
 - **Coverage:** for a toy two-mode distribution, count how often samples fall near each real mode. For complex images, use suitable distributional measures and explain their limitations.
@@ -250,7 +250,7 @@ Follow:
 
 **Start with the VAE:** [Understanding Variational Autoencoders (VAEs)](https://www.youtube.com/watch?v=HBYQvKlaE0A)
 
-Use focused companions for the other mechanisms:
+Focused companions for the other mechanisms include:
 - [GANs: explanations and implementations](https://www.youtube.com/results?search_query=GAN+generative+adversarial+network+explained)
 - [Diffusion models: denoising and reverse sampling](https://www.youtube.com/results?search_query=diffusion+models+denoising+reverse+process+explained)
 

@@ -19,7 +19,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Begin with compression. Suppose an image has 784 pixel values but the important structure lies on a much smaller manifold. An autoencoder learns an encoder and a decoder:
+Compression is the starting intuition. An image may contain 784 pixel values while its meaningful structure varies along far fewer dimensions. An autoencoder learns an encoder and a decoder:
 
 $$
 z=f_\phi(x),\qquad \hat{x}=g_\theta(z).
@@ -35,9 +35,29 @@ The notation $\|\cdot\|_2^2$ means square each difference between corresponding 
 
 The encoder is forced to preserve information useful for reconstruction; the bottleneck controls how much information can pass.
 
-Work through a tiny 4-dimensional example compressed to 2 dimensions. Explain why a linear autoencoder is closely related to principal-component analysis, while nonlinear activations let the learned representation bend around nonlinear structure.
+### A four-value compression example
 
-Then distinguish variants:
+Consider $x=(1,2,3,4)$. For a hand-designed illustration, let a linear encoder average alternating coordinates:
+
+$$
+z_1=\frac{x_1+x_3}{2}=2,\qquad z_2=\frac{x_2+x_4}{2}=3.
+$$
+
+A simple linear decoder repeats those two summaries:
+
+$$
+\hat{x}=(z_1,z_2,z_1,z_2)=(2,3,2,3).
+$$
+
+The mean squared reconstruction error is
+
+$$
+\mathrm{MSE}=\frac{(1-2)^2+(2-3)^2+(3-2)^2+(4-3)^2}{4}=1.
+$$
+
+This hand-designed encoder is not a trained model; it shows what a bottleneck does: compressing the input forces some distinctions to be lost. A trained linear autoencoder with squared reconstruction loss can learn a low-dimensional subspace closely related to the principal-component subspace. Nonlinear activations go beyond a single linear subspace and can represent curved structure.
+
+Common variants differ in what they constrain or corrupt:
 - sparse: encourage only a small number of latent activations;
 - denoising: reconstruct clean x from corrupted x̃;
 - contractive: penalize sensitivity to small input changes;

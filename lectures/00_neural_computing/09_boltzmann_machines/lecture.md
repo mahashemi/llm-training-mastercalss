@@ -19,7 +19,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 ## Teaching walkthrough
 
-Begin with an energy function rather than a neural-network layer. An energy-based model assigns lower energy to configurations it considers more compatible.
+An energy function is a useful starting point for a Boltzmann machine. An energy-based model assigns lower energy to configurations it considers more compatible.
 
 For a restricted Boltzmann machine (RBM), let $v$ be the visible units (the observed data), $h$ the hidden units (latent features), $a$ and $b$ their biases, and $W$ the connection weights. One common energy function is
 
@@ -37,7 +37,7 @@ $$
 
 This says: given the visible data, calculate a weighted input for hidden unit $j$, add its bias, and use the sigmoid to turn that score into the probability that the unit is on. Visible units have an analogous conditional distribution.
 
-Explain contrastive divergence: start from observed data, sample hidden states, reconstruct visible states, sample again, and use the difference between data and reconstruction statistics as an approximate learning signal.
+Contrastive divergence approximates the likelihood-learning signal with a short Gibbs chain. Start from observed data, sample hidden states, reconstruct visible states, sample again, and compare data statistics with statistics from the reconstructed samples. The difference estimates the direction in which the model should change, but a short chain is only an approximation to the model's equilibrium distribution.
 
 Deep belief networks stack RBM-like representations.
 
