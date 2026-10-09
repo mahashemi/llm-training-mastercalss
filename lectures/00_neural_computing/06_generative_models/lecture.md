@@ -192,6 +192,40 @@ The generator asks:
 
 The difficulty is that both objectives move during training. A generator can also discover an easy subset of the distribution and repeatedly produce similar examples: **mode collapse**.
 
+#### Read a GAN loss numerically—and why it is not a quality score
+
+For a single real example \(x\) and generated example \(G(z)\), the discriminator's binary-cross-entropy objective can be written
+
+\[
+\mathcal L_D=-\log D(x)-\log(1-D(G(z))).
+\]
+
+The discriminator wants \(D(x)\) near 1 for real data and \(D(G(z))\) near 0 for generated data. Suppose \(D(x)=0.9\) and \(D(G(z))=0.2\). Then
+
+\[
+\mathcal L_D=-\log(0.9)-\log(0.8)\approx0.329.
+\]
+
+If the discriminator instead assigns \(D(G(z))=0.9\), its loss becomes
+
+\[
+-\log(0.9)-\log(0.1)\approx2.408.
+\]
+
+A common non-saturating generator loss for that generated example is \(\mathcal L_G=-\log D(G(z))\). It is about \(1.609\) when \(D(G(z))=0.2\), and about \(0.105\) when \(D(G(z))=0.9\).
+
+These numbers tell us how the current discriminator scores the examples—not whether the generator covers the whole data distribution. A generator can produce a few convincing examples from only one mode and still have poor diversity. Likewise, GAN losses can move in opposite directions because the two networks are learning against one another.
+
+#### Evaluate fidelity, coverage, and compute separately
+
+For a meaningful generative comparison, report at least three different kinds of evidence:
+
+- **Fidelity:** do generated examples look or behave like plausible examples from the data distribution?
+- **Diversity / mode coverage:** does the generator represent the important varieties in the real data, or has it collapsed to a narrow subset?
+- **Compute:** how many updates, how much elapsed time, and—when relevant—how much accelerator memory were required?
+
+In the toy two-mode lab, count how many generated samples fall near each real mode and report the generated spread. This is a transparent teaching metric for that synthetic distribution, not a universal image-quality metric. For image models, choose suitable distributional and human/qualitative evaluations and state their limitations. Never compare a VAE reconstruction loss, a GAN discriminator loss, and a diffusion noise-prediction loss as if they were measurements on the same scale.
+
 ### Diffusion: learn to reverse corruption
 
 Diffusion takes a different route.
