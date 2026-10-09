@@ -257,8 +257,11 @@ A learner is ready for Course 2 when they can:
 ## Video companions
 
 Use these as methodological companions rather than substitutes for running the experiment:
+- [Princeton workshop: The Reproducibility Crisis in ML-based Science](https://sites.google.com/princeton.edu/rep-workshop/) — recorded talks and materials on leakage, evaluation, and reproducibility.
 - [Deep learning experiment design, ablations, and reproducibility](https://www.youtube.com/results?search_query=deep+learning+experiment+design+ablation+reproducibility)
 - [How to read and critically evaluate machine-learning papers](https://www.youtube.com/results?search_query=how+to+read+machine+learning+research+papers+critically)
+
+**Viewing question:** Which experimental detail would you need to reproduce the claim: data version, split, seed, hyperparameters, compute budget, metric, or code? Identify what the speaker reports and what remains missing.
 
 ## Navigation
 

@@ -262,9 +262,11 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-**Start here:** [Time-series forecasting — concepts and evaluation](https://www.youtube.com/results?search_query=time+series+forecasting+chronological+split+baseline+explained)
+**Start with the mechanism:** [Recurrent Neural Networks (RNNs), Clearly Explained — StatQuest](https://www.youtube.com/watch?v=AsNTP8Kwu80) (focus on the recurrent state, shared weights, and why long sequences are difficult to train).
 
-Then compare recurrent sequence models with [RNN, LSTM, and GRU explanations](https://www.youtube.com/results?search_query=RNN+LSTM+GRU+sequence+models+explained). When watching forecasting tutorials, check whether the evaluation uses a chronological split and compares against a simple baseline.
+For the forecasting protocol, use this [focused video search on chronological splits, baselines, and leakage](https://www.youtube.com/results?search_query=time+series+forecasting+chronological+split+baseline+data+leakage). For gated memory, compare the companion [LSTM explanation from StatQuest](https://www.youtube.com/watch?v=YCzL96nL7j0).
+
+**Viewing question:** Does the example preserve time order, fit preprocessing on the training period only, and compare against a naive forecast? If not, its reported score may not estimate future performance.
 
 ## Navigation
 
