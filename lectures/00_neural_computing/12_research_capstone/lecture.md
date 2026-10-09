@@ -90,15 +90,15 @@ A table containing only the best seed hides important uncertainty.
 
 Suppose three independent training seeds produce evaluation scores $89,91,90$ (for example, percentage accuracy). Their mean is
 
-$
+$$
 \bar x=\frac{89+91+90}{3}=90.
-$
+$$
 
 The sample standard deviation is
 
-$
+$$
 s=\sqrt{\frac{(89-90)^2+(91-90)^2+(90-90)^2}{3-1}}=1.
-$
+$$
 
 Report this as $90\pm1$ percentage point **with the number of seeds and protocol stated**. Three seeds are a small sample, so this is descriptive evidence, not a guarantee that the true performance lies within one point. The seeds should repeat the relevant sources of randomness; three checkpoints from the same training run are not three independent runs.
 
