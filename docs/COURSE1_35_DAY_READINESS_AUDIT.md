@@ -58,3 +58,12 @@ Before marking Course 1 instructor-ready, verify each item against the actual ch
 ## Completion policy
 
 Do not label the entire course “complete” solely because every notebook executes or because every chapter has a diagram. Completion means all 35 day-level promises are supported by teachable explanations, worked examples, reliable labs, answer keys, and evidence-based interpretation. Resolve P0 issues first, then P1 teaching gaps, then P2 evidence improvements. Update this audit as each gap is closed.
+
+
+## Research-first schedule and publication readiness update (2026-10-09)
+
+The delivery plan now begins the research workflow in Lecture 1 rather than treating Days 34–35 as the first project time. The plan publishes a Day 18 midterm, a Day 35 final examination, a Day 5 study-report topic milestone, a Day 7 project proposal, a Day 29 baseline/evaluation gate, a Day 30 report draft, and a Day 34 final submission. Grading is explicitly allocated as 40% assignments/project work, 15% critical study report, 15% midterm, and 30% final examination.
+
+Boltzmann machines and DBNs are retained as valuable historical and conceptual context, but compressed to one session (Day 25). This creates room for student research clinics without implying that energy-based models are unimportant; the emphasis is on understanding their contribution and limitations in the context of current practice.
+
+Visual course assets are stored under `visuals/course1/` and linked from the Course 1 README and Lecture 1. A dedicated LaTeX/publication guide provides a maintained starter template, links to current official CVPR/NeurIPS author resources, and responsible preprint guidance. The schedule update itself does not certify the course's full content readiness: all linked assets and teaching artifacts still need link/render checks in the repository workflow.
