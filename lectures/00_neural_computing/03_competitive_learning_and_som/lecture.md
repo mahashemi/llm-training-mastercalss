@@ -23,9 +23,9 @@ Start with a clustering problem where labels do not exist. Competitive learning 
 
 For an input vector $x$ and prototype $w_j$, first find the **best-matching unit (BMU)**: the prototype with the smallest squared Euclidean distance to the input.
 
-$$
-j^* = \arg\min_j \|x-w_j\|_2^2.
-$$
+$$ j^* = \arg\min_j \|x-w_j\|_2^2. $$
+
+The notebook sometimes reports ordinary Euclidean distance $\|x-w_j\|_2$ instead. That does not change which prototype wins: squaring is a strictly increasing operation on nonnegative distances. It does change the numerical value of the reported error, so compare runs only when they use the same convention.
 
 The winner then moves a fraction of the way toward the input:
 
@@ -45,7 +45,7 @@ The winner usually has neighborhood strength near 1, while farther units receive
 
 The important intuition is that learning is simultaneously doing two things: fitting prototypes to data and organizing nearby prototypes to represent nearby regions of the input space.
 
-Worked example: place four 2-D prototypes on the corners of a square and feed points from two clusters. Calculate the winner for one point and move the winner. Then activate its neighbors and observe how the map changes.
+
 
 Real connection: SOMs are useful for exploratory visualization, sensor regimes, customer segmentation, and inspecting high-dimensional structure. They are not magic clustering algorithms; topology preservation and neighborhood choices matter.
 
