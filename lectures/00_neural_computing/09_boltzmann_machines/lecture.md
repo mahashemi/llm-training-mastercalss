@@ -21,21 +21,21 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Begin with an energy function rather than a neural-network layer. An energy-based model assigns lower energy to configurations it considers more compatible.
 
-For a restricted Boltzmann machine (RBM), let \(v\) be the visible units (the observed data), \(h\) the hidden units (latent features), \(a\) and \(b\) their biases, and \(W\) the connection weights. One common energy function is
+For a restricted Boltzmann machine (RBM), let $v$ be the visible units (the observed data), $h$ the hidden units (latent features), $a$ and $b$ their biases, and $W$ the connection weights. One common energy function is
 
-\[
+$$
 E(v,h)=-a^\top v-b^\top h-v^\top Wh.
-\]
+$$
 
-Think of energy as a compatibility score: configurations the model prefers have lower energy. Their probability is proportional to \(\exp(-E(v,h))\), after normalizing across possible configurations.
+Think of energy as a compatibility score: configurations the model prefers have lower energy. Their probability is proportional to $\exp(-E(v,h))$, after normalizing across possible configurations.
 
 The restriction—no visible-visible or hidden-hidden edges—makes conditional sampling tractable. For binary hidden units,
 
-\[
+$$
 P(h_j=1\mid v)=\sigma\!\left(b_j+\sum_i W_{ij}v_i\right).
-\]
+$$
 
-This says: given the visible data, calculate a weighted input for hidden unit \(j\), add its bias, and use the sigmoid to turn that score into the probability that the unit is on. Visible units have an analogous conditional distribution.
+This says: given the visible data, calculate a weighted input for hidden unit $j$, add its bias, and use the sigmoid to turn that score into the probability that the unit is on. Visible units have an analogous conditional distribution.
 
 Explain contrastive divergence: start from observed data, sample hidden states, reconstruct visible states, sample again, and use the difference between data and reconstruction statistics as an approximate learning signal.
 
@@ -94,18 +94,18 @@ That question connects statistical approximation directly to systems cost.
 
 For a restricted Boltzmann machine, one common energy function is
 
-\[
+$$
 E(v,h)=-a^\top v-b^\top h-v^\top Wh,
-\]
+$$
 
-where \(v\) is the visible vector, \(h\) the hidden vector, \(a,b\) are biases, and \(W\) connects visible to hidden units. Lower energy means the model regards that joint configuration as more compatible.
+where $v$ is the visible vector, $h$ the hidden vector, $a,b$ are biases, and $W$ connects visible to hidden units. Lower energy means the model regards that joint configuration as more compatible.
 
-For a one-visible, one-hidden toy model, set both biases to zero and \(W=1\). Then:
+For a one-visible, one-hidden toy model, set both biases to zero and $W=1$. Then:
 
-- \(E(1,1)=-1\), because the active visible and hidden units agree through the positive weight;
-- \(E(1,0)=0\), because the interaction term is zero.
+- $E(1,1)=-1$, because the active visible and hidden units agree through the positive weight;
+- $E(1,0)=0$, because the interaction term is zero.
 
-The unnormalized probability is proportional to \(e^{-E(v,h)}\), so the first configuration receives weight \(e^1\), while the second receives weight \(e^0=1\). This illustrates how the interaction changes relative preference. It is not a full probability calculation over every possible configuration.
+The unnormalized probability is proportional to $e^{-E(v,h)}$, so the first configuration receives weight $e^1$, while the second receives weight $e^0=1$. This illustrates how the interaction changes relative preference. It is not a full probability calculation over every possible configuration.
 
 ### Why contrastive divergence has two phases
 
@@ -118,43 +118,61 @@ A falling reconstruction error is useful diagnostic evidence, not proof that the
 
 ## Enumerate a one-visible, one-hidden RBM completely
 
-Let \(v,h\in\{0,1\}\), set both biases to zero, and let \(W=1\). The energy is \(E(v,h)=-vh\). We can list every possible joint configuration—there are only four:
+Let $v,h\in\{0,1\}$, set both biases to zero, and let $W=1$. The energy is $E(v,h)=-vh$. We can list every possible joint configuration—there are only four:
 
-| Visible \(v\) | Hidden \(h\) | Energy \(E(v,h)\) | Unnormalized weight \(e^{-E(v,h)}\) |
+| Visible $v$ | Hidden $h$ | Energy $E(v,h)$ | Unnormalized weight $e^{-E(v,h)}$ |
 |---:|---:|---:|---:|
 | 0 | 0 | 0 | 1 |
 | 0 | 1 | 0 | 1 |
 | 1 | 0 | 0 | 1 |
-| 1 | 1 | -1 | \(e\approx2.718\) |
+| 1 | 1 | -1 | $e\approx2.718$ |
 
 The partition function is the sum of these weights:
 
-\[
+$$
 Z=1+1+1+e\approx5.718.
-\]
+$$
 
-So the joint probability of \((v=1,h=1)\) is \(e/Z\approx0.475\); each of the other three configurations has probability \(1/Z\approx0.175\). The positive weight makes the jointly active configuration more probable, but it does not make it certain.
+So the joint probability of $(v=1,h=1)$ is $e/Z\approx0.475$; each of the other three configurations has probability $1/Z\approx0.175$. The positive weight makes the jointly active configuration more probable, but it does not make it certain.
 
 The conditional probability gives the sampling rule. With zero hidden bias,
 
-\[
+$$
 P(h=1\mid v)=\sigma(Wv).
-\]
+$$
 
-If \(v=0\), the probability is \(\sigma(0)=0.5\). If \(v=1\), it is \(\sigma(1)\approx0.731\). To perform a Gibbs transition, sample \(h\) from \(P(h\mid v)\), then sample \(v\) from \(P(v\mid h)\), and repeat. Each transition alternates between the two conditionals.
+If $v=0$, the probability is $\sigma(0)=0.5$. If $v=1$, it is $\sigma(1)\approx0.731$. To perform a Gibbs transition, sample $h$ from $P(h\mid v)$, then sample $v$ from $P(v\mid h)$, and repeat. Each transition alternates between the two conditionals.
+
+### The partition function: why exact probabilities become expensive
+
+To turn unnormalized weights into probabilities, the model needs the partition function
+
+$
+Z=\sum_{v\in\{0,1\}^{n_v}}\sum_{h\in\{0,1\}^{n_h}}e^{-E(v,h)}.
+$
+
+It sums over every possible visible/hidden configuration. With $n_v$ binary visible units and $n_h$ binary hidden units, there are $2^{n_v+n_h}$ joint configurations. The four-row toy example is easy to enumerate; a realistic RBM may have millions of configurations, making exact summation impractical. Sampling approximates the expectations needed for learning without explicitly enumerating the whole state space.
+
+The visible conditional mirrors the hidden conditional:
+
+$
+P(v_i=1\mid h)=\sigma\left(a_i+\sum_j W_{ij}h_j\right).
+$
+
+A Gibbs step samples hidden units given the current visible vector, then samples visible units given the new hidden vector. Repeating those two steps creates a Markov chain whose samples are used to approximate model statistics.
 
 ## Contrastive divergence as a difference of statistics
 
-For this tiny model, the positive-phase statistic for the weight is the data expectation \(\mathbb E_{\text{data}}[vh]\); the negative-phase statistic is the corresponding expectation under reconstructed/model samples. A schematic update is
+For this tiny model, the positive-phase statistic for the weight is the data expectation $\mathbb E_{\text{data}}[vh]$; the negative-phase statistic is the corresponding expectation under reconstructed/model samples. A schematic update is
 
-\[
+$$
 \Delta W\propto
 \underbrace{\mathbb E_{\text{data}}[vh]}_{\text{positive phase}}
 -
 \underbrace{\mathbb E_{\text{model}}[vh]}_{\text{negative phase}}.
-\]
+$$
 
-CD-\(k\) starts its negative-phase chain at observed examples and performs \(k\) Gibbs transitions. CD-1 is cheap but uses a short, generally biased approximation; increasing \(k\) spends more compute on the chain but does not guarantee a monotonic improvement in every finite training run.
+CD-$k$ starts its negative-phase chain at observed examples and performs $k$ Gibbs transitions. CD-1 is cheap but uses a short, generally biased approximation; increasing $k$ spends more compute on the chain but does not guarantee a monotonic improvement in every finite training run.
 
 ## How RBM layer-wise pretraining builds a DBN
 
@@ -206,6 +224,15 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 4. What is the simplest credible baseline?
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
+
+### Answers
+
+1. An RBM models a joint distribution over visible data and hidden features using an energy function.
+2. Lower energy gives greater unnormalized weight $e^{-E}$; the partition function normalizes those weights into probabilities.
+3. The restricted graph has no visible-visible or hidden-hidden edges, making the conditional distributions easy to sample.
+4. The positive phase measures data-driven statistics; the negative phase measures statistics from model samples. If they match exactly, their difference—and the corresponding schematic update—is zero.
+5. Contrastive divergence approximates the negative phase with a short Gibbs chain initialized from data, which saves compute but introduces bias.
+6. A lower reconstruction error alone does not prove distribution quality; inspect generated samples, diversity, held-out likelihood proxies where appropriate, and sensitivity to the number of Gibbs steps.
 
 ## Visual intuition
 
