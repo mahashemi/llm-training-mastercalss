@@ -26,9 +26,9 @@ The central difficulty is **credit assignment through delayed consequences**.
 
 Suppose the rewards after an action are $r_{t+1}=1$, $r_{t+2}=0$, and $r_{t+3}=2$, with discount factor $\gamma=0.9$. The return from time $t$ is
 
-$
+$$
 G_t=1+0.9(0)+0.9^2(2)=1+0+1.62=2.62.
-$
+$$
 
 The later reward still matters, but it contributes less than an equally sized immediate reward. The discount factor expresses how the task values delayed outcomes; it is not simply a tuning knob for making the score look good.
 
