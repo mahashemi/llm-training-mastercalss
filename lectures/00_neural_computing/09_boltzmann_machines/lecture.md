@@ -122,7 +122,11 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — energy and hidden structure
+## Visual intuition
+
+![An RBM learns by contrasting distributions](../../../visuals/course1/09-boltzmann-machine.svg)
+
+— energy and hidden structure
 
 An RBM assigns an energy to a visible/hidden configuration. Training adjusts weights and biases so observed data configurations become more compatible with the model than configurations produced by its own sampling process.
 
