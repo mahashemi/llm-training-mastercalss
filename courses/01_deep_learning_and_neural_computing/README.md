@@ -2,9 +2,23 @@
 
 **Purpose:** teach the ideas, mathematics, architectures, training dynamics, and experimental habits that make modern deep learning understandable rather than mysterious.
 
-**Instructor-led delivery:** [35-day teaching plan (70 contact hours)](./35_DAY_TEACHING_PLAN.md)
+**Instructor-led delivery:** [35-day teaching plan (70 contact hours)](./35_DAY_TEACHING_PLAN.md)  
+**Start here:** [Course roadmap](../../visuals/course1/course-roadmap.svg) · [Assessment breakdown](../../visuals/course1/assessment-breakdown.svg) · [Research-to-publication pathway](../../visuals/course1/research-publication-pathway.svg)  
+**Student research toolkit:** [LaTeX and paper-writing guide](../../docs/COURSE1_LATEX_AND_PUBLICATION_GUIDE.md)
 
 This is a **standalone course**. It is not a 12-item prerequisite checklist for the LLM course.
+
+## Your journey through the course
+
+This course is designed to help you move from *“I can run a neural-network notebook”* to *“I can ask a precise question, test it fairly, and communicate what the evidence supports.”* You do not need to begin with a brilliant idea or expensive hardware. You do need curiosity, careful records, and a willingness to discover that your first hypothesis was wrong.
+
+![Course roadmap](../../visuals/course1/course-roadmap.svg)
+
+![Assessment breakdown](../../visuals/course1/assessment-breakdown.svg)
+
+![Research-to-publication pathway](../../visuals/course1/research-publication-pathway.svg)
+
+In the first week you will browse the project catalogue, select a question, and start a proposal. Your project is developed throughout the course—not postponed until the final two days. You will also begin a separate critical study report and use LaTeX early, so research writing becomes a normal part of the workflow.
 
 ## What this course teaches
 
@@ -66,6 +80,19 @@ Chapter 10 introduces Transformers because they are the natural historical endpo
 ## Real-data thread
 
 The course repeatedly uses real datasets rather than isolated toy examples. The same experiment is revisited when useful so students learn to distinguish a property of an algorithm from a property of a dataset.
+
+## Assessment at a glance
+
+- **Assignments and project work — 40%**
+- **Critical study report — 15%**
+- **Midterm examination (Day 18) — 15%**
+- **Final examination (Day 35) — 30%**
+
+See the [assessment and milestone policy](../../docs/ASSESSMENT_AND_MASTERY.md) for deliverables, dates, and rubrics. Project work begins with a question and proposal, then grows through a baseline, controlled intervention, error analysis, and reproducible final package.
+
+## Start writing in LaTeX in Week 1
+
+Use the [LaTeX and publication guide](../../docs/COURSE1_LATEX_AND_PUBLICATION_GUIDE.md) to set up a paper project, manage references, and learn the structure used in computer-vision and machine-learning research. Start with the lightweight course template; switch to the current official CVPR or NeurIPS template only when the intended venue and its current author instructions are confirmed.
 
 ## Relationship to Course 2
 
