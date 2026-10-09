@@ -320,7 +320,9 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: VAE / GAN / diffusion](https://www.youtube.com/results?search_query=VAE+GAN+diffusion+deep+learning)
+**Recommended starting point:** [Variational Autoencoders: latent variables, ELBO, and reparameterization](https://www.youtube.com/watch?v=HBYQvKlaE0A)
+
+For additional coverage, [browse more GANs and diffusion models videos](https://www.youtube.com/results?search_query=GANs+and+diffusion+models).
 
 ## Navigation
 
