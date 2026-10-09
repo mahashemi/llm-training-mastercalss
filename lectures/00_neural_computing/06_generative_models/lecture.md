@@ -320,7 +320,11 @@ The notebook uses a real dataset or environment, records quantitative results, a
 
 ## Video companions
 
-[Video companions: VAE / GAN / diffusion](https://www.youtube.com/results?search_query=VAE+GAN+diffusion+deep+learning)
+**Start with the VAE:** [Understanding Variational Autoencoders (VAEs)](https://www.youtube.com/watch?v=HBYQvKlaE0A)
+
+These are different mechanisms, so use focused companions rather than assuming one video teaches all three:
+- [GANs: original paper and practical explanations](https://www.youtube.com/results?search_query=GAN+generative+adversarial+network+explained)
+- [Diffusion models: denoising and reverse sampling](https://www.youtube.com/results?search_query=diffusion+models+denoising+reverse+process+explained)
 
 ## Navigation
 
