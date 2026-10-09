@@ -123,17 +123,17 @@ Suppose the relevant gradient factor is approximately $0.8$ at each step.
 
 After 50 steps:
 
-$
+$$
 0.8^{50}\approx1.43\times10^{-5}.
-$
+$$
 
 The signal is tiny.
 
 If the factor is $1.2$:
 
-$
+$$
 1.2^{50}\approx9,100.
-$
+$$
 
 The signal can become enormous.
 
@@ -145,9 +145,9 @@ A gate can learn to preserve information rather than repeatedly transforming it.
 
 The LSTM cell-state update
 
-$
+$$
 c_t=f_t\odot c_{t-1}+i_t\odot\tilde c_t
-$
+$$
 
 contains an additive path.
 
