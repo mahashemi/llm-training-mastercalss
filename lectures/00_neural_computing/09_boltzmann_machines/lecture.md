@@ -21,13 +21,21 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Begin with an energy function rather than a neural-network layer. An energy-based model assigns lower energy to configurations it considers more compatible.
 
-For a restricted Boltzmann machine with visible v and hidden h:
-E(v,h) = -aᵀv - bᵀh - vᵀWh.
-The probability is proportional to exp(-E).
+For a restricted Boltzmann machine (RBM), let \(v\) be the visible units (the observed data), \(h\) the hidden units (latent features), \(a\) and \(b\) their biases, and \(W\) the connection weights. One common energy function is
 
-The restriction—no visible-visible or hidden-hidden edges—makes conditional sampling tractable:
-P(h_j=1|v)=σ(b_j+W_jv).
-Similarly for visible units.
+\[
+E(v,h)=-a^\top v-b^\top h-v^\top Wh.
+\]
+
+Think of energy as a compatibility score: configurations the model prefers have lower energy. Their probability is proportional to \(\exp(-E(v,h))\), after normalizing across possible configurations.
+
+The restriction—no visible-visible or hidden-hidden edges—makes conditional sampling tractable. For binary hidden units,
+
+\[
+P(h_j=1\mid v)=\sigma\!\left(b_j+\sum_i W_{ij}v_i\right).
+\]
+
+This says: given the visible data, calculate a weighted input for hidden unit \(j\), add its bias, and use the sigmoid to turn that score into the probability that the unit is on. Visible units have an analogous conditional distribution.
 
 Explain contrastive divergence: start from observed data, sample hidden states, reconstruct visible states, sample again, and use the difference between data and reconstruction statistics as an approximate learning signal.
 
