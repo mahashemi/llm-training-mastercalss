@@ -153,21 +153,27 @@ $$
 
 Rearranging gives
 
-$$
+$
 \hat y=(W_2W_1)x+(W_2b_1+b_2).
-$$
+$
 
-That is still a linear function of $x$.
+To see why, define a new combined weight $W=W_2W_1$ and a new combined bias $b=W_2b_1+b_2$. Then the whole network is just
+
+$
+\hat y=Wx+b.
+$
+
+It has exactly the form of a single affine layer. The dimensions must match: if $x$ has $d$ features, the hidden layer has $m$ units, and the output has $k$ units, then $W_1$ is $m\times d$, $W_2$ is $k\times m$, and $W=W_2W_1$ is $k\times d$. The two layers may have more parameters internally, but without a nonlinear activation their composition still reduces to one affine transformation.
 
 So stacking linear layers without nonlinearities does not give us the expressive power we want.
 
-A common activation is ReLU:
+A common activation is the **rectified linear unit (ReLU)**. To avoid renderer-specific operator macros, we write its name as ordinary upright text:
 
-$$
-\operatorname{ReLU}(a)=\max(0,a).
-$$
+$
+\mathrm{ReLU}(a)=\max(0,a).
+$
 
-It keeps positive values and changes negative values to zero.
+This means: if $a$ is positive, keep it; if $a$ is negative, output zero. For example, $\mathrm{ReLU}(3)=3$ and $\mathrm{ReLU}(-2)=0$. At exactly zero, implementations use a chosen derivative convention (commonly zero); this single point does not change the function's overall purpose.
 
 ## 4. Loss: turning a prediction into a number we can optimize
 
@@ -243,7 +249,7 @@ W_1
 \rightarrow L.
 $$
 
-For a **single scalar path** through the network, the chain rule can be written as a product of local derivatives:
+For our one-input, one-hidden-unit, one-output example, each quantity on this path is a scalar, so the chain rule can be written as a product of local derivatives:
 
 $$
 \frac{dL}{dW_1}
@@ -255,7 +261,7 @@ $$
 \frac{dz_1}{dW_1}.
 $$
 
-This product is exact for the scalar example we will calculate below. In a real network, weights, activations, and gradients are usually vectors or matrices. The same chain rule still applies, but the local derivatives become Jacobians and the products become dimensionally valid matrix/vector products. Automatic differentiation computes the needed products efficiently without usually constructing a giant Jacobian explicitly.
+This product is exact for the scalar example we calculate below. In a real network, a weight matrix contains many parameters and the hidden activation contains many values. The chain rule still applies, but the derivatives must respect those shapes: backpropagation combines vector-Jacobian products rather than multiplying scalar fractions blindly. Automatic differentiation computes the required products efficiently without usually constructing a giant Jacobian explicitly.
 
 ### Read the equation in English
 
