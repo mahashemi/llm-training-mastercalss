@@ -170,9 +170,9 @@ The return can be split into:
 
 That gives the Bellman idea:
 
-$
+$$
 Q^*(s,a)=\mathbb E[r+\gamma\max_{a'}Q^*(s',a')].
-$
+$$
 
 The equation says:
 

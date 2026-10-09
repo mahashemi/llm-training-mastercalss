@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Recurrent Architectures and Time-Series Forecasting
+# Course 1 · Chapter 8 — Recurrent Architectures and Time-Series Forecasting
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)

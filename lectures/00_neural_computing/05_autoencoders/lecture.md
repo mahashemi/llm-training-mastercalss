@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Autoencoders: Learning Useful Representations
+# Course 1 · Chapter 5 — Autoencoders: Learning Useful Representations
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)

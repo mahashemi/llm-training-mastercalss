@@ -85,3 +85,12 @@ The invariant remains:
 - Made the gradient vector explicit as the list of partial derivatives for each weight, rather than leaving \(\nabla_w L\) unexplained as a standalone symbol.
 - Corrected the chapter title to identify it as Chapter 1 and removed the duplicate Course 1 home link from its navigation.
 - Audited the edited source for unmatched display-math delimiters, standalone single-dollar display delimiters, and math expressions in headings; no such issues remain in the edited file.
+
+## Course 1 cross-chapter math and attention follow-up — 2026-10-09
+
+- The first audit caught malformed standalone single-dollar display delimiters in Chapters 4, 6, 7, 10, and 11. These were restored to proper display-math delimiters.
+- Chapters 2–10 now have explicit chapter numbers in their top-level headings; Chapter 1's inline-math headings and duplicate home link were corrected in [PR #28](https://github.com/mahashemi/llm-training-mastercalss/pull/28).
+- Chapter 10 now walks through multi-head attention tensor shapes using \(B=2\), \(T=3\), \(d_{\mathrm{model}}=4\), and \(H=2\), from projections through per-head scores, concatenation, and output projection.
+- The attention lab now isolates BERT-style bidirectional versus GPT-style causal information access using a shared illustrative score matrix, with assertions checking that the causal row assigns zero probability to future positions.
+- The attention lab change requires fresh clean-kernel validation after merge. The prior successful 12/12 run validates the merged SOM changes, not this newer attention-lab addition.
+

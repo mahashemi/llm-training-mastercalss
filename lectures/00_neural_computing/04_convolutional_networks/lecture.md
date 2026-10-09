@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Convolutional Networks, Residual Learning, and Dense Connections
+# Course 1 · Chapter 4 — Convolutional Networks, Residual Learning, and Dense Connections
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
@@ -70,17 +70,17 @@ For a $28\times28$ grayscale image, compare:
 
 The dense layer has:
 
-$
+$$
 784\times64+64=50,240
-$
+$$
 
 parameters.
 
 The convolution has:
 
-$
+$$
 16(3\times3+1)=160.
-$
+$$
 
 The dramatic difference comes from two assumptions:
 
@@ -105,9 +105,9 @@ If a block learns $F(x)$, ordinary learning asks it to produce the entire transf
 
 A residual block asks it to produce a correction:
 
-$
+$$
 F(x)=y-x.
-$
+$$
 
 If the best transformation is close to identity, the desired correction is small.
 

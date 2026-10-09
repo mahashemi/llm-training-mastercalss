@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Boltzmann Machines, RBMs, and Deep Belief Networks
+# Course 1 · Chapter 9 — Boltzmann Machines, RBMs, and Deep Belief Networks
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)

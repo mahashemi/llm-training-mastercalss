@@ -1,4 +1,4 @@
-# Course 1 · Chapter — Attention and the Transformer Bridge
+# Course 1 · Chapter 10 — Attention and the Transformer Bridge
 
 **Course:** Deep Learning & Neural Computing Foundations  
 **Primary laboratory:** [Open the executable laboratory](./lab.ipynb)
@@ -79,9 +79,9 @@ For one query:
 
 If the weights are $[0.7,0.2,0.1]$, the output is simply:
 
-$
+$$
 0.7v_1+0.2v_2+0.1v_3.
-$
+$$
 
 So attention is not magic memory. It is **content-dependent weighted information retrieval inside the sequence**.
 
@@ -93,13 +93,13 @@ For next-token training, that would expose information that the model is suppose
 
 With a causal mask, the attention matrix becomes triangular:
 
-$
+$$
 \begin{bmatrix}
 \times&0&0\\
 \times&\times&0\\
 \times&\times&\times
 \end{bmatrix}.
-$
+$$
 
 The zeros mean “future information is unavailable.”
 
@@ -190,6 +190,67 @@ Here \(x_{<t}\) means all tokens before position \(t\). The causal attention mas
 The key distinction is not that one model “uses attention” and the other does not. Both can use Transformer attention. The difference is **which tokens are visible to each prediction and which targets receive loss**. Masked prediction is useful for learning bidirectional representations; causal next-token prediction directly matches left-to-right text generation. These objectives create different training behavior and should not be treated as interchangeable.
 
 **Check yourself:** If the target is *sat*, what context is available to a GPT-style model? What extra information can a BERT-style masked model use when *cat* is masked in the middle of the sentence?
+
+## Multi-head attention: a complete tensor-shape example
+
+The single-head example used one query/key/value space. A Transformer usually runs several attention heads in parallel so that different learned projections can represent different relationships. Let us track every dimension without needing a large model.
+
+Choose these small dimensions:
+
+- batch size \(B=2\): two examples processed together;
+- sequence length \(T=3\): three tokens per example;
+- model width \(d_{\text{model}}=4\): four numbers represent each token;
+- number of heads \(H=2\): two attention calculations in parallel;
+- head width \(d_k=d_v=2\): each head uses two-dimensional queries, keys, and values.
+
+The input tensor is
+
+$$
+X\in\mathbb R^{B\times T\times d_{\text{model}}}
+=\mathbb R^{2\times3\times4}.
+$$
+
+First, learned projection matrices turn each token representation into queries, keys, and values. For this example, each projection maps four features to four features:
+
+$$
+W_Q,W_K,W_V\in\mathbb R^{4\times4},
+\qquad
+Q=XW_Q,\ K=XW_K,\ V=XW_V.
+$$
+
+Therefore \(Q\), \(K\), and \(V\) each have shape \((2,3,4)\). The model then splits the final dimension of four into two heads of width two and moves the head dimension next to the batch dimension:
+
+$$
+(B,T,4)\rightarrow(B,T,H,d_k)\rightarrow(B,H,T,d_k).
+$$
+
+After splitting, each of \(Q\), \(K\), and \(V\) has shape \((2,2,3,2)\). Within each head, the key matrix is transposed across its final two dimensions. The score calculation is
+
+$$
+QK^\top:
+(2,2,3,2)\times(2,2,2,3)
+\rightarrow(2,2,3,3).
+$$
+
+Each head now has a \(3\times3\) score matrix for every example: each of the three query tokens scores all three key positions. Scale the scores by \(\sqrt{d_k}=\sqrt2\), apply softmax over the last axis, and multiply by that head's values:
+
+$$
+\operatorname{softmax}\left(\frac{QK^\top}{\sqrt2}\right)V
+\rightarrow(2,2,3,2).
+$$
+
+Finally, move the head dimension back next to the feature dimension, concatenate the two heads, and apply the output projection:
+
+$$
+(2,2,3,2)\rightarrow(2,3,2,2)
+\rightarrow(2,3,4)\rightarrow(2,3,4).
+$$
+
+The last projection changes the combined representation using learned weights; it does not change the tensor shape in this example.
+
+**Shape sanity check:** the sequence length stays three throughout attention. The two heads each return two features, so concatenating them restores the model width of four. If your implementation produces a final feature width of two here, you probably forgot to concatenate the heads; if it produces a sequence length of two, check the reshape or transpose.
+
+Multiple heads do not automatically mean that each head learns a different useful relationship. They are separate learned subspaces that *can* specialize; whether they do so usefully is an empirical question.
 
 ## Core concepts
 
