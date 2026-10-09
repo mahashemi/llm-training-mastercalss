@@ -21,11 +21,11 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Start with a sequence whose interpretation depends on earlier context. A recurrent model maintains a hidden state:
 
-\[
+$$
 h_t=\phi(W_xx_t+W_hh_{t-1}+b).
-\]
+$$
 
-Read this from right to left as a recipe: combine the current input \(x_t\) with the previous memory \(h_{t-1}\), apply learned weights \(W_x\) and \(W_h\), add bias \(b\), then pass the result through activation \(\phi\) to obtain the new state \(h_t\). The same weights are reused at every time step.
+Read this from right to left as a recipe: combine the current input $x_t$ with the previous memory $h_{t-1}$, apply learned weights $W_x$ and $W_h$, add bias $b$, then pass the result through activation $\phi$ to obtain the new state $h_t$. The same weights are reused at every time step.
 
 Unroll the recurrence for three tokens and calculate the hidden state symbolically. This makes an important fact visible: the gradient from a later time step passes through repeated transformations.
 
@@ -33,69 +33,69 @@ Explain vanishing and exploding gradients. If the relevant Jacobian repeatedly s
 
 An LSTM introduces gates—learned values between 0 and 1—that regulate information flow. A simplified view is
 
-\[
+$$
 i_t=\sigma(\cdots),\qquad f_t=\sigma(\cdots),\qquad o_t=\sigma(\cdots).
-\]
+$$
 
-The input gate \(i_t\) controls what new information may enter the memory, the forget gate \(f_t\) controls what old memory to retain, and the output gate \(o_t\) controls what part of the memory is exposed as the hidden state. The sigmoid \(\sigma\) maps each gate value into the interval \((0,1)\). The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations and a numerical cell-state trace follow below.
+The input gate $i_t$ controls what new information may enter the memory, the forget gate $f_t$ controls what old memory to retain, and the output gate $o_t$ controls what part of the memory is exposed as the hidden state. The sigmoid $\sigma$ maps each gate value into the interval $(0,1)$. The ellipses stand for learned affine combinations of the current input and previous hidden state; the full equations and a numerical cell-state trace follow below.
 
 ### Full LSTM equations: what the gates actually compute
 
 The ellipses above hide learned weighted sums. In one common LSTM convention, the gates and candidate memory are
 
-\[
+$$
 \begin{aligned}
 i_t &= \sigma(W_i x_t+U_i h_{t-1}+b_i),\\
 f_t &= \sigma(W_f x_t+U_f h_{t-1}+b_f),\\
 o_t &= \sigma(W_o x_t+U_o h_{t-1}+b_o),\\
 g_t &= \tanh(W_g x_t+U_g h_{t-1}+b_g).
 \end{aligned}
-\]
+$$
 
-Here \(x_t\) is the current input, \(h_{t-1}\) is the previous exposed hidden state, each \(W\) and \(U\) is a learned weight matrix, and each \(b\) is a bias. The sigmoid makes each gate a value between 0 and 1; \(\tanh\) makes candidate content lie between -1 and 1.
+Here $x_t$ is the current input, $h_{t-1}$ is the previous exposed hidden state, each $W$ and $U$ is a learned weight matrix, and each $b$ is a bias. The sigmoid makes each gate a value between 0 and 1; $\tanh$ makes candidate content lie between -1 and 1.
 
 The cell memory and hidden state are then updated:
 
-\[
+$$
 c_t=f_t\odot c_{t-1}+i_t\odot g_t,
 \qquad
 h_t=o_t\odot\tanh(c_t).
-\]
+$$
 
-The symbol \(\odot\) means element-by-element multiplication. Read the cell update as **keep some old memory + write some candidate memory**. The output gate decides how much of the updated cell to expose as \(h_t\). Implementations differ in details and gate ordering, but this is a standard formulation.
+The symbol $\odot$ means element-by-element multiplication. Read the cell update as **keep some old memory + write some candidate memory**. The output gate decides how much of the updated cell to expose as $h_t$. Implementations differ in details and gate ordering, but this is a standard formulation.
 
 #### Trace one cell update by hand
 
-For one memory component, suppose the previous cell value is \(c_{t-1}=0.5\), the forget gate is \(f_t=0.8\), the input gate is \(i_t=0.25\), and the candidate is \(g_t=0.4\). Then
+For one memory component, suppose the previous cell value is $c_{t-1}=0.5$, the forget gate is $f_t=0.8$, the input gate is $i_t=0.25$, and the candidate is $g_t=0.4$. Then
 
-\[
+$$
 c_t=(0.8)(0.5)+(0.25)(0.4)=0.4+0.1=0.5.
-\]
+$$
 
-The old memory contributes 0.4 and the new candidate contributes 0.1. If \(o_t=0.9\), the exposed state is
+The old memory contributes 0.4 and the new candidate contributes 0.1. If $o_t=0.9$, the exposed state is
 
-\[
+$$
 h_t=0.9\tanh(0.5)\approx0.416.
-\]
+$$
 
 This is the point of the gates: the model learns separate controls for retaining memory, writing candidate content, and exposing information.
 
 ### GRU equations and how they differ
 
-A common GRU formulation uses an update gate \(z_t\), reset gate \(r_t\), and candidate state \(\tilde h_t\):
+A common GRU formulation uses an update gate $z_t$, reset gate $r_t$, and candidate state $\tilde h_t$:
 
-\[
+$$
 \begin{aligned}
 z_t &= \sigma(W_zx_t+U_zh_{t-1}+b_z),\\
 r_t &= \sigma(W_rx_t+U_rh_{t-1}+b_r),\\
 \tilde h_t &= \tanh\!\left(W_hx_t+U_h(r_t\odot h_{t-1})+b_h\right),\\
 h_t &= (1-z_t)\odot h_{t-1}+z_t\odot\tilde h_t.
 \end{aligned}
-\]
+$$
 
-In this convention, \(z_t\) mixes the previous state with the candidate state, while \(r_t\) controls how much previous state contributes when forming the candidate. Some libraries use the complementary update-gate convention, so always check the implementation's definition before comparing equations.
+In this convention, $z_t$ mixes the previous state with the candidate state, while $r_t$ controls how much previous state contributes when forming the candidate. Some libraries use the complementary update-gate convention, so always check the implementation's definition before comparing equations.
 
-A GRU has no separate cell state \(c_t\) or output gate. This can make it simpler, but fewer gates do not guarantee better performance. Compare RNN, LSTM, and GRU with the same data split, parameter/training budget, and repeated seeds.
+A GRU has no separate cell state $c_t$ or output gate. This can make it simpler, but fewer gates do not guarantee better performance. Compare RNN, LSTM, and GRU with the same data split, parameter/training budget, and repeated seeds.
 
 
 
@@ -166,32 +166,45 @@ Keep the important variables fixed, vary the recurrent cell, and repeat across s
 
 A simple RNN updates its hidden state using the current input and previous state:
 
-\[
+$$
 h_t=\tanh(0.5x_t+0.8h_{t-1}).
-\]
+$$
 
-Let \(h_0=0\) and feed \(x_1=1, x_2=0, x_3=1\).
+Let $h_0=0$ and feed $x_1=1, x_2=0, x_3=1$.
 
-- Step 1: \(h_1=\tanh(0.5)\approx0.462\).
-- Step 2: \(h_2=\tanh(0+0.8\times0.462)\approx0.354\).
-- Step 3: \(h_3=\tanh(0.5+0.8\times0.354)\approx0.654\).
+- Step 1: $h_1=\tanh(0.5)\approx0.462$.
+- Step 2: $h_2=\tanh(0+0.8\times0.462)\approx0.354$.
+- Step 3: $h_3=\tanh(0.5+0.8\times0.354)\approx0.654$.
 
 The second input is zero, but the state remains nonzero because it carries information from the first step. This is useful memory, but it is also a path through which gradients must travel.
 
 ### Why long-range learning is hard
 
-If a simplified gradient multiplier is \(0.8\) at each step, after 10 repeated steps its contribution is \(0.8^{10}\approx0.107\); after 50 steps it is \(0.8^{50}\approx1.43\times10^{-5}\). If the multiplier is \(1.2\), then \(1.2^{50}\approx9,100\). Repeated shrinkage makes early events hard to learn; repeated growth can destabilize updates. Real RNN gradients involve matrix Jacobians, so these scalar examples illustrate the mechanism rather than model every case.
+If a simplified gradient multiplier is $0.8$ at each step, after 10 repeated steps its contribution is $0.8^{10}\approx0.107$; after 50 steps it is $0.8^{50}\approx1.43\times10^{-5}$. If the multiplier is $1.2$, then $1.2^{50}\approx9,100$. Repeated shrinkage makes early events hard to learn; repeated growth can destabilize updates. Real RNN gradients involve matrix Jacobians, so these scalar examples illustrate the mechanism rather than model every case.
 
 LSTM introduces a cell-state path:
 
-\[
+$$
 c_t=f_t\odot c_{t-1}+i_t\odot\tilde{c}_t.
-\]
+$$
 
-The forget gate \(f_t\) controls retained memory; the input gate \(i_t\) controls new content. When \(f_t\) is near 1, information can persist without being repeatedly overwritten. GRU uses a simpler gating design with related goals.
+The forget gate $f_t$ controls retained memory; the input gate $i_t$ controls new content. When $f_t$ is near 1, information can persist without being repeatedly overwritten. GRU uses a simpler gating design with related goals.
 
 **Check yourself:** if the same input sequence is processed twice from different initial states, should the hidden states necessarily match? Explain which condition would make them match and why this matters when resetting state between independent sequences.
 
+
+## Failure analysis: when recurrence stops helping
+
+A recurrent model can fail for different reasons that require different responses:
+
+- **Long dependencies are forgotten:** plot performance against dependency length and compare the vanilla RNN with LSTM/GRU. Do not infer vanishing gradients from accuracy alone; inspect gradient norms or controlled synthetic tasks too.
+- **Training becomes unstable:** log gradient norms and loss; gradient clipping may limit extreme updates, but it cannot restore information that has already vanished.
+- **State leaks across unrelated examples:** reset the hidden/cell state at sequence boundaries unless the examples are intentionally contiguous streams. Otherwise the model can use information from a previous sample.
+- **A gated model appears better:** compare parameter counts, training steps, and tuning budget; the extra capacity or optimization may explain part of the gain.
+
+### Answer to the state-reset question
+
+The same input sequence does **not** necessarily produce the same hidden states from different initial states: the recurrence explicitly depends on $h_0$ (and, for LSTM, $c_0$). With identical inputs, parameters, and initial states, a deterministic evaluation pass should reproduce the same states. Resetting state is therefore part of the experimental protocol, not just a coding detail.
 
 ## Core concepts
 
@@ -232,6 +245,15 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 4. What is the simplest credible baseline?
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
+
+### Answers
+
+1. An RNN updates a hidden state using the current input and previous state; the same transition parameters are reused over time.
+2. Vanishing gradients shrink signals through repeated Jacobian products; exploding gradients grow them and can destabilize optimization.
+3. The LSTM forget gate controls retained cell memory, the input gate controls candidate content written, and the output gate controls exposed state.
+4. A GRU uses update/reset gates and a candidate state but has no separate LSTM-style cell state; exact gate conventions vary by implementation.
+5. Compare at a declared budget, test a task with controlled dependency lengths, and inspect gradient behavior as well as predictive quality.
+6. The initial state influences later states, so state must be reset or deliberately carried according to the real sequence boundaries.
 
 ## Visual intuition
 
