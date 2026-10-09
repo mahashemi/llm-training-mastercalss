@@ -136,7 +136,13 @@ Every learner produces a **mini research package**: hypothesis, related-work not
 5. Which metric and split answer the research question?
 6. What failure would falsify your hypothesis?
 
-## Visual intuition — recurrent state and gated memory
+## Visual intuition
+
+![Recurrent networks carry state through time](../../../visuals/course1/07-recurrent-networks.svg)
+
+*Figure: Each step reads the current input and updates a memory state.*
+
+— recurrent state and gated memory
 
 A recurrent network reuses the same cell at each time step. The hidden state carries information forward. LSTM and GRU add gates that control how much information is retained, overwritten, or exposed.
 
