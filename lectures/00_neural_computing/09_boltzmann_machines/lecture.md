@@ -145,19 +145,6 @@ flowchart TB
 
 The restricted structure matters: there are no visible-visible or hidden-hidden connections, which makes the conditional distributions easier to sample. Contrastive divergence is an approximation; it is not exact maximum-likelihood training.
 
-## Laboratory
-
-The notebook is intentionally part of this lecture. It uses a real dataset and requires a baseline, controlled intervention, ablation/error analysis, and a paper-ready result rather than a “hello world” demo.
-
-
-
-
-
-
-[← Previous](../08_sequence_architectures_and_forecasting/lecture.md) · [Course 1 home](../README.md) · [Continue to Course 2 →](../../02_llm_engineering_and_training/README.md)
-
-</div>
-
 ## Laboratory — run the experiment end to end
 
 **[Open the executable laboratory](./lab.ipynb)**
