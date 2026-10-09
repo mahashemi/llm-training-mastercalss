@@ -456,9 +456,9 @@ These methods differ in their update rule—not in the loss they are trying to m
 
 Feature scaling changes the numerical units seen by the optimizer. If one feature ranges from 0 to 1 and another ranges from 0 to 100,000, their contributions can create badly conditioned optimization. Standardization uses
 
-$
+$$
 x'=\frac{x-\mu_{\mathrm{train}}}{\sigma_{\mathrm{train}}}.
-$
+$$
 
 The mean and standard deviation must be estimated from training data only, then reused unchanged for validation and test data. Fitting the scaler on all examples leaks information from the held-out set.
 
@@ -468,9 +468,9 @@ Batch normalization instead normalizes intermediate activations using batch stat
 
 Weight decay adds a penalty for large weights, commonly written
 
-$
+$$
 \mathcal L_{\mathrm{total}}=\mathcal L_{\mathrm{data}}+\lambda\|w\|_2^2.
-$
+$$
 
 The coefficient $\lambda$ controls the trade-off: a stronger penalty may reduce overfitting but can also underfit. Dropout randomly masks some activations during training, discouraging the network from depending too heavily on one path. Neither technique is guaranteed to help; choose its strength using validation data, not the final test set.
 
