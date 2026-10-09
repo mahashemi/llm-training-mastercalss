@@ -70,3 +70,9 @@ The invariant remains:
 - Chapter 11 now introduces policy-gradient objectives and distinguishes direct policy learning from DQN's value-based approach.
 - These are lecture improvements, not proof that every associated lab covers each concept. The [35-day readiness audit](COURSE1_35_DAY_READINESS_AUDIT.md) records the remaining lab-verification gates.
 
+## Course 1 SOM lab update — 2026-10-09
+
+- Chapter 3's lab now fits feature scaling on the training partition, evaluates prototype/SOM quantization on held-out examples, and includes an explicit growing 1-D SOM-family demonstration with a capacity-vs-error comparison.
+- The growing-map example is clearly labeled educational and variant-specific; it is not presented as a canonical implementation of every Evolving SOM algorithm.
+- Because notebook code changed, this branch requires a fresh clean-kernel execution check before merge. The prior 12/12 execution run does not validate this new version.
+
