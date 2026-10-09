@@ -92,25 +92,33 @@ The invariant remains:
 - Chapters 2–10 now have explicit chapter numbers in their top-level headings; Chapter 1's inline-math headings and duplicate home link were corrected in [PR #28](https://github.com/mahashemi/llm-training-mastercalss/pull/28).
 - Chapter 10 now walks through multi-head attention tensor shapes using \(B=2\), \(T=3\), \(d_{\mathrm{model}}=4\), and \(H=2\), from projections through per-head scores, concatenation, and output projection.
 - The attention lab now isolates BERT-style bidirectional versus GPT-style causal information access using a shared illustrative score matrix, with assertions checking that the causal row assigns zero probability to future positions.
-- The attention lab change requires fresh clean-kernel validation after merge. The prior successful 12/12 run validates the merged SOM changes, not this newer attention-lab addition.
+- The updated attention lab passed clean-kernel execution in [full run #37915074150](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915074150), which completed all 12 jobs successfully and published executed notebooks.
 
 ## Course 1 controlled CNN experiment — 2026-10-09
 
 - Chapter 4's lab now compares plain and residual convolutional blocks with the same learned layers and parameter count. For each of three seeds, both variants use the same initialization and minibatch order.
 - The notebook records per-epoch training loss, final held-out loss/accuracy, and seed variability, with plots for optimization curves and final accuracy.
-- This experiment is intentionally modest; a fresh clean-kernel run is required after merge, and it does not yet constitute a full DenseNet-versus-ResNet benchmark.
+- The updated CNN lab's clean-kernel job passed in [run #37915247406](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915247406); the full 12-job workflow was still in progress at the time of this ledger update. This experiment is intentionally modest and does not yet constitute a full DenseNet-versus-ResNet benchmark.
 
 ## Course 1 generative objective and metric pass — 2026-10-09
 
 - Chapter 6 now works through a numeric GAN discriminator loss and non-saturating generator loss, emphasizing that neither is a direct sample-quality or mode-coverage score.
 - The GAN lab reports generated spread, fractions near each mode in its two-mode toy distribution, an explicit two-mode coverage fraction, update count, and environment-specific training time.
 - The VAE and diffusion sections already include worked numeric objective/noising examples; the readiness audit now distinguishes those from the remaining need for a defensible sample-fidelity evaluation.
-- Notebook code changed in this pass; a fresh clean-kernel run is required before treating these new metrics as execution-verified.
+- The updated GAN lab's clean-kernel job passed in [run #37915461396](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915461396); that full workflow was still in progress at the time of this ledger update.
 
 ## Course 1 autoencoder regularization and representation pass — 2026-10-09
 
 - Chapter 5 now defines sparse and contractive autoencoder objectives and works a numeric example for each penalty.
 - The lab now freezes a trained encoder and evaluates latent vectors with a logistic-regression linear probe. It compares the trained encoder with raw pixels and an untrained random encoder using the same train/test examples.
 - The lab uses a fixed seed for the baseline autoencoder and fits feature scaling only within each probe's training data via a pipeline.
-- This notebook code change requires a fresh clean-kernel run after merge. The linear-probe comparison is diagnostic and still needs repeated-seed uncertainty analysis.
+- The updated autoencoder lab was still running its clean-kernel job in [run #37915707503](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915707503) at the time of this ledger update. The linear-probe comparison is diagnostic and still needs repeated-seed uncertainty analysis.
 
+
+
+## Validation ledger refresh — 2026-10-09
+
+- **Attention lab:** all 12 notebooks passed in full run [#37915074150](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915074150), including the BERT/GPT visibility assertions.
+- **CNN lab:** the updated plain/residual experiment's individual job passed in run [#37915247406](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915247406); the complete workflow was still running.
+- **GAN lab:** the updated toy mode-coverage experiment's individual job passed in run [#37915461396](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915461396); the complete workflow was still running.
+- **Autoencoder lab:** the updated frozen-encoder probe's individual job was still running in [#37915707503](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37915707503). Do not mark it execution-verified until its job completes successfully.
