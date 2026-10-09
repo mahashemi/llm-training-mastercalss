@@ -27,10 +27,16 @@ Suppose we want the representation of “published” to use information about �
 
 > Which positions should this position directly use right now?
 
-Given queries Q, keys K, and values V:
-Attention(Q,K,V)=softmax(QKᵀ/√d_k)V.
+Given queries \(Q\), keys \(K\), and values \(V\), scaled dot-product attention is
 
-Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token t cannot use future tokens during autoregressive language modeling.
+\[
+\operatorname{Attention}(Q,K,V)=
+\operatorname{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
+\]
+
+Conceptually, \(QK^\top\) scores how strongly each token's query matches each token's key. Dividing by \(\sqrt{d_k}\) controls the scale of those scores as the key dimension grows. Softmax turns each row of scores into nonnegative weights that sum to 1. Multiplying those weights by \(V\) produces a weighted mixture of the information carried by the tokens.
+
+Use a three-token numerical example and calculate one attention row. Then apply a causal mask and show why token \(t\) cannot use future tokens during autoregressive language modeling.
 
 Explain the roles separately:
 - Q: what this position is looking for;

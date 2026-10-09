@@ -21,18 +21,31 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Start with the image problem: a detector for an edge should not need a completely different parameter for every pixel location. Convolution introduces a useful inductive bias: the same local detector can be reused across positions.
 
-For a 1-D illustration,
-y_i = Σ_k w_k x_{i+k}.
-In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
+For a 1-D illustration, the output at position \(i\) is a weighted sum of nearby input values:
+
+\[
+y_i=\sum_k w_k x_{i+k}.
+\]
+
+Here \(x_{i+k}\) is an input value in the local window, \(w_k\) is the learned weight applied to it, and the sum combines those weighted values into one output. In 2-D the same idea becomes a sliding kernel over height and width. A feature map therefore answers questions such as “where does this learned pattern occur?”
 
 Explain stride, padding, receptive field, channels, and parameter sharing with a 5×5 image and a 3×3 kernel. Count the parameters explicitly and compare them with a fully connected layer.
 
 Then explain depth: early layers can detect edges/textures, later layers can combine them into more complex patterns. Residual networks change the optimization problem by learning a residual:
-y = F(x) + x.
-The shortcut gives information and gradients a direct path.
+
+\[
+y=F(x)+x.
+\]
+
+Here \(x\) is the incoming representation, \(F(x)\) is the learned correction, and \(y\) is the output. The shortcut carries \(x\) directly to the addition, giving information and gradients a direct path.
 
 Dense networks instead concatenate earlier representations:
-x_l = H_l([x_0,...,x_{l-1}]).
+
+\[
+x_\ell=H_\ell([x_0,\ldots,x_{\ell-1}]).
+\]
+
+The brackets mean “join these feature tensors along the feature/channel dimension,” not add them.
 
 Real connection: CNNs power visual inspection, medical imaging, OCR, satellite imagery, and many multimodal encoders.
 

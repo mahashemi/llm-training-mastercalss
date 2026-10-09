@@ -258,7 +258,9 @@ A learner is ready for Course 2 when they can:
 
 ## Video companions
 
-[Video companions: research methods for deep learning](https://www.youtube.com/results?search_query=deep+learning+research+experiment+lecture)
+Use these as methodological companions rather than substitutes for running the experiment:
+- [Deep learning experiment design, ablations, and reproducibility](https://www.youtube.com/results?search_query=deep+learning+experiment+design+ablation+reproducibility)
+- [How to read and critically evaluate machine-learning papers](https://www.youtube.com/results?search_query=how+to+read+machine+learning+research+papers+critically)
 
 ## Navigation
 
