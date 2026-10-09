@@ -160,3 +160,10 @@ The invariant remains:
 - The RBM lab passed structural validation in [run #37916621548](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916621548); full-suite execution including the corrected Gibbs chain is pending in [run #37916681821](https://github.com/mahashemi/llm-training-mastercalss/actions/runs/37916681821).
 - Keep execution and pedagogical completeness as separate gates. Structural validation checks notebook structure; clean-kernel execution checks runtime behavior; neither alone establishes statistical robustness or full instructor readiness.
 
+## Course 1 optimization dynamics pass — 2026-10-09
+
+- Chapter 2 now explains why initialization must break symmetry, how SGD/momentum/Adam differ, why data normalization must be fit on training data only, and how weight decay/dropout affect the objective or training behavior.
+- The lab adds two controlled interventions: SGD versus Adam from identical MLP weights, and Adam with weight decay disabled versus enabled from identical weights. Architecture, split, full-batch order, and epoch budget are held fixed; learning rates are explicit.
+- The new experiment is a single-seed teaching comparison, not an optimizer leaderboard. The readiness audit requires repeated seeds and validation-only hyperparameter tuning.
+- Notebook code changed; fresh clean-kernel execution is required after merge.
+
