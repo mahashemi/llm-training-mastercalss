@@ -320,12 +320,7 @@ For the vector of weights $w$,
 
 $$
 \nabla_w L =
-\begin{bmatrix}
-\frac{\partial L}{\partial w_1}\\
-\frac{\partial L}{\partial w_2}\\
-\vdots\\
-\frac{\partial L}{\partial w_d}
-\end{bmatrix}
+\left[\frac{\partial L}{\partial w_1},\frac{\partial L}{\partial w_2},\ldots,\frac{\partial L}{\partial w_d}\right]^{\top}
 $$
 
 means:
@@ -483,10 +478,7 @@ $$
 Substitute the first equation into the second:
 
 $$
-\begin{aligned}
-h_2 &= W_2(W_1x+b_1)+b_2\\
-&= (W_2W_1)x+(W_2b_1+b_2).
-\end{aligned}
+h_2 = W_2(W_1x+b_1)+b_2 = (W_2W_1)x+(W_2b_1+b_2).
 $$
 
 The result is still one **affine** transformation of $x$: it has the form $Ax+c$, where $A=W_2W_1$ and $c=W_2b_1+b_2$. (An affine function is a linear transformation plus a constant offset.) Adding more linear/affine layers only changes the effective matrix and bias; it does not create a more expressive kind of input-output function.
@@ -494,10 +486,20 @@ The result is still one **affine** transformation of $x$: it has the form $Ax+c$
 Now put a nonlinear activation between the layers:
 
 $$
-h_2=W_2\,\phi(W_1x+b_1)+b_2.
+h_2 = W_2\,\phi(W_1x+b_1)+b_2.
 $$
 
-In general, this composition cannot be represented by one affine transformation $Ax+c$. For example, ReLU bends the mapping at the point where its input crosses zero: values below zero are mapped to zero, while positive values pass through. That input-dependent bend is something a single affine transformation cannot reproduce over the whole input range. Some particular settings of the weights can still make a nonlinear network behave linearly, but the architecture is no longer restricted to linear/affine behavior.
+In general, this composition cannot be represented by one affine transformation $Ax+c$. Here is a numerical proof using ReLU, $\phi(x)=\max(0,x)$:
+
+| Input $x$ | $\mathrm{ReLU}(x)$ |
+|---:|---:|
+| $-1$ | $0$ |
+| $0$ | $0$ |
+| $2$ | $2$ |
+
+Could one affine function $ax+c$ produce all three outputs? Matching the input $0$ requires $c=0$. Matching the input $2$ then requires $a=1$. But that function gives $-1$ at input $-1$, not $0$. Therefore no single affine function can match all three ReLU outputs.
+
+ReLU creates a bend: negative inputs become zero, while positive inputs pass through. A network can combine such bends to build more expressive mappings. A nonlinear activation does not guarantee that training will find a good solution, and some weight settings can still make the whole network behave linearly; it removes the architecture's restriction to affine behavior.
 
 ---
 
