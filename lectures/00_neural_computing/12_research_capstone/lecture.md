@@ -213,7 +213,7 @@ Your final Course 1 artifact should contain:
 8. uncertainty;
 9. qualitative/error analysis;
 10. limitations;
-11. reproducibility details;
+11. [reproducibility details](https://sites.google.com/princeton.edu/rep-workshop/);
 12. next experiment.
 
 ### Course 2 readiness
