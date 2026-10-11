@@ -7,7 +7,7 @@
 
 Language, sensor streams, transactions, and speech arrive as sequences. A recurrent model carries information from earlier steps into later decisions.
 
-A vanilla RNN repeatedly applies the same transition. LSTM and GRU introduce gates that learn what to keep, forget, and expose, addressing long-range gradient problems.
+A vanilla RNN repeatedly applies the same transition. [LSTM and GRU](https://www.youtube.com/watch?v=YCzL96nL7j0) introduce gates that learn what to keep, forget, and expose, addressing long-range gradient problems.
 
 You will see the failure before learning why the gates were invented.
 

@@ -12,7 +12,7 @@ The central question is:
 
 > **If the final prediction is wrong, how do we know which weight should change, in which direction, and by how much?**
 
-That is the problem of **backpropagation**.
+That is the problem of [**backpropagation**](https://www.youtube.com/watch?v=Ilg3gGewQ5U).
 
 We will build the idea from a tiny network, with actual numbers, before relying on automatic differentiation.
 

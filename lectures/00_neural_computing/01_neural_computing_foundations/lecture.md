@@ -42,7 +42,7 @@ You will also start writing in LaTeX early. The [LaTeX and publication guide](..
 
 ## Why this chapter exists
 
-A fresher-friendly starting point: what a model is, what learning means, and why a single neuron is useful but limited.
+A fresher-friendly starting point: what a model is, what learning means, and why a [single neuron](https://www.youtube.com/watch?v=aircAruvnKk) is useful but limited.
 
 In a real system, think of a spam filter, a medical risk screen, or a quality-control camera. The model receives measurements and must turn them into a useful decision.
 
@@ -362,7 +362,7 @@ That is what the gradient is telling us.
 
 ---
 
-## 7. Gradient descent: how do we use the gradient?
+## 7. [Gradient descent](https://www.youtube.com/watch?v=IHZwWFHWa-w): how do we use the gradient?
 
 Now we have a direction telling us how the loss changes.
 
@@ -436,7 +436,7 @@ The question becomes:
 
 > **How can we efficiently calculate how each parameter contributed to the final loss?**
 
-Backpropagation answers this using the **chain rule**.
+[Backpropagation](https://www.youtube.com/watch?v=Ilg3gGewQ5U) answers this using the **chain rule**.
 
 The chain rule says that if a quantity changes through several intermediate steps, we can multiply the local changes together.
 

@@ -7,7 +7,7 @@
 
 Before today's dominant neural architectures, researchers explored probabilistic energy-based models that learn which configurations of variables are plausible.
 
-An RBM assigns an energy to visible/hidden configurations and uses alternating conditional sampling. Contrastive divergence makes this practical by approximating the learning signal.
+An [RBM](https://www.youtube.com/watch?v=_bqa_I5hNAo) assigns an energy to visible/hidden configurations and uses alternating conditional sampling. Contrastive divergence makes this practical by approximating the learning signal.
 
 The lab makes the sampling process tangible and shows why approximation and compute matter.
 

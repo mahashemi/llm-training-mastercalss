@@ -21,7 +21,7 @@ By the end of this unit, the learner should be able to explain the mechanism mat
 
 Forecasting exposes a critical distinction between fitting a sequence and evaluating a future prediction system.
 
-In an Elman-style network, the hidden state summarizes previous observations. Jordan-style recurrence feeds previous outputs into the state. A fully recurrent architecture can allow richer recurrent connectivity but increases optimization complexity.
+In an [Elman-style network](https://www.youtube.com/watch?v=AsNTP8Kwu80), the hidden state summarizes previous observations. Jordan-style recurrence feeds previous outputs into the state. A fully recurrent architecture can allow richer recurrent connectivity but increases optimization complexity.
 
 For forecasting, suppose the observed history is $x_1,\ldots,x_t$, and we predict the next value:
 

@@ -96,7 +96,7 @@ This can make apparently reasonable gradient updates unstable.
 
 ## 3A. Value-based learning versus policy gradients
 
-DQN is **value-based**: it estimates $Q(s,a)$, then chooses actions using those values (often with occasional exploration). Policy-gradient methods instead learn a policy directly: $\pi_\theta(a\mid s)$ is the probability that the policy chooses action $a$ in state $s$.
+[DQN](https://www.youtube.com/watch?v=KySQ0WoXsPo) is **value-based**: it estimates $Q(s,a)$, then chooses actions using those values (often with occasional exploration). Policy-gradient methods instead learn a policy directly: $\pi_\theta(a\mid s)$ is the probability that the policy chooses action $a$ in state $s$.
 
 A simplified objective is expected discounted return:
 
