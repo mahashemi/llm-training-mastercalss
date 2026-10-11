@@ -7,7 +7,7 @@
 
 A classifier predicts a label or target for an input. A generative model tries to learn enough about the structure of examples to produce new ones. This underlies image synthesis, speech generation, molecule design, simulation, and many modern media systems.
 
-Variational autoencoders (VAEs), generative adversarial networks (GANs), and diffusion models all generate samples, but their learning signals are fundamentally different. By the end of this chapter, you should be able to explain each objective in plain language, calculate a tiny example, identify a characteristic failure, and choose evaluation metrics that do not confuse model loss with sample quality.
+[Variational autoencoders (VAEs)](https://www.youtube.com/watch?v=HBYQvKlaE0A), generative adversarial networks (GANs), and diffusion models all generate samples, but their learning signals are fundamentally different. By the end of this chapter, you should be able to explain each objective in plain language, calculate a tiny example, identify a characteristic failure, and choose evaluation metrics that do not confuse model loss with sample quality.
 
 ## 1. What does it mean to model data?
 
