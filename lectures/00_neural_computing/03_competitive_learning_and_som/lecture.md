@@ -7,7 +7,7 @@
 
 Not every problem has labels. Sometimes we want a model to discover structure: customer groups, sensor patterns, or regions of a feature space.
 
-Competitive learning asks which prototype is closest, then moves that prototype toward the example. A SOM adds neighborhood structure so nearby prototypes learn related patterns.
+Competitive learning asks which prototype is closest, then moves that prototype toward the example. A [SOM](https://www.youtube.com/watch?v=OJT_57s0SHo) adds neighborhood structure so nearby prototypes learn related patterns.
 
 The lab turns this into a measurable clustering experiment rather than a historical algorithm tour.
 
