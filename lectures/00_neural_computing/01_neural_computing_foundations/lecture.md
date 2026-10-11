@@ -318,9 +318,10 @@ The symbol $\nabla$ (“nabla”) is simply a compact way to collect these parti
 
 For the vector of weights $w$,
 
-$
-\nabla_w L = \left[\frac{\partial L}{\partial w_1},\frac{\partial L}{\partial w_2},\ldots,\frac{\partial L}{\partial w_d}\right]^{\top}.
-$
+$$
+\nabla_w L =
+\left[\frac{\partial L}{\partial w_1},\frac{\partial L}{\partial w_2},\ldots,\frac{\partial L}{\partial w_d}\right]^{\top}
+$$
 
 means:
 
@@ -476,29 +477,29 @@ $$
 
 Substitute the first equation into the second:
 
-$
+$$
 h_2 = W_2(W_1x+b_1)+b_2 = (W_2W_1)x+(W_2b_1+b_2).
-$
+$$
 
 The result is still one **affine** transformation of $x$: it has the form $Ax+c$, where $A=W_2W_1$ and $c=W_2b_1+b_2$. (An affine function is a linear transformation plus a constant offset.) Adding more linear/affine layers only changes the effective matrix and bias; it does not create a more expressive kind of input-output function.
 
 Now put a nonlinear activation between the layers:
 
-$
+$$
 h_2 = W_2\,\phi(W_1x+b_1)+b_2.
-$
+$$
 
-In general, this composition cannot be represented by one affine transformation $Ax+c$. Here is a tiny numerical proof using the ReLU function $\phi(x)=\max(0,x)$:
+In general, this composition cannot be represented by one affine transformation $Ax+c$. Here is a numerical proof using ReLU, $\phi(x)=\max(0,x)$:
 
-| Input $x$ | ReLU$(x)$ |
+| Input $x$ | $\mathrm{ReLU}(x)$ |
 |---:|---:|
 | $-1$ | $0$ |
 | $0$ | $0$ |
 | $2$ | $2$ |
 
-Could one affine function $ax+c$ produce all three outputs? To match the input $0$, it must have $c=0$. To match the input $2$, it must have $a=1$. But then its output at $-1$ would be $-1$, not $0$. So no single affine function can match these three ReLU outputs.
+Could one affine function $ax+c$ produce all three outputs? Matching the input $0$ requires $c=0$. Matching the input $2$ then requires $a=1$. But that function gives $-1$ at input $-1$, not $0$. Therefore no single affine function can match all three ReLU outputs.
 
-The key idea is that ReLU creates a bend: negative inputs become zero, while positive inputs pass through. A network can combine such bends to build more expressive input-output mappings. A nonlinear activation does not guarantee that every network will learn a good solution, and some weight settings can still make the whole network behave linearly; it removes the architecture's restriction to affine behavior.
+ReLU creates a bend: negative inputs become zero, while positive inputs pass through. A network can combine such bends to build more expressive mappings. A nonlinear activation does not guarantee that training will find a good solution, and some weight settings can still make the whole network behave linearly; it removes the architecture's restriction to affine behavior.
 
 ---
 
