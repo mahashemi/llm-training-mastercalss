@@ -5,7 +5,7 @@
 
 ## Why this chapter exists
 
-A recurrent model carries information step by step. Attention lets one position directly consult other positions, making long-range relationships much easier to represent.
+A recurrent model carries information step by step. [Attention](https://www.youtube.com/watch?v=eMlx5fFNoYc) lets one position directly consult other positions, making long-range relationships much easier to represent.
 
 Queries ask what a token is looking for; keys describe what each token offers; values contain the information retrieved. The Transformer combines this mechanism with residual paths, normalization, and feed-forward layers.
 
