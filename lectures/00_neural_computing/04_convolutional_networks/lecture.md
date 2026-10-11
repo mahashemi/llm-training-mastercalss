@@ -5,7 +5,7 @@
 
 ## Why this chapter exists
 
-Images contain local structure: edges, corners, textures, and shapes. Convolution builds that prior directly into the model.
+Images contain local structure: edges, corners, textures, and shapes. [Convolution](https://www.youtube.com/watch?v=HGwBXDKFk9I) builds that prior directly into the model.
 
 A convolution kernel is a small set of shared weights that scans an image. Residual connections then make deeper networks easier to optimize by giving information a shortcut path.
 
