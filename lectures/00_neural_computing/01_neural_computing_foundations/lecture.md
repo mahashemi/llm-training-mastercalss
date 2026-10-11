@@ -318,7 +318,9 @@ The symbol $\nabla$ (“nabla”) is simply a compact way to collect these parti
 
 For the vector of weights $w$,
 
-$ \nabla_w L = \left[\frac{\partial L}{\partial w_1},\frac{\partial L}{\partial w_2},\ldots,\frac{\partial L}{\partial w_d}\right]^{\top}. $
+$
+\nabla_w L = \left[\frac{\partial L}{\partial w_1},\frac{\partial L}{\partial w_2},\ldots,\frac{\partial L}{\partial w_d}\right]^{\top}.
+$
 
 means:
 
@@ -474,13 +476,17 @@ $$
 
 Substitute the first equation into the second:
 
-$ h_2 = W_2(W_1x+b_1)+b_2 = (W_2W_1)x+(W_2b_1+b_2). $
+$
+h_2 = W_2(W_1x+b_1)+b_2 = (W_2W_1)x+(W_2b_1+b_2).
+$
 
 The result is still one **affine** transformation of $x$: it has the form $Ax+c$, where $A=W_2W_1$ and $c=W_2b_1+b_2$. (An affine function is a linear transformation plus a constant offset.) Adding more linear/affine layers only changes the effective matrix and bias; it does not create a more expressive kind of input-output function.
 
 Now put a nonlinear activation between the layers:
 
-$ h_2 = W_2\,\phi(W_1x+b_1)+b_2. $
+$
+h_2 = W_2\,\phi(W_1x+b_1)+b_2.
+$
 
 In general, this composition cannot be represented by one affine transformation $Ax+c$. Here is a tiny numerical proof using the ReLU function $\phi(x)=\max(0,x)$:
 
