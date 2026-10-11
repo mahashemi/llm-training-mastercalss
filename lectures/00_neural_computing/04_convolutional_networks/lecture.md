@@ -63,6 +63,20 @@ $$
 
 The brackets mean “join these feature tensors along the feature/channel dimension,” not add them.
 
+### Dense connectivity in numbers
+
+Suppose a feature tensor starts with $C_0=4$ channels, and each dense layer creates $k=2$ new channels (the **growth rate**):
+
+1. Layer 1 reads 4 channels and produces 2 new channels. Concatenating them gives $4+2=6$ channels.
+2. Layer 2 reads all 6 available channels and produces 2 new ones. The concatenated tensor now has $6+2=8$ channels.
+3. Layer 3 reads those 8 channels and produces 2 new ones, leaving $8+2=10$ channels.
+
+So layer $\ell$ receives $C_0+(\ell-1)k$ channels, and after $L$ layers the concatenated representation has $C_0+Lk$ channels. Earlier features remain available to later layers rather than being overwritten.
+
+For a deliberately simplified example where each layer is only a $3\times3$ convolution with $k$ output channels and one bias per output channel, its parameter count is $k(9C_{\mathrm{in}}+1)$. With $C_0=4$, $k=2$, and three layers, the counts are $2(9\cdot4+1)=74$, $2(9\cdot6+1)=110$, and $2(9\cdot8+1)=146$, for 330 total convolution parameters. This ignores batch normalization and optional $1\times1$ bottleneck layers used in many practical DenseNet variants.
+
+Compare that with a residual block: $y=x+F(x)$ adds corresponding values and normally keeps the same channel count; dense connectivity concatenates tensors and deliberately increases the channel count. Addition and concatenation are different operations, so their shapes and parameter costs must be analyzed differently. The lab's small dense-style block implements this same idea with a growth rate of 5.
+
 Real connection: CNNs power visual inspection, medical imaging, OCR, satellite imagery, and many multimodal encoders.
 
 Failure experiment: compare a CNN with and without augmentation under a controlled background shift. Ask whether the model learned the object or a shortcut.
