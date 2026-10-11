@@ -244,7 +244,7 @@ $$
 z=w^\top x+b.
 $$
 
-Adaline trains this continuous score rather than immediately converting it to 0 or 1.
+Adaline trains this continuous score rather than immediately converting it to 0 or 1. Its training objective is the squared error of that score; a classification threshold is applied only when we turn the trained score into a class. In the lab, the threshold is 0.5 because the two target values are 0 and 1. This threshold is a decision rule, not a probability guarantee: an Adaline score can fall below 0 or above 1, and changing the threshold does not change the squared-error gradient used during training.
 
 For $N$ training examples, define the mean squared error:
 
