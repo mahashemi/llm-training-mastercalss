@@ -335,9 +335,21 @@ $$
 
 Differentiating with respect to the weight vector gives
 
-$$
+$
 \nabla_w L = 2(w^\top x+b-y)x.
-$$
+$
+
+### Derive that gradient one small step at a time
+
+Let the score be $z=w^\top x+b$, the error be $e=z-y$, and the loss be $L=e^2$. The chain rule says to multiply the effect of each link in this path:
+
+- Squaring the error gives $\frac{\partial L}{\partial e}=2e$.
+- The error changes one-for-one with the score, so $\frac{\partial e}{\partial z}=1$.
+- Because $z=w_1x_1+\cdots+w_dx_d+b$, changing weight $w_j$ changes the score at rate $\frac{\partial z}{\partial w_j}=x_j$.
+
+Multiply those three local effects: $\frac{\partial L}{\partial w_j}=(2e)(1)(x_j)=2(z-y)x_j$. Collecting this result for every weight gives the gradient vector above. For the bias, $\frac{\partial z}{\partial b}=1$, so $\frac{\partial L}{\partial b}=2(z-y)$.
+
+The formula above is for one example. For the mean loss across $N$ examples, average the per-example contributions: $\nabla_w L=\frac{2}{N}\sum_{i=1}^{N}(z_i-y_i)x_i$. This is why the batch gradient combines information from all examples rather than following just one example's error.
 
 You do not need to memorize this yet. Read it as a recipe:
 
