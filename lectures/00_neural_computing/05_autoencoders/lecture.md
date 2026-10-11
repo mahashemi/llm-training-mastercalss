@@ -7,7 +7,7 @@
 
 Suppose we remove the label and simply ask a model to compress an image and reconstruct it. What information does it decide to keep?
 
-An autoencoder learns an encoder $z=f_\phi(x)$ and decoder $\hat{x}=g_\theta(z)$. The bottleneck forces the model to represent the input economically.
+An [autoencoder](https://www.youtube.com/watch?v=geH5HnRapRs) learns an encoder $z=f_\phi(x)$ and decoder $\hat{x}=g_\theta(z)$. The bottleneck forces the model to represent the input economically.
 
 We then deliberately make the bottleneck too small, add noise, and inspect what the representation loses.
 
