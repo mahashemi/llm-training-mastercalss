@@ -335,9 +335,9 @@ $$
 
 Differentiating with respect to the weight vector gives
 
-$
+$$
 \nabla_w L = 2(w^\top x+b-y)x.
-$
+$$
 
 ### Derive that gradient one small step at a time
 
